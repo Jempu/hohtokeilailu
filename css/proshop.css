@@ -1,0 +1,418 @@
+@font-face {
+  font-family: RussoOne;
+  src: url("./fonts/russo-one/RussoOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("./fonts/montserrat/Montserrat-Regular.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-SemiBold;
+  src: url("./fonts/montserrat/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: Sansita;
+  src: url("./fonts/sansita/Sansita-Regular.ttf");
+}
+
+@font-face {
+  font-family: Sansita-ExtraBold;
+  src: url("./fonts/sansita/Sansita-ExtraBold.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, input, option, li {
+  font-family: Montserrat;
+  color: #fff;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  width: 98.33vw;
+  height: auto;
+  background: linear-gradient(158.65deg, #FC466B 14.05%, #344ED2 89.42%);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.titlecard {
+  width: 100%;
+  height: 50vw;
+  background-color: #D9D9D9;
+  border-radius: 0 0 10px 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.titlecard .main {
+  width: 100%;
+  height: 80%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.titlecard .main .header {
+  width: 65%;
+  float: left;
+  clear: both;
+  margin: 10% 0 0 6%;
+}
+
+.titlecard .main .header h1, .titlecard .main .header h2, .titlecard .main .header h3 {
+  color: #813638;
+}
+
+.titlecard .main .header h1 {
+  font-family: RussoOne;
+  font-size: 96px;
+}
+
+.titlecard .main .header h2, .titlecard .main .header h3 {
+  font-family: Montserrat;
+}
+
+.titlecard .main .header h2 {
+  font-size: 64px;
+}
+
+.titlecard .main .header h3 {
+  font-size: 36px;
+}
+
+.titlecard .main .product-img {
+  width: 35%;
+  float: right;
+}
+
+.titlecard .main .product-img img {
+  width: 100%;
+}
+
+.titlecard .controls {
+  width: 100%;
+  height: 20%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.titlecard .controls .arrow {
+  position: absolute;
+}
+
+.titlecard .controls .arrow:nth-of-type(2) {
+  right: 0;
+}
+
+.titlecard .controls .wheel {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.titlecard .controls .wheel .item {
+  height: 100%;
+  width: 15%;
+  text-align: center;
+}
+
+.titlecard .controls .wheel .item img {
+  height: 80%;
+  width: 100%;
+}
+
+.titlecard .controls .wheel .item h1 {
+  font-family: RussoOne;
+  color: #9DA1B0;
+  font-size: 16px;
+}
+
+.titlecard .controls .wheel .item.selected {
+  width: 25%;
+}
+
+.titlecard .controls .wheel .item.selected h1 {
+  color: #6C6D6F;
+  font-size: 26px;
+}
+
+.titlecard .controls img {
+  border-radius: 20px;
+  cursor: pointer;
+  height: 100%;
+}
+
+.titlecard .btn {
+  position: absolute;
+}
+
+.titlecard .btn.a {
+  left: 180px;
+  top: 540px;
+}
+
+.titlecard .btn.b {
+  left: 518px;
+  top: 540px;
+}
+
+.catalogue {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: inline-block;
+}
+
+.catalogue .type {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.catalogue .type .title {
+  width: 100%;
+  height: 20%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.catalogue .type .title .div {
+  background-color: #fff;
+  border-radius: 4px;
+  height: 2px;
+  margin: 1.5rem;
+}
+
+.catalogue .type .title .div.a {
+  width: 8%;
+}
+
+.catalogue .type .title .div.b {
+  width: 100%;
+}
+
+.catalogue .type .title h1 {
+  font-family: Sansita-ExtraBold;
+}
+
+.catalogue .type .items {
+  width: 100%;
+  height: auto;
+  display: inline;
+}
+
+.catalogue .type .items .item {
+  display: inline;
+  float: right;
+  width: 30%;
+  height: 400px;
+  cursor: pointer;
+  text-align: center;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+}
+
+.catalogue .type .items .item h1 {
+  font-family: Montserrat;
+}
+
+.catalogue .type .items img {
+  width: 100%;
+  height: 80%;
+  border-radius: 30px;
+}
+
+.catalogue .type.shoes {
+  height: auto;
+}
+
+.btn {
+  cursor: pointer;
+  width: 230px;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  border-radius: 12px;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: RussoOne;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  color: #FFFFFF;
+}
+
+.btn.a {
+  background-color: #813638;
+}
+
+.btn.b {
+  color: #636877;
+  border: 3px solid #636877;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.item-overlay {
+  width: 90%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 11;
+  background: -webkit-gradient(linear, left top, right top, from(#FC466B), to(#3F5EFB));
+  background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.item-overlay .return {
+  width: 100%;
+  height: 8rem;
+  margin: 4rem 0 0 4rem;
+  cursor: pointer;
+}
+
+.item-overlay .main {
+  width: 100%;
+  height: auto;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.item-overlay .main .overview {
+  width: 50%;
+  height: 60rem;
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.item-overlay .main .overview .colors {
+  width: 13%;
+  height: auto;
+  position: relative;
+  background: rgba(73, 73, 73, 0.2);
+  border-radius: 60px 0px 0px 60px;
+  margin: 10rem 0 auto 5rem;
+}
+
+.item-overlay .main .overview .colors div {
+  width: 94px;
+  height: 94px;
+  left: 45px;
+  top: 162px;
+  background: #BFBEC6;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 2rem;
+}
+
+.item-overlay .main .overview .colors h1 {
+  position: absolute;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  right: -40%;
+  bottom: -40%;
+  font-family: RussoOne;
+  font-size: 52px;
+}
+
+.item-overlay .main .overview .photos {
+  width: 80%;
+  height: 100%;
+  position: relative;
+  background: rgba(73, 73, 73, 0.2);
+  border-radius: 65px;
+  float: right;
+  text-align: center;
+}
+
+.item-overlay .main .overview .photos img {
+  width: 30%;
+  height: 175px;
+  border-radius: 16px;
+  margin: 0 1rem 0 0;
+  cursor: pointer;
+}
+
+.item-overlay .main .overview .photos img:nth-child(1) {
+  width: 95%;
+  height: calc(93% - 175px);
+  margin: 1rem;
+  border-radius: 40px;
+}
+
+.item-overlay .main .header {
+  width: 50%;
+  position: relative;
+  clear: inline-start;
+  float: right;
+  margin-left: 2%;
+}
+
+.item-overlay .main .header h1 {
+  font-family: RussoOne;
+  font-size: 96px;
+}
+
+.item-overlay .main .header h2 {
+  font-family: Montserrat-SemiBold;
+  font-size: 32px;
+}
+
+.item-overlay .main .header p {
+  width: 80%;
+  font-family: Montserrat;
+  font-size: 36px;
+}
+
+.item-overlay .package {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: inline;
+  background-color: #494949;
+}
+
+.item-overlay .package .container {
+  width: 100%;
+}
+
+.item-overlay .package .container img {
+  border-radius: 16px;
+}
+/*# sourceMappingURL=proshop.css.map */

@@ -1,0 +1,276 @@
+root {
+  --gallery-freewall-height: 75rem;
+  --gallery-button-height: 60px;
+}
+
+.toggle-gallery {
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin: auto;
+}
+
+.toggle-gallery[open="true"] .overlay {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.toggle-gallery .title {
+  height: 3vw;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(123.03deg, rgba(0, 0, 0, 0.2) 24.49%, rgba(0, 0, 0, 0.153125) 41.94%, rgba(0, 0, 0, 0) 71%), linear-gradient(91.03deg, #396AB4 0.3%, #8C7EC4 23.84%, #7E67DA 55.58%, #8073D0 80.15%, #396AB4 98.58%);
+}
+
+.toggle-gallery .title::before, .toggle-gallery .title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: #fff;
+  opacity: 20%;
+  z-index: 2;
+}
+
+.toggle-gallery .title::before {
+  top: 0;
+}
+
+.toggle-gallery .title::after {
+  bottom: 0;
+}
+
+.toggle-gallery .title h1 {
+  font-family: Sansita-ExtraBold;
+  font-size: 2.3vw;
+  margin-top: 0.2vw;
+}
+
+.toggle-gallery .content {
+  width: 55%;
+  height: 40rem;
+  position: relative;
+  margin: auto;
+  padding: 1.3rem 2rem;
+  overflow: hidden;
+  -webkit-transition: height 1s ease-in-out, border-radius 5s ease-out;
+  transition: height 1s ease-in-out, border-radius 5s ease-out;
+  border-radius: 10px 10px 20px 20px;
+  background: linear-gradient(92.51deg, #782566 12.02%, #763281 23.79%, #4966B0 67.75%, #7B59A9 77.55%, #8E3F86 87.36%);
+}
+
+.toggle-gallery .content::before, .toggle-gallery .content::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  left: 0;
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+  -webkit-animation: galleryBorderAnim 12s forwards infinite;
+          animation: galleryBorderAnim 12s forwards infinite;
+  z-index: 1;
+}
+
+.toggle-gallery .content::before {
+  top: 0;
+  height: 3rem;
+  opacity: 0.5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), color-stop(0.01%, #9BC0D4), to(rgba(131, 175, 200, 0)));
+  background: linear-gradient(180deg, #FFFFFF 0%, #9BC0D4 0.01%, rgba(131, 175, 200, 0) 100%);
+  z-index: 3;
+}
+
+.toggle-gallery .content::after {
+  bottom: 0;
+  height: 10rem;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(71, 126, 156, 0)), to(#325180));
+  background: linear-gradient(180deg, rgba(71, 126, 156, 0) 0%, #325180 100%);
+}
+
+.toggle-gallery .content[open="true"] {
+  height: var(--gallery-freewall-height);
+  border-radius: 0;
+}
+
+.toggle-gallery .content[open="true"]::before, .toggle-gallery .content[open="true"]::after {
+  opacity: 0;
+}
+
+.toggle-gallery .content[open="true"] .button {
+  background: -webkit-gradient(linear, left top, right top, from(#393E6B), color-stop(50.76%, rgba(69, 75, 130, 0.489583)), color-stop(99.45%, #393E6B));
+  background: linear-gradient(90deg, #393E6B 0%, rgba(69, 75, 130, 0.489583) 50.76%, #393E6B 99.45%);
+  bottom: 0;
+}
+
+.toggle-gallery .content[open="true"] .button img {
+  opacity: 1;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+.toggle-gallery .content .free-wall {
+  width: 100%;
+  position: relative;
+}
+
+.toggle-gallery .content .free-wall .brick {
+  -webkit-box-shadow: 4px 4px 4px rgba(20, 20, 20, 0.25);
+          box-shadow: 4px 4px 4px rgba(20, 20, 20, 0.25);
+}
+
+.toggle-gallery .content .free-wall .brick img {
+  pointer-events: auto;
+  cursor: pointer;
+  margin: 0;
+  display: block;
+  -webkit-transition: -webkit-transform 0.5s ease-out;
+  transition: -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+}
+
+.toggle-gallery .content .free-wall .brick img:hover {
+  -webkit-transform: scale(103%);
+          transform: scale(103%);
+}
+
+.toggle-gallery .content .button {
+  cursor: pointer;
+  width: 100%;
+  height: var(--gallery-button-height);
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 0;
+  bottom: 2%;
+  z-index: 2;
+  -webkit-transition: bottom 0.2s ease-out, height 0.6s ease-out;
+  transition: bottom 0.2s ease-out, height 0.6s ease-out;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 0px 0px 20px 20px;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  transition: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+  transition: transform 0.4s ease-out, -webkit-transform 0.4s ease-out;
+}
+
+.toggle-gallery .content .button:hover {
+  -webkit-transform: scale(103%);
+          transform: scale(103%);
+}
+
+.toggle-gallery .content .button img {
+  min-width: 1.8rem;
+  min-height: 1.8rem;
+  max-width: 20%;
+  height: 80%;
+  margin: auto;
+  opacity: 0.8;
+  -webkit-transition: opacity 1s ease-out, -webkit-transform 1s ease-out;
+  transition: opacity 1s ease-out, -webkit-transform 1s ease-out;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  transition: opacity 1s ease-out, transform 1s ease-out, -webkit-transform 1s ease-out;
+}
+
+.toggle-gallery .overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in;
+  transition: opacity 0.3s ease-in;
+  pointer-events: none;
+}
+
+.toggle-gallery .overlay .item {
+  width: 90vw;
+  height: 50vw;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+}
+
+.toggle-gallery .overlay .item img {
+  min-width: 20rem;
+  max-width: 100%;
+  height: 100%;
+}
+
+.toggle-gallery .overlay .close {
+  cursor: pointer;
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  right: 4.5%;
+  top: 3.5%;
+  -webkit-transition: -webkit-transform 0.5s ease-out;
+  transition: -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+  z-index: 12;
+}
+
+.toggle-gallery .overlay .close:hover {
+  -webkit-transform: translateX(10%);
+          transform: translateX(10%);
+}
+
+.toggle-gallery .overlay .close img {
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 1028px) {
+  .gallery .title {
+    height: 3.5rem;
+  }
+  .gallery .title h1 {
+    font-size: 2.5rem;
+  }
+  .gallery .content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@-webkit-keyframes galleryBorderAnim {
+  0% {
+    background-color: linear-gradient(180deg, rgba(71, 126, 156, 0) 0%, #325180 100%);
+  }
+  50% {
+    background-color: linear-gradient(180deg, rgba(102, 160, 192, 0) 0%, rgba(76, 113, 151, 0.651042) 61.98%, #324F7A 100%);
+  }
+  100% {
+    background-color: linear-gradient(180deg, rgba(71, 126, 156, 0) 0%, #325180 100%);
+  }
+}
+
+@keyframes galleryBorderAnim {
+  0% {
+    background-color: linear-gradient(180deg, rgba(71, 126, 156, 0) 0%, #325180 100%);
+  }
+  50% {
+    background-color: linear-gradient(180deg, rgba(102, 160, 192, 0) 0%, rgba(76, 113, 151, 0.651042) 61.98%, #324F7A 100%);
+  }
+  100% {
+    background-color: linear-gradient(180deg, rgba(71, 126, 156, 0) 0%, #325180 100%);
+  }
+}
+/*# sourceMappingURL=gallery.css.map */

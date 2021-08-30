@@ -1,0 +1,28 @@
+.rollingImg {
+  display: inline-block;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.rollingImg, .rollingImg .rollingImgItem {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.rollingImg .rollingImgItem {
+  opacity: 0;
+  pointer-events: none;
+  background-size: auto 110%;
+  background-position: left;
+  background-repeat: no-repeat;
+  -webkit-transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
+}
+
+.rollingImg .rollingImgItem[visible="true"] {
+  opacity: 1;
+}
+/*# sourceMappingURL=utils-main.css.map */

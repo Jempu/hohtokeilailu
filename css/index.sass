@@ -1,0 +1,1635 @@
+$gmapHeight: 24vw
+// Carousel
+$monitorHeight: 47vw
+$monitorSlideHeight: 58vw
+$sliderHeight: 250px
+// Barrel
+$barrelHeight: 44vw
+
+\root
+    --barrel-width: 100%
+    --barrel-height: 100%
+    --fullwidth-height: 1000px
+
+*
+    box-sizing: border-box
+
+
+/// Carousel ///
+.titlecard
+    width: 100%
+    height: auto
+    position: relative
+    .monitor
+        width: 100%
+        height: $monitorHeight
+        position: relative
+        margin: auto
+        overflow: hidden
+        .title
+            font-size: 4.5vw
+            font-family: Sansita-ExtraBold
+            position: absolute
+            left: 50%
+            top: 23%
+            transform: translateX(-50%)
+            text-align: center
+            text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5)
+            z-index: 5
+        .container
+            width: 100%
+            height: 100%
+            position: relative
+            .item
+                width: 100%
+                height: $monitorSlideHeight
+                position: absolute
+                top: 0
+                bottom: 0
+                left: 0
+                right: 0
+                transition: opacity 0.42s ease-in-out, transform 0.3s ease-out
+                opacity: 0
+                background-position: center
+                background-repeat: no-repeat
+                background-size: cover cover
+                &[slide="true"]
+                    opacity: 1
+                *
+                    z-index: 1
+                h1
+                    position: absolute
+                    top: 0
+                    bottom: 0
+                    left: 0
+                    right: 0
+                    padding: 25px 50px
+                img
+                    position: absolute
+                    top: 0
+                    left: 0
+                img, iframe
+                    width: 100%
+                    height: 100%
+                    z-index: -1
+        .events
+            position: absolute
+            right: 8%
+            top: 44%
+            width: 370px
+            height: auto
+            font-family: RedHatDisplay-Regular
+            &::before, &::after
+                content: ''
+                position: absolute
+                width: 100%
+                height: 5px
+                border-radius: 5px
+                background-color: #fff
+            &::before
+                top: 0
+            &::after
+                bottom: 0
+            .item
+                cursor: pointer
+                h3
+                    font-size: 36px
+                    margin-left: 0.2em
+                    margin-top: 0.5em
+                    margin-right: 0.1em
+                h4
+                    font-size: 22px
+                    opacity: 80%
+                    margin-left: 0.6em
+                    margin-bottom: 0.5em
+        .categories
+            width: 60%
+            height: 42%
+            position: absolute
+            left: 50%
+            transform: translateX(-50%)
+            bottom: 0
+            z-index: 8
+            &::after
+                content: ''
+                width: 100%
+                height: 50px
+                position: absolute
+                bottom: 3%
+                left: 50%
+                transform: translateX(-50%)
+                background-image: url('../img/curved-line.png')
+                background-size: 100% 100%
+                background-repeat: no-repeat
+            #cloud9-carousel
+                width: 100%
+                height: 500px
+                position: relative
+                bottom: 0
+                .cloud9-item
+                    width: 12vw
+                    height: 12vw
+                    cursor: pointer
+                    position: relative
+                    display: grid
+                    align-items: center
+                    justify-items: center
+                    pointer-events: none
+                    text-align: center
+                    opacity: 0.47
+                    transition: opacity 0.5s ease-out
+                    img
+                        width: 80%
+                        height: 80%
+                        transition: all 0.5s ease-in-out
+                        transition-property: width height
+                    &.front
+                        opacity: 1
+                        img
+                            width: 90%
+                            height: 90%
+        .control
+            position: absolute
+            bottom: 10%
+            display: block
+            width: 4rem
+            height: 4rem
+            background: #2a2a2a
+            color: #fff
+            text-decoration: none
+            font-weight: 600
+            font-size: 18px
+            opacity: 0.8
+            cursor: pointer
+            z-index: 6
+            transition: transform 0.4s ease-in-out
+            &.prev
+                left: 14%
+                &:hover
+                    transform: translateX(-15%)
+            &.next
+                right: 14%
+                &:hover
+                    transform: translateX(15%)
+            img
+                width: 100%
+                height: 100%
+    .slider
+        width: 100%
+        height: $sliderHeight
+        position: relative
+        overflow: hidden
+        margin: 0 auto 0 auto
+        ul
+            width: 100%
+            height: 100%
+            position: relative
+            display: inline-block
+            margin: 0
+            padding: 0
+            list-style: none
+            background: #458
+            li
+                width: 100vw
+                height: 100%
+                position: relative
+                float: left
+                display: inline-block
+                margin: 0
+                padding: 0
+                text-align: center
+                background-position: center
+                background-repeat: no-repeat
+                background-size: cover cover
+                color: #333
+                &[x="0"]
+                    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.025) 50.52%, rgba(0, 0, 0, 0) 100%), linear-gradient(92.51deg, #8E3F86 12.02%, #907941 38.31%, #8F5B64 48.9%, #907941 64.99%, #8F5B64 71.66%, #253D78 87.36%)
+                &[x="1"]
+                    background: linear-gradient(92.51deg, #253D78 12.02%, #C54A58 67.75%, #934BAC 87.36%)
+                &[x="2"]
+                    background: linear-gradient(91.3deg, #253D78 10.39%, #426672 31.58%, #547E6F 60.81%, #3E6073 81.4%, #243C78 99.6%)
+                &[x="3"]
+                    background: linear-gradient(92.51deg, #8E3F86 12.02%, #C54A58 64.99%, #253D78 87.36%)
+                &[x="4"]
+                    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(22, 20, 20, 0.098) 70.34%, rgba(101, 93, 93, 0) 109.8%), linear-gradient(92.51deg, #253D78 12.02%, #C54A58 67.75%, #934BAC 87.36%)
+                &[x="5"]
+                    background: linear-gradient(89.54deg, #934BAC 6.55%, #563494 34.59%, #563494 79.02%, #934BAC 96.32%)
+                p
+                    font-size: 36px
+                    margin: 1rem 12% 3rem 12%
+                    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3)
+                iframe
+                    pointer-events: none
+        .button
+            position: absolute
+            width: 245px
+            height: 60px
+            left: 50%
+            transform: translate(-50%)
+            bottom: 20%
+            background: #CF4040
+            border-radius: 40px
+            cursor: pointer
+            box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.3)
+            &:hover
+                background: 
+                box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1)
+                color: #fff
+                & > img
+                    transition: transform 0.2s ease-out
+                    transform: translate(30%, -50%)
+                &:before
+                    widh: 100%
+            &:active
+                & > img
+                    transition: transform 0.06s ease-out
+                    transform: scale(95%) translate(50%, -50%)
+            h2, img
+                pointer-events: none
+                position: absolute
+            h2
+                width: 142px
+                height: 42px
+                left: 30px
+                top: 8px
+                font-family: Roboto
+                font-style: normal
+                font-weight: normal
+                font-size: 36px
+                line-height: 42px
+                text-align: center
+            img
+                width: 43px
+                height: 43px
+                left: 182px
+                top: 50%
+                transform: translateY(-50%)
+            border-radius: 10rem
+            color: #fff
+            font-size: 1rem
+            transition: all .3s
+            overflow: hidden
+            &::before, &::after
+                content: ''
+                position: absolute
+                bottom: 0
+                left: 0
+                width: 100%
+                height: 100%
+            &::after
+                background-color: #CF4040
+                border-radius: 10rem
+                z-index: -2
+            &::before
+                background-color: darken(#0cf, 15%)
+                transition: all .3s
+                border-radius: 10rem
+                z-index: -1
+            /* optional reset for presentation */
+            .container
+                padding-top: 50px
+                margin: 0 auto
+                width: 100%
+                text-align: center
+            h1
+                text-transform: uppercase
+                font-size: .8rem
+                margin-bottom: 2rem
+                color: #777
+            span
+                display: block
+                margin-top: 2rem
+                font-size: .7rem
+                color: #777
+            a
+                font-size: .7rem
+                color: #999
+                text-decoration: underline
+
+
+/// Barrel ///
+.barrel
+    height: auto
+    position: relative
+    left: 0
+    top: 0
+    display: inline-block
+    font-family: Sansita
+    transition: all 1.4s ease-in-out
+    transition-property: margin-bottom
+    .title
+        background: linear-gradient(92.51deg, #782566 12.02%, #763281 23.79%, #4966B0 67.75%, #7B59A9 77.55%, #8E3F86 87.36%)
+        text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5)
+        transition: transform 0.5s ease-in-out
+        text-decoration-color: #fff
+        &:hover
+            transform: scale(104%)
+            text-decoration: underline
+    // responsivity
+    &[ika-responsive="pc"]
+        width: 100%
+        .item-container
+            position: relative
+            display: grid
+        [open="true"]
+            width: 100%
+            height: 100%
+            .body
+                display: block
+            // animation: bodyOpen ease-in-out forwards
+        [open="false"] .body
+            display: none
+            // animation: bodyClose ease-in-out forwards
+        [x="1"]
+            &[open="true"] .head
+                animation: x1Open 0.6s ease-out forwards
+            &[open="false"] .head
+                animation: x1Close 0.6s ease-out forwards
+                &:hover
+                    transform: scale(104%)
+                    z-index: 30
+            .head
+                left: 0
+        [x="2"]
+            &[open="true"] .head
+                animation: x2Open 0.6s ease-out forwards
+            &[open="false"] .head
+                animation: x2Close 0.6s ease-out forwards
+                &:hover
+                    transform: translateX(-50%) scale(104%)
+                    z-index: 30
+            .head
+                left: 50%
+                transform: translateX(-50%)
+        [x="3"]
+            &[open="true"] .head
+                animation: x3Open 0.6s ease-out forwards
+            &[open="false"] .head
+                animation: x3Close 0.6s ease-out forwards
+                &:hover
+                    transform: scale(104%)
+                    z-index: 30
+            .head
+                right: 0
+        [y="1"]
+            .head
+                top: 0
+        [y="2"]
+            .head
+                bottom: 0
+        .item-container
+            height: $barrelHeight
+            transition: all 0.6s ease-in-out
+            transition-property: margin-top margin-bottom
+            .item
+                &[open="true"]
+                    width: 100%
+                    height: 100%
+                    .head
+                        width: 100%
+                &[open="false"]
+                    width: var(--barrel-width)
+                    height: var(--barrel-height)
+                    .head
+                        width: 125%
+                position: absolute
+                transition: all 0.62s ease-out
+                transition-property: width height
+                // unified cap borders
+                &[x="1"] .cap, &[x="2"] .cap
+                    &::after
+                        border-radius: 20px 0 0 20px
+                        right: -1%
+                &[x="3"] .cap
+                    &::before
+                        border-radius: 0 20px 20px 0
+                        left: -1%
+                .head
+                    width: 125%
+                    height: 100%
+                    position: absolute
+                    transition: transform 0.5s ease-out
+                .body
+                    display: none
+        .fullwidth-container
+            width: 100%
+            height: var(--fullwidth-height)
+            display: block
+            transition: all 0.9s ease-in-out
+            transition-property: margin-top
+            .item
+                position: absolute
+                bottom: 0
+    &[ika-responsive="mobile"]
+        width: 98%
+        // all
+        [open="true"] .body
+            display: inline-table
+            animation: bodyOpenMobile 0.6s ease-in-out forwards
+        [open="false"] .body
+            display: none
+            animation: none
+        .item-container
+            height: auto
+            position: relative
+            transition: all 0.6s ease-in-out
+            transition-property: margin-top margin-bottom
+            .item
+                position: relative
+                clip-path: none
+                width: 100%
+                transition: all 0.5s ease-in-out
+                transition-property: margin-top margin-bottom
+                &[open="true"]
+                    margin-bottom: var(--fullwidth-height)
+                .head
+                    width: 100%
+                    position: relative
+                .body
+                    position: absolute
+                    top: 100%
+                    left: 50%
+                    width: 100%
+        .fullwidth-container
+            display: none
+    // normal
+    .title
+        text-align: center
+        font-size: 2vw
+        z-index: 0
+        h1
+            cursor: default
+            padding-top: 0.5rem
+            padding-bottom: 1rem
+    .item-container
+        cursor: pointer
+        width: 100%
+        position: relative
+        .item
+            // pointer-events: none
+            .head
+                position: relative
+                transition: all 0.65s ease-out, outline 0.3s ease-in-out
+                transition-property: width, height, outline, clip-path
+                pointer-events: visible
+                z-index: 10
+                overflow: clip
+                // border
+                outline-offset: -5px
+                &:hover
+                    outline: 5px solid #fff
+                .cap
+                    width: 100%
+                    height: 100%
+                    position: absolute
+                    bottom: 1%
+                    left: 50%
+                    transform: translateX(-50%)
+                    *
+                        pointer-events: none
+                    &::before, &::after
+                        body: ''
+                        width: 40%
+                        height: 1.8%
+                        position: absolute
+                        bottom: 0
+                        background-color: #3979F3
+                        border-radius: 20px
+                        outline: #fff 2px solid
+                    &::before
+                        left: 1%
+                    &::after
+                        right: 1%
+                    &:hover
+                        & > h1
+                            font-size: 3.5vw
+                        & > .button
+                            width: 2.75rem
+                            height: 2.75rem
+                    h1
+                        position: absolute
+                        left: 50%
+                        bottom: 10%
+                        font-size: 2.6vw
+                        transform: translateX(-50%)
+                        transition: font-size 0.4s ease-out
+                        white-space: nowrap
+                    .button
+                        width: 2rem
+                        height: 2rem
+                        position: absolute
+                        left: 50%
+                        transform: translateX(-50%)
+                        bottom: 0
+                        transition: all 0.3s ease-out
+                        transition-property: width height
+                        img
+                            height: 100%
+                            width: 100%
+                            transition: transform 0.6s ease-out
+                            transform: rotateZ(0)
+                img
+                    width: 100%
+                    height: 100%
+            &[open="true"] .cap .button img
+                transform: rotateZ(180deg)
+    .container
+        width: 100%
+        height: auto
+        display: grid
+    .body
+        width: 100%
+        height: auto
+        position: relative
+        padding-top: 0.1vw
+        h1
+            font-family: Sansita-ExtraBold
+            font-size: 48px
+        p
+            font-family: NunitoSans
+            font-size: 36px
+        .title
+            background: rgba(100, 39, 97, 0.5)
+            border: 6px solid rgba(255, 255, 255, 0.5)
+            box-sizing: border-box
+            border-radius: 121px
+            text-align: center
+            margin: 1rem 12vw 1rem 12vw
+            h1
+                padding: 1vw
+                font-family: Sansita
+                font-size: 1.7vw
+            &.image-left
+                display: grid
+                grid-template-columns: 8vw auto
+                grid-template-rows: 8vw
+                .image
+                    padding: 1.5vw
+                    background: #698AA9
+                    border: 8px solid #FFFFFF
+                    box-sizing: border-box
+                    border-radius: 116px
+                    position: relative
+                    transform: scale(118%)
+                    img
+                        width: 100%
+                        height: 100%
+                        filter: drop-shadow(1px 4px 4px rgba(0, 0, 0, 0.25))
+                h2
+                    padding: 1.5vw
+                    font-family: NunitoSans
+                    font-size: 1.3vw
+                &.size2
+                    margin: 1rem 35vw 1rem 14vw
+                    h2
+                        padding: 1.5vw
+                    .image
+                        padding: 1.15vw
+                        border: 6px solid #FFFFFF
+                        border-radius: 116px
+                        transform: scale(112%)
+        // all of the categories
+        &#hohtokeilaus
+            background-image: url('../img/neon.png')
+            background-position: center
+            background-size: cover
+            background-repeat: no-repeat
+            // &[open="true"]
+            //     display: block
+            // &[open="true"]
+            //     display: block
+            p
+                width: 80%
+                text-align: center
+        &#synttarit
+            background: linear-gradient(90.3deg, rgba(133, 63, 121, 0) 0.45%, rgba(123, 51, 111, 0.5) 10.81%, rgba(141, 67, 129, 0.5) 49.15%, rgba(131, 56, 118, 0.5) 86.98%, rgba(120, 53, 109, 0) 99.93%), #60205B
+            .behemoth
+                width: 90%
+                height: 18vw
+                position: relative
+                display: grid
+                grid-template-areas: "a1 b1 c1"
+                grid-template-columns: 14% 33% 48%
+                grid-template-rows: 100%
+                padding: 1vw 0
+                &::before
+                    grid-area: a1
+                    content: ''
+                    background: linear-gradient(90deg, #5A1D50 0.52%, #5B1F54 20.31%, #733072 100%)
+                .b1
+                    grid-area: b1
+                    border-radius: 10px
+                    border: 7px solid rgba(0, 0, 0, 0.1)
+                    box-sizing: border-box
+                    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+                    transform: scale(104%)
+                    z-index: 1
+                    img
+                        width: 100%
+                        height: 100%
+                .c1
+                    grid-area: c1
+                    background: linear-gradient(159.22deg, #2A3B7A 8.12%, rgba(95, 111, 171, 0.354167) 53.09%, rgba(26, 32, 54, 0) 87.34%)
+                    border: 5px solid rgba(255, 255, 255, 0.85)
+                    box-sizing: border-box
+                    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+                    border-radius: 0px 30px 0px 0px
+                    display: grid
+                    grid-template-areas: "a2 a2" "b2 b2"
+                    grid-template-columns: 83.33% 16.66%
+                    grid-template-rows: 22% auto
+                    z-index: 0
+                    h3
+                        grid-area: a2
+                        margin: 1.5vw 0.8vw 0 1.25vw
+                        font-size: 1.5vw
+                        font-family: NunitoSans
+                        text-align: left
+                    p
+                        grid-area: b2
+                        margin: 1vw 1.25vw
+                        font-size: 1.3vw
+                        text-align: left
+                .static-image
+                    width: 10vw
+                    height: auto
+                    position: absolute
+                    right: 1.6vw
+                    bottom: -8.75vw
+                    border: 5px solid rgba(0, 0, 0, 0.2)
+                    box-sizing: border-box
+                    filter: drop-shadow(2px 5px 4px rgba(0, 0, 0, 0.25))
+                    border-radius: 36px
+                    overflow: clip
+                    img
+                        width: 100%
+                        height: 100%
+            .pan
+                width: 100%
+                height: 25vw
+                position: relative
+                .header
+                    width: 100%
+                    background-color: #592255
+                    text-align: center
+                    h1
+                        cursor: default
+                        padding-top: 0.5rem
+                        padding-bottom: 1rem
+                .mat
+                    width: 100%
+                    height: 20vw
+                    position: relative
+                    background-image: url('../img/abstract.png')
+                    background-position: center
+                    background-size: cover
+                    background-repeat: no-repeat
+                    display: grid
+                    grid-template-areas: "a3 b3"
+                    align-items: center
+                    justify-items: center
+                    .item
+                        width: 32vw
+                        height: 80%
+                        position: relative
+                        top: 0
+                        margin: 0 0.5vw
+                        background-color: #43547E
+                        border: 6px dashed rgba(255, 255, 255, 0.6)
+                        box-sizing: border-box
+                        border-radius: 60p
+                        text-align: center
+                        &:nth-child(1)
+                            grid-area: a3
+                        &:nth-child(2)
+                            grid-area: b3
+                        h1
+                            font-family: NunitoSans
+                            font-size: 64px
+                        h2
+                            font-family: NunitoSans
+                            font-size: 58px
+                            font-weight: 300
+                        h3
+                            font-size: 90px
+                            font-weight: bold
+                        h4
+                            font-size: 36px
+                            font-weight: 300
+        &#baari
+            background-color: black
+        &#sauna
+            background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%)
+            justify-items: center
+            .gallery
+                width: 90%
+                background: #62255B
+                border: 5px solid rgba(254, 254, 254, 0.5)
+                border-radius: 60px
+                text-align: center
+                img
+                    width: 28%
+                    height: 20%
+            .prop
+                width: auto
+                position: relative
+                margin: 1vw
+                text-align: center
+                display: grid
+                grid-template-areas: "a4 b4"
+                border-radius: 10px
+                box-sizing: border-box
+                &::before, &::after
+                    content: ''
+                    position: absolute
+                    left: 50%
+                    transform: translateX(-50%)
+                    width: 100%
+                    height: 0.2vw
+                    background-color: #ccc
+                    border-radius: 10px
+                    opacity: 0.1
+                &::before
+                    top: 0
+                &::after
+                    bottom: 0
+                &:nth-child(1)
+                    grid-area: a4
+                &:nth-child(2)
+                    grid-area: b4
+                &#a
+                    background: linear-gradient(259.79deg, rgba(107, 98, 98, 0) 0%, rgba(32, 28, 28, 0.49) 56.92%, rgba(12, 12, 12, 0.64) 100.27%), url('../img/photos/snooker.png')
+                    background-position: center
+                    background-size: cover
+                    background-repeat: no-repeat
+                    img
+                        filter: drop-shadow(3px 8px 0px #B8ABAB)
+                &#b
+                    background: linear-gradient(259.79deg, rgba(46, 43, 43, 0.43) 0%, rgba(32, 28, 28, 0.48) 71.02%, rgba(12, 12, 12, 0.64) 100.27%), url('../img/photos/air-hockey.png')
+                    background-position: center
+                    background-size: cover
+                    background-repeat: no-repeat
+                    img
+                        filter: drop-shadow(3px 8px 0px #B8ABAB)
+        &#kilpakeilaus
+            background-color: #0D1137
+            .title
+                position: relative
+                h2
+                    white-space: nowrap
+                    position: absolute
+                    left: 50%
+                    top: 39%
+                    transform: translateX(-50%)
+            .container
+                width: 100%
+                height: auto
+                position: relative
+                overflow: hidden
+                &#a
+                    background: linear-gradient(91.35deg, rgba(118, 132, 146, 0.441) 0.85%, rgba(35, 68, 79, 0.639) 100.32%)
+                &#b
+                    background: rgba(14, 10, 27, 0.75)
+                .content
+                    width: auto
+                    height: auto
+                    padding: 1.3vw
+                    position: relative
+                    display: grid
+                    justify-items: center
+                    align-content: center
+                    gap: 5%
+                    grid-auto-flow: column
+                    margin: auto
+                    .item
+                        cursor: pointer
+                        width: 16vw
+                        height: 22vw
+                        position: relative
+                        background: #FFFFFF
+                        border: 9px solid #406194
+                        box-sizing: border-box
+                        border-radius: 70px 70px 90px 90px
+                        text-align: center
+                        z-index: 0
+                        transition: transform 0.3s ease-out
+                        pointer-events: fill
+                        &:hover
+                            transform: scale(110%)
+                        &::before
+                            content: ''
+                            width: 98%
+                            height: 98.5%
+                            position: absolute
+                            top: 0
+                            left: 0
+                            margin: 1%
+                            background: linear-gradient(132deg, #1CB5E0 0%, #000851 100%)
+                            border-radius: 60px 60px 80px 80px
+                            z-index: 0
+                        img, h2, h3, .bo
+                            margin-top: 0.7vw
+                            position: relative
+                            z-index: 1
+                            pointer-events: none
+                        img
+                            max-width: 90%
+                            height: 7vw
+                            border-radius: 12px
+                        h2
+                            margin: 0
+                            font-size: 1.7vw
+                        h3
+                            font-size: 1.2vw
+                            margin-bottom: 1.55vw
+                        .bo
+                            width: 100%
+                            height: 5px
+                            position: relative
+                            height: 1vw
+                            &::before, &::after
+                                content: ''
+                                position: absolute
+                                left: 50%
+                                height: 3px
+                                transform: translateX(-50%)
+                                background-color: #ccc
+                                border-radius: 10px
+                                opacity: 0.5
+                            &#a
+                                &::before
+                                    top: 0
+                                    width: 80%
+                                &::after
+                                    top: 25%
+                                    width: 90%
+                            &#b
+                                &::before
+                                    top: 0
+                                    width: 90%
+                                &::after
+                                    top: 25%
+                                    width: 80%
+        // &[ika-responsive="pc"] .item-container &#proshop
+        &#proshop
+            background-color: #0D1137
+            .items
+                width: 1000px
+                height: 150px
+                position: relative
+                left: 50%
+                transform: translateX(-50%)
+                display: grid
+                grid-template-areas: "a1 b1 b1" "a1 c1 d1"
+                grid-template-columns: 15% 66% 19%
+                grid-template-rows: 30% 70%
+                p
+                    width: 100%
+                .a1
+                    grid-area: a1
+                    top-margin: 1.5rem
+                    right-margin: 2vw
+                    width: 80%
+                .b1
+                    grid-area: b1
+                    font-size: 28px
+                    white-space: no-wrap
+                    text-align: center
+                    position: relative
+                    p
+                        width: 80%
+                .c1
+                    grid-area: c1
+                    font-size: 48px
+                    text-align: center
+                    margin: 0.5rem
+                .d1
+                    grid-area: d1
+                    height: 65%
+                    margin: 0.5rem
+
+
+.contact-barrel
+    width: 100%
+    height: auto
+    position: relative
+    display: grid
+    background: linear-gradient(90deg, #394185 0%, #222751 15.63%, #1B2044 48.81%, #222751 81.53%, #394185 100%)
+    align-items: center
+    justify-items: center
+    padding: 1vw 0
+    &::before, &::after
+        content: ''
+        position: absolute
+        left: 50%
+        transform: translateX(-50%)
+        height: 0.15rem
+        background-color: #ccc
+        border-radius: 10px
+        opacity: 0.5
+    &::before
+        top: 5%
+        width: 40rem
+    &::after
+        bottom: 5%
+        width: 35rem
+    h2
+        margin: 0.5vw 0 0.8vw 0
+        font-family: NunitoSans
+        font-size: 28px
+        font-weight: 300
+    .item
+        margin-top: 0.5rem
+        width: 20rem
+        display: flex
+        img
+            width: 3.5rem
+            height: 3.5rem
+        h2
+            margin-left: 1.2rem
+            font-size: 28px
+
+@keyframes x1Open
+    0%
+        clip-path: polygon(0 0, 75% 0, 100% 100%, 0% 100%)
+    100%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)
+@keyframes x1Close
+    0%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)
+    100%
+        clip-path: polygon(0 0, 75% 0, 100% 100%, 0% 100%)
+
+@keyframes x2Open
+    0%
+        clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%)
+    100%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)
+@keyframes x2Close
+    0%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)
+    100%
+        clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%)
+
+@keyframes x3Open
+    0%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%)
+    100%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)
+@keyframes x3Close
+    0%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)
+    100%
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%)
+
+@keyframes bodyOpenMobile
+    0%
+        transform: translateX(-50%) translateY(-50%)
+        margin-top: 0px
+    50%
+        transform: translateX(-50%) translateY(3%)
+        margin-top: 5%
+    100%
+        transform: translateX(-50%) translateY(0)
+        margin-top: 0px
+@keyframes bodyCloseMobile
+    0%
+        margin-top: 0px
+    100%
+        margin-top: 0px
+
+
+/// About-osio ///
+.about-container
+    width: 100%
+    height: auto
+    position: relative
+    display: grid
+    &::before
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        content: ''
+        z-index: 2
+        background: linear-gradient(194.5deg, rgba(106, 99, 32, 0.3) 74.49%, rgba(0, 0, 0, 0) 89.73%), linear-gradient(85.67deg, rgba(0, 0, 0, 0.144) 0.41%, rgba(0, 0, 0, 0) 72.33%), linear-gradient(80.32deg, #1F3B80 7.28%, #942F96 48.04%, #5168A0 67.97%)
+        opacity: 0.4
+    .item
+        height: auto
+        position: relative
+        left: 0
+        top: 0
+        z-index: 3
+        h1, h2
+            text-decoration: underline
+        h1
+            font-size: 64px
+            font-family: Sansita-ExtraBold-Italic
+        h2
+            font-size: 56px
+            font-family: Sansita-ExtraBold
+        p
+            font-size: 36px
+        &#mk
+            width: 100%
+            height: 8.5vw
+            display: grid
+            justify-items: center
+            #l
+                width: 90%
+                height: 100%
+                margin: 0.8vw
+                opacity: 0.85
+            #a, #b
+                position: absolute
+                opacity: 0.22
+            #a
+                right: 11%
+                top: -8%
+                width: 6.5%
+                transform: rotateZ(7deg)
+            #b
+                right: 17%
+                top: 28%
+                width: 8.5%
+                transform: rotateZ(-3deg)
+    .content
+        margin: 0 8vw
+        .split
+            display: flex
+            margin-top: 2vw
+        .item
+            &#a
+                width: 55%
+                margin-right: auto
+            &#schedule
+                position: relative
+                width: 580px
+                height: 540px
+                background: linear-gradient(90.43deg, rgba(34, 59, 118, 0.24) 0.34%, rgba(43, 62, 111, 0.1536) 53.59%, rgba(74, 98, 158, 0) 99.59%)
+                border: 4px solid #FFFFFF
+                box-sizing: border-box
+                border-radius: 39px
+                font-family: NunitoSans
+                font-size: 35px
+                .d1, .d2
+                    position: absolute
+                    background: #FFFFFF
+                    border-radius: 5px
+                .d1
+                    width: 394px
+                    height: 5px
+                    left: 55px
+                    top: 107px
+                .d2
+                    width: 4px
+                    height: 270px
+                    left: 55px
+                    top: 107px
+                img
+                    position: absolute
+                    width: 50px
+                    height: 50px
+                    left: 60px
+                    top: 40px
+                h1
+                    position: absolute
+                    width: auto
+                    height: 48px
+                    left: 140px
+                    top: 35px
+                    font-family: NunitoSans
+                    font-size: 35px
+                    line-height: 48px
+                .days
+                    pointer-events: none
+                    position: absolute
+                    width: 54px
+                    height: 250px
+                    left: 85px
+                    top: 127px
+                    font-size: 26px
+                    line-height: 35px
+                    text-align: center
+                    color: #FFFFFF
+                ul
+                    position: absolute
+                    width: 329px
+                    height: 250px
+                    left: 154px
+                    top: 127px
+                    font-size: 26px
+                .note
+                    position: absolute
+                    width: 432px
+                    height: 72px
+                    left: 55px
+                    top: 415px
+                    font-size: 26px
+                    color: #FFFFFF
+            &#b, &#c
+                margin-top: 1.2vw
+            &#b
+                width: 55%
+                margin-left: auto
+                text-align: right
+            &#c
+                width: 65%
+                margin-right: auto
+                margin-bottom: 1.8vw
+            p
+                margin: 0.8vw
+
+
+/// Arvostelut ///
+.stats
+    width: 100%
+    height: 300px
+    position: relative
+    display: grid
+    grid-template-areas: "a1"
+    grid-template-columns: auto auto auto
+    grid-template-rows: 100%
+    column-gap: 20%
+    align-content: center
+    justify-content: center
+    &::before
+        content: ''
+        width: 100%
+        height: 142%
+        position: absolute
+        left: 0
+        top: -14%
+        background: linear-gradient(123.03deg, rgba(0, 0, 0, 0.2) 24.49%, rgba(0, 0, 0, 0.153125) 41.94%, rgba(0, 0, 0, 0) 71%), linear-gradient(91.03deg, #396AB4 0.3%, #8C7EC4 23.84%, #7E67DA 55.58%, #8073D0 80.15%, #396AB4 98.58%)
+        clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%)
+        transform: translateY(-5%)
+        z-index: 1
+    .content
+        grid-area: a1
+        z-index: 2
+        font-family: NunitoSans
+        display: grid
+        grid-template-columns: auto 750px auto
+        grid-template-rows: 85%
+        grid-template-areas: "a2 b2 c2"
+        justify-items: normal
+        img
+            width: 2.25rem
+            height: 2.25rem
+        .satisfied, .amount
+            background-color: #59A1B1
+            opacity: 0.8
+            border-radius: 70px
+            margin: 2rem 5rem
+            text-align: center
+        .satisfied
+            grid-area: a2
+        .reviews
+            grid-area: b2
+            display: grid
+            grid-template-areas: "a3 a3 a3" "b3 c3 d3" "e3 e3 e3" "f3 f3 f3"
+            grid-template-columns: 20% 42% 4rem
+            grid-template-rows: 40px 70px auto 30px
+            align-items: end
+            justify-items: center
+            h1
+                font-size: 26px
+                text-align: center
+                &.title
+                    grid-area: a3
+            .rating
+                grid-area: b3
+                font-size: 64px
+            .stars
+                grid-area: c3
+                margin: 0.5rem
+                display: grid
+                align-items: center
+            .refresh-btn
+                grid-area: d3
+                display: grid
+                align-items: center
+                justify-items: center
+                background: none
+                img
+                    height: 2.5rem
+                    width: 2.5rem
+                &:hover > img
+                    animation: refreshBtnAnim 2.45s ease-in-out infinite
+            h2
+                grid-area: e3
+                // width: 100%
+                margin-top: 1.5rem
+                margin-bottom: 0.5rem
+                max-height: 10rem
+                font-size: 26px
+            h3
+                grid-area: f3
+                // width: 100%
+                font-size: 22px
+        .amount
+            grid-area: c2
+
+@keyframes refreshBtnAnim
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(360deg)
+
+    
+.map
+    width: 100%
+    height: auto
+    left: 0
+    position: relative
+    z-index: 0
+    .top, .bottom
+        background-color: #1a2432
+    .top
+        width: 100%
+        height: 110px
+        position: relative
+        display: flex
+        img
+            width: 48px
+            height: 48px
+            margin: 1rem
+        h1
+            margin: 2rem
+    .middle
+        width: 100%
+        height: $gmapHeight
+        position: relative
+        background-color: black
+        #map
+            width: 100%
+            height: $gmapHeight
+    .bottom
+        width: 100%
+        height: 45px
+        position: relative
+        img
+            cursor: pointer
+            width: 26px
+            height: 26px
+        a
+            font-size: 18px
+        div
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            &:nth-child(1)
+                left: 1rem
+            &:nth-child(2)
+                right: 1rem
+
+
+/// Tapahtumat ///
+.main-category.events
+    width: 100%
+    position: relative
+    align-content: center
+    justify-content: center
+    background: linear-gradient(90deg, #373A66 0%, #666A9C 30.21%, #BB9696 50.52%, #666A9C 71.35%, #373A66 100%)
+    background-size: contain
+    display: grid
+    grid-template-areas: "a a a" "b c d"
+    grid-template-columns: auto auto auto
+    grid-template-rows: auto auto
+    &::before, &::after
+        content: ''
+        position: absolute
+        width: 60%
+        height: 5px
+        left: 50%
+        transform: translateX(-50%)
+        border-radius: 5px
+        background-color: #fff
+        opacity: 0.3
+    &::before
+        top: 0
+    &::after
+        bottom: 0
+    .title
+        grid-area: a
+        text-align: center
+    .item
+        cursor: pointer
+        margin: 1rem
+        width: 20rem
+        height: auto
+        text-align: center
+        position: relative
+        display: inline-block
+        background-color: #ACABAB
+        border-radius: 12px
+        overflow: hidden
+        transition: all 0.3s ease-in-out
+        transition-property: width height
+        &:hover
+            width: 21rem
+            margin: 1.2rem
+        &:nth-child(2)
+            grid-area: b
+        &:nth-child(3)
+            grid-area: c
+        &:nth-child(4)
+            grid-area: d
+        img
+            pointer-events: none
+            width: 100%
+            max-height: 70%
+        h1, h2
+            margin: 1rem 0 1rem 0
+
+
+/// Hinnasto ///
+.pricing
+    width: 100%
+    height: auto
+    background-color: linear-gradient(156.42deg, #403988 8.57%, #692C58 49.76%, #30315C 67.88%, #363865 87.65%)
+    background-size: contain
+    position: relative
+    display: grid
+    grid-template-columns: 100%
+    grid-template-rows: 30% 40% 30% auto
+    grid-template-areas: "a" "b" "c" "d"
+    text-align: center
+    align-items: center
+    justify-content: center
+    margin-bottom: 2rem
+    .title
+        grid-area: a
+        background-color: linear-gradient(180deg, rgba(4, 4, 4, 0.1) 0%, rgba(4, 4, 4, 0.15) 55.21%, rgba(4, 4, 4, 0.1) 75.52%, rgba(4, 4, 4, 0.02) 100%)
+        text-align: center
+    .cards
+        grid-area: b
+        position: relative
+        display: grid
+        grid-template-rows: 100%
+        grid-template-columns: auto auto auto auto auto
+        grid-template-areas: "a2 b2 c2 d2 e2"
+        align-items: center
+        justify-content: center
+        div
+            background-color: #6A8587
+            text-align: center
+            border-radius: 40px
+            border: 4px solid #fff
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+            transition: all 0.1s ease-out
+            transition-property: width height
+            &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5)
+                img
+                    margin: 2.6rem 0 1.1rem 0
+            // move into place
+            &:nth-child(1)
+                transform: translateX(20%) translateY(8%)
+            &:nth-child(2)
+                transform: translateX(10%) translateY(6%)
+            &:nth-child(4)
+                transform: translateX(-10%) translateY(6%)
+            &:nth-child(5)
+                transform: translateX(-20%) translateY(8%)
+            // sizes
+            &:nth-child(1), &:nth-child(5)
+                width: 300px
+                height: 360px
+                z-index: 1
+                &:hover
+                    width: 340px
+                    height: 400px
+                img
+                    width: 78px
+                    height: 78px
+            &:nth-child(2), &:nth-child(4)
+                width: 320px
+                height: 380px
+                z-index: 2
+                &:hover
+                    width: 360px
+                    height: 420px
+                img
+                    width: 86px
+                    height: 86px
+            &:nth-child(3)
+                width: 320px
+                height: 470px
+                z-index: 3
+                &:hover
+                    width: 360px
+                    height: 510px
+                img
+                    width: 140px
+                    height: 145px
+            &:nth-child(1)
+                grid-area: a2
+            &:nth-child(2)
+                grid-area: b2
+            &:nth-child(3)
+                grid-area: c2
+                background: linear-gradient(0deg, rgba(37, 39, 39, 0.8), rgba(37, 39, 39, 0.8)), url('../img/neon.png')
+                background-size: contain contain
+                background-position: center
+                background-repeat: no-repeat
+            &:nth-child(4)
+                grid-area: d2
+            &:nth-child(5)
+                grid-area: e2
+            img
+                margin: 1.6rem 0 1.1rem 0
+            h2
+                margin: 1.3rem 0 1.5rem 0
+            h3
+                font-size: 46px
+                text-shadow: 3px 2px 5px rgba(0, 0, 0, 0.2)
+    .middle
+        grid-area: c
+        position: relative
+        text-align: center
+        display: grid
+        grid-template-columns: 20% 400px 20%
+        grid-template-rows: 100%
+        grid-template-areas: "a1 b1 c1"
+        align-items: center
+        justify-content: center
+        column-gap: 6%
+        img
+            width: 2rem
+            height: 2rem
+        .services, .benefits
+            border-radius: 18px
+        .services
+            grid-area: a1
+            background-color: red
+        .contacts
+            grid-area: b1
+            display: grid
+            grid-template-columns: 100%
+            grid-template-rows: auto auto auto auto
+            grid-template-areas: "a3" "b3" "c3" "d3"
+            column-gap: 1rem
+            justify-items: left
+            margin-left: 20%
+            margin-right: 20%
+            margin-top: 2rem
+            margin-bottom: 2rem
+            &::after
+                content: ''
+                position: absolute
+                left: 50%
+                bottom: 0
+                background-color: #fff
+                opacity: 0.5
+            div
+                margin-top: 1rem
+                &:nth-child(1)
+                    grid-area: a3
+                &:nth-child(2)
+                    grid-area: b3
+                &:nth-child(3)
+                    grid-area: c3
+                    display: flex
+                &:nth-child(4)
+                    grid-area: d3
+                    display: flex
+                h2
+                    text-align: center
+                    margin-left: 0.9rem
+            .varaa-btn
+                width: 100%
+                height: 80px
+                img
+                    width: 90%
+                    height: 100%
+        .benefits
+            grid-area: c1
+            // width: 30%
+            // height: auto
+            background-color: blue
+    .methods
+        grid-area: d
+        position: relative
+        text-align: center
+        pointer-events: none
+        background: linear-gradient(92.12deg, rgba(85, 37, 92, 0) 5.93%, rgba(76, 41, 93, 0.53) 18.48%, rgba(52, 52, 95, 0.22) 87.12%, rgba(49, 54, 95, 0.04) 91.72%, rgba(47, 54, 96, 0) 98.58%)
+        filter: drop-shadow(3px -2px 39px rgba(255, 255, 255, 0.02))
+        img
+            margin: 1rem 2rem
+
+
+/// Galleria ///
+.gallery
+    width: 100%
+    height: auto
+    position: relative
+    .free-wall
+        width: 55%
+        position: relative
+        margin: auto
+        .brick img
+            margin: 0
+            display: block
+
+
+/// Overlayt ///
+.overlay-container
+    width: 100%
+    height: 100%
+    position: fixed
+    top: 0
+    left: 50%
+    transform: translateX(-50%)
+    z-index: 20
+    background-color: rgba(140, 170, 200, 0.7)
+    display: none
+    // &[visible="true"]
+    //     display: block
+    .item
+        padding: 2vw
+        position: absolute
+        width: 90vw
+        height: 80%
+        top: 50%
+        left: 50%
+        transform: translate(-50%,-50%)
+        box-sizing: border-box
+        border-radius: 20px
+        background: linear-gradient(135deg, #0700b8 0%, #32605d 100%)
+        text-align: center
+        overflow-x: clip
+        overflow-y: scroll
+        // like bowling competitions...
+        &#bowling-activity
+            display: grid
+            grid-template-areas: "b a"
+            grid-template-columns: 40% 60%
+            grid-auto-flow: column
+            &:nth-child(1)
+                grid-area: a
+            &:nth-child(2)
+                grid-area: b
+            iframe
+                width: 620px
+                height: 800px
+                margin: 1vw
+            button
+                position: absolute
+                top: 2%
+                right: 2%
+                width: 1rem
+            h1, h2, h3, h4, p
+                margin: 1vw
+            ul
+                display: grid
+                grid-auto-flow: column
+            h1
+                font-size: 1.6vw
+            p
+                font-size: 1vw
+
+
+@media screen and (max-width: 1028px)
+    .titlecard .slider ul li p
+        font-size: 14px
+    
+    .titlecard
+        .events
+            display: none
+
+    .category-desc
+        .desc
+            font-size: 21px
+    
+    .category-holder
+        height: 330vw // 55vw * 6 items
+        .selection
+            height: 330vw // 55vw * 6 items
+            display: inline
+            .item
+                position: relative
+                height: 25%
+                width: 100%
+                &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+                    clip-path: none
+                &:nth-child(4), &:nth-child(5), &:nth-child(6)
+                    top: 0
+    
+    .about-container
+        .content
+            width: 95%
+            margin: 0 auto
+            .split
+                display: inline-block
+            .item
+                &#a, &#b, &#c, &#schedule
+                    margin-top: 2vw
+                &#a, &#b, &#c
+                    width: 100%
+                    margin-left: 0
+                    margin-right: 0
+                    text-align: center
+                &#schedule
+                    left: 50%
+                    transform: translateX(-53%)

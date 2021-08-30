@@ -1,0 +1,163 @@
+@font-face {
+  font-family: Sansita;
+  src: url("./fonts/sansita/Sansita-Regular.ttf");
+}
+
+@font-face {
+  font-family: Sansita-ExtraBold;
+  src: url("./fonts/sansita/Sansita-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Sansita-ExtraBold-Italic;
+  src: url("./fonts/sansita/Sansita-ExtraBoldItalic.ttf");
+}
+
+@font-face {
+  font-family: RedHatDisplay-Regular;
+  src: url("./fonts/red-hat-display/RedHatDisplay-Regular.ttf");
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url("./fonts/roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: NunitoSans;
+  src: url("./fonts/nunito-sans/NunitoSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: NunitoSans-Light;
+  src: url("./fonts/nunito-sans/NunitoSans-Light.ttf");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  width: 99.3vw;
+  height: 100vh;
+  position: relative;
+  display: inline-block;
+  background-color: #041F60;
+  font-family: NunitoSans;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+  color: #fff;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 2rem;
+  font-size: 2rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  pointer-events: none;
+}
+
+.tt-bb {
+  position: relative;
+}
+
+.tt-bb::before, .tt-bb::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: #fff;
+  opacity: 20%;
+  z-index: 7;
+}
+
+.tt-bb::before {
+  top: 0;
+}
+
+.tt-bb::after {
+  bottom: 0;
+}
+
+.tt-bb.rr::before, .tt-bb.rr::after {
+  border-radius: 5px;
+}
+
+.hover-image {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.4s ease-in-out;
+  transition: -webkit-transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  border-radius: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.hover-image:hover {
+  -webkit-transform: scale(103%);
+          transform: scale(103%);
+}
+
+.hover-image img {
+  border-radius: 10px;
+}
+
+.lb {
+  position: relative;
+  width: 95%;
+  height: 0.2vw;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  margin: 1vw;
+  background-color: #ccc;
+  border-radius: 10px;
+  opacity: 0.3;
+}
+
+.header {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  background-color: #2d3436;
+  background-image: linear-gradient(268deg, #2d3436 0%, #685C68 50%, #2d3436 100%);
+  position: relative;
+}
+
+.header h1 {
+  padding: 0.4vw;
+  font-size: 1.8vw;
+  white-space: nowrap;
+}
+
+.varaa-btn {
+  cursor: pointer;
+}
+
+.varaa-btn img {
+  pointer-events: none;
+}
+/*# sourceMappingURL=main.css.map */

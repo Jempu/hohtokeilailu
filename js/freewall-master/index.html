@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<meta name="description" content="Freewall demo for flex layout" />
+	<meta name="keywords" content="javascript, dynamic, grid, layout, jquery plugin, flex layouts" />
+	<link rel="shortcut icon" href="./img/logos/ikatyros.png" type="image/x-icon">
+	<title>Gallery Test</title>
+	<link rel="stylesheet" href="./css/main.css">
+
+	<!-- JQuery-3.6.0 -->
+    <script src="./js/jquery-3.6.0.min/jquery.js"></script>
+
+	<!-- [Gallery] -->
+	<!-- JQuery-1.10.2.min -->
+	<script src="./js/freewall-master/example/js/jquery-1.10.2.min.js"></script>
+	<!-- Freewall -->
+	<link rel="stylesheet" href="./js/freewall-master/example/css/gallery.css">
+	<script src="./js/ikatyros-utilities-master/utilities.js"></script>
+	<script type="text/javascript" src="./js/freewall-master/freewall.js"></script>
+</head>
+<body>
+
+    <!-- Galleria -->
+    <div class="gallery">
+        <div class="title">
+            <h1>Meillä tehdään muistoja</h1>
+        </div>
+		<div class="content">
+			<div id="freewall" class="free-wall"></div>
+			<div class="button">
+				<img src="./img/category-arrow.png" alt="Näytä kaikki gallerian kuvat">
+			</div>
+		</div>
+		<div class="overlay">
+			<div class="close">
+				<img src="./img/close.png" alt="Sulje kuvanäkymä">
+			</div>
+			<div class="item">
+				<img src="./img/proshop-ad.png" alt="Gallerian kuva">
+			</div>
+		</div>
+    </div>
+
+	<script type="text/javascript">
+	function setGallery(data, imageLimit = 20) {
+		const cellWidth = 320;
+		const buttonMargin = 15;
+		
+		const gallery = $('.gallery');
+		const content = $(gallery).find('.content');
+		const freewall = $(gallery).find('#freewall');
+		const overlay = $(gallery).find('.overlay');
+
+    	var html = '';
+		var i = 0;
+		const temp = "<div class='brick' style='width:{width}px;'><img src='{img}' width='100%'></div>";
+		while (i < (imageLimit < data.length ? imageLimit : data.length)) {
+			const w = 1 + 3 * Math.random() << 0;
+			html += temp.replace(/\{width\}/g, w * cellWidth).replace("{img}", data[i]);
+			i++;
+		}
+
+		$(freewall).html(html);
+
+		const wall = new Freewall("#freewall");
+
+		var open = false;
+		function setHeight(val) {
+			open = val;
+			$(content).get(0).setAttribute('open', val);
+			const buttonHeight = val ? 80 : 60;
+			const freewallHeight = $(freewall).height() + buttonHeight + buttonMargin;
+			document.documentElement.style.setProperty('--gallery-freewall-height', `${freewallHeight}px`);
+			document.documentElement.style.setProperty('--gallery-button-height', `${buttonHeight}px`);
+		}
+
+		function setOverlay(src = null) {
+			if (src != null) {
+				$('html').css({ overflowY: 'clip' });
+				$(gallery).css({ height: '100vh' });
+				$(gallery).get(0).setAttribute('open', 'true');
+				$(overlay).find('.item img').get(0).setAttribute('src', src);
+			} else {
+				$('html').css({ overflowY: 'auto' });
+				$(gallery).get(0).setAttribute('open', 'false');
+				setTimeout(() => {
+					$(gallery).css({ height: 'auto' });
+				}, 1200);
+			}
+		}
+
+		wall.reset({
+			selector: '.brick',
+			animate: true,
+			cellW: cellWidth,
+			cellH: 'auto',
+			onResize: function () {
+				wall.fitWidth();
+				setHeight(true);
+			},
+			onComplete: function() {
+				$(freewall).children().each(function (i, l) {
+					$(l).on('click', function () {
+						const img = $(l).find('img');
+						setOverlay($(img).attr('src'));
+					});
+				});
+			}
+		});
+
+		const images = wall.container.find('.brick');
+		images.find('img').load(function () {
+			wall.fitWidth();
+		});
+
+		$(content).find('.button').on('click', function () {
+			setHeight(!open);
+		});
+
+		$(overlay).find('.close').on('click', function () {
+			setOverlay();
+		});
+
+		setTimeout(() => {
+			setHeight(false);
+		}, 200);
+	}
+
+
+	const indexJsonPath = './content/index.json';
+	const galleryPath = './content/gallery/';
+
+	fetch(indexJsonPath).then(v => v.json()).then(data => {
+		// add path to gallery photos
+		var arr = [];
+		data['gallery'].forEach(e => {
+			arr.push(galleryPath + e);
+		});
+		setGallery(arr);
+	});
+
+	</script>
+	
+</body>
+</html>

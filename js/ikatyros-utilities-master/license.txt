@@ -1,0 +1,4 @@
+© Ikatyros 2021 - All rights reserved
+Use of files inside this directory are permitted under the GPL Version 3.0 license.
+
+https://opensource.org/licenses/GPL-3.0

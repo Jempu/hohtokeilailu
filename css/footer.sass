@@ -1,0 +1,140 @@
+
+.footer
+    width: 100%
+    position: relative
+    background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(163.48deg, #132F72 11.44%, #AB568E 56.87%, #892E65 95.2%)
+    .container
+        width: 100%
+        position: relative
+        display: flex
+        margin-bottom: 8rem
+        .title
+            width: 22rem
+            position: relative
+            left: 50%
+            transform: translateX(-50%)
+            text-align: center
+            &::after
+                content: ''
+                width: 100%
+                height: 2px
+                position: absolute
+                left: 50%
+                bottom: 0
+                transform: translateX(-50%)
+                background-color: #fff
+        .content
+            width: 70%
+            position: relative
+            float: left
+            margin: 0 6rem
+            .sponsors
+                width: 100%
+                height: 7.5rem
+                display: flex
+                img
+                    margin: 1rem
+                    height: 100%
+                    width: 16%
+            .middle
+                width: 100%
+                height: 20rem
+                display: inline-flex
+                .logo
+                    width: 8%
+                    padding: 3rem 2rem
+                    img
+                        width: 100%
+                .contacts
+                    height: 100%
+                    width: 30%
+                    position: relative
+                    margin: 1rem
+                    img
+                        height: 10rem
+                    ul
+                        width: 100%
+                        height: 100%
+                        position: relative
+                        li
+                            cursor: pointer
+                            height: 33%
+                            display: inline-flex
+                            margin: 1rem
+                            img
+                                height: 100%
+                .reserve
+                    width: 20%
+                    display: block
+                    margin: 4rem
+                    text-align: center
+                    img
+                        cursor: pointer
+                        margin: 2rem
+                .notice
+                    margin: 4rem
+                    text-align: center
+                    li
+                        margin: 1rem
+                    a
+                        font-size: 2rem
+        iframe
+            position: relative
+            transform: translateY(10%)
+            img
+                width: 100%
+                border-radius: 20px 20px 10px 10px
+    .watermark
+        width: 100%
+        height: 110px
+        position: relative
+        font-family: NunitoSans
+        background-color: #892E65
+        &::before, &::after
+            content: ''
+            position: absolute
+            width: 100%
+            height: 5px
+            border-radius: 5px
+            background-color: #fff
+            left: 0
+            opacity: 20%
+        &::before
+            top: 0
+        &::after
+            bottom: 0
+        h1
+            font-size: 26px
+        .item
+            cursor: pointer
+            position: absolute
+            display: inline-flex
+            width: 650px
+            height: 50%
+            left: 50%
+            top: 50%
+            transform: translate(-40%, -50%)
+            &:hover
+                & > img
+                    animation: ikaLogoAnim 1.7s ease-in-out infinite
+                & > a
+                    text-decoration: underline
+                    text-decoration-color: #fff
+            img
+                height: 100%
+                left: 723px
+                top: 33px
+            a
+                color: #fff
+                width: fit-content
+                padding: 0.8rem
+                font-size: 24px
+                text-decoration: none
+                &:hover
+                    text-decoration: underline
+
+@keyframes ikaLogoAnim
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(-360deg)

@@ -1,0 +1,169 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7.5rem;
+  -webkit-transition: height .3s ease-out;
+  transition: height .3s ease-out;
+  z-index: 42;
+  background-color: rgba(50, 50, 50, 0.2);
+  font-family: NunitoSans;
+}
+
+.nav img {
+  height: 100%;
+}
+
+.nav .background {
+  width: 92%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate(3%, 10%);
+          transform: translate(3%, 10%);
+}
+
+.nav .background img {
+  width: 100%;
+  height: 100%;
+}
+
+.nav .home {
+  cursor: pointer;
+  float: left;
+  width: 7.5rem;
+  height: 7.5rem;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  -webkit-transition-property: width height;
+  transition-property: width height;
+  margin-left: 2rem;
+}
+
+.nav .home img {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nav .links {
+  width: 70%;
+  height: 100%;
+  top: 30%;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.nav .links::before, .nav .links::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  -webkit-transform: translateY(-1200%);
+          transform: translateY(-1200%);
+}
+
+.nav .links::before {
+  left: 8%;
+  bottom: 0;
+  background: #DC8D89;
+  opacity: 0.60;
+}
+
+.nav .links::after {
+  width: 1200px;
+  left: 10%;
+  bottom: -16%;
+  background: #D3A9A7;
+  opacity: 0.3;
+}
+
+.nav .links a {
+  cursor: pointer;
+  position: relative;
+  margin: 0 2rem;
+  color: #fff;
+  pointer-events: all;
+}
+
+.nav .holder {
+  position: relative;
+}
+
+.nav .holder .category {
+  width: 20rem;
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: none;
+  background-color: #6D9AB4;
+  border-radius: 10px;
+  z-index: 11;
+  -webkit-transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, -webkit-transform 0.3s ease-out;
+  transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, -webkit-transform 0.3s ease-out;
+  transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, transform 0.3s ease-out;
+  transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+}
+
+.nav .holder .category h1 {
+  padding: 0.7rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.nav .holder .category h1:hover {
+  background-color: #ACB6CB;
+}
+
+.nav .social, .nav .reserve {
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.nav .social:hover > h3, .nav .reserve:hover > h3 {
+  opacity: 1;
+}
+
+.nav .social h3, .nav .reserve h3 {
+  margin: .7rem 0;
+  width: 25rem;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: NunitoSans;
+  font-size: 24px;
+  color: #fff;
+  pointer-events: none;
+  -webkit-transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
+  opacity: 0;
+}
+
+.nav .social img, .nav .reserve img {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.nav .social {
+  right: 9%;
+}
+
+.nav .reserve {
+  right: 4%;
+}
+/*# sourceMappingURL=nav.css.map */

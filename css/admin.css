@@ -1,0 +1,98 @@
+.side-panel {
+  position: fixed;
+  width: 32rem;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-radius: 25px 0 0 25px;
+  z-index: 99;
+  text-align: center;
+  overflow-x: hidden;
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+  -ms-grid-columns: 80% 20%;
+      grid-template-columns: 80% 20%;
+  -ms-grid-rows: 100%;
+      grid-template-rows: 100%;
+      grid-template-areas: "b a";
+}
+
+.side-panel .anchors {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: a;
+  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+}
+
+.side-panel .anchors .control {
+  height: 10%;
+  cursor: pointer;
+}
+
+.side-panel .anchors .control:hover > h1 {
+  text-decoration: underline;
+}
+
+.side-panel .anchors .prop {
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.side-panel .anchors .prop h4 {
+  cursor: pointer;
+}
+
+.side-panel .anchors .prop h4:hover {
+  text-decoration: underline;
+}
+
+.side-panel .content {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: b;
+  overflow-y: scroll;
+  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+}
+
+.side-panel input {
+  margin: 0.5rem;
+}
+
+.side-panel input[type="submit"] {
+  width: auto;
+  background-color: black;
+}
+
+.side-panel form {
+  width: 100%;
+  position: relative;
+  margin-top: 2rem;
+  background-color: rgba(20, 20, 20, 0.2);
+}
+
+.side-panel form img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.side-panel form .a-title {
+  width: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.side-panel form .a-title input {
+  width: 74%;
+}
+
+.side-panel form .a-title p {
+  margin: 2%;
+}
+/*# sourceMappingURL=admin.css.map */

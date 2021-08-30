@@ -1,0 +1,238 @@
+.footer {
+  width: 100%;
+  position: relative;
+  background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(163.48deg, #132F72 11.44%, #AB568E 56.87%, #892E65 95.2%);
+}
+
+.footer .container {
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 8rem;
+}
+
+.footer .container .title {
+  width: 22rem;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  text-align: center;
+}
+
+.footer .container .title::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: #fff;
+}
+
+.footer .container .content {
+  width: 70%;
+  position: relative;
+  float: left;
+  margin: 0 6rem;
+}
+
+.footer .container .content .sponsors {
+  width: 100%;
+  height: 7.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.footer .container .content .sponsors img {
+  margin: 1rem;
+  height: 100%;
+  width: 16%;
+}
+
+.footer .container .content .middle {
+  width: 100%;
+  height: 20rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.footer .container .content .middle .logo {
+  width: 8%;
+  padding: 3rem 2rem;
+}
+
+.footer .container .content .middle .logo img {
+  width: 100%;
+}
+
+.footer .container .content .middle .contacts {
+  height: 100%;
+  width: 30%;
+  position: relative;
+  margin: 1rem;
+}
+
+.footer .container .content .middle .contacts img {
+  height: 10rem;
+}
+
+.footer .container .content .middle .contacts ul {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.footer .container .content .middle .contacts ul li {
+  cursor: pointer;
+  height: 33%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: 1rem;
+}
+
+.footer .container .content .middle .contacts ul li img {
+  height: 100%;
+}
+
+.footer .container .content .middle .reserve {
+  width: 20%;
+  display: block;
+  margin: 4rem;
+  text-align: center;
+}
+
+.footer .container .content .middle .reserve img {
+  cursor: pointer;
+  margin: 2rem;
+}
+
+.footer .container .content .middle .notice {
+  margin: 4rem;
+  text-align: center;
+}
+
+.footer .container .content .middle .notice li {
+  margin: 1rem;
+}
+
+.footer .container .content .middle .notice a {
+  font-size: 2rem;
+}
+
+.footer .container iframe {
+  position: relative;
+  -webkit-transform: translateY(10%);
+          transform: translateY(10%);
+}
+
+.footer .container iframe img {
+  width: 100%;
+  border-radius: 20px 20px 10px 10px;
+}
+
+.footer .watermark {
+  width: 100%;
+  height: 110px;
+  position: relative;
+  font-family: NunitoSans;
+  background-color: #892E65;
+}
+
+.footer .watermark::before, .footer .watermark::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  left: 0;
+  opacity: 20%;
+}
+
+.footer .watermark::before {
+  top: 0;
+}
+
+.footer .watermark::after {
+  bottom: 0;
+}
+
+.footer .watermark h1 {
+  font-size: 26px;
+}
+
+.footer .watermark .item {
+  cursor: pointer;
+  position: absolute;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 650px;
+  height: 50%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-40%, -50%);
+          transform: translate(-40%, -50%);
+}
+
+.footer .watermark .item:hover > img {
+  -webkit-animation: ikaLogoAnim 1.7s ease-in-out infinite;
+          animation: ikaLogoAnim 1.7s ease-in-out infinite;
+}
+
+.footer .watermark .item:hover > a {
+  text-decoration: underline;
+  -webkit-text-decoration-color: #fff;
+          text-decoration-color: #fff;
+}
+
+.footer .watermark .item img {
+  height: 100%;
+  left: 723px;
+  top: 33px;
+}
+
+.footer .watermark .item a {
+  color: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.8rem;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.footer .watermark .item a:hover {
+  text-decoration: underline;
+}
+
+@-webkit-keyframes ikaLogoAnim {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+
+@keyframes ikaLogoAnim {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+/*# sourceMappingURL=footer.css.map */

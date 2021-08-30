@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<!-- © Suunnitellut & toteuttanut Ikatyros NY 2021 -->
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Tule kokeilemaan keilausta meillä! Tarjoamme mahdollisuuden keilata perheen pienimmällekin. Keilahallimme löytyy Ammattikorkeakoulun vierestä.">
+    <meta name="keywords" content="keilaus, bowling, lasten synttärit, kilpakeilaus, competetive bowling, competition">
+
+    <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-round.png" type="image/x-icon">
+    <title>Mikkelin keilahalli</title>
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/index.css">
+    
+    <link rel="stylesheet" href="./js/ikatyros-utilities-master/loading/loading-screen.css">
+    <link rel="stylesheet" href="./js/ikatyros-utilities-master/rolling/rolling-image.css">
+    <link rel="stylesheet" href="./css/coordinator.css">
+    
+    <!-- JQuery-3.6.0 -->
+    <script src="./js/jquery-3.6.0.min/jquery.js"></script>
+	<!-- JQuery-1.1.2.min (for Freewall.js specifically) -->
+	<script src="./js/freewall-master/jquery-1.10.2.min.js"></script>    
+
+    <!-- Main Script -->
+    <script src="./js/main.js"></script>
+
+    <!-- Title card category carousel: -->
+    <!-- Cloud 9 Carousel -->
+    <script src="./js/cloud9carousel-master/jquery.cloud9carousel.js"></script>
+    <!-- Carousel item reflection -->
+    <script src="./js/reflection-jquery/src/reflection.js"></script>
+
+    <!-- Typewriter.js -->
+    <!-- <script src="./js/typewriterjs-master/src/core/Typewriter.js"></script> -->
+    <script src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js"></script>
+
+	<!-- [Gallery] -->
+	<!-- Freewall -->
+	<link rel="stylesheet" href="./js/freewall-master/gallery.css">
+	<script type="text/javascript" src="./js/freewall-master/freewall.js"></script>
+    
+    <!-- 3rd party plugins: -->
+    <!-- Vimeo Video Player -->
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <!-- Facebook Web SDK -->
+    <!-- <script type="text/javascript">
+        function init() {
+            window.FB.api(
+            '/l214.animaux',
+            {"fields":"fan_count"},
+            function(response) {
+                alert(response.fan_count);
+            }
+            );
+        }
+        
+        window.fbAsyncInit = function () {
+            window.FB.init({
+                appId: '569676491109134',
+                xfbml: true,
+                version: 'v11.0'
+            });
+            FB.AppEvents.logPageView();
+            init();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        FB.api(
+            '/100066923353792/photos',
+            'GET',
+            {"fields":"height,width"},
+            function(response) {
+                // Insert your code here
+                console.log(response)
+            }
+        );
+    </script> -->
+</head>
+
+<body>
+
+    <div class="page-loader">
+        <img class="background" src="./img/pins.png" alt="Keiloja...">
+        <div class="content">
+            <img src="./img/logos/mikkelin-keilahalli-round.png" alt="Mikkelin Keilahallin logo">
+            <div class="title">
+                <h1>Mikkelin Keilahalli</h1>
+                <p>Sivuja ladataan. Odota hetki...</p>
+            </div>
+            <div class="loading-indicator">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="maker">
+            <img src="./img/logos/ikatyros.png" alt="Ikatyros NY:n logo">
+            <p>Sivustot suunnitellut ja toteuttanut Ikatyros NY</p>
+        </div>
+    </div>
+
+    <div ika-instance='{"html":"content/nav.html", "scripts":[{ "src":"js/nav.js", "callback": null }], "styles":["css/nav.css"] }'></div>
+
+    <div class="titlecard">
+
+        <div class="monitor">
+            
+            <h1 class="title">Keilahalli avoinna koko kesän</h1>
+            
+            <div class="container">
+                <div class="item">
+                    <!-- <iframe src="https://www.youtube.com/embed/Ov16oTSDsCc?controls=0&rel=0&mute=1&amp;autoplay=0&start=8" width="100%" height="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media" allowfullscreen="false"></iframe> -->
+                    <img src="./img/photos/bowling-alley.jpg" alt="taustakuva">
+                </div>
+                <div class="item">
+                    <img src="./img/photos/synttarit-mikkelinkeilahalli.png" alt="taustakuva">
+                </div>
+                <div class="item">
+                    <img src="./img/photos/baari1.png" alt="taustakuva">
+                </div>
+                <div class="item">
+                    <img src="./img/photos/sauna.jpg" alt="taustakuva">
+                </div>
+                <div class="item">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/587861013?h=ee90476f84&autoplay=0&muted=1&loop=1&color=fa0105&title=0&byline=0&portrait=0&sidedock=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" muted allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                </div>
+                <div class="item">
+                    <img src="./img/photos/bowling-shoes.png" alt="taustakuva">
+                </div>
+            </div>
+
+            <div class="categories">
+                
+                <div id="cloud9-carousel">
+                    <div class="cloud9-item">
+                        <img src="./img/categories/proshop.png" alt="Pro Shop -kategoria">
+                        <h1>Pro Shop</h1>
+                    </div>
+                    <div class="cloud9-item">
+                        <img src="./img/categories/kilpailu.png" alt="Kilpakeilaus -kategoria">
+                        <h1>Kilpakeilaus</h1>
+                    </div>
+                    <div class="cloud9-item">
+                        <img src="./img/categories/sauna.png" alt="Saunakabinetti -kategoria">
+                        <h1>Saunakabinetti</h1>
+                    </div>
+                    <div class="cloud9-item">
+                        <img src="./img/categories/baari.png" alt="Mättö Baari -kategoria">
+                        <h1>Mättö Baari</h1>
+                    </div>
+                    <div class="cloud9-item">
+                        <img src="./img/categories/synttarit.png" alt="Lasten Synttärit -kategoria">
+                        <h1>Lasten Synttärit</h1>
+                    </div>
+                    <div class="cloud9-item">
+                        <img src="./img/categories/hohto.png" alt="Hohtokeilaus -kategoria">
+                        <h1>Hohtokeilaus</h1>
+                    </div>
+                </div>
+            
+            </div>
+
+            <div class="controls">
+                <button class="prev control">
+                    <img src="./img/arrow-left.png" alt="Lue lisää -näppäin">
+                </button>
+                <button class="next control">
+                    <img src="./img/arrow-right.png" alt="Lue lisää -näppäin">
+                </button>
+            </div>
+
+        </div>
+
+        <div class="slider tt-bb">
+            <ul>
+                <li class="b">
+
+                    <p>
+                        Hohtokeilauksessa radat, pallot ja keilat hohtavat kilpaa keilaajan kanssa. Lähes rajaton määrä musiikkivaihtoehtoja takaa sen, että meillä
+                        soitetaan mitä halutaan.
+                    </p>
+                    <div class="button">
+                        <h2>Lue lisää</h2>
+                        <img src="./img/button-arrow.png" alt="Lue lisää">
+                    </div>
+
+                </li>
+                <li class="r">
+
+                    <p>
+                        Mikkelin keilahalli tarjoaa upeilla lasten synttäripaketeilla mahdollisuuden järjestää
+                        ikimuistoiset synttärit. Synttäripaketit on suunniteltu vanhempia ajatellen eli tarvitsee
+                        tuoda lapset paikalle.
+                    </p>
+                    <div class="button">
+                        <h2>Lue lisää</h2>
+                        <img src="./img/button-arrow.png" alt="Lue lisää">
+                    </div>
+
+                </li>
+                <li class="g">
+
+                    <p>
+                        Kenelle ei tu
+                        Keilauksen ohessa kahvilastamme saa kupin kahvia tai tölkin olutta nakkipadan ohessa isommille syöjille.
+                    </p>
+                    <div class="button">
+                        <h2>Lue lisää</h2>
+                        <img src="./img/button-arrow.png" alt="Lue lisää">
+                    </div>
+
+                </li>
+                <li class="c">
+
+                    <p>
+                        Keilailun jälkeen on mukava mennä tilavan ja viihtyisän saunamme löylyihin. Hallillamme on myös biljardi- ja ilmakiekkopöydät.
+                    </p>
+                    <div class="button">
+                        <h2>Lue lisää</h2>
+                        <img src="./img/button-arrow.png" alt="Lue lisää">
+                    </div>
+
+                </li>
+                <li class="y">
+
+                    <p>
+                        Mikäli olet innostunut kilpailuhenkisestä keilauksesta, niin meiltä saat näppärästi
+                        säilytyskaapin ja mahdollisuuden osallistua kilpailuihin. Alta löydät myös kilpailuiden tiedot
+                        ja tulokset.
+                    </p>
+                    <div class="button">
+                        <h2>Lue lisää</h2>
+                        <img src="./img/button-arrow.png" alt="Lue lisää">
+                    </div>
+
+                </li>
+                <li class="r">
+
+                    <p>
+                        Keilahallimme myy tarvikkeet ammattikeilaajille tai ammattikeilaajaksi unelvoiville.
+                    </p>
+                    <div class="button">
+                        <h2>Lue lisää</h2>
+                        <img src="./img/button-arrow.png" alt="Lue lisää">
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <!-- Palvelut -->
+    <div class="barrel" row="3" ika-responsive>
+        <div class="title tt-bb rr">
+            <h1>PALVELUMME</h1>
+        </div>
+        <div class="item-container">
+            <div class="item" id="hohtokeilaus">
+                <div class="head">
+                    <img src="./img/photos/bowling-alley.jpg">
+                    <div class="cap">
+                        <h1>Hohtokeilaus</h1>
+                        <div class="button">
+                            <img src="./img/category-arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="title">
+                        <h1>Hohtokeilatessa neon-valot ja musiikki kilpailevat keilaajan vauhdissa.</h1>
+                    </div>
+                    <p>
+                        Hohtokeilaus on hauskaa hyvän musiikin soidessa ja valoefektien loistaessa. Voimme käytännössä
+                        soittaa minkä tahansalaista musiikkia.
+
+                        Lapsille on pieniä keilakenkiä ja keveitä palloja sekä mahdollisuus pelaajakohtaisesti
+                        kouruesteisiin.
+                    </p>
+                    <img src="./img/musical.png">
+                    <!-- Hohtokeilauksen Hinnasto -->
+                </div>
+            </div>
+            <div class="item" id="synttarit">
+                <div class="head">
+                    <img src="./img/photos/synttarit-mikkelinkeilahalli1.png">
+                    <div class="cap">
+                        <h1>Lasten Synttärit</h1>
+                        <div class="button">
+                            <img src="./img/category-arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+
+                    <div class="title">
+                        <h1>Synttäreitä tiedossa? Hoidamme kaiken valmiiksi.</h1>
+                    </div>
+
+                    <div class="title image-left">
+                        <div class="image">
+                            <img src="./img/cake.png" alt="Syntymäpäiväkakku">
+                        </div>
+                        <h2>
+                            Mikkelin keilahalli tarjoaa upeilla lasten synttäripaketeilla mahdollisuuden järjestää
+                            ikimuistoiset synttärit. Synttäripaketit on suunniteltu vanhempia ajatellen eli vanhempien ei
+                            tarvitse huolehtia mistään muusta kuin lasten tuomisesta paikalle.
+                        </h2>
+                    </div>
+
+                    <div class="behemoth">
+                        <div class="b1">
+                            <div class="hover-image">
+                                <img src="./img/photos/synttarit-mikkelinkeilahalli1.png" alt="Syntymäpäiväkuva">
+                            </div>
+                        </div>
+                        <div class="c1">
+                            <h3>Me tarjoamme synttärisankarille karkit, sipsit ja limpparit.</h3>
+                            <p>
+                                Alkuopastus, välinevuokrat, ratavuokrat, aito oikea nimikkokeila synttärisankarille, sipsejä,
+                                karkkia, popcornia, jäätelöt, limpparit, pelejä ja biljardipöydän käytön.
+                            </p>
+                        </div>
+                        <div class="static-image hover-image">
+                            <img src="./img/photos/win-pin.png" alt="Syntymäpäiväkeila">
+                        </div>
+                    </div>
+
+                    <div class="title image-left size2">
+                        <div class="image">
+                            <img src="./img/white-star.png" alt="Paketin sisältö">
+                        </div>
+                        <h2>Synttäreissä on 1 tunti keilausta ja 1 tunti yhdessäoloa, pelejä pelaillen ja tarjoilusta nauttien.</h2>
+                    </div>
+                    
+                    <div class="pan">
+                        <div class="header tt-bb">
+                            <h1>Synttäripaketit</h1>
+                        </div>
+                        <div class="mat">
+                            <div class="item">
+                                <h1>Pieni synttäripaketti</h1>
+                                <h2>4-8 henkilöä</h2>
+                                <h3>135€</h3>
+                                <h4>Hohto 145€</h4>
+                            </div>
+                            <div class="item">
+                                <h1>Iso synttäripaketti</h1>
+                                <h2>9-12 henkilöä</h2>
+                                <h3>175€</h3>
+                                <h4>Hohto 190€</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ika-instance='{"html":"content/contact-barrel.html"}'></div>
+
+                </div>
+            </div>
+            <div class="item" id="baari">
+                <div class="head">
+                    <img src="./img/photos/glasses.jpg">
+                    <div class="cap">
+                        <h1>Baari</h1>
+                        <div class="button">
+                            <img src="./img/category-arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="title left-image">
+                        <img src="./img/excellent-service.png" alt="">
+                        <h1>Keilatessa keilaajille saattaa tulla nälkä. Täällä keilahallilla me tarjoamme ruoat ja juomat nälkäisille ja janoisille.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="item" id="sauna">
+                <div class="head">
+                    <img src="./img/photos/sauna.jpg">
+                    <div class="cap">
+                        <h1>Saunakabinetti</h1>
+                        <div class="button">
+                            <img src="./img/category-arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+
+                    <div class="title">
+                        <h1>Keilailun jälkeen on mukava mennä tilavan ja viihtyisän saunamme löylyihin.</h1>
+                    </div>
+                    <div class="gallery">
+                        <img src="./img/photos/glasses.jpg" alt="">
+                        <img src="./img/photos/glasses.jpg" alt="">
+                        <img src="./img/photos/glasses.jpg" alt="">
+                        <p>
+                            Saunakabinetissa voi katsella peililasin takaa radoille ja kabinetti käy myös kokouskäyttöön
+                            oheislaitteiden avulla.
+                        </p>
+                    </div>
+                    <div class="lb"></div>
+                    <div class="prop" id="a">
+                        <img src="./img/snooker.png" alt="">
+                        <div>
+                            <h1>Biljardia</h1>
+                            <p>
+                                Esimerkkinä saunapaketti 10 hengen ryhmälle sisältäen keilauksen, saunatilan ja ruoat alk.
+                                300€.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="lb"></div>
+                    <div class="prop" id="b">
+                        <div>
+                            <h1>Ilmakiekkoa</h1>
+                            <p>
+                                Esimerkkinä saunapaketti 10 hengen ryhmälle sisältäen keilauksen, saunatilan ja ruoat alk.
+                                300€.
+                            </p>
+                        </div>
+                        <img src="./img/air-hockey.png" alt="">
+                    </div>
+
+                    <div ika-instance='{"html":"content/contact-barrel.html"}'></div>
+
+                </div>
+            </div>
+            <div class="item" id="kilpakeilaus">
+                <div class="head">
+                    <img src="./img/photos/keilaus1.png">
+                    <div class="cap">
+                        <h1>Kilpakeilaus</h1>
+                        <div class="button">
+                            <img src="./img/category-arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    
+                    <div class="title image-left">
+                        <div class="image">
+                            <img src="./img/bowling-pins.png" alt="Loistokeilat">
+                        </div>
+                        <h1>Meidän keilahallillamme kilpaillaan aktiivisesti. Alta löydät kilpailujen tiedot ja tulokset.</h1>
+                        <h2>Klikkaamalla ilmoituksia saat lisätietoja tapahtumista.</h2>
+                    </div>
+                    
+                    <div class="lb"></div>
+
+                    <div class="submarine">
+                        <div class="container" id="a">
+                            <div class="header tt-bb">
+                                <h1>Meneillään olevat kilpailut</h1>
+                            </div>
+                            <div class="content" id="a"></div>
+                        </div>
+                        <div class="container" id="b">
+                            <div class="header tt-bb">
+                                <h1>Tulevat kilpailut</h1>
+                            </div>
+                            <div class="content" id="b"></div>
+                        </div>
+                        <div class="container" id="c">
+                            <div class="header tt-bb">
+                                <h1>Menneet kilpailut</h1>
+                            </div>
+                            <div class="content" id="c"></div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="item" id="proshop">
+                <div class="head">
+                    <img src="./img/photos/bowling-shoes.png">
+                    <div class="cap">
+                        <h1>Pro Shop</h1>
+                        <div class="button">
+                            <img src="./img/category-arrow.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="title">
+                        <h1>Keilahallimme myy tarvikkeet ammattikeilaajille tai ammattikeilaajaksi unelvoiville.</h1>
+                    </div>
+                    <div class="items">
+                        <img class="a1" src="./img/logos/proshop-round.png" alt="ProShop logo">
+                        <p class="b1">Pro Shopilla on omat sivut. Voit käydä myymälän esineet läpi siellä.</p>
+                        <a class="c1" href="./proshop.html">Lue lisää Pro Shop -sivuilla.</a>
+                        <img class="d1" src="./img/arrow-right.png" alt="Nuoli">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fullwidth-container"></div>
+
+    </div>
+
+    <!-- Tietoja meistä -osio -->
+    <div class="about-container">
+        <div class="item" id="mk">
+            <img id="l" src="./img/mk-lines.png" alt="Logo-effekti">
+            <img id="a" src="./img/pins.png" alt="Keiloja!">
+            <img id="b" src="./img/pins.png" alt="Keiloja!">
+        </div>
+        <div class="content">
+
+            <div class="split">
+                <div class="item" id="a">
+                    <h1>Keilaa elämäsi kyllyydestä.</h1>
+                    <p>
+                        Keilailu on suosittu harrastus, joka ei katso ikää, ja jota on hauska pelata isossakin kaveriporukassa.
+                        <br><br>
+                        Ammattikorkeakoulu XAMK:in vieressä sijaitseva Mikkelin keilahalli tarjoaa koko perheelle mahdollisuuden keilata. Ikimuistoisista syntymäpäiväjuhlista kaveriporukan saunailtaan, kaikki tarjotaan täällä meillä.
+                        <br><br>
+                        Hohtokeilaus sopii mukavasti työpäivän päätteeksi. Lämpimästi tervetuloa!
+                    </p>
+                </div>
+                <div class="item" id="schedule">
+                    <div class="d1"></div>
+                    <div class="d2"></div>
+                    <div>
+                        <img src="./img/clock.gif" alt="Kellonajat">
+                        <h1>Aukioloajat (nyt suljettu)</h1>
+                    </div>
+                    <div class="days">ma: ti: ke: to: pe: la: su:</div>
+                    <ul></ul>
+                    <div class="note">Keilahalli avoinna tilauksesta myös muina aikoina. Lisätiedot soittamalla.</div>
+                </div>
+            </div>
+    
+            <div class="item" id="b">
+                <h2>Lapsiystävällinen</h2>
+                <p>
+                    Joka radalle saa rännisuojat eli bumpperit, jotka estävät pallon putoamisen ränniin ja näin ollen takaavat onnistumisen ilon.
+                </p>
+            </div>
+            <div class="item" id="c">
+                <h2>Liikuntarajoitteisille</h2>
+                <p>
+                    Keilahallimme on avoin kaikille ja meiltä löytyy erilaisia telineitä sekä kahvapalloja liikuntarajoitteisille. Avulias ja ammattitaitoinen henkilökuntamme on aina valmiina auttamaan.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    
+    <!-- Tapahtumat -->
+    <div class="main-category events">
+        <div class="title">
+            <h1>Keilahallilla tapahtuu</h1>
+        </div>
+    </div>
+
+
+    <!-- Galleria -->
+    <div class="toggle-gallery">
+        <div class="title">
+            <h1>Meillä tehdään muistoja</h1>
+        </div>
+		<div class="content">
+			<div id="freewall" class="free-wall"></div>
+			<div class="button">
+				<img src="./img/category-arrow.png" alt="Näytä kaikki gallerian kuvat">
+			</div>
+		</div>
+		<div class="overlay">
+			<div class="close">
+				<img src="./img/close.png" alt="Sulje kuvanäkymä">
+			</div>
+			<div class="item">
+				<img src="./img/proshop-ad.png" alt="Gallerian kuva">
+			</div>
+		</div>
+    </div>
+    
+
+    <!-- Arvostelut -->
+    <div class="stats">
+        <div class="content">
+            <div class="satisfied">
+                <img src="./img/thumbs-up.png">
+                <h2>900 tyytyväistä keilaajaa</h2>
+            </div>
+            <div class="reviews">
+                <h1 class="title">Tätä sanovat meillä käyneet keilaajat.</h1>
+                <h1 class="rating">4.2</h1>
+                <div class="stars">
+                    <div>
+                        <img src="./img/white-star.png">
+                        <img src="./img/white-star.png">
+                        <img src="./img/white-star.png">
+                        <img src="./img/white-star.png">
+                        <img src="./img/white-star.png">
+                    </div>
+                    <h4>Perustuu 225 arvosteluun</h4>
+                </div>
+                <div class="refresh-btn">
+                    <img src="./img/refresh.png" alt="Valitse seuraava keilahallin arvostelu">
+                </div>
+                <h2>Hyvät radat. Kelpaa vaikka ammattilaisille. Hallin omat välineet kunnossa. Sopii myös alkuillasta
+                    ennen baaria, ja kokoustamista varten neukkari ja sauna. Proshopista ammattimaista palvelua.</h2>
+                <h3>${reviewer-name}</h3>
+            </div>
+            <div class="amount">
+                <img src="./img/trophy.png">
+                <h2>234 tyytyväistä keilaajaa</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Hinnasto -->
+    <div class="pricing">
+        <div class="title">
+            <h1>Keilailun ratahinnasto</h1>
+        </div>
+        <div class="cards">
+            <div>
+                <img src="./img/day.png" alt="Päiväsaikainen keilaus">
+                <h1>Päivä</h1>
+                <h2>Ti – Pe 12.00 – 17.00</h2>
+                <h3>18€</h3>
+                <h4>Rata / tunti</h4>
+            </div>
+            <div>
+                <img src="./img/night.png" alt="Iltaisaikainen keilaus">
+                <h1>Ilta</h1>
+                <h2>Ti – Pe 17.00 – 20.00</h2>
+                <h3>24€</h3>
+                <h4>Rata / tunti</h4>
+            </div>
+            <div>
+                <img src="./img/excellent-service.png" alt="">
+                <h1>Hohtokeilaus</h1>
+                <h2>Ti – La 16.00 – 22.00</h2>
+                <h3>30€</h3>
+                <h4>Rata / tunti</h4>
+            </div>
+            <div>
+                <img src="./img/calendar.png" alt="">
+                <h1>Viikonloppu</h1>
+                <h2>La 12.00 – 16.00</h2>
+                <h3>26€</h3>
+                <h4>Rata / tunti</h4>
+            </div>
+            <div>
+                <img src="./img/night.png" alt="">
+                <h1>Välinevuokraus</h1>
+                <h2>Keilakengät</h2>
+                <h3>2€</h3>
+            </div>
+        </div>
+
+        <div class="middle">
+            <div class="services">
+                <h1>Palvelumme</h1>
+
+                <img src="./img/snooker.png" alt="">
+                <h2>Biljardi (30mins)</h2>
+                <h3>7€</h3>
+            </div>
+            <div class="contacts">
+                <h2>Voit tehdä ratavarauksen täältä:</h2>
+                <div class="varaa-btn">
+                    <img src="./img/varaus-btn.png" alt="Ajan varaus -näppäin">
+                </div>
+                <div>
+                    <img src="./img/phone.png" alt="">
+                    <h2>015 164005</h2>
+                </div>
+                <div>
+                    <img src="./img/email.png" alt="">
+                    <h2>info@mikkelinkeilahalli.fi</h2>
+                </div>
+            </div>
+            <div class="benefits">
+                <h1>Etumme</h1>
+                <h2>Opiskelija- ja eläkeläisalennus (voimassa arkisin)</h2>
+                <h3>–2€</h3>
+            </div>
+        </div>
+
+        <div class="methods">
+            <h1>Meillä myös käy maksuvälineinä</h1>
+            <img src="./img/logos/methods/smartum.png" alt="Smartum pay">
+            <img src="./img/logos/methods/edenred.png" alt="Edenred">
+            <img src="./img/logos/methods/epassi.png" alt="ePassi">
+            <img src="./img/logos/methods/tyky.png" alt="TYKY -maksuvälineet">
+            <img src="./img/logos/methods/eazybreak.png" alt="Eazybreak">
+        </div>
+    </div>
+
+
+    <!-- Kartta -->
+    <div class="map">
+        <div class="top">
+            <img src="./img/location.png" alt="Sijaintimme">
+            <h1>Meidät löytää samasta osoitteesta kuin ennenkin.</h1>
+        </div>
+        <div class="middle">
+            <!-- Google Maps JavaScript API embed -->
+            <script src="./js/gmap.js"></script>
+            <div id="map"></div>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ1NvDQFR8gJzOwYUJ4V20e0JEj37dpgM&callback=initMap&libraries=&v=weekly"
+                async></script>
+        </div>
+        <div class="bottom">
+            <div>
+                <img src="./img/logos/google-maps.png" alt="">
+                <a href="https://www.google.com/maps/place/Mikkelin+Keilahalli+Oy/@61.6795432,27.2582591,251m/data=!3m1!1e3!4m5!3m4!1s0x469aa1767a417e27:0x23d55ed777fc40e9!8m2!3d61.6795653!4d27.2587805"
+                    target="#">Google Maps linkki</a>
+            </div>
+            <div>
+                <img src="./img/logos/google-maps.png" alt="">
+                <img src="./img/video.png" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Sivun pohja -->
+    <div ika-instance='{"html":"content/footer.html", "scripts": [{ "src":"js/footer.js", "callback": null }], "styles":["css/footer.css"]}'></div>
+
+
+    <!-- Smooth Scroll Buttons -->
+    <div class="coordinator">
+        <button class="btn" id="page-top">
+            <img src="./img/up-arrow.png" alt="Mene takaisin sivun yläosaan">
+        </button>
+    </div>
+    <script type="text/javascript" src="./js/smooth-scroll.js"></script>
+
+    
+    <!-- Overlayt -->
+    <div class="overlay-container">
+
+    </div>
+
+</body>
+
+<!-- ikatyros-utilities -->
+<script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
+<script type="text/javascript" src="./js/ikatyros-utilities-master/rolling/rolling-image.js"></script>
+<!-- the barrel's own functionality -->
+<script type="text/javascript" src="./js/ikatyros-utilities-master/barrel/barrel.js"></script>
+<!-- this page's functionality -->
+<script type="text/javascript" src="./js/index.js"></script>
+
+<script type="text/javascript" src="./js/freewall-master/gallery.js"></script>
+
+</html>
