@@ -1,7 +1,7 @@
 function initMap() {
     const halli = { lat: 61.67951580467743, lng: 27.25878119499498 }
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 16,
+        zoom: 14,
         center: halli,
         styles: [
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },

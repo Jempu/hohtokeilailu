@@ -1,13 +1,17 @@
-
 .footer
     width: 100%
     position: relative
-    background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(163.48deg, #132F72 11.44%, #AB568E 56.87%, #892E65 95.2%)
+    background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(173.68deg, #172E67 -2.03%, #6B306C 9.85%, #AB568E 48.71%, #892E65 99.16%)
     .container
         width: 100%
         position: relative
-        display: flex
-        margin-bottom: 8rem
+        padding: 2rem 2vw 1vw 2vw
+        display: grid
+        grid-template-areas: "a b" "c b"
+        h1, a, li, img
+            transition: transform 0.4s ease-out
+            &:hover
+                transform: scale(104%)
         .title
             width: 22rem
             position: relative
@@ -23,73 +27,105 @@
                 bottom: 0
                 transform: translateX(-50%)
                 background-color: #fff
-        .content
-            width: 70%
+        .content, .middle
+            width: 60vw
+            height: auto
             position: relative
+            margin: 0 auto
+        .content
+            grid-area: a
             float: left
-            margin: 0 6rem
             .sponsors
                 width: 100%
-                height: 7.5rem
-                display: flex
+                height: auto
+                display: inline-block
+                text-align: center
                 img
+                    pointer-events: all
+                    width: auto
+                    height: 7rem
                     margin: 1rem
-                    height: 100%
-                    width: 16%
-            .middle
-                width: 100%
-                height: 20rem
-                display: inline-flex
-                .logo
-                    width: 8%
-                    padding: 3rem 2rem
+        .middle
+            grid-area: c
+            position: relative
+            margin: 1.5rem auto
+            display: grid
+            grid-template-areas: "a b c d"
+            .item
+                width: auto
+                height: 100%
+                display: inline-block
+                position: relative
+                top: 0
+                left: 0
+                margin: 2rem
+                &#logo
+                    grid-area: a
                     img
-                        width: 100%
-                .contacts
-                    height: 100%
-                    width: 30%
-                    position: relative
-                    margin: 1rem
+                        width: 5rem
+                        height: 5rem
+                &#contacts
+                    grid-area: b
                     img
-                        height: 10rem
+                        width: 4rem
+                        height: 4rem
                     ul
                         width: 100%
-                        height: 100%
+                        height: auto
                         position: relative
                         li
-                            cursor: pointer
-                            height: 33%
+                            width: 100%
+                            height: auto
                             display: inline-flex
-                            margin: 1rem
-                            img
-                                height: 100%
-                .reserve
-                    width: 20%
-                    display: block
-                    margin: 4rem
+                            margin: 0.5rem 0
+                            cursor: pointer
+                            div
+                                width: 100%
+                            h1
+                                pointer-events: none
+                                margin: auto auto auto 2rem
+                                white-space: nowrap
+                                font-size: calc(16px + 0.4vw)
+                &#reserve
+                    grid-area: c
                     text-align: center
+                    cursor: pointer
+                    transition: transform 0.4s ease-out
                     img
-                        cursor: pointer
-                        margin: 2rem
-                .notice
-                    margin: 4rem
+                        margin-top: 2rem
+                    &:hover
+                        transform: scale(104%)
+                &#notice
+                    grid-area: d
                     text-align: center
-                    li
-                        margin: 1rem
-                    a
-                        font-size: 2rem
+                    ul
+                        height: 100%
+                        li
+                            margin: auto
+                        a
+                            font-size: 2rem
+                            margin: auto
+            img
+               width: 100%
         iframe
+            grid-area: b
             position: relative
-            transform: translateY(10%)
+            margin: auto
+            box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5)
             img
                 width: 100%
                 border-radius: 20px 20px 10px 10px
+    .mobile-width
+        display: none
     .watermark
         width: 100%
-        height: 110px
+        height: 9rem
         position: relative
+        display: flex
+        justify-content: center
         font-family: NunitoSans
         background-color: #892E65
+        padding: 2.5rem 0
         &::before, &::after
             content: ''
             position: absolute
@@ -106,14 +142,12 @@
         h1
             font-size: 26px
         .item
-            cursor: pointer
+            max-width: 650px
+            height: auto
             position: absolute
             display: inline-flex
-            width: 650px
-            height: 50%
-            left: 50%
-            top: 50%
-            transform: translate(-40%, -50%)
+            margin: 0 auto
+            cursor: pointer
             &:hover
                 & > img
                     animation: ikaLogoAnim 1.7s ease-in-out infinite
@@ -121,14 +155,17 @@
                     text-decoration: underline
                     text-decoration-color: #fff
             img
-                height: 100%
+                height: 5rem
+                width: 5rem
                 left: 723px
                 top: 33px
             a
                 color: #fff
                 width: fit-content
-                padding: 0.8rem
-                font-size: 24px
+                margin: auto
+                margin-left: 2rem
+                font-size: calc(16px + 0.5vw)
+                white-space: nowrap
                 text-decoration: none
                 &:hover
                     text-decoration: underline
@@ -138,3 +175,40 @@
         transform: rotate(0)
     100%
         transform: rotate(-360deg)
+
+@media screen and (max-width: 1200px)
+    .footer
+        .container
+            grid-template-areas: "a" "c" "b"
+            justify-items: center
+            .content, .middle
+                width: 100vw
+
+@media screen and (max-width: 1000px)
+    .footer
+        .container
+            .middle
+                grid-template-areas: "a b d" "c c c"
+        .watermark .item img
+            width: 4rem
+            height: 4rem
+
+@media screen and (max-width: 600px)
+    .footer
+        .container
+            .middle
+                grid-template-areas: "a" "b" "d" "c"
+                justify-items: center
+                .item
+                    width: 90%
+                    margin: 2rem 0
+            .full-width
+                display: none
+            .mobile-width
+                display: block
+        .watermark .item
+            margin: 0 2rem
+            a
+                margin-left: 1rem
+                white-space: normal
+                text-align: center

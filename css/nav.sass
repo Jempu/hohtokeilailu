@@ -1,115 +1,294 @@
+$nav-height-full: 7.5rem
+$nav-height-minimized: 5rem
+
+// Mobile Burger Menu
+$burgerMenuZ: 10
+$burgerColor: #e5dcdc
+$sidePieceMove: 195%
+
 .nav
     position: fixed
     top: 0
     left: 0
     width: 100%
-    height: 7.5rem
+    height: $nav-height-full
     transition: height .3s ease-out
     z-index: 42
-    background-color: rgba(50, 50, 50, 0.2)
+    background: url('../img/stars-align.png'), linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.48) 43.23%, rgba(255, 255, 255, 0) 100%)
+    background-size: auto 100%
+    background-repeat: no-repeat
+    background-position: left
     font-family: NunitoSans
+    &[minimized="true"]
+        height: $nav-height-minimized
     img
         height: 100%
-    .background
-        width: 92%
-        height: 100%
-        position: absolute
-        top: 0
-        left: 0
-        transform: translate(3%, 10%)
-        img
-            width: 100%
-            height: 100%
-    .home
+    // normal links that open a new window or scroll to
+    .link
         cursor: pointer
-        float: left
-        width: 7.5rem
-        height: 7.5rem
-        transition: all .3s ease-out
-        transition-property: width height
-        margin-left: 2rem
-        img
-            pointer-events: none
-            width: 100%
-            height: 100%
-    .links
-        width: 70%
+        position: relative
+        text-align: center
+        color: #fff
+        pointer-events: visible
+        margin: auto 0
+        font-size: calc( 12px + 0.8vw )
+        // elements only visible in mobile view
+        &.mobile
+            display: none
+        // hoverable links
+        &.hover
+            cursor: pointer
+            width: 55px
+            height: 55px
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            transition: transform 0.4s ease-in-out
+            &:hover
+                transform: translateY(-50%) scale(104%)
+                & > p
+                    opacity: 1
+            p
+                margin: .7rem 0
+                width: auto
+                height: 100%
+                position: absolute
+                right: 0
+                bottom: 0
+                transform: translateY(140%)
+                font-family: NunitoSans
+                font-size: 24px
+                color: #fff
+                pointer-events: none
+                transition: opacity 0.25s ease-in-out
+                opacity: 0
+                white-space: nowrap
+            img
+                width: 100%
+            &#facebook
+                right: 9rem
+            &#reserve
+                right: 4rem
+        // home button
+        &#home
+            width: 250px
+            height: 86px
+            float: left
+            margin-left: 10.5rem
+            background: linear-gradient(88.84deg, rgba(145, 134, 134, 0.5) 0.66%, rgba(119, 103, 103, 0.448182) 19.61%, rgba(132, 115, 115, 0.264943) 50.34%, rgba(140, 122, 122, 0.155) 66.22%, rgba(192, 192, 192, 0) 99.01%)
+            border-radius: 50px 0px 0px 50px
+            transition: width .3s ease-out, height .3s ease-out, opacity 0.5s ease-in-out, border-radius 0.5s ease-in-out, transform 0.5s ease-in-out
+            pointer-events: all
+            overflow: hidden
+            z-index: 42
+            margin: 0.9rem 0 0 10rem
+            &::before
+                content: ''
+                position: absolute
+                width: 100%
+                height: 100%
+                opacity: 0
+                transition: opacity 0.5s ease-in-out
+                pointer-events: none
+                z-index: 40
+            &:hover
+                border-radius: 50px
+                transform: scale(104%)
+                &::before
+                    opacity: 0.1
+                    background-color: rgb(150, 150, 150)
+            img
+                width: 100%
+    .content
+        width: auto
         height: 100%
-        top: 30%
+        top: 0
         position: relative
         display: grid
+        margin-right: 12rem
         grid-auto-flow: column
+        z-index: 44
         &::before, &::after
             content: ''
             position: absolute
-            width: 100%
             height: 4px
             border-radius: 4px
-            transform: translateY(-1200%)
         &::before
-            left: 8%
-            bottom: 0
+            width: 72vw
+            left: 0
+            bottom: 20%
             background: #DC8D89
             opacity: 0.60
         &::after
-            width: 1200px
+            width: 73vw
             left:   10%
-            bottom: -16%
+            bottom: 12%
             background: #D3A9A7
             opacity: 0.3
-        a
-            cursor: pointer
+        .column
             position: relative
-            margin: 0 2rem
-            color: #fff
-            pointer-events: all
-    .holder
-        position: relative
-        .category
-            width: 20rem
-            position: absolute
-            top: 5rem
-            left: 50%
-            transform: translateX(-50%)
-            display: none
-            background-color: #6D9AB4
-            border-radius: 10px
-            z-index: 11
-            transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, transform 0.3s ease-out
-            h1
-                padding: 0.7rem
-                text-align: center
-                cursor: pointer
+            display: grid
+            .holder
+                width: 20rem
+                position: absolute
+                top: 5rem
+                left: 50%
+                transform: translateX(-50%)
+                background-color: #6D9AB4
                 border-radius: 10px
-                &:hover
-                    background-color: #ACB6CB
-    .social, .reserve
-        cursor: pointer
-        width: 55px
-        height: 55px
+                z-index: 11
+                transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, transform 0.3s ease-out
+                pointer-events: none
+                opacity: 0
+                &[active="true"]
+                    pointer-events: visible
+                    opacity: 1
+                p
+                    padding: 0.7rem
+                    cursor: pointer
+                    border-radius: 10px
+                    &:hover
+                        background-color: #ACB6CB
+    // Burger Menu
+    .burger
+        margin: 0
+        padding: 0
         position: absolute
+        right: 3rem
         top: 50%
         transform: translateY(-50%)
-        &:hover > h3
+        cursor: pointer
+        width: 60px
+        height: 52px
+        z-index: 999
+        flex-flow: column
+        display: none
+        div
+            flex: 1 1 auto
+            pointer-events: none
+            width: inherit
+            border-radius: 20px
+            background-color: $burgerColor
+        *:nth-child(1), *:nth-child(2)
+            margin-bottom: 10px
+    .mobile-side-bar
+        width: 0
+        min-height: 100vh
+        right: 0
+        top: 0
+        position: absolute
+        opacity: 0
+        z-index: 45
+        background-color: blue
+        pointer-events: none
+        transition: width 0.5s ease-out, opacity 0.5s ease-out
+        &[enabled="true"]
             opacity: 1
-        h3
-            margin: .7rem 0
-            width: 25rem
-            height: 100%
-            position: absolute
-            right: 0
-            top: 0
-            font-family: NunitoSans
-            font-size: 24px
-            color: #fff
-            pointer-events: none
-            transition: opacity 0.25s ease-in-out
-            opacity: 0
-        img
-            pointer-events: none
+
+// rotate middle 90deg
+@keyframes burgerIconAnim1
+    from
+        transform: none
+    to
+        transform: rotate(90deg)
+// rotate all 90deg
+@keyframes burgerIconAnim2
+    from
+        transform: translate(-50%, -50%)
+    to
+        transform: translate(-50%, -50%) rotate(270deg)
+// add sparkling glow to borders
+@keyframes burgerIconAnim3
+    from
+        transform: translate(-50%, -50%) rotate(90deg)
+    to
+        transform: translate(-50%, -50%) rotate(90deg)
+// rotate all 45deg anti-clockwise
+@keyframes burgerIconAnim4
+    from
+        transform: translate(-50%, -50%) rotate(90deg)
+    to
+        transform: translate(-50%, -50%) rotate(315deg)
+// move side pieces to middle
+@keyframes burgerIconAnim5L
+    from
+        transform: translateY(0)
+    to
+        transform: translateY($sidePieceMove)
+@keyframes burgerIconAnim5R
+    from
+        transform: translateY(0)
+    to
+        transform: translateY(-$sidePieceMove)
+
+// REVERSE
+
+// move side pieces to middle
+@keyframes burgerIconAnim6L
+    from
+        transform: translateY($sidePieceMove)
+    to
+        transform: translateY(0%)
+@keyframes burgerIconAnim6R
+    from
+        transform: translateY(-$sidePieceMove)
+    to
+        transform: translateY(0%)
+// rotate all 45deg anti-clockwise
+@keyframes burgerIconAnim9
+    from
+        transform: translate(-50%, -50%) rotate(-45deg)
+    to
+        transform: translate(-50%, -50%) rotate(90deg)
+// rotate all aroung,
+@keyframes burgerIconAnim7
+    from
+        transform: translate(-50%, -50%) rotate(90deg)
+    to
+        transform: translate(-50%, -50%) rotate(360deg)
+// while middle piece is rotated to original rotation
+@keyframes burgerIconAnim8
+    from
+        transform: rotate(90deg)
+    to
+        transform: rotate(0)
+
+@media screen and (max-width: 1024px)
+    .nav
+        .content
+            .link, .column
+                display: none
+            &::after
+                display: none
+            &::before
+                width: 100vw
+                left: 0
+        .link
+            &#home
+                margin-left: 12vw
+            &.hover
+                &#facebook
+                    right: 15.5rem
+                &#reserve
+                    right: 10rem
+        .burger
+            display: flex
+        .mobile-side-bar[enabled="true"]
+            width: 60%
+
+@media screen and (max-width: 620px)
+    .nav
+        .content
+            &::before
+                display: none
+        .mobile-side-bar[enabled="true"]
             width: 100%
-            height: 100%
-    .social
-        right: 9%
-    .reserve
-        right: 4%
+        .link
+            &.hover#facebook, &.hover#reserve
+                display: none
+            &.mobile
+                display: block
+            &#home
+                margin-top: 1.3rem
+                width: 200px
+                height: 65px

@@ -123,7 +123,6 @@ $(window).ready(function () {
     ikaInstances = document.querySelectorAll('[ika-instance]');
     ikaInstances.forEach(el => {
         const d = JSON.parse(el.getAttribute('ika-instance'));
-        console.log(d)
         const scripts = d['scripts'] !== undefined ? d['scripts'] : null;
         const styles = d['styles'] !== undefined ? d['styles'] : null;
         instantiate(el, d['html'], scripts, styles);
@@ -241,6 +240,30 @@ function getDateStatus(targetDateStart, targetDateEnd) {
         return 2;
     // past
     return 1;
+}
+
+
+// Times need to be formatted as "9:26"
+function getIfOpen(openTime, closeTime, currentTime = null) {
+    var ct = currentTime, ctH = 0, ctM = 0;
+    const ot = openTime.split(':'), wt = closeTime.split(':');
+    const otH = ot[0], otM = ot[1], wtH = wt[0], wtM = wt[1];
+    // if null, use local time
+    if (ct == null) {
+        const d = new Date();
+        ctH = d.getHours();
+        ctM = d.getMinutes();
+    }
+    if (ctH - otH >= 0) {
+        if (ctM - wtM > 0) {
+            if (wtH - ctH >= 0) {
+                if (wtM - ctM > 0) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 

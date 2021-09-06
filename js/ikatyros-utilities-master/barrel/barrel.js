@@ -93,7 +93,7 @@ const responsiveBarrel = {
                 }, 1200);
                 document.documentElement.style.setProperty('--fullwidth-height', '0px');
             }
-            responsiveBarrel.fullWidthContainer.style.marginTop = `${oh1}px`;
+            // responsiveBarrel.fullWidthContainer.style.marginTop = `${oh1}px`;
         } else {
             if (v) {
                 setTimeout(() => {

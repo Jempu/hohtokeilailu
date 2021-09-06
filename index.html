@@ -8,13 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description" content="Tule kokeilemaan keilausta meillä! Tarjoamme mahdollisuuden keilata perheen pienimmällekin. Keilahallimme löytyy Ammattikorkeakoulun vierestä.">
-    <meta name="keywords" content="keilaus, bowling, lasten synttärit, kilpakeilaus, competetive bowling, competition">
+    <meta name="keywords" content="keilaus, bowling, lasten synttärit, kilpakeilaus, competitive bowling, competition">
 
     <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-round.png" type="image/x-icon">
     <title>Mikkelin keilahalli</title>
 
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/nav.css">
     
     <link rel="stylesheet" href="./js/ikatyros-utilities-master/loading/loading-screen.css">
     <link rel="stylesheet" href="./js/ikatyros-utilities-master/rolling/rolling-image.css">
@@ -26,6 +27,7 @@
 	<script src="./js/freewall-master/jquery-1.10.2.min.js"></script>    
 
     <!-- Main Script -->
+    <script src="./js/ikatyros-utilities-master/main.js"></script>
     <script src="./js/main.js"></script>
 
     <!-- Title card category carousel: -->
@@ -43,50 +45,8 @@
 	<link rel="stylesheet" href="./js/freewall-master/gallery.css">
 	<script type="text/javascript" src="./js/freewall-master/freewall.js"></script>
     
-    <!-- 3rd party plugins: -->
     <!-- Vimeo Video Player -->
     <script src="https://player.vimeo.com/api/player.js"></script>
-
-    <!-- Facebook Web SDK -->
-    <!-- <script type="text/javascript">
-        function init() {
-            window.FB.api(
-            '/l214.animaux',
-            {"fields":"fan_count"},
-            function(response) {
-                alert(response.fan_count);
-            }
-            );
-        }
-        
-        window.fbAsyncInit = function () {
-            window.FB.init({
-                appId: '569676491109134',
-                xfbml: true,
-                version: 'v11.0'
-            });
-            FB.AppEvents.logPageView();
-            init();
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        FB.api(
-            '/100066923353792/photos',
-            'GET',
-            {"fields":"height,width"},
-            function(response) {
-                // Insert your code here
-                console.log(response)
-            }
-        );
-    </script> -->
 </head>
 
 <body>
@@ -250,7 +210,7 @@
                 <li class="r">
 
                     <p>
-                        Keilahallimme myy tarvikkeet ammattikeilaajille tai ammattikeilaajaksi unelvoiville.
+                        Keilahallimme myy tarvikkeet ammattikeilaajille tai ammattikeilaajaksi mieliville.
                     </p>
                     <div class="button">
                         <h2>Lue lisää</h2>
@@ -344,7 +304,7 @@
                         <div class="image">
                             <img src="./img/white-star.png" alt="Paketin sisältö">
                         </div>
-                        <h2>Synttäreissä on 1 tunti keilausta ja 1 tunti yhdessäoloa, pelejä pelaillen ja tarjoilusta nauttien.</h2>
+                        <h2>Synttäreissä on tunti keilausta ja tunti yhdessäoloa, pelejä pelaillen ja tarjoilusta nauttien.</h2>
                     </div>
                     
                     <div class="pan">
@@ -524,7 +484,7 @@
                 <div class="item" id="a">
                     <h1>Keilaa elämäsi kyllyydestä.</h1>
                     <p>
-                        Keilailu on suosittu harrastus, joka ei katso ikää, ja jota on hauska pelata isossakin kaveriporukassa.
+                        Keilailu on suosittu harrastus, joka ei katso ikää, ja jota voi pelata isossakin kaveriporukassa.
                         <br><br>
                         Ammattikorkeakoulu XAMK:in vieressä sijaitseva Mikkelin keilahalli tarjoaa koko perheelle mahdollisuuden keilata. Ikimuistoisista syntymäpäiväjuhlista kaveriporukan saunailtaan, kaikki tarjotaan täällä meillä.
                         <br><br>
@@ -534,9 +494,9 @@
                 <div class="item" id="schedule">
                     <div class="d1"></div>
                     <div class="d2"></div>
-                    <div>
+                    <div id="title">
                         <img src="./img/clock.gif" alt="Kellonajat">
-                        <h1>Aukioloajat (nyt suljettu)</h1>
+                        <h1>Aukioloajat</h1>
                     </div>
                     <div class="days">ma: ti: ke: to: pe: la: su:</div>
                     <ul></ul>
@@ -547,7 +507,7 @@
             <div class="item" id="b">
                 <h2>Lapsiystävällinen</h2>
                 <p>
-                    Joka radalle saa rännisuojat eli bumpperit, jotka estävät pallon putoamisen ränniin ja näin ollen takaavat onnistumisen ilon.
+                    Neljälle reunaradalle saa rännisuojat eli bumpperit, jotka estävät pallon putoamisen ränniin ja näin ollen takaavat onnistumisen ilon.
                 </p>
             </div>
             <div class="item" id="c">
@@ -557,15 +517,36 @@
                 </p>
             </div>
 
+            <div class="item" id="d">
+                <h2>Veteraanikeilaus</h2>
+                <p>
+                    Meillä toimii Veteraanikeilaajien kerho. Kerho on tarkoitettu yli 60-vuotiaille, jossa järjestetään viikoittain maanantaisin ohjattua keilailua veteraanikisan veteraanikeilaajille klo 12.00 – 15.00. Kerho osallistuu myös veteraanien kaupunkiotteluihin ja muihin Keilahallin järjestämiin kilpailuihin.
+                    <br><br>
+                    <a href="./content/uploads/yleistiedotenetti2020.pdf" target="#">Lue lisää toiminnasta täältä</a>
+                </p>
+            </div>
+
         </div>
     </div>
 
     
     <!-- Tapahtumat -->
     <div class="main-category events">
+        
         <div class="title">
             <h1>Keilahallilla tapahtuu</h1>
         </div>
+        
+        <div class="container">
+
+        </div>
+        
+        <!-- Facebook Page Plugin for viewing timeline (Small Header) -->
+        <!-- Full-width -->
+        <iframe class="full-width" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmikkelinkeilahallioy&tabs=timeline&width=420&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="420" height="600" style="border:none;overflow:hidden;border-radius:0 0 10px 10px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="web-share"></iframe>
+        <!-- Mobile-width -->
+        <iframe class="mobile-width" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmikkelinkeilahallioy&tabs=timeline&width=340&height=620&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="620" style="border:none;overflow:hidden;border-radius:0 0 10px 10px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="web-share"></iframe>
+
     </div>
 
 
@@ -593,21 +574,21 @@
 
     <!-- Arvostelut -->
     <div class="stats">
-        <div class="content">
+        <div class="content tt-bb">
             <div class="satisfied">
                 <img src="./img/thumbs-up.png">
-                <h2>900 tyytyväistä keilaajaa</h2>
+                <h2>Yli 520 tyytyväistä keilaajaa</h2>
             </div>
             <div class="reviews">
                 <h1 class="title">Tätä sanovat meillä käyneet keilaajat.</h1>
                 <h1 class="rating">4.2</h1>
                 <div class="stars">
                     <div>
-                        <img src="./img/white-star.png">
-                        <img src="./img/white-star.png">
-                        <img src="./img/white-star.png">
-                        <img src="./img/white-star.png">
-                        <img src="./img/white-star.png">
+                        <img src="./img/rating-star.png">
+                        <img src="./img/rating-star.png">
+                        <img src="./img/rating-star.png">
+                        <img src="./img/rating-star.png">
+                        <img src="./img/rating-star1.png">
                     </div>
                     <h4>Perustuu 225 arvosteluun</h4>
                 </div>
@@ -616,11 +597,11 @@
                 </div>
                 <h2>Hyvät radat. Kelpaa vaikka ammattilaisille. Hallin omat välineet kunnossa. Sopii myös alkuillasta
                     ennen baaria, ja kokoustamista varten neukkari ja sauna. Proshopista ammattimaista palvelua.</h2>
-                <h3>${reviewer-name}</h3>
+                <h3>Nimimerkki</h3>
             </div>
             <div class="amount">
                 <img src="./img/trophy.png">
-                <h2>234 tyytyväistä keilaajaa</h2>
+                <h2>Ammattikeilaajia vuodesta 1963.</h2>
             </div>
         </div>
     </div>
@@ -628,82 +609,100 @@
 
     <!-- Hinnasto -->
     <div class="pricing">
-        <div class="title">
-            <h1>Keilailun ratahinnasto</h1>
-        </div>
-        <div class="cards">
-            <div>
-                <img src="./img/day.png" alt="Päiväsaikainen keilaus">
-                <h1>Päivä</h1>
-                <h2>Ti – Pe 12.00 – 17.00</h2>
-                <h3>18€</h3>
-                <h4>Rata / tunti</h4>
+        <div class="snooker tt-bb">
+            <div class="title">
+                <h1>Hinnastomme</h1>
             </div>
-            <div>
-                <img src="./img/night.png" alt="Iltaisaikainen keilaus">
-                <h1>Ilta</h1>
-                <h2>Ti – Pe 17.00 – 20.00</h2>
-                <h3>24€</h3>
-                <h4>Rata / tunti</h4>
-            </div>
-            <div>
-                <img src="./img/excellent-service.png" alt="">
-                <h1>Hohtokeilaus</h1>
-                <h2>Ti – La 16.00 – 22.00</h2>
-                <h3>30€</h3>
-                <h4>Rata / tunti</h4>
-            </div>
-            <div>
-                <img src="./img/calendar.png" alt="">
-                <h1>Viikonloppu</h1>
-                <h2>La 12.00 – 16.00</h2>
-                <h3>26€</h3>
-                <h4>Rata / tunti</h4>
-            </div>
-            <div>
-                <img src="./img/night.png" alt="">
-                <h1>Välinevuokraus</h1>
-                <h2>Keilakengät</h2>
-                <h3>2€</h3>
-            </div>
-        </div>
-
-        <div class="middle">
-            <div class="services">
-                <h1>Palvelumme</h1>
-
+            <div class="item">
                 <img src="./img/snooker.png" alt="">
-                <h2>Biljardi (30mins)</h2>
-                <h3>7€</h3>
+                <div>
+                    <h1>Biljardi</h1>
+                    <h2>7€</h2>
+                    <h3>30 mins</h3>
+                </div>
             </div>
-            <div class="contacts">
-                <h2>Voit tehdä ratavarauksen täältä:</h2>
+        </div>
+        <div class="container">
+            <div class="title">
+                <h1>Ratahinnasto</h1>
+            </div>
+            <div class="cards">
+                <div class="benefit">
+                    <h2>Opiskelija- ja eläkeläisalennus (voimassa arkisin)</h2>
+                    <h1>–2€</h1>
+                </div>
+                <div class="item">
+                    <img src="./img/day.png" alt="Päiväsaikainen keilaus">
+                    <h1>Päivä</h1>
+                    <h2>Ti – Pe 12.00 – 17.00</h2>
+                    <div class="price">
+                        <h3 class="normal">18€</h3>
+                        <h3 class="reduced">16€</h3>
+                    </div>
+                    <h4>Rata / tunti</h4>
+                </div>
+                <div class="item">
+                    <img src="./img/night.png" alt="Iltaisaikainen keilaus">
+                    <h1>Ilta</h1>
+                    <h2>Ti – Pe 17.00 – 20.00</h2>
+                    <div class="price">
+                        <h3 class="normal">24€</h3>
+                        <h3 class="reduced">22€</h3>
+                    </div>
+                    <h4>Rata / tunti</h4>
+                </div>
+                <div class="item">
+                    <img src="./img/excellent-service.png" alt="">
+                    <h1>Hohtokeilaus</h1>
+                    <h2>Ti – La 16.00 – 22.00</h2>
+                    <div class="price">
+                        <h3 class="normal">30€</h3>
+                        <h3 class="reduced">28€</h3>
+                    </div>
+                    <h4>Rata / tunti</h4>
+                </div>
+                <div class="item">
+                    <img src="./img/calendar.png" alt="">
+                    <h1>Viikonloppu</h1>
+                    <h2>La 12.00 – 16.00</h2>
+                    <div class="price">
+                        <h3 class="normal">26€</h3>
+                        <h3 class="reduced">24€</h3>
+                    </div>
+                    <h4>Rata / tunti</h4>
+                </div>
+                <div class="item">
+                    <img src="./img/proshop/shoes/shoes.png" alt="">
+                    <h1>Välinevuokraus</h1>
+                    <h2>Keilakengät</h2>
+                    <div class="price">
+                        <h3 class="normal">2€</h3>
+                        <h3 class="reduced">0€!</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="contact">
+                <h1>Voit tehdä ratavarauksen täältä:</h1>
                 <div class="varaa-btn">
                     <img src="./img/varaus-btn.png" alt="Ajan varaus -näppäin">
                 </div>
-                <div>
+                <div class="item">
                     <img src="./img/phone.png" alt="">
                     <h2>015 164005</h2>
                 </div>
-                <div>
+                <div class="item">
                     <img src="./img/email.png" alt="">
                     <h2>info@mikkelinkeilahalli.fi</h2>
                 </div>
             </div>
-            <div class="benefits">
-                <h1>Etumme</h1>
-                <h2>Opiskelija- ja eläkeläisalennus (voimassa arkisin)</h2>
-                <h3>–2€</h3>
+            <div class="methods">
+                <h1>Meillä myös käy maksuvälineinä</h1>
+                <img src="./img/logos/methods/smartum.png" alt="Smartum pay">
+                <img src="./img/logos/methods/edenred.png" alt="Edenred">
+                <img src="./img/logos/methods/epassi.png" alt="ePassi">
+                <img src="./img/logos/methods/tyky.png" alt="TYKY -maksuvälineet">
+                <img src="./img/logos/methods/eazybreak.png" alt="Eazybreak">
             </div>
-        </div>
-
-        <div class="methods">
-            <h1>Meillä myös käy maksuvälineinä</h1>
-            <img src="./img/logos/methods/smartum.png" alt="Smartum pay">
-            <img src="./img/logos/methods/edenred.png" alt="Edenred">
-            <img src="./img/logos/methods/epassi.png" alt="ePassi">
-            <img src="./img/logos/methods/tyky.png" alt="TYKY -maksuvälineet">
-            <img src="./img/logos/methods/eazybreak.png" alt="Eazybreak">
         </div>
     </div>
 
@@ -715,22 +714,28 @@
             <h1>Meidät löytää samasta osoitteesta kuin ennenkin.</h1>
         </div>
         <div class="middle">
-            <!-- Google Maps JavaScript API embed -->
-            <script src="./js/gmap.js"></script>
-            <div id="map"></div>
-            <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ1NvDQFR8gJzOwYUJ4V20e0JEj37dpgM&callback=initMap&libraries=&v=weekly"
-                async></script>
+            <div class="item" id="gmap">
+                <img src="./img/googlemaps.png" alt="Google-maps -näkymä">
+            </div>
+            <div class="item" id="video">
+                <div style="padding:24.13% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/598699332?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=ceecc693d3" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="drone-map-vid3.mp4"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+            </div>
         </div>
         <div class="bottom">
-            <div>
+            <div class="link" onclick="window.open('https://www.google.com/maps/place/Mikkelin+Keilahalli+Oy/@61.6795432,27.2582591,251m/data=!3m1!1e3!4m5!3m4!1s0x469aa1767a417e27:0x23d55ed777fc40e9!8m2!3d61.6795653!4d27.2587805', target='#')">
                 <img src="./img/logos/google-maps.png" alt="">
                 <a href="https://www.google.com/maps/place/Mikkelin+Keilahalli+Oy/@61.6795432,27.2582591,251m/data=!3m1!1e3!4m5!3m4!1s0x469aa1767a417e27:0x23d55ed777fc40e9!8m2!3d61.6795653!4d27.2587805"
-                    target="#">Google Maps linkki</a>
+                    target="#">Google Maps -linkki</a>
             </div>
-            <div>
-                <img src="./img/logos/google-maps.png" alt="">
-                <img src="./img/video.png" alt="">
+            <div class="controls">
+                <div class="item" id="video">
+                    <img src="./img/video.png" alt="">
+                    <h1>Dronevideo</h1>
+                </div>
+                <div class="item" id="gmap">
+                    <img src="./img/logos/google-maps.png" alt="">
+                    <h1>Karttanäkymä</h1>
+                </div>
             </div>
         </div>
     </div>
@@ -756,14 +761,16 @@
 
 </body>
 
-<!-- ikatyros-utilities -->
-<script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
-<script type="text/javascript" src="./js/ikatyros-utilities-master/rolling/rolling-image.js"></script>
-<!-- the barrel's own functionality -->
-<script type="text/javascript" src="./js/ikatyros-utilities-master/barrel/barrel.js"></script>
-<!-- this page's functionality -->
-<script type="text/javascript" src="./js/index.js"></script>
-
-<script type="text/javascript" src="./js/freewall-master/gallery.js"></script>
+<footer>
+    <!-- ikatyros-utilities -->
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/rolling/rolling-image.js"></script>
+    <!-- the barrel's own functionality -->
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/barrel/barrel.js"></script>
+    <!-- this page's functionality -->
+    <script type="text/javascript" src="./js/index.js"></script>
+    
+    <script type="text/javascript" src="./js/freewall-master/gallery.js"></script>
+</footer>
 
 </html>

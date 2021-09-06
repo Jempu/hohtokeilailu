@@ -1,219 +1,40 @@
 <!DOCTYPE html>
 <!-- © Suunnitellut & toteuttanut Ikatyros NY 2021 -->
 <html lang="fi">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/proshop-logo-rounded.png" type="image/x-icon">
-    <title>Mikkelin Keilahalli - Pro Shop</title>
+    
+    <meta name="description" content="Mikkelin Keilahalli myy keilaaja-ammattilaisen tarvikkeet. Voit tulla katsomaan ja sovittamaan paikan päälle.">
+    <meta name="keywords" content="keilaustarvikkeet, keilaustarvike, keilausväline, keilausvälineet, bowling equipment, kilpakeilaus, competitive bowling, competition">
+
+    <link rel="shortcut icon" href="./img/logos/proshop-round.png" type="image/x-icon">
+    <title>Proshop</title>
+    
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/proshop.css">
+
+    <!-- JQuery-3.6.0 -->
+    <script src="./js/jquery-3.6.0.min/jquery.js"></script>
+
+    <script src="./js/ikatyros-utilities-master/main.js"></script>
+
     <script src="./js/main.js"></script>
+
 </head>
 
 <body>
 
-    <script type="text/javascript">
-        instantiate('instantiate.navbar', 'content/nav.html', [{
-            src: 'js/nav.js',
-            callback: function (navbar) {
-                let card = document.body.querySelector('.titlecard')
-                window.addEventListener('scroll', () => {
-                    navbar.style.height = window.scrollY > card.offsetHeight * .9 ? `4rem` : `7.5rem`
-                })
-            }
-        }], ['css/nav.css'])
-    </script>
-    <div id="instantiate.navbar"></div>
-
     <div class="titlecard">
-        <div class="main">
-            <div class="header">
-                <h3>Mikkelin Keilahallin</h3>
-                <h1>PRO SHOP</h1>
-                <h2>Korkeapitoista kitkaa radalle</h2>
-                <div class="btn a">Selaa tuotteita</div>
-                <div class="btn b">Lue lisää</div>
-            </div>
-            <img class="product-img" src="./img/proshop/shoes/shoes.png">
-        </div>
-        <div class="controls">
-            <img class="arrow" src="./img/arrow-left.png" alt="Valitse edellinen kategoria">
-            <div class="wheel">
-                <div class="item selected">
-                    <img src="./img/proshop/shoes/kicks/kicks.jpg" alt="Valitse keilakengät">
-                    <h1>Kengät</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/bags/3-ball-deluxe.jpg" alt="Valitse laukut">
-                    <h1>Laukut</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/bowling-alley.jpg" alt="Valitse pallot">
-                    <h1>Pallot</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/oheistuotteet.jpg" alt="Valitse oheistuotteet">
-                    <h1>Muu</h1>
-                </div>
-            </div>
-            <img class="arrow" src="./img/arrow-right.png" alt="Valitse seuraava kategoria">
-        </div>
+        <img src="./img/logos/proshop-round.png" alt="Proshopin -logo">
+        <h1>Proshop</h1>
+        <h2>Tule tarkistamaan tuotevalikoimamme myymälästämme.</h2>
     </div>
-
-    <div class="catalogue">
-        
-        <div class="type shoes">
-            <div class="title">
-                <div class="div a"></div>
-                <h1>Kenkämallistomme</h1>
-                <div class="div b"></div>
-            </div>
-            <div class="items">
-                <div class="item">
-                    <img src="./img/proshop/shoes/tour-ultra/tour-ultra.jpg" alt="Tour ultra -sarjan kengät">
-                    <h1>Tour ultra 230€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/sport-ultra/sport-ultra-white.jpg" alt="Sport ultra -sarjan kengät">
-                    <h1>Sport ultra 180€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/kicks/kicks.jpg" alt="Kicks -sarjan kengät">
-                    <h1>Kicks 65€</h1>
-                </div>
-            </div>
-        </div>
-
-        <div class="type bags">
-            <div class="title">
-                <div class="div a"></div>
-                <h1>Laukkumallistomme</h1>
-                <div class="div b"></div>
-            </div>
-            <div class="items">
-                <div class="item">
-                    <img src="./img/proshop/shoes/tour-ultra/tour-ultra.jpg" alt="">
-                    <h1>Tour ultra 230€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/sport-ultra/sport-ultra-white.jpg" alt="">
-                    <h1>Sport ultra 180€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/kicks/kicks.jpg" alt="">
-                    <h1>Kicks 65€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/tour-ultra/tour-ultra.jpg" alt="">
-                    <h1>Tour ultra 230€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/sport-ultra/sport-ultra-white.jpg" alt="">
-                    <h1>Sport ultra 180€</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/kicks/kicks.jpg" alt="">
-                    <h1>Kicks 65€</h1>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="item-overlay">
-        <div class="return">
-            X
-        </div>
-        <div class="main">
-            <div class="overview">
-                <div class="colors">
-                    <h1>Saatavilla</h1>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="photos">
-                    <img src="./img/proshop/shoes/tour-ultra/tour-ultra.jpg" alt="Tuotekuva 1">
-                    <img src="./img/proshop/shoes/tour-ultra/TourUltraBlack_Pair.jpg" alt="Tuotekuva 2">
-                    <img src="./img/proshop/shoes/tour-ultra/tour_ultra_hero-white-black.jpg" alt="Tuotekuva 3">
-                    <img src="./img/proshop/shoes/tour-ultra/TourUltra_SoleFrame.jpg" alt="Tuotekuva 4">
-                </div>
-            </div>
-            <div class="header">
-                <h1>Tour ultra</h1>
-                <p>Keveimmästä ja vahvimmasta nahkamateriaalista valmistetut Tour Ultra -sarjan kengät ovat suunnisteltu maksimaaliseen pitoon, jotka ovat niin tehokkaita, kestäviä ja ketteriä. Nämä kovat ja jaloissa mukavat kengät tulevat vaihdettavilla pohjilla ja neljällä erilaisella nauhalla pitääkseen sinut mukana jokaisessa tilanteessa.</p>
-                <h2>Hinta: 230€</h2>
-                <div class="btn a">Tilaa Puhelimitse</div>
-                <p>Tuote sovitetaan myymälässä ennen tilausta.
-                    Tuotteiden toimitusaika on 1 - 3 viikkoa.</p>
-            </div>
-        </div>
-        <div class="package">
-            <h1>Pakettiin sisältyy</h1>
-            <div class="container">
-                <h1>Vaihdettavat pohjat</h1>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/Chrome-sole-uai-516x344.jpg" alt="Krominahkakorko">
-                    <h1>Krominahkakorko</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="Peurannahkakorko">
-                    <h1>Peurannahkakorko</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="Selkänahkakorko">
-                    <h1>Selkänahkakorko</h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-            </div>
-            <div class="container">
-                <h1>Oheistuotteet</h1>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-                <div class="item">
-                    <img src="./img/proshop/shoes/misc/" alt="">
-                    <h1></h1>
-                </div>
-            </div>
-            <a href="http://3gbowling.com/wp-content/uploads/2016/05/Slide-chart-squares.pdf" target="#">Erilaisten kengänkorkojen opas (.pdf)</a>
-        </div>
-    </div>
-
-    <script type="text/javascript">instantiate('instantiate.footer', 'content/footer.html', [{ src: 'js/footer.js', callback: null }], ['css/footer.css'])</script>
-    <div id="instantiate.footer"></div>
-
+    
 </body>
-<!-- <script src="./js/proshop-catalogue.js"></script> -->
+
+<script src="./js/ikatyros-utilities-master/utilities.js"></script>
+
 </html>

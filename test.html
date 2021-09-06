@@ -1,28 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- © Suunnitellut & toteuttanut Ikatyros NY 2021 -->
+<html lang="fi">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/logos/ikatyros.png" type="image/x-icon">
-    <title>Carousel Test</title>
+
+    <meta name="description" content="Tule kokeilemaan keilausta meillä! Tarjoamme mahdollisuuden keilata perheen pienimmällekin. Keilahallimme löytyy Ammattikorkeakoulun vierestä.">
+    <meta name="keywords" content="keilaus, bowling, lasten synttärit, kilpakeilaus, competitive bowling, competition">
+
+    <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-round.png" type="image/x-icon">
+    <title>Mikkelin keilahalli</title>
+
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    
+    <link rel="stylesheet" href="./js/ikatyros-utilities-master/loading/loading-screen.css">
+    <link rel="stylesheet" href="./js/ikatyros-utilities-master/rolling/rolling-image.css">
+    <link rel="stylesheet" href="./css/coordinator.css">
     
     <!-- JQuery-3.6.0 -->
     <script src="./js/jquery-3.6.0.min/jquery.js"></script>
+	<!-- JQuery-1.1.2.min (for Freewall.js specifically) -->
+	<script src="./js/freewall-master/jquery-1.10.2.min.js"></script>    
+
+    <!-- Main Script -->
+    <script src="./js/ikatyros-utilities-master/main.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Title card category carousel: -->
+    <!-- Cloud 9 Carousel -->
+    <script src="./js/cloud9carousel-master/jquery.cloud9carousel.js"></script>
+    <!-- Carousel item reflection -->
+    <script src="./js/reflection-jquery/src/reflection.js"></script>
+
+    <!-- Typewriter.js -->
+    <!-- <script src="./js/typewriterjs-master/src/core/Typewriter.js"></script> -->
+    <script src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js"></script>
+
+	<!-- [Gallery] -->
+	<!-- Freewall -->
+	<link rel="stylesheet" href="./js/freewall-master/gallery.css">
+	<script type="text/javascript" src="./js/freewall-master/freewall.js"></script>
     
-    <!-- <script src="./js"></script> -->
-    <script src="./js/ikatyros-utilities-master/utilities.js"></script>
-</head>
+    <!-- 3rd party plugins: -->
+    <!-- Vimeo Video Player -->
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <!-- Facebook Web SDK -->
+    <!-- <script type="text/javascript">
+        function init() {
+            window.FB.api(
+            '/l214.animaux',
+            {"fields":"fan_count"},
+            function(response) {
+                alert(response.fan_count);
+            }
+            );
+        }
+        
+        window.fbAsyncInit = function () {
+            window.FB.init({
+                appId: '569676491109134',
+                xfbml: true,
+                version: 'v11.0'
+            });
+            FB.AppEvents.logPageView();
+            init();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        FB.api(
+            '/100066923353792/photos',
+            'GET',
+            {"fields":"height,width"},
+            function(response) {
+                // Insert your code here
+                console.log(response)
+            }
+        );
+    </script> -->
+</head
 
 <body>
 
-    <!-- <div ika-instance='{"html":"content/nav.html", "scripts":[{ "src":"js/nav.js", "callback": null }], "styles":["css/nav.css"] }'></div> -->
-    
-    <div ika-instance='{"html":"content/footer.html", "scripts":null, "styles":["css/footer.css"] }'></div>
-
 
 </body>
+
+<footer>
+    <!-- ikatyros-utilities -->
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/rolling/rolling-image.js"></script>
+    <!-- the barrel's own functionality -->
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/barrel/barrel.js"></script>
+    <!-- this page's functionality -->
+    <script type="text/javascript" src="./js/index2.js"></script>
+    
+    <script type="text/javascript" src="./js/freewall-master/gallery.js"></script>
+</footer>
 
 </html>

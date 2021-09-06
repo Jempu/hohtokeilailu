@@ -44,6 +44,9 @@ body
     background-color: #041F60
     font-family: NunitoSans
 
+h1, h2, h3, h4, h5, h6
+    cursor: default
+
 h1, h2, h3, h4, h5, h6, p, li
     color: #fff
 
@@ -53,8 +56,6 @@ ul
 a
     color: #fff
     text-decoration: none
-    margin: 0 2rem
-    font-size: 2rem
     &:hover
         text-decoration: underline
 
@@ -119,3 +120,13 @@ img
     cursor: pointer
     img
         pointer-events: none
+
+@media screen and (max-width: 1028px)
+    body
+        width: 100vw
+
+@media screen and (max-width: 600px)
+    html
+        scrollbar-width: none
+        &::-webkit-scrollbar
+            display: none

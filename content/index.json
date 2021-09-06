@@ -38,7 +38,7 @@
             {
                 "name": "Opiskelija- ja eläkeläisalennus",
                 "desc": "",
-                "price": -2,
+                "price": 2,
                 "under": "(voimassa arkisin)",
                 "image": "bowling-309965.png"
             }
@@ -49,7 +49,7 @@
                 "desc": "Ti-La 16.00 – 22.00",
                 "price": 20,
                 "under": "Rata / tunti",
-                "image": "excellent-service-icon.png"
+                "image": "excellent-service.png"
             },
             {
                 "name": "Päivä",

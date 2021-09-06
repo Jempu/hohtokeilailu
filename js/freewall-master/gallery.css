@@ -8,6 +8,7 @@ root {
   height: auto;
   position: relative;
   margin: auto;
+  padding-bottom: 2%;
 }
 
 .toggle-gallery[open="true"] .overlay {
@@ -189,7 +190,7 @@ root {
   justify-items: center;
   left: 0;
   top: 0;
-  z-index: 11;
+  z-index: 51;
   background-color: rgba(0, 0, 0, 0.9);
   opacity: 0;
   -webkit-transition: opacity 0.3s ease-in;

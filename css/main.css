@@ -52,6 +52,10 @@ body {
   font-family: NunitoSans;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  cursor: default;
+}
+
 h1, h2, h3, h4, h5, h6, p, li {
   color: #fff;
 }
@@ -63,8 +67,6 @@ ul {
 a {
   color: #fff;
   text-decoration: none;
-  margin: 0 2rem;
-  font-size: 2rem;
 }
 
 a:hover {
@@ -159,5 +161,20 @@ img {
 
 .varaa-btn img {
   pointer-events: none;
+}
+
+@media screen and (max-width: 1028px) {
+  body {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
 }
 /*# sourceMappingURL=main.css.map */

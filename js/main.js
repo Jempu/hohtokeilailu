@@ -1,37 +1,30 @@
-// If the current page is the index.html / index.php
+const scheduleJsonPath =  './content/opening.json';
+var scheduleArray = [];
 
-function isIndex() {
-    let loc = window.location.pathname.split('/')[2];
-    return loc == '' || loc == 'index.html' || loc == 'index.php';
-}
-
-// Misc
-
-function createSchedule(ul) {
-    fetch('./content/opening.json').then(v => v.json()).then(data => {
-        data['days'].forEach(day => {
-            const li = document.createElement('li');
-            const split = day.split(',');
-            const t1 = split[0];
-            const t2 = split[1];
-            // const hohto = (split.length > 2 ? ` (hohtona ${split[3]}` + (split.length == 4 ? ` – ${split[4]})` : ')') : '')
-            li.innerHTML = day != "" ? `${t1} – ${t2}` : 'SULJETTU';
-            $(ul).append(li);
+function createSchedule(ul, title = null) {
+    function addOpenToTitle() {
+        if (title == null) return;
+        const day = new Date().getDay() - 1;
+        const sch = scheduleArray[day];
+        title.innerHTML += ` (nyt ${sch.close != null ? (getIfOpen(sch.open, sch.close) ? 'auki' : 'suljettu') : 'suljettu'})`;
+    }
+    if (scheduleArray.length == 0) {
+        fetch(scheduleJsonPath).then(v => v.json()).then(data => {
+            data['days'].forEach(day => {
+                const li = document.createElement('li');
+                const split = day.split(',');
+                const t1 = split[0];
+                const t2 = split[1];
+                // const hohto = (split.length > 2 ? ` (hohtona ${split[3]}` + (split.length == 4 ? ` – ${split[4]})` : ')') : '')
+                li.innerHTML = day != "" ? `${t1} – ${t2}` : 'SULJETTU';
+                $(ul).append(li);
+                scheduleArray.push({ open: t1, close: t2 });
+            });
+        }).then(() => {
+            addOpenToTitle();
         });
-    });
-}
-
-// Mathematical functions
-
-function back(x, timeFraction) {
-    return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x);
-}
-
-function bounce(timeFraction) {
-    for (let a = 0, b = 1, result; 1; a += b, b /= 2) {
-        if (timeFraction >= (7 - 4 * a) / 11) {
-            return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
-        }
+    } else {
+        addOpenToTitle();
     }
 }
 

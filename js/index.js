@@ -1,8 +1,10 @@
-
 const html = $("html");
 const overlayContainer = $('.overlay-container');
 
 const titlecard = $('.titlecard');
+const aboutContainer = $('.about-container');
+
+const schedule = $(aboutContainer).find('#schedule');
 
 const indexJsonPath = './content/index.json';
 const galleryPath = './content/gallery/';
@@ -22,9 +24,20 @@ $(function () {
     const sliderUl = $(slider).find("ul");
     var sliderSlides = $(sliderUl).children();
 
+    function selectBarrelCategory(index) {
+        responsiveBarrel.setCategory(index);
+        smoothScroll($('.barrel').get(0).offsetTop);
+    }
+
+    carouselChildren.each(function (i, l) {
+        $(l).on('click', function () {
+            selectBarrelCategory(carouselChildCount - (i + 1));
+        });
+    });
+
     sliderSlides.each(function (i, l) {
         $(l).find(".button").on('click', function () {
-            console.log('clicked on ' + i);
+            selectBarrelCategory(i);
         });
     });
 
@@ -41,7 +54,7 @@ $(function () {
         carouselChildren = $(carousel).children().get().reverse();
         carouselChildCount = $(carouselChildren).length;
         $(carousel).Cloud9Carousel({
-            bringToFront: true,
+            bringToFront: false,
             frontItemClass: "front",
             mirror: {
                 gap: 12,     /* 12 pixel gap between item and reflection */
@@ -140,7 +153,6 @@ $(function () {
             slideHeight = $(sliderSlides).height();
             slideUlWidth = slideCount * slideWidth;
             $(sliderUl).css({ "width": slideUlWidth, "margin-left": - slideWidth });
-            console.log(currentSlide)
             setCarousel(currentSlide + 1);
         }, 50);
     });
@@ -176,10 +188,11 @@ $(function () {
 
 
 /// Opening Hours ///
-createSchedule($('.schedule').find('ul'));
+
+createSchedule($(schedule).find('ul'), $(schedule).find('#title').find('h1').get(0));
 
 
-/// Reviews ///
+/// Arvostelut ///
 function setReviews(data) {
     var currentReview = -1;
     let reviews = [];
@@ -201,6 +214,7 @@ function setReviews(data) {
             typewriter1.deleteAll().typeString(`"${item['text']}"`).start();
             typewriter2.deleteAll().pauseFor(600).typeString(`– ${item['reviewer']}`).start();
         }
+        resetTimer();
     }
     if (reviewObj != null) {
         reviews = data;
@@ -209,8 +223,17 @@ function setReviews(data) {
         });
     }
     setReview();
-}
 
+    var timer = 0;
+    function resetTimer() { timer = 0; }
+    function startTimer() {
+        setTimeout(() => {
+            if (timer > 4) setReview(); else timer++;
+            startTimer();
+        }, 1000);
+    }
+    startTimer();
+}
 
 /// Activities ///
 
@@ -219,19 +242,19 @@ const compContainer = $('.submarine').children();
 // titlecard events
 const titlecardEventLog = $(titlecard).find('.events').get(0);
 // footer events
-const mainCategoryEvents = document.querySelector('.main-category.events');
+const mainCategoryEvents = $('.main-category.events .container').get(0);
 // comp list events
 
 var competitionItems = [0, 0, 0];
 function setActivities(data) {
-    function setOverlayContainer(state, index = -1) {
-        if (state) {
+    function setOverlayContainer(item) {
+        console.log(item)
+        if (item != "") {
             overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
             html.css({ overflowX: 'clip', overflowY: 'clip' });
-            // .children = index;
-            // for (let i = 0; i < 0; i++) {
-            //     index == ;
-            // }
+            overlayContainer.children().each(function(i, l) {
+                $(l).css({ display: l.id == item ? 'block' : 'none' });
+            });
             overlayContainer.animate({ now: 108 }, {
                 duration: '400',
                 step: function (now, fx) {
@@ -251,10 +274,10 @@ function setActivities(data) {
             });
         }
     }
-    setOverlayContainer(false);
+    setOverlayContainer("");
     const directory = './content/activities/';
 
-    function createTitlecardEventItem(title, date) {
+    function createTitlecardEventItem(item, title, date) {
         if (titlecardEventLog == null) return;
         if (titlecardEventLog.children.length < 3) {
             let titleEventItem = document.createElement('div');
@@ -266,7 +289,7 @@ function setActivities(data) {
             titlecardEventLog.appendChild(titleEventItem);
         }
     }
-    function createFooterEventItem(img, title, date) {
+    function createFooterEventItem(item, img, title, date) {
         if (mainCategoryEvents == null) return;
         let footerEventItem = document.createElement('div');
         footerEventItem.className = 'item';
@@ -275,16 +298,16 @@ function setActivities(data) {
             <h1>${title}</h1>
             <h2>${date}</h2>
         `;
-        footerEventItem.addEventListener('click', function () {
-            console.log('opened an event overlay for ' + item['title']);
+        $(footerEventItem).on('click', function () {
+            setOverlayContainer(item);
         });
         mainCategoryEvents.appendChild(footerEventItem);
     }
-    function createCompetitionContainerItem(id, title, date, content, headerImg, dateStatus) {
+    function createCompetitionContainerItem(item, title, date, content, headerImg, dateStatus) {
         // container item
         const cel = document.createElement('div');
         cel.className = 'item';
-        cel.id = id;
+        cel.id = item;
         date1 = `<h3>${date}</h3>`;
         cel.innerHTML = `
             ${headerImg}
@@ -297,12 +320,12 @@ function setActivities(data) {
         $('.submarine').find(`.content#${['a', 'b', 'c'][dateStatus]}`).append(cel);
         // On container item click open overlay window
         $(cel).on('click', function () {
-            setOverlayContainer(true);
+            setOverlayContainer(item);
         });
         // overlay item
         const oel = document.createElement('div');
         oel.className = 'item';
-        oel.id = id;
+        oel.id = item;
         oel.innerHTML = `
             <div>
                 <button>x</button>
@@ -332,7 +355,7 @@ function setActivities(data) {
         overlayContainer.append(oel);
         // On overlay item click close overlay window
         $(oel).find('button').on('click', function () {
-            setOverlayContainer(false);
+            setOverlayContainer("");
         });
     }
     
@@ -350,8 +373,6 @@ function setActivities(data) {
                 ? `<img src="${folder}${child['header-image']}" alt="Tapahtumakuva">`
                 : '';
 
-            // console.log(`${folder}${child['header-image']}`);
-
             let vfiles = child['files'];
             let vlink = child['links'];
 
@@ -365,14 +386,14 @@ function setActivities(data) {
                     switch (dateStatus) {
                         case 0:
                         case 1:
-                            createTitlecardEventItem(vtitle, vdate);
-                            createFooterEventItem(vimg, vtitle, vdate);
+                            createTitlecardEventItem(item, vtitle, vdate);
+                            createFooterEventItem(item, vimg, vtitle, vdate);
                             break;
                     }
                     break;
                 case 'competition':
-                    createTitlecardEventItem(vtitle, vdate);
-                    createFooterEventItem(vimg, vtitle, vdate);
+                    createTitlecardEventItem(item, vtitle, vdate);
+                    createFooterEventItem(item, vimg, vtitle, vdate);
                     createCompetitionContainerItem(item, vtitle, vdate, vcontent, vimg, dateStatus);
                     break;
             }
@@ -389,6 +410,28 @@ function setActivities(data) {
 // Load rolling image background for about section
 
 createRollingImage('.about-container', 'img/about-roll', ['1.jpg', '3.jpg', '5.jpg', '7.jpg', '9.jpg', '11.jpg', '13.jpg', '15.jpg', '17.jpg', '19.jpg']);
+
+
+// Create the responsive map
+$(function() {
+    const middle = $('.map .middle');
+    const controls = $('.map .bottom .controls');
+    
+    function setCategory(map) {
+        $(middle).find('#gmap').css({ display: map ? 'block' : 'none' });
+        $(middle).find('#video').css({ display: map ? 'none' : 'block' });
+    }
+
+    $(controls).find('#gmap').on('click', function() {
+        setCategory(true);
+    });
+
+    $(controls).find('#video').on('click', function () {
+        setCategory(false);
+    });
+
+    setCategory(false);
+});
 
 
 /// Load 'index.json' ///
@@ -408,8 +451,16 @@ fetch(indexJsonPath).then(v => v.json()).then(data => {
     }
     
     // setPricing(v['pricing']);
-    // setReviews(v['reviews']);
+    setReviews(data['reviews']);
 });
+
+
+/// Get the anchor from the url ///
+
+const anchor = window.location.hash != '' ? window.location.hash.slice(1) : '';
+if (anchor != '') {
+    console.log(anchor);
+}
 
 
 // Functionality done
