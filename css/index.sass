@@ -158,7 +158,8 @@ $barrelHeight: 44vw
             display: block
             width: 4rem
             height: 4rem
-            background: #2a2a2a
+            background: none
+            border: none
             color: #fff
             text-decoration: none
             font-weight: 600
@@ -1073,7 +1074,7 @@ $barrelHeight: 44vw
                 position: relative
                 width: 580px
                 height: 540px
-                background: linear-gradient(90.43deg, rgba(34, 59, 118, 0.24) 0.34%, rgba(43, 62, 111, 0.1536) 53.59%, rgba(74, 98, 158, 0) 99.59%)
+                background: linear-gradient(268.88deg, rgba(34, 59, 118, 0.8) -3.77%, rgba(43, 62, 111, 0.512) 14.48%, rgba(12, 18, 35, 0.296) 102.78%), rgba(45, 62, 106, 0.7)
                 border: 4px solid #FFFFFF
                 box-sizing: border-box
                 border-radius: 39px
@@ -1219,9 +1220,9 @@ $barrelHeight: 44vw
             display: grid
             grid-template-areas: "a3 a3 a3" "b3 c3 d3" "e3 e3 e3" "f3 f3 f3"
             padding: 0 2rem
+            text-align: center
             h1
                 font-size: calc( 18px * 1.4vw )
-                text-align: center
                 &.title
                     grid-area: a3
                     font-family: Sansita-ExtraBold
@@ -1235,6 +1236,7 @@ $barrelHeight: 44vw
                 margin: 0.5rem
                 display: grid
                 align-items: center
+                text-align: left
                 div
                     width: 220px
                 img
@@ -1404,58 +1406,53 @@ $barrelHeight: 44vw
 .main-category.events
     width: 100%
     position: relative
+    display: flex
+    flex-wrap: wrap
     align-content: center
     justify-content: center
     background: linear-gradient(96.74deg, rgba(0, 0, 0, 0) -13.79%, rgba(186, 76, 155, 0.153) 14.43%, rgba(111, 189, 142, 0.261) 39.65%, rgba(106, 137, 159, 0.258) 75.67%, rgba(0, 0, 0, 0) 101.49%), linear-gradient(180deg, #2A4586 0%, rgba(42, 69, 134, 0.567708) 43.23%, rgba(42, 69, 134, 0) 100%)
     background-size: contain
-    display: grid
-    grid-template-areas: "a a a" "b c d"
-    grid-template-columns: auto auto auto
-    grid-template-rows: auto auto
-    &::before, &::after
-        content: ''
-        position: absolute
-        width: 60%
-        height: 5px
-        left: 50%
-        transform: translateX(-50%)
-        border-radius: 5px
-        background-color: #fff
-        opacity: 0.3
-    &::before
-        top: 0
-    &::after
-        bottom: 0
+    padding-bottom: 2rem
     .title
-        grid-area: a
-        text-align: center
-    .item
-        cursor: pointer
-        margin: 1rem
-        width: 20rem
-        height: auto
-        text-align: center
+        width: 100%
+        font-size: 2vw
+        font-family: Sansita-ExtraBold
         position: relative
-        display: inline-block
-        background-color: #ACABAB
-        border-radius: 12px
-        overflow: hidden
-        transition: transform 0.3s ease-in-out
-        &:hover
-            transform: scale(104%)
-        &:nth-child(2)
-            grid-area: b
-        &:nth-child(3)
-            grid-area: c
-        &:nth-child(4)
-            grid-area: d
-        h1, h2, img
-            pointer-events: none
-        img
-            width: 100%
-            max-height: 70%
-        h1, h2
-            margin: 1rem 0 1rem 0
+        display: inline
+        text-align: center
+        text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5)
+    .container
+        display: flex
+        .item
+            cursor: pointer
+            margin: 1rem
+            width: 20rem
+            height: auto
+            text-align: center
+            position: relative
+            display: inline-block
+            background-color: #ACABAB
+            border-radius: 12px
+            overflow: hidden
+            transition: transform 0.3s ease-in-out
+            &:hover
+                transform: scale(104%)
+            &:nth-child(2)
+                grid-area: b
+            &:nth-child(3)
+                grid-area: c
+            &:nth-child(4)
+                grid-area: d
+            h1, h2, img
+                pointer-events: none
+            img
+                width: 100%
+                max-height: 70%
+            h1, h2
+                margin: 1rem 0 1rem 0
+    iframe
+        margin-left: 2rem
+        box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5)
     .mobile-width
         display: none
 

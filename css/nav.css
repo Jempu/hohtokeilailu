@@ -7,8 +7,8 @@
   -webkit-transition: height .3s ease-out;
   transition: height .3s ease-out;
   z-index: 42;
-  background: url("../img/stars-align.png"), -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.25)), color-stop(43.23%, rgba(255, 255, 255, 0.48)), to(rgba(255, 255, 255, 0)));
-  background: url("../img/stars-align.png"), linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.48) 43.23%, rgba(255, 255, 255, 0) 100%);
+  background: url("../img/stars-align.png"), -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.25)), color-stop(43.23%, rgba(255, 255, 255, 0.48)), to(rgba(255, 255, 255, 0))), -webkit-gradient(linear, left top, left bottom, from(rgba(30, 46, 69, 0.5)), color-stop(58.33%, rgba(38, 62, 99, 0.263021)), to(rgba(0, 0, 0, 0)));
+  background: url("../img/stars-align.png"), linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.48) 43.23%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, rgba(30, 46, 69, 0.5) 0%, rgba(38, 62, 99, 0.263021) 58.33%, rgba(0, 0, 0, 0) 100%);
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: left;
@@ -30,7 +30,20 @@
   color: #fff;
   pointer-events: visible;
   margin: auto 0;
-  font-size: calc( 12px + 0.8vw);
+  font-size: calc( 18px + 0.6vw);
+  text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5);
+  -webkit-transition: -webkit-transform 0.4s ease-in-out;
+  transition: -webkit-transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
+}
+
+.nav .link:hover {
+  -webkit-transform: scale(104%);
+          transform: scale(104%);
+  text-decoration: underline;
+  -webkit-text-decoration-color: #fff;
+          text-decoration-color: #fff;
 }
 
 .nav .link.mobile {
@@ -45,10 +58,6 @@
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  -webkit-transition: -webkit-transform 0.4s ease-in-out;
-  transition: -webkit-transform 0.4s ease-in-out;
-  transition: transform 0.4s ease-in-out;
-  transition: transform 0.4s ease-in-out, -webkit-transform 0.4s ease-in-out;
 }
 
 .nav .link.hover:hover {
@@ -179,7 +188,7 @@
 .nav .content .column .holder {
   width: 20rem;
   position: absolute;
-  top: 5rem;
+  top: -30vh;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -197,6 +206,7 @@
 .nav .content .column .holder[active="true"] {
   pointer-events: visible;
   opacity: 1;
+  top: 5rem;
 }
 
 .nav .content .column .holder p {

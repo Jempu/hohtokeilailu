@@ -1,11 +1,16 @@
-.side-panel {
+.mainpage-preview {
+  width: calc( 100% - 6.4rem);
+  height: auto;
+}
+
+.admin-panel {
   position: fixed;
   width: 32rem;
   height: 100%;
   top: 0;
   right: 0;
   border-radius: 25px 0 0 25px;
-  z-index: 99;
+  z-index: 48;
   text-align: center;
   overflow-x: hidden;
   display: -ms-grid;
@@ -18,81 +23,298 @@
       grid-template-areas: "b a";
 }
 
-.side-panel .anchors {
+.admin-panel[expanded="true"] .anchors {
+  border-radius: 25px 0 0 25px;
+}
+
+.admin-panel[expanded="true"] .anchors .control {
+  -webkit-transform: rotateZ(180deg);
+          transform: rotateZ(180deg);
+}
+
+.admin-panel[expanded="true"] .anchors .control:hover {
+  -webkit-transform: scale(104%) rotateZ(180deg);
+          transform: scale(104%) rotateZ(180deg);
+}
+
+.admin-panel[expanded="true"] .content {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.admin-panel .anchors {
   display: -ms-grid;
   display: grid;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: a;
   background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+  -webkit-transition: border-radius 0.4s ease-out;
+  transition: border-radius 0.4s ease-out;
+  z-index: 49;
 }
 
-.side-panel .anchors .control {
-  height: 10%;
+.admin-panel .anchors .control {
+  width: 4rem;
+  height: 4rem;
+  margin: 1rem auto 0 auto;
   cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
 }
 
-.side-panel .anchors .control:hover > h1 {
-  text-decoration: underline;
+.admin-panel .anchors .control img {
+  width: 100%;
+  height: 100%;
 }
 
-.side-panel .anchors .prop {
+.admin-panel .anchors .control:hover {
+  -webkit-transform: scale(104%);
+          transform: scale(104%);
+}
+
+.admin-panel .anchors .prop {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-line-pack: center;
       align-content: center;
+}
+
+.admin-panel .anchors .prop h4 {
+  cursor: pointer;
+  margin-top: 1rem;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+}
+
+.admin-panel .anchors .prop h4:hover {
+  text-decoration: underline;
+  -webkit-transform: scale(104%);
+          transform: scale(104%);
+}
+
+.admin-panel .anchors .help {
+  display: -ms-grid;
+  display: grid;
+}
+
+.admin-panel .anchors .help a {
+  margin: auto 0;
+}
+
+.admin-panel .content {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: b;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+  border-radius: 25px 0 0 25px;
+  -webkit-transition: -webkit-transform 0.6s ease-in-out;
+  transition: -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  -ms-flex-line-pack: start;
+      align-content: start;
+}
+
+.admin-panel .content #schedule {
+  width: 60%;
+  height: auto;
+  position: relative;
+}
+
+.admin-panel .content #schedule .item {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: block;
+  background-color: #c0c0c0;
+  border: 1px solid #ccc;
+  color: #555;
+}
+
+.admin-panel .content #schedule .item .time {
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-.side-panel .anchors .prop h4 {
-  cursor: pointer;
+.admin-panel .content #schedule .item .time input {
+  width: 50%;
+  border: none;
+  color: #555;
+  text-align: center;
+  width: 60px;
 }
 
-.side-panel .anchors .prop h4:hover {
-  text-decoration: underline;
+.admin-panel .content #gallery {
+  width: 100%;
+  height: auto;
+  position: relative;
 }
 
-.side-panel .content {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: b;
-  overflow-y: scroll;
-  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+.admin-panel .content #gallery .item {
+  width: 80%;
+  height: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-items: center;
 }
 
-.side-panel input {
+.admin-panel .content #gallery .item img, .admin-panel .content #gallery .item video {
+  width: 100%;
+  height: auto;
+}
+
+.admin-panel input {
   margin: 0.5rem;
 }
 
-.side-panel input[type="submit"] {
+.admin-panel input[type="submit"] {
   width: auto;
-  background-color: black;
+  background-color: gray;
 }
 
-.side-panel form {
+.admin-panel form {
   width: 100%;
   position: relative;
   margin-top: 2rem;
   background-color: rgba(20, 20, 20, 0.2);
 }
 
-.side-panel form img {
+.admin-panel form img {
   width: 3rem;
   height: 3rem;
 }
 
-.side-panel form .a-title {
+.admin-panel form .a-title {
   width: 100%;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
 }
 
-.side-panel form .a-title input {
+.admin-panel form .a-title input {
   width: 74%;
 }
 
-.side-panel form .a-title p {
+.admin-panel form .a-title p {
   margin: 2%;
+}
+
+.admin-panel input {
+  border-style: none;
+  background: transparent;
+  outline: none;
+}
+
+.admin-panel button {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.admin-panel .webflow-style-input {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 2px;
+  padding: 1.4rem 2rem 1.6rem;
+  background: rgba(57, 63, 84, 0.8);
+}
+
+.admin-panel .webflow-style-input:after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 999;
+  height: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background-position: 0% 0%;
+  background: -webkit-gradient(linear, left top, right top, from(#B294FF), color-stop(#57E6E6), color-stop(#FEFFB8), color-stop(#57E6E6), color-stop(#B294FF), to(#57E6E6));
+  background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+  background-size: 500% auto;
+  -webkit-animation: gradient 3s linear infinite;
+          animation: gradient 3s linear infinite;
+}
+
+.admin-panel .webflow-style-input input {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  color: #BFD2FF;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  vertical-align: middle;
+}
+
+.admin-panel .webflow-style-input::-webkit-input-placeholder {
+  color: #7881A1;
+}
+
+.admin-panel .webflow-style-input button {
+  color: #7881A1;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  vertical-align: middle;
+  -webkit-transition: color .25s;
+  transition: color .25s;
+}
+
+.admin-panel .webflow-style-input:hover {
+  color: #BFD2FF;
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
 /*# sourceMappingURL=admin.css.map */

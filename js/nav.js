@@ -8,19 +8,20 @@ $(function () {
     linkUrls = {
         onlineScoring: "http://onlinescore.qubicaamf.com/?idcenter=7054",
         facebookProfile: "https://www.facebook.com/mikkelinkeilahallioy",
-        reserve: "https://www.varaavuoro.com/mikkeli",
-        veterans: "https://www.hohtokeilailu.fi/veteraanit/"
+        reserve: "https://www.varaavuoro.com/mikkeli"
     };
     const links = $(nav).find('.link');
     function op(val) {
         window.open(val.charAt(0) == '.' ? val : val, val = '#');
     }
-    function opg(val = null, other = '') {
+    function openIndex(val = null, other = '') {
         if (isIndex()) {
-            smoothScroll(val != null ? $(val).offset().top : 0);
-            if (other != '') {
-                op(`#${other}`);
+            if (val == null) {
+                window.location.hash = '';
+                smoothScroll(0);
+                return;
             }
+            smoothScroll(val != null ? $(val).offset().top : 0);
         } else {
             const a = other != '' ? `#${other}` : (val != null ? `#${val}` : './');
             op(`${gp(true)}${a}`);
@@ -35,61 +36,82 @@ $(function () {
             $(holder).get(0).setAttribute('active', 'false');
         });
     });
+
+    function setBarrel(index) {
+        if (responsiveBarrel.selectedCategory != -1 && responsiveBarrel.selectedCategory != index) return;
+        responsiveBarrel.setCategory(index);
+    }
+
     $(links).each(function (i, l) {
         const val = l.id;
         if (val === undefined || val == '') return;
         $(l).on('click', function () {
             switch (val) {
                 case 'home':
-                    opg();
+                    openIndex();
                     break;
                 case 'proshop':
                     op('./proshop.html');
                     break;
                 // first column
                 case 'services':
-                    opg('.category-holder', 'palvelut');
+                    openIndex('.barrel', 'palvelut');
                     break;
                 case 'opening':
-                    opg('', 'aukioloajat');
+                    openIndex('.about-container .content .split .item#schedule', 'aukioloajat');
                     break;
                 case 'hohto':
-                    opg('', 'hohto');
+                    openIndex('.barrel', 'hohto');
+                    if (isIndex()) {
+                        setBarrel(0);
+                    }
                     break;
                 case 'synttarit':
-                    opg('', 'syntarit');
+                    openIndex('.barrel', 'syntarit');
+                    if (isIndex()) {
+                        setBarrel(1);
+                    }
                     break;
                 case 'sauna':
-                    opg('', 'sauna');
+                    openIndex('.barrel', 'sauna');
+                    if (isIndex()) {
+                        setBarrel(3);
+                    }
                     break;
                 case 'baari':
-                    opg('', 'baari');
+                    openIndex('.barrel', 'baari');
+                    if (isIndex()) {
+                        setBarrel(2);
+                    }
                     break;
                 // second column
                 case 'bowling':
-                    opg('.pricing', 'keilaus');
+                    openIndex('.about-container', 'keilaus');
                     break;
                 case 'pricing':
-                    opg('', 'hinnastomme');
+                    openIndex('.pricing', 'hinnastomme');
                     break;
                 case 'location':
-                    opg('', 'sijaintimme');
+                    openIndex('.map', 'sijaintimme');
                     break;
                 case 'competitive':
-                    opg('', 'kilpakeilaus');
+                    openIndex('.barrel', 'kilpakeilaus');
+                    if (isIndex()) {
+                        setBarrel(4);
+                    }
                     break;
                 case 'veteran':
-                    op(linkUrls.veterans);
+                    openIndex('.about-container .content .item#d', 'veteraani');
                     break;
                 case 'scoring':
                     op(linkUrls.onlineScoring);
                     break;
                 // other
                 case 'activities':
-                    opg('.main-category.events', 'tapahtumat');
+                    openIndex('.main-category.events', 'tapahtumat');
                     break;
                 case 'gallery':
-                    opg('.gallery', 'galleria');
+                    openIndex('.toggle-gallery', 'galleria');
                     break;
                 // hover buttons
                 case 'facebook':

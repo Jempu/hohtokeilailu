@@ -1,4 +1,4 @@
-AuthUserFile "/xampp/htdocs/hohtokeila/admin/.htpasswd"
+AuthUserFile "/xampp/htdocs/mikkelin-keilahalli/admin/.htpasswd"
 AuthName "Admin Only"
 AuthType Basic
 require valid-user

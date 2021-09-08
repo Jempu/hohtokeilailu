@@ -248,7 +248,6 @@ const mainCategoryEvents = $('.main-category.events .container').get(0);
 var competitionItems = [0, 0, 0];
 function setActivities(data) {
     function setOverlayContainer(item) {
-        console.log(item)
         if (item != "") {
             overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
             html.css({ overflowX: 'clip', overflowY: 'clip' });
@@ -457,9 +456,61 @@ fetch(indexJsonPath).then(v => v.json()).then(data => {
 
 /// Get the anchor from the url ///
 
-const anchor = window.location.hash != '' ? window.location.hash.slice(1) : '';
-if (anchor != '') {
-    console.log(anchor);
+function setAnchors() {
+    function setBarrel(index) {
+        if (responsiveBarrel.selectedCategory != -1 && responsiveBarrel.selectedCategory != index) return;
+        responsiveBarrel.setCategory(index);
+    }
+    function op(val) { smoothScroll($(val).offset().top); }
+    const anchor = window.location.hash != '' ? window.location.hash.slice(1) : '';
+    if (anchor != '') {
+        switch (anchor) {
+            case 'palvelut':
+                op('.barrel');
+                break;
+            case 'aukioloajat':
+                op('.about-container .content .split .item#schedule');
+                break;
+            case 'hohto':
+                op('.barrel');
+                setBarrel(0);
+                break;
+            case 'synttarit':
+                op('.barrel');
+                setBarrel(1);
+                break;
+            case 'sauna':
+                op('.barrel');
+                setBarrel(3);
+                break;
+            case 'baari':
+                op('.barrel');
+                setBarrel(2);
+                break;
+            case 'keilaus':
+                op('.about-container');
+                break;
+            case 'hinnastomme':
+                op('.pricing');
+                break;
+            case 'sijaintimme':
+                op('.map');
+                break;
+            case 'kilpakeilaus':
+                op('.barrel')
+                setBarrel(4);
+                break;
+            case 'veteraani':
+                op('.about-container .content .item#d');
+                break;
+            case 'tapahtumat':
+                op('.main-category.events');
+                break;
+            case 'galleria':
+                op('.toggle-gallery');
+                break;
+        }
+    }
 }
 
 
@@ -468,10 +519,10 @@ if (anchor != '') {
 $(window).on('load', function () {
     $('img').on('dragstart', function (e) {
         e.preventDefault()
-    })
-    
-    // setActivitiesData();
-
+    });
+    setTimeout(() => {
+        setAnchors();
+    }, 200);
     // Once all of the other data has been loaded, finally load the barrel.
     responsiveBarrel.start(document.querySelector('.barrel'));
 });

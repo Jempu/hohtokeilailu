@@ -1,12 +1,21 @@
+// admin-panel
+$panel-width: 32rem
+$input-background: rgba(57, 63, 84, 0.8)
+$input-text-inactive: #7881A1
+$input-text-active: #BFD2FF
+    
+.mainpage-preview
+    width: calc( 100% - 6.4rem )
+    height: auto
 
-.side-panel
+.admin-panel
     position: fixed
-    width: 32rem
+    width: $panel-width
     height: 100%
     top: 0
     right: 0
     border-radius: 25px 0 0 25px
-    z-index: 99
+    z-index: 48
     text-align: center
     overflow-x: hidden
     display: grid
@@ -14,31 +23,100 @@
     grid-template-columns: 80% 20%
     grid-template-rows: 100%
     grid-template-areas: "b a"
+    &[expanded="true"]
+        .anchors
+            border-radius: 25px 0 0 25px
+            .control
+                transform: rotateZ(180deg)
+                &:hover
+                    transform: scale(104%) rotateZ(180deg)
+        .content
+            transform: translateX(100%)
     .anchors
         display: grid
+        align-items: stretch
         grid-area: a
         background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
+        transition: border-radius 0.4s ease-out
+        z-index: 49
         .control
-            height: 10%
+            width: 4rem
+            height: 4rem
+            margin: 1rem auto 0 auto
             cursor: pointer
-            &:hover > h1
-                text-decoration: underline
+            transition: transform 0.3s ease-out
+            img
+                width: 100%
+                height: 100%
+            &:hover
+                transform: scale(104%)
         .prop
-            align-content: center
+            display: grid
             justify-content: center
+            align-content: center
             h4
                 cursor: pointer
+                margin-top: 1rem
+                transition: transform 0.3s ease-out
                 &:hover
                     text-decoration: underline
+                    transform: scale(104%)
+        .help
+            display: grid
+            a
+                margin: auto 0
     .content
         grid-area: b
-        overflow-y: scroll
+        overflow-y: auto
+        overflow-x: hidden
         background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
+        border-radius: 25px 0 0 25px
+        transition: transform 0.6s ease-in-out
+        transform: translateX(0)
+        display: grid
+        justify-items: center
+        align-content: start
+        #schedule
+            width: 60%
+            height: auto
+            position: relative
+            .item
+                width: 100%
+                height: auto
+                position: relative
+                display: block
+                background-color: #c0c0c0
+                border: 1px solid #ccc
+                color: #555
+                .time
+                    width: 100%
+                    position: relative
+                    display: flex
+                    justify-content: center
+                    input
+                        width: 50%
+                        border: none
+                        color: #555
+                        text-align: center
+                        width: 60px
+        #gallery
+            width: 100%
+            height: auto
+            position: relative
+            .item
+                width: 80%
+                height: auto
+                position: relative
+                display: flex
+                justify-items: center
+                img, video
+                    width: 100%
+                    height: auto
     input
         margin: 0.5rem
         &[type="submit"]
             width: auto
-            background-color: black
+            background-color: gray
     form
         width: 100%
         position: relative
@@ -54,3 +132,60 @@
                 width: 74%
             p
                 margin: 2%
+    input
+        border-style: none
+        background: transparent
+        outline: none
+    button
+        padding: 0
+        background: none
+        border: none
+        outline: none
+
+    // https://codepen.io/PRtheRose/pen/BNgEJo
+    .webflow-style-input
+        position: relative
+        display: flex
+        flex-direction: row
+        width: 100%
+        max-width: 400px
+        margin: 0 auto
+        border-radius: 2px
+        padding: 1.4rem 2rem 1.6rem
+        background: $input-background
+        &:after
+            content: ""
+            position: absolute
+            left: 0px
+            right: 0px
+            bottom: 0px
+            z-index: 999
+            height: 2px
+            border-bottom-left-radius: 2px
+            border-bottom-right-radius: 2px
+            background-position: 0% 0%
+            background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6)
+            background-size: 500% auto
+            animation: gradient 3s linear infinite
+        & input
+            flex-grow: 1
+            color: $input-text-active
+            font-size: 1.8rem
+            line-height: 2.4rem
+            vertical-align: middle
+        &::-webkit-input-placeholder
+            color: $input-text-inactive
+        & button
+            color: $input-text-inactive
+            font-size: 2.4rem
+            line-height: 2.4rem
+            vertical-align: middle
+            transition: color .25s
+        &:hover
+            color: $input-text-active
+
+@keyframes gradient
+    0%
+        background-position: 0 0
+    100%
+        background-position: 100% 0
