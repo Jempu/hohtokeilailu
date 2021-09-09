@@ -10,16 +10,19 @@ function createSchedule(ul, title = null) {
     }
     if (scheduleArray.length == 0) {
         fetch(scheduleJsonPath).then(v => v.json()).then(data => {
-            data['days'].forEach(day => {
+            for (let i = 0; i < data['days'].length; i += 2) {
+                const n =  data['days'][i];
+                const h =  data['days'][i + 1];
                 const li = document.createElement('li');
-                const split = day.split(',');
-                const t1 = split[0];
-                const t2 = split[1];
-                // const hohto = (split.length > 2 ? ` (hohtona ${split[3]}` + (split.length == 4 ? ` – ${split[4]})` : ')') : '')
-                li.innerHTML = day != "" ? `${t1} – ${t2}` : 'SULJETTU';
+                const splN = n.split(',');
+                const splH = h.split(',');
+                const t1 = splN[0];
+                const t2 = splN[1];
+                const hohto = h.length > 0 ? ` (Hohto ${splH[0]} - ${splH[1]})` : '';
+                li.innerHTML = n.length > 0 ? `${t1} - ${t2}${hohto}` : 'SULJETTU';
                 $(ul).append(li);
                 scheduleArray.push({ open: t1, close: t2 });
-            });
+            }
         }).then(() => {
             addOpenToTitle();
         });

@@ -1,4 +1,10 @@
 AuthUserFile "/xampp/htdocs/mikkelin-keilahalli/admin/.htpasswd"
-AuthName "Admin Only"
+AuthName "Kirjoita Admin-salasana"
 AuthType Basic
 require valid-user
+
+<Files ~ "^.*\.([Hh][Tt][Aa])">
+    order allow,deny
+    deny from all
+    satisfy all
+</Files>

@@ -1,3 +1,11 @@
+body {
+  width: 100vw;
+  height: 99.7vh;
+  position: relative;
+  background: url("../img/photos/admin-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
 .mainpage-preview {
   width: calc( 100% - 6.4rem);
   height: auto;
@@ -5,7 +13,7 @@
 
 .admin-panel {
   position: fixed;
-  width: 32rem;
+  width: 34rem;
   height: 100%;
   top: 0;
   right: 0;
@@ -16,8 +24,8 @@
   display: -ms-grid;
   display: grid;
   grid-auto-flow: column;
-  -ms-grid-columns: 80% 20%;
-      grid-template-columns: 80% 20%;
+  -ms-grid-columns: 82% auto;
+      grid-template-columns: 82% auto;
   -ms-grid-rows: 100%;
       grid-template-rows: 100%;
       grid-template-areas: "b a";
@@ -48,6 +56,7 @@
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+  justify-items: center;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: a;
@@ -112,6 +121,34 @@
   margin: auto 0;
 }
 
+.admin-panel .anchors .home {
+  width: 60%;
+  height: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.admin-panel .anchors .home img {
+  width: 100%;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.admin-panel .anchors .home img:hover {
+  -webkit-transform: scale(104%);
+          transform: scale(104%);
+}
+
 .admin-panel .content {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
@@ -134,22 +171,23 @@
 }
 
 .admin-panel .content #schedule {
-  width: 60%;
-  height: auto;
-  position: relative;
-}
-
-.admin-panel .content #schedule .item {
   width: 100%;
   height: auto;
   position: relative;
-  display: block;
-  background-color: #c0c0c0;
-  border: 1px solid #ccc;
-  color: #555;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
 }
 
-.admin-panel .content #schedule .item .time {
+.admin-panel .content #schedule .title {
   width: 100%;
   position: relative;
   display: -webkit-box;
@@ -158,14 +196,123 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 0.6rem;
 }
 
-.admin-panel .content #schedule .item .time input {
-  width: 50%;
-  border: none;
+.admin-panel .content #schedule .title img, .admin-panel .content #schedule .title h1 {
+  margin: 0 1rem;
+}
+
+.admin-panel .content #schedule ul {
+  width: 75%;
+  height: auto;
+  position: relative;
+  display: block;
+}
+
+.admin-panel .content #schedule ul li {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: block;
+  background-color: #5e5e7a;
+  border: 1px solid #ccc;
   color: #555;
+  border-radius: 16px;
+  padding: 0 0.8rem 1rem 0.8rem;
+  margin: 1rem 0;
+}
+
+.admin-panel .content #schedule ul li .time {
+  width: 100%;
+  height: 42px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+}
+
+.admin-panel .content #schedule ul li .time input {
+  width: 25%;
+  height: 70%;
+  border: none;
   text-align: center;
-  width: 60px;
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.admin-panel .content #schedule ul li .time img {
+  width: 48px;
+  height: 40px;
+}
+
+.admin-panel .content #schedule ul li .time img#middle {
+  width: 20px;
+  height: 20px;
+}
+
+.admin-panel .content #pricing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin-panel .content #pricing ul {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.admin-panel .content #pricing ul li {
+  width: 90%;
+  height: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.admin-panel .content #pricing ul li img, .admin-panel .content #pricing ul li .price, .admin-panel .content #pricing ul li div {
+  margin: auto;
+}
+
+.admin-panel .content #pricing ul li input[type="number"] {
+  height: 24px;
+  width: 42px;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.admin-panel .content #pricing ul li .price {
+  background: gray;
+  border-radius: 18px;
+  padding-right: 1rem;
+}
+
+.admin-panel .content #pricing ul li h2 {
+  font-family: NunitoSans-Light;
+  font-size: 18px;
 }
 
 .admin-panel .content #gallery {
@@ -189,19 +336,10 @@
   height: auto;
 }
 
-.admin-panel input {
-  margin: 0.5rem;
-}
-
-.admin-panel input[type="submit"] {
-  width: auto;
-  background-color: gray;
-}
-
 .admin-panel form {
   width: 100%;
   position: relative;
-  margin-top: 2rem;
+  padding-top: 2rem;
   background-color: rgba(20, 20, 20, 0.2);
 }
 
@@ -225,10 +363,29 @@
   margin: 2%;
 }
 
-.admin-panel input {
+.admin-panel input[type="submit"], .admin-panel button[type="button"] {
+  width: auto;
+  cursor: pointer;
+  background-color: gray;
+}
+
+.admin-panel input::-webkit-outer-spin-button, .admin-panel input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.admin-panel input[type=number] {
+  -moz-appearance: textfield;
+  background: gray;
+}
+
+.admin-panel input, .admin-panel button {
+  position: relative;
+  color: #fff;
   border-style: none;
   background: transparent;
   outline: none;
+  margin: 0.5rem;
 }
 
 .admin-panel button {
@@ -236,6 +393,27 @@
   background: none;
   border: none;
   outline: none;
+  border-radius: 12px;
+  padding: 0.4rem;
+}
+
+.admin-panel button[type="button"] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin-panel button img {
+  width: 28px;
+  height: 28px;
+}
+
+.admin-panel select {
+  height: 20px;
 }
 
 .admin-panel .webflow-style-input {
@@ -315,6 +493,12 @@
   }
   100% {
     background-position: 100% 0;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .admin-panel {
+    display: none;
   }
 }
 /*# sourceMappingURL=admin.css.map */

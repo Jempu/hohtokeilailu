@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- © Suunnitellut & toteuttanut Ikatyros NY 2021 -->
 <html lang="fi">
 
 <head>
@@ -16,24 +17,19 @@
     <script src="./js/jquery-3.6.0.min/jquery.js"></script>
     
     <?php
-        require_once('./admin/gallery_post.php');
+        // include other php files to save data.
+        require_once './admin/gallery_post.php';
+        require_once './admin/schedule_post.php';
     ?>
 </head>
 
 <body>
     <div class="mainpage-preview">
         <?php
+            // load up the preview for the main page that is being edited.
             // require_once('./content/index.html');
         ?>
     </div>
-
-    <!--
-        Kun uutta kilpailuilmoitusta luodaan, siitä luodaan "content/activities" -kansioon
-        uusi kansio, jonka nimi on sen "title":n ensimmäisen sanan ja "title":n kirjainten
-        määrän päivän yhdistelmä, jotka on eroteltu "-".
-        Kansiossa on kaikki siihen liittyvä sisältö.
-    -->
-    <!-- id = title first word + day of date -->
 
     <div class="admin-panel">
         <div class="anchors">
@@ -44,138 +40,390 @@
                 <h2>Pääsivu</h2>
                 <h4>Aukioloajat</h4>
                 <h4>Hinnasto</h4>
-                <h4>Ilmoistukset</h4>
+                <h4>Ilmoitukset</h4>
                 <h4>Galleria</h4>
             </div>
             <div class="help">
-                <a href="./content/uploads/yleistiedotenetti2020.pdf" target="#">Tarvitsetko apua? Lue manuaali.</a>
+                <a href="./content/uploads/mikkelinkeilahalli-sivuston-käyttöohjeet.pdf" target="#">Tarvitsetko apua? Lue manuaali.</a>
+            </div>
+            <div class="home" onclick="window.location = './';">
+                <img src="./img/home.png" alt="Palaa etusivulle">
             </div>
         </div>
         <div class="content">
-            <form action="schedule_post.php" method="post" id="schedule">
-                <h1>Aukioloajat</h1>
+            <form action="./admin/schedule_post.php" method="post" id="schedule" name="schedule">
+                <div class="title">
+                    <img src="./img/clock.gif" alt="Kello">
+                    <h1>Aukioloajat</h1>
+                </div>
                 <ul>
-                    <li class="item">
+                    <li>
                         <h1>Ma</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
-                    <li class="item">
+                    <li>
                         <h1>Ti</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
-                    <li class="item">
+                    <li>
                         <h1>Ke</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
-                    <li class="item">
+                    <li>
                         <h1>To</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
-                    <li class="item">
+                    <li>
                         <h1>Pe</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
-                    <li class="item">
+                    <li>
                         <h1>La</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
-                    <li class="item">
+                    <li>
                         <h1>Su</h1>
                         <div class="time">
-                            <input type="number" min="0" max="23" placeholder="23">:
+                            <img src="./img/bowling-pins.png" alt="Normikeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                        </div>
+                        <div class="time">
+                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
+                            <input type="number" min="0" max="59" placeholder="00">
+                            <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
+                            <input type="number" min="0" max="23" placeholder="23">
+                            :
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
                 </ul>
-                <input type="submit" value="Tallenna ajan muutos">
+                <button type="button">
+                    <img src="./img/save.png" alt="Tallenna">
+                    Tallenna ajan muutos
+                </button>
             </form>
 
-            <h1>Luo uusi ilmoitus</h1>
-            <select name="" id="activity-select">
-                <option value="0">Tapahtumailmoitus</option>
-                <option value="1">Kilpailuilmoitus</option>
-                <option value="2">Linkki sivustolle</option>
-            </select>
+            <form action="./admin/pricing_post.php" method="post" id="pricing" name="pricing">
+                <div class="title">
+                    <h1>Hinnasto</h1>
+                </div>
 
-            <form action="" method="post" id="events">
-                <h1>Luo uusi tapahtumailmoitus</h1>
+                <ul>
+                    <li>
+                        <img src="./img/bowler.png" alt="Hohto">
+                        <div>
+                            <h1>Hohtokeilaus</h1>
+                            <h2>Ti - La 16.00 - 22.00</h2>
+                        </div>
+                        <div>
+                            <div class="price">
+                                <input type="number" name="" id="" min="0" placeholder="00">
+                                €
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./img/day.png" alt="Päivä">
+                        <div>
+                            <h1>Päivä</h1>
+                            <h2>Ti - Pe 12.00 - 17.00</h2>
+                        </div>
+                        <div>
+                            <div class="price">
+                                <input type="number" name="" id="" min="0" placeholder="00">
+                                €
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./img/night.png" alt="Ilta">
+                        <div>
+                            <h1>Ilta</h1>
+                            <h2>Ti - Pe 17.00 - 20.00</h2>
+                        </div>
+                        <div>
+                            <div class="price">
+                                <input type="number" name="" id="" min="0" placeholder="00">
+                                €
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./img/calendar.png" alt="Viikonloppu">
+                        <div>
+                            <h1>Viikonloppu</h1>
+                            <h2>Ti - Pe 12.00 - 17.00</h2>
+                        </div>
+                        <div>
+                            <div class="price">
+                                <input type="number" name="" id="" min="0" placeholder="00">
+                                €
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./img/proshop/shoes/shoes.png" alt="Vuokraus">
+                        <div>
+                            <h1>Välinevuokraus</h1>
+                        </div>
+                        <div>
+                            <div class="price">
+                                <input type="number" name="" id="" min="0" placeholder="00">
+                                €
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <img src="./img/excellent-service.png" alt="Alennus">
+                        <div>
+                            <h1>Opiskelija- ja eläkeläisalennus</h1>
+                        </div>
+                        <div>
+                            <div class="price">
+                                <input type="number" name="" id="" min="0" placeholder="00">
+                                €
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button type="button">
+                    <img src="./img/save.png" alt="Tallenna">
+                    Tallenna hinnan muutos
+                </button>
+
             </form>
 
-            <form action="" method="post" id="competitions">
-                
-                <h1>Luo uusi kilpailuilmoitus</h1>
-                
-                <div class="a-title">
-                    <input type="text" required placeholder="Ilmoituksen otsikko...">
-                    <p>40</p>
-                </div>
-                
-                <div>
-                    <h2>Ilmoituksen ajankohta</h2>
+<!--
+    Kun uutta kilpailuilmoitusta luodaan, siitä luodaan "content/activities" -kansioon
+    uusi kansio, jonka nimi on sen "title":n ensimmäisen sanan ja "title":n kirjainten
+    määrän päivän yhdistelmä, jotka on eroteltu "-".
+    Kansiossa on kaikki siihen liittyvä sisältö.
+-->
+<!-- id = title first word + day of date -->
 
-                    <img src="./img/clock.png" alt="Aloitus">
-                    <input type="date" name="" id="">
-
-                    <img src="./img/clock.png" alt="Lopetus">
-                    <input type="date" name="" id="">
-                </div>
-                
-                <div>
-                    <h2>Ilmoituksen linkit</h2>
+            <form action="" method="post">
+                <h1>Luo uusi ilmoitus</h1>
+                <select name="" id="activity-select">
+                    <option value="0">Tapahtumailmoitus</option>
+                    <option value="1">Kilpailuilmoitus</option>
+                    <option value="2">Linkki sivustolle</option>
+                </select>
+    
+                <div id="events">
+                    
                     <div class="webflow-style-input">
-                        <input class="" type="email" placeholder="Linkki VaraaVuoro.com..."></input>
+                        <input class="" type="email" placeholder="Ilmoituksen otsikko..."></input>
                         <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
+                        <p>40</p>
                     </div>
-                    <input type="button" value="+">
+                    <div>
+                        <h2>Ilmoituksen ajankohta</h2>
+    
+                        <img src="./img/clock.png" alt="Aloitus">
+                        <input type="date" name="" id="">
+    
+                        <img src="./img/clock.png" alt="Lopetus">
+                        <input type="date" name="" id="">
+                    </div>
+    
                 </div>
-                
-                <div>
-                    <h2>Lisää tiedosto</h2>
+    
+                <div id="competitions">
+                    
+                    <div class="webflow-style-input">
+                        <input class="" type="email" placeholder="Ilmoituksen otsikko..."></input>
+                        <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
+                        <p>40</p>
+                    </div>
+                    
+                    <div>
+                        <h2>Ilmoituksen ajankohta</h2>
+    
+                        <img src="./img/clock.png" alt="Aloitus">
+                        <input type="date" name="" id="">
+    
+                        <img src="./img/clock.png" alt="Lopetus">
+                        <input type="date" name="" id="">
+                    </div>
+                    
+                    <div>
+                        <h2>Ilmoituksen linkit</h2>
+                        <div class="webflow-style-input">
+                            <input class="" type="email" placeholder="Linkki VaraaVuoro.com..."></input>
+                            <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h2>Lisää tiedosto</h2>
+    
+                        <div class="pdf-container"></div>
+    
+                        <form action="" method="post">
+                            <input type="text" placeholder="Lisää ilmoitukseen...">
+                            <input type="file" name="Lisää tiedosto" id="">
+                            <input type="button" value="+">
+                        </form>
+                    </div>
+                    
+                    <div>
+                        
+                        <input type="submit">
 
-                    <div class="pdf-container"></div>
-
-                    <form action="" method="post">
-                        <input type="text" placeholder="Lisää ilmoitukseen...">
-                        <input type="file" name="Lisää tiedosto" id="">
-                        <input type="button" value="+">
-                    </form>
+                    </div>
+    
                 </div>
-                
-                <div>
-                    <input type="submit">
+    
+                <div id="links">
+                    
+                    <!-- Uusi linkki-ilmoitus -->
+
+                    <div class="webflow-style-input">
+                        <input class="" type="email" placeholder="Linkki ilmoitukseen..."></input>
+                    </div>
+
                 </div>
 
-            </form>
-
-            <form action="" method="post" id="links">
-                
-                <h1>Luo uusi linkki-ilmoitus</h1>
-
+                <button type="button">
+                    <img src="./img/save.png" alt="Tallenna">
+                    Tallenna uusi ilmoitus
+                </button>
             </form>
 
             <form action="./admin/gallery_post.php" method="post" enctype="multipart/form-data" id="gallery">
                 
                 <h1>Muokkaa Galleriaa</h1>
-                <input type="file" name="gallery-images[]" multiple id="file-input">
-                <input type="submit" value="Lisää uudet kuvat">
+                
+                <h2>Poista vanhaa mediaa</h2>
+
+                <div>
+                    <h2>Lisää uutta mediaa</h2>
+                    <input type="file" name="gallery-images[]" multiple id="file-input">
+                    <input type="submit" value="Lisää uudet kuvat">
+                </div>
 
             </form>
 

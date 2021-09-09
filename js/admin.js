@@ -19,20 +19,84 @@ function pdfEmbed(pdf, target) {
 // pdfEmbed('../content/uploads/template1.pdf', '#pdf2')
 
 
-
 $(function () {
     const panel = $('.admin-panel');
     const anchors = $(panel).find('.anchors');
     const content = $(panel).find('.content');
-
+    
     // schedule
-    $(content).find('#schedule input[type=number]').each(function (i, l) {
-        $(l).on('input', function () {
-            if (this.value.length >= 2) this.value = this.value.slice(1);
-            if (this.value.length === 1) this.value = '0' + this.value;
-            if (!this.value) this.value = '00';
+    const scheduleForm = $(content).find('#schedule');
+    const timeInputs = $(scheduleForm).find('input[type=number]');
+    var currKey;
+    document.addEventListener('keydown', function(e) {
+        currKey = e.key;
+    });
+    // load the opening.json that has all of the openings
+    var openingArr = [];
+    fetch('./content/opening.json').then(v => v.json()).then(data => {
+        data['days'].forEach(e => {
+            if (e.includes(',')) {
+                e.split(',').forEach(x => {
+                    openingArr.push(...x.split('.'));
+                });
+            } else openingArr.push('00', '00', '00', '00');
+        });
+        // add input logic
+        $(timeInputs).each(function (i, l) {
+            $(l).attr('value', openingArr[i]);
+            $(l).on('input', function () {
+                const usingArrowKeys = currKey == 'ArrowUp' || currKey == 'ArrowDown';
+                if (!usingArrowKeys) {
+                    if (this.value.length >= 2) this.value = this.value.slice(1);
+                    if (this.value.length === 1) this.value = '0' + this.value;
+                    if (!this.value) this.value = '00';
+                    // check if over the limit
+                    const max = $(this).attr('max');
+                    if (this.value > max) this.value = max;
+                } else {
+                    if (this.value.length === 1) this.value = '0' + this.value;
+                    if (!this.value) this.value = '00';
+                }
+            });
+        });
+        // create a submittable .json-format xhr-request. more about the format in 'README.md'.
+        $(scheduleForm).find('button[type=button]').on('click', function () {
+            var arr = [];
+            for (let i = 0; i < timeInputs.length; i++) {
+                const a = timeInputs[i];
+                const b = timeInputs[i + 1];
+                if (Number.parseInt(a.value) == 0) {
+                    arr.push('');
+                } else {
+                    arr.push(a.value);
+                    if (i % 2 == 0) {
+                        arr.push(Number.parseInt(b.value) != 0 ? b.value : '00');
+                        i++;
+                    }
+                }
+            }
+            var arr2 = [];
+            for (let i = 0; i < arr.length; i += 4)
+                arr2.push(arr[i].length != 0 ? `${arr[i]}.${arr[i + 1]},${arr[i + 2]}.${arr[i + 3]}` : '');
+            var output = JSON.stringify({ days: arr2 });
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", './admin/schedule_post.php', true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            xhr.send(output);
         });
     });
+
+    
+    // pricing
+    const pricingForm = $(panel).find('#pricing');
+
+    // - Hohtokeilaus hae kellonajat "opening.json" (16.00-22.00)
+    // - Päiväkeilaus koko päivän 17 asti.
+    // - Iltakeilaus alkaa 17 ja kestää niin pitkään kun halli on auki
+    // - viikonloppu koko päivän (La & Su)
+    
+    
+
 
 
     // panel new activity post creation
