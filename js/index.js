@@ -228,9 +228,9 @@ function setReviews(data) {
     function resetTimer() { timer = 0; }
     function startTimer() {
         setTimeout(() => {
-            if (timer > 4) setReview(); else timer++;
+            if (timer > 6) setReview(); else timer++;
             startTimer();
-        }, 1000);
+        }, 2000);
     }
     startTimer();
 }

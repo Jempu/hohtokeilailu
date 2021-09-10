@@ -97,7 +97,7 @@ body {
       align-content: center;
 }
 
-.admin-panel .anchors .prop h4 {
+.admin-panel .anchors .prop h4, .admin-panel .anchors .prop h5 {
   cursor: pointer;
   margin-top: 1rem;
   -webkit-transition: -webkit-transform 0.3s ease-out;
@@ -106,7 +106,7 @@ body {
   transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
 }
 
-.admin-panel .anchors .prop h4:hover {
+.admin-panel .anchors .prop h4:hover, .admin-panel .anchors .prop h5:hover {
   text-decoration: underline;
   -webkit-transform: scale(104%);
           transform: scale(104%);
@@ -319,6 +319,17 @@ body {
   width: 100%;
   height: auto;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 1rem;
 }
 
 .admin-panel .content #gallery .item {
@@ -329,6 +340,27 @@ body {
   display: -ms-flexbox;
   display: flex;
   justify-items: center;
+  margin: 0.6rem 0;
+  border-radius: 12px;
+  overflow: clip;
+}
+
+.admin-panel .content #gallery .item .close {
+  width: 4rem;
+  height: 5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
+}
+
+.admin-panel .content #gallery .item .close:hover {
+  -webkit-transform: scale(104%);
+          transform: scale(104%);
 }
 
 .admin-panel .content #gallery .item img, .admin-panel .content #gallery .item video {

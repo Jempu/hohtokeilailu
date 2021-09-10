@@ -11,23 +11,30 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/admin.css">
 
+    <!-- tells browser not to cache -->
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- says that the cache expires 'now' -->
+    <meta http-equiv="expires" content="0">
+    <!-- says not to use cached stuff, if there is any -->
+    <meta http-equiv="pragma" content="no-cache">
+
     <!-- pdfobject-2.2.6 -->
     <script type="text/javascript" src="./js/pdfobject-2.6.6/pdfobject.js"></script>
 
     <script src="./js/jquery-3.6.0.min/jquery.js"></script>
-    
+
     <?php
-        // include other php files to save data.
-        require_once './admin/gallery_post.php';
-        require_once './admin/schedule_post.php';
+    // include other php files to save data.
+    require_once './admin/gallery_post.php';
+    require_once './admin/schedule_post.php';
     ?>
 </head>
 
 <body>
     <div class="mainpage-preview">
         <?php
-            // load up the preview for the main page that is being edited.
-            // require_once('./content/index.html');
+        // load up the preview for the main page that is being edited.
+        // require_once './content/index.html';
         ?>
     </div>
 
@@ -42,6 +49,8 @@
                 <h4>Hinnasto</h4>
                 <h4>Ilmoitukset</h4>
                 <h4>Galleria</h4>
+                <h5>Vanha media</h5>
+                <h5>Uusi media</h5>
             </div>
             <div class="help">
                 <a href="./content/uploads/mikkelinkeilahalli-sivuston-käyttöohjeet.pdf" target="#">Tarvitsetko apua? Lue manuaali.</a>
@@ -316,13 +325,13 @@
 
             </form>
 
-<!--
+            <!--
     Kun uutta kilpailuilmoitusta luodaan, siitä luodaan "content/activities" -kansioon
     uusi kansio, jonka nimi on sen "title":n ensimmäisen sanan ja "title":n kirjainten
     määrän päivän yhdistelmä, jotka on eroteltu "-".
     Kansiossa on kaikki siihen liittyvä sisältö.
 -->
-<!-- id = title first word + day of date -->
+            <!-- id = title first word + day of date -->
 
             <form action="" method="post">
                 <h1>Luo uusi ilmoitus</h1>
@@ -331,9 +340,9 @@
                     <option value="1">Kilpailuilmoitus</option>
                     <option value="2">Linkki sivustolle</option>
                 </select>
-    
+
                 <div id="events">
-                    
+
                     <div class="webflow-style-input">
                         <input class="" type="email" placeholder="Ilmoituksen otsikko..."></input>
                         <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
@@ -341,34 +350,34 @@
                     </div>
                     <div>
                         <h2>Ilmoituksen ajankohta</h2>
-    
+
                         <img src="./img/clock.png" alt="Aloitus">
                         <input type="date" name="" id="">
-    
+
                         <img src="./img/clock.png" alt="Lopetus">
                         <input type="date" name="" id="">
                     </div>
-    
+
                 </div>
-    
+
                 <div id="competitions">
-                    
+
                     <div class="webflow-style-input">
                         <input class="" type="email" placeholder="Ilmoituksen otsikko..."></input>
                         <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
                         <p>40</p>
                     </div>
-                    
+
                     <div>
                         <h2>Ilmoituksen ajankohta</h2>
-    
+
                         <img src="./img/clock.png" alt="Aloitus">
                         <input type="date" name="" id="">
-    
+
                         <img src="./img/clock.png" alt="Lopetus">
                         <input type="date" name="" id="">
                     </div>
-                    
+
                     <div>
                         <h2>Ilmoituksen linkit</h2>
                         <div class="webflow-style-input">
@@ -376,29 +385,29 @@
                             <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
                         </div>
                     </div>
-                    
+
                     <div>
                         <h2>Lisää tiedosto</h2>
-    
+
                         <div class="pdf-container"></div>
-    
+
                         <form action="" method="post">
                             <input type="text" placeholder="Lisää ilmoitukseen...">
                             <input type="file" name="Lisää tiedosto" id="">
                             <input type="button" value="+">
                         </form>
                     </div>
-                    
+
                     <div>
-                        
+
                         <input type="submit">
 
                     </div>
-    
+
                 </div>
-    
+
                 <div id="links">
-                    
+
                     <!-- Uusi linkki-ilmoitus -->
 
                     <div class="webflow-style-input">
@@ -414,17 +423,17 @@
             </form>
 
             <form action="./admin/gallery_post.php" method="post" enctype="multipart/form-data" id="gallery">
-                
                 <h1>Muokkaa Galleriaa</h1>
-                
-                <h2>Poista vanhaa mediaa</h2>
-
-                <div>
+                <div class="container" id="old">
+                    <h2>Poista vanhaa mediaa</h2>
+                    <div class="content"></div>
+                </div>
+                <div class="container" id="new">
                     <h2>Lisää uutta mediaa</h2>
+                    <div class="content"></div>
                     <input type="file" name="gallery-images[]" multiple id="file-input">
                     <input type="submit" value="Lisää uudet kuvat">
                 </div>
-
             </form>
 
             <!--
@@ -440,8 +449,32 @@
 </body>
 
 <footer>
-    
+
     <script src="./js/admin.js"></script>
+
+    <?php
+    $arr = [];
+
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator('content/gallery'),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+
+    function addToArr($item)
+    {
+        if (strlen($item) < 4) return;
+        global $arr;
+        array_push($arr, "./$item");
+    }
+
+    foreach ($iterator as $file) {
+        addToArr(str_replace("\\", "/", $file));
+    }
+
+    $data = json_encode($arr, JSON_HEX_AMP | JSON_HEX_TAG);
+    echo "<script type='text/javascript'>galleryAddOldPreviews(" . $data . ");</script>";
+    ?>
+
 
 </footer>
 

@@ -63,7 +63,7 @@ body
             display: grid
             justify-content: center
             align-content: center
-            h4
+            h4, h5
                 cursor: pointer
                 margin-top: 1rem
                 transition: transform 0.3s ease-out
@@ -186,12 +186,29 @@ body
             width: 100%
             height: auto
             position: relative
+            display: flex
+            flex-direction: column
+            align-items: center
+            padding-bottom: 1rem
             .item
                 width: 80%
                 height: auto
                 position: relative
                 display: flex
                 justify-items: center
+                margin: 0.6rem 0
+                border-radius: 12px
+                overflow: clip
+                .close
+                    width: 4rem
+                    height: 5rem
+                    position: absolute
+                    right: 0.5rem
+                    top: 0.5rem
+                    cursor: pointer
+                    transition: transform 0.4s ease
+                    &:hover
+                        transform: scale(104%)
                 img, video
                     width: 100%
                     height: auto

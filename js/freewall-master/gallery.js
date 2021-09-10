@@ -9,10 +9,22 @@ function setGallery(data, imageLimit = 20) {
 
     var html = '';
     var i = 0;
-    const temp = "<div class='brick' style='width:{width}px;'><img src='{img}' width='100%'></div>";
+    const temp = "<div class='brick' style='width:{width}px;'>{type}</div>";
     while (i < (imageLimit < data.length ? imageLimit : data.length)) {
         const w = 1 + 3 * Math.random() << 0;
-        html += temp.replace(/\{width\}/g, w * cellWidth).replace("{img}", data[i]);
+        var e = null;
+        switch (data[i].split('.').pop()) {
+            case 'png':
+            case 'jpg':
+            case 'gif':
+                e = `<img src="${data[i]}" style="width:100%">`;
+                break;
+            case 'mp4':
+            case 'mov':
+                e = `<video src="${data[i]}" controls="true" style="width:100%"></video>`;
+                break;
+        }
+        if (e != null) html += temp.replace('{width}', `${w * cellWidth}`).replace('{type}', e);
         i++;
     }
 

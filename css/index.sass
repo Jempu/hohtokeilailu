@@ -1222,8 +1222,8 @@ $barrelHeight: 44vw
             padding: 0 2rem
             text-align: center
             h1
-                font-size: calc( 18px * 1.4vw )
                 &.title
+                    font-size: calc( 14px + 1.4vw )
                     grid-area: a3
                     font-family: Sansita-ExtraBold
                 &.rating
@@ -1273,22 +1273,27 @@ $barrelHeight: 44vw
         transform: rotate(360deg)
 
 @media screen and (max-width: 880px)
-    .stats .content
-        display: inline
-        .satisfied, .reviews, .amount
-            left: 46%
-            transform: translateX(-50%) rotateZ(-2deg)
-            padding: 0
-            &:hover
-                transform: translateX(-50%) scale(105%) rotateZ(-2deg)
-        .satisfied, .amount
-            width: 250px
-            height: 250px
-        .reviews
-            width: auto
-            height: auto
-            margin: 0 1rem
-            text-align: center
+    .toggle-gallery
+        display: none
+    .stats
+        &::before
+            clip-path: none
+        .content
+            display: inline
+            .satisfied, .reviews, .amount
+                left: 46%
+                transform: translateX(-50%) rotateZ(-2deg)
+                padding: 0
+                &:hover
+                    transform: translateX(-50%) scale(105%) rotateZ(-2deg)
+            .satisfied, .amount
+                width: 250px
+                height: 250px
+            .reviews
+                width: auto
+                height: auto
+                margin: 0 1rem
+                text-align: center
 
 
 /// Kartta ///
@@ -1497,6 +1502,7 @@ $barrelHeight: 44vw
         background-size: cover
         background-repeat: no-repeat
         z-index: 2
+        padding-top: 3rem
         h1, h2, h3
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
         .title

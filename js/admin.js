@@ -1,4 +1,35 @@
 
+/**
+ * sends a request to the specified url from a form. this will change the window location.
+ * @param {string} path the path to send the post request to
+ * @param {object} params the parameters to add to the url
+ * @param {string} [method=post] the method to use on the form
+ */
+
+function post(path, params, method = 'post') {
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less verbose if you use one.
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+
+    for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = key;
+            hiddenField.value = params[key];
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
 function pdfEmbed(pdf, target) {
     PDFObject.embed(pdf, target, {
         pdfOpenParams: {
@@ -18,17 +49,75 @@ function pdfEmbed(pdf, target) {
 // pdfEmbed('https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf', '#pdf1')
 // pdfEmbed('../content/uploads/template1.pdf', '#pdf2')
 
+// called by .php
+function galleryAddOldPreviews(data) {
+    const parent = $('.admin-panel').find('#gallery .container#old .content');
+    data.forEach(e => {
+        if (e.substr(e.length - 1, 1) != '.') {
+            var type = '';
+            const spl = e.split('.');
+            switch (spl[spl.length - 1]) {
+                case 'png':
+                case 'jpg':
+                case 'gif':
+                    type = 'image'
+                    break;
+                case 'mp4':
+                case 'mov':
+                    type = 'video';
+                    break;
+            }
+            addPreviewToGallery(type, e, parent, true);
+        }
+    })
+}
+
+function addPreviewToGallery(type, src, parent, deletable = false) {
+    // create the parent
+    const di = document.createElement('div');
+    di.className = 'item';
+    if (deletable) {
+        di.innerHTML = `
+            <div class="close" onclick="removePreview(this, '${src}')">
+                <img src="./img/close.png" alt="poista kuva">
+            </div>
+        `;
+    }
+    $(parent).append(di);
+    var el = null;
+    // check which type the file is
+    switch (type) {
+        case 'image':
+            el = document.createElement('img');
+            break;
+        case 'video':
+            el = document.createElement('video');
+            el.setAttribute('controls', true);
+            break;
+    }
+    if (el != null) {
+        $(el).attr('src', src);
+        $(di).append(el);
+    }
+}
+
+// called by the item itself, no listeners
+function removePreview(item, src) {
+    const t = item.parentNode;
+    t.parentNode.removeChild(t);
+    post('./admin/gallery_post.php', { gallery_remove_media: src.split('/').pop() });
+}
 
 $(function () {
     const panel = $('.admin-panel');
     const anchors = $(panel).find('.anchors');
     const content = $(panel).find('.content');
-    
+
     // schedule
     const scheduleForm = $(content).find('#schedule');
     const timeInputs = $(scheduleForm).find('input[type=number]');
     var currKey;
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         currKey = e.key;
     });
     // load the opening.json that has all of the openings
@@ -86,7 +175,7 @@ $(function () {
         });
     });
 
-    
+
     // pricing
     const pricingForm = $(panel).find('#pricing');
 
@@ -94,8 +183,8 @@ $(function () {
     // - Päiväkeilaus koko päivän 17 asti.
     // - Iltakeilaus alkaa 17 ja kestää niin pitkään kun halli on auki
     // - viikonloppu koko päivän (La & Su)
-    
-    
+
+
 
 
 
@@ -113,36 +202,17 @@ $(function () {
     });
     setActivityForm(0);
 
-    
+
     // gallery
     const gallery = $(panel).find('#gallery');
+    const galleryPreviewHolder = $(gallery).find('.container#new .content');
     const galleryInput = $(gallery).find('#file-input');
     $(galleryInput).change(function () {
         const files = $(galleryInput).prop('files');
         $(files).each(function (i, l) {
             const reader = new FileReader();
             reader.onload = function (e) {
-                // create the parent
-                const di = document.createElement('div');
-                di.className = 'item';
-                di.innerHTML = `
-                    <img src="./img/close.png" alt="poista kuva">
-                `;
-                $(gallery).append(di);
-                var el = null;
-                // check which type the file is
-                switch (l['type'].split('/')[0]) {
-                    case 'video':
-                        el = document.createElement('video');
-                        break;
-                    case 'image':
-                        el = document.createElement('img');
-                        break;
-                }
-                if (el != null) {
-                    $(el).attr('src', e.target.result);
-                    $(di).append(el);
-                }
+                addPreviewToGallery(l['type'].split('/')[0], e.target.result, galleryPreviewHolder);
             }
             reader.readAsDataURL(l);
         });

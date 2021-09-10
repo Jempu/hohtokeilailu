@@ -1996,11 +1996,8 @@ root {
   text-align: center;
 }
 
-.stats .content .reviews h1 {
-  font-size: calc( 18px * 1.4vw);
-}
-
 .stats .content .reviews h1.title {
+  font-size: calc( 14px + 1.4vw);
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;
@@ -2118,6 +2115,13 @@ root {
 }
 
 @media screen and (max-width: 880px) {
+  .toggle-gallery {
+    display: none;
+  }
+  .stats::before {
+    -webkit-clip-path: none;
+            clip-path: none;
+  }
   .stats .content {
     display: inline;
   }
@@ -2461,6 +2465,7 @@ root {
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 2;
+  padding-top: 3rem;
 }
 
 .pricing .snooker h1, .pricing .snooker h2, .pricing .snooker h3 {
