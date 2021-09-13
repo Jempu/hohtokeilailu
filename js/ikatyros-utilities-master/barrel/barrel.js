@@ -86,23 +86,23 @@ const responsiveBarrel = {
                     responsiveBarrel.fullWidthContainer.children[i].style.display = i == index ? 'block' : 'none';
                 }
                 oh1 = responsiveBarrel.holder.offsetHeight;
-                document.documentElement.style.setProperty('--fullwidth-height', oh1);
+                // document.documentElement.style.setProperty('--fullwidth-height', `${oh1}px`);
             } else {
                 setTimeout(() => {
                     responsiveBarrel.fullWidthContainer.style.display = 'none';
                 }, 1200);
-                document.documentElement.style.setProperty('--fullwidth-height', '0px');
+                // document.documentElement.style.setProperty('--fullwidth-height', '0');
             }
             // responsiveBarrel.fullWidthContainer.style.marginTop = `${oh1}px`;
         } else {
-            if (v) {
-                setTimeout(() => {
-                    const oh2 = responsiveBarrel.container.contents[index].offsetHeight;
-                    document.documentElement.style.setProperty('--fullwidth-height', `${oh2}px`);
-                }, 300);
-            } else {
-                document.documentElement.style.setProperty('--fullwidth-height', '0px');
-            }
+            // if (v) {
+            //     setTimeout(() => {
+            //         const oh2 = responsiveBarrel.container.contents[index].offsetHeight;
+            //         document.documentElement.style.setProperty('--fullwidth-height', `${oh2}px`);
+            //     }, 300);
+            // } else {
+            //     document.documentElement.style.setProperty('--fullwidth-height', '0');
+            // }
         }
         
         setTimeout(() => {
