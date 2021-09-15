@@ -167,6 +167,60 @@ img {
   pointer-events: none;
 }
 
+.coordinator {
+  width: 2rem;
+  height: auto;
+  position: fixed;
+  right: 2.25%;
+  bottom: 6.5%;
+  z-index: 50;
+  display: table;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s ease-out;
+  transition: opacity 0.4s ease-out;
+}
+
+.coordinator[enabled="true"] {
+  opacity: 1;
+}
+
+.coordinator .btn {
+  position: relative;
+  width: 5rem;
+  height: 4rem;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: white;
+  padding: 15px 32px;
+  background-color: #5A1D50;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  transition: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+  transition: transform 0.4s ease-out, -webkit-transform 0.4s ease-out;
+}
+
+.coordinator .btn:hover {
+  -webkit-transform: scale(110%);
+          transform: scale(110%);
+}
+
+.coordinator .btn img {
+  height: 100%;
+}
+
 @media screen and (max-width: 1028px) {
   body {
     width: 100vw;

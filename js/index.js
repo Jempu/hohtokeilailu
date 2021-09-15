@@ -49,6 +49,7 @@ $(function () {
     var currentSlide = -1;
     var isTransitioning = false;
 
+    const slideVideos = monitorContainer.find('iframe');
 
     function setCarousel(index) {
         carouselChildren = $(carousel).children().get().reverse();
@@ -81,6 +82,11 @@ $(function () {
     function setSlideVariable(index) {
         monitorContainer.children().each(function (i, l) {
             $(l).attr('slide', `${l.getAttribute('x') == index}`);
+        });
+        // auto-play the video in slide
+        slideVideos.each(function (i, l) {
+            const player = $f(l);
+            player.api(i == index ? 'play' : 'pause');
         });
     }
 
@@ -182,6 +188,14 @@ $(function () {
         setTimeout(() => {
             $(".prev").on("click", function () { rotateCarousel(false); });
             $(".next").on("click", function () { rotateCarousel(true); });
+
+            setTimeout(() => {
+                // auto-play the video in slide
+                slideVideos.each(function (i, l) {
+                    const player = $f(l);
+                    player.api(i == currentSlide ? 'play' : 'pause');
+                });
+            }, 1200);
         }, 200);
     }, 100);
 });
@@ -407,9 +421,7 @@ function setActivities(data) {
 }
 
 // Load rolling image background for about section
-
-createRollingImage('.about-container', 'img/about-roll', ['1.jpg', '3.jpg', '5.jpg', '7.jpg', '9.jpg', '11.jpg', '13.jpg', '15.jpg', '17.jpg', '19.jpg']);
-
+// createRollingImage('.about-container', 'img/about-roll', ['1.jpg', '3.jpg', '5.jpg', '7.jpg', '9.jpg', '11.jpg', '13.jpg', '15.jpg', '17.jpg', '19.jpg']);
 
 // Create the responsive map
 $(function() {

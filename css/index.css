@@ -1685,6 +1685,9 @@ root {
   position: relative;
   display: -ms-grid;
   display: grid;
+  background-image: url("../img/photos/about.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .about-container::before {
@@ -2806,6 +2809,7 @@ root {
 .pricing .contact div h2 {
   text-align: left;
   margin-left: 0.9rem;
+  margin-bottom: 1.3rem;
   -webkit-transform: translateX(3%);
           transform: translateX(3%);
 }
@@ -3079,4 +3083,3 @@ root {
             transform: translateX(-53%);
   }
 }
-/*# sourceMappingURL=index.css.map */
