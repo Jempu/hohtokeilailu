@@ -23,7 +23,7 @@ const responsiveBarrel = {
     resize: function (fullWidth) {
         // set barrel size
         const elWidth = !fullWidth ? `${100 / responsiveBarrel.columnCount}%` : '100%';
-        const elHeight = !fullWidth ? `${100 / responsiveBarrel.rowCount}%` : '100%';
+        const elHeight = !fullWidth ? `${100 / responsiveBarrel.rowCount + 2}%` : '100%';
         document.documentElement.style.setProperty('--barrel-width', elWidth);
         document.documentElement.style.setProperty('--barrel-height', elHeight);
 

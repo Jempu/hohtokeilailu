@@ -2,26 +2,27 @@
     "title": "Keilahalli avoinna koko kesän",
     "activities": [
         "aamukeilaus-01",
-        "kevatkiekaus-03"
+        "kevatkiekaus-03",
+        "title-20"
     ],
     "gallery": [
         "air-hockey.jpg",
         "baari1.png",
         "baari2.jpg",
-        "bowling-alley.jpg",
-        "bowling-shoes.png",
         "glasses.jpg",
         "keilaus1.png",
         "snooker.png",
         "synttarit-mikkelinkeilahalli.png",
-        "synttarit-mikkelinkeilahalli1.png"
+        "synttarit-mikkelinkeilahalli1.png",
+        "win-pin.png",
+        "kabinetti.jpg"
     ],
     "pricing": {
-        "birthday-small": {
+        "birthday_small": {
             "normal": 135,
             "hohto": 145
         },
-        "birthday-big": {
+        "birthday_big": {
             "normal": 175,
             "hohto": 190
         },

@@ -340,34 +340,31 @@ function setActivities(data) {
         oel.className = 'item';
         oel.id = item;
         oel.innerHTML = `
-            <div>
-                <button>x</button>
-                <h1>${title}</h1>
-                <h2>${date}</h2>
-                <p>${content}</p>
-                <ul>
-                    <li>
+            <div class="item">
+                <div class="content">
+                    <div class="left">
+                        <div class="header-img"></div>
+                        <h1>${title}</h1>
+                        <h2>${date}</h2>
+                        <p>${content}</p>
                         <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
-                    </li>
-                    <li>
                         <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
-                    </li>
-                </ul>
+                    </div>
+                    <div class="right">
+                        <div class="media">
+                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
+                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="close">
+                        <img src="./img/close.png" alt="Sulje näkymä">
+                    </div>
+                </div>
             </div>
-            <ul>
-                <li>
-                    <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" type="application/pdf"></iframe>
-                    <h2>Kilpailuilmoitus</h2>
-                </li>
-                <li>
-                    <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" type="application/pdf"></iframe>
-                    <h2>Olosuhde</h2>
-                </li>
-            </ul>
         `;
         overlayContainer.append(oel);
         // On overlay item click close overlay window
-        $(oel).find('button').on('click', function () {
+        $(oel).find('.close').on('click', function () {
             setOverlayContainer("");
         });
     }

@@ -1,38 +1,22 @@
-// admin-panel
 $panel-width: 34rem
 $input-background: rgba(57, 63, 84, 0.8)
 $input-text-inactive: #7881A1
 $input-text-active: #BFD2FF
 
-body
-    width: 100vw
-    height: 99.7vh
-    position: relative
-    // background: linear-gradient(0deg, rgba(4, 31, 96, 0.35), rgba(4, 31, 96, 0.35)), url('../img/photos/admin-background.jpg')
-    background: url('../img/photos/admin-background.jpg') no-repeat center center fixed
-    background-size: cover
-
-.mainpage-preview
-    width: calc( 100% - 6.4rem )
-    height: auto
-
 .admin-panel
     position: fixed
-    width: $panel-width
+    width: 100%
     height: 100%
     top: 0
     right: 0
-    border-radius: 25px 0 0 25px
-    z-index: 48
+    display: inline-block
     text-align: center
     overflow-x: hidden
-    display: grid
-    grid-auto-flow: column
-    grid-template-columns: 82% auto
-    grid-template-rows: 100%
-    grid-template-areas: "b a"
+    z-index: 48
+    background: linear-gradient(0deg, rgba(4, 31, 96, 1), rgba(4, 31, 96, 1))
+    background-size: cover
     &[expanded="true"]
-        .anchors
+        .nav
             border-radius: 25px 0 0 25px
             .control
                 transform: rotateZ(180deg)
@@ -40,178 +24,174 @@ body
                     transform: scale(104%) rotateZ(180deg)
         .content
             transform: translateX(100%)
-    .anchors
-        display: grid
-        align-items: stretch
-        justify-items: center
-        grid-area: a
+    .nav
+        width: 100%
+        height: 4.5rem
+        display: inline-flex
+        position: relative
         background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
+        background-size: cover
         transition: border-radius 0.4s ease-out
         z-index: 49
-        .control
-            width: 4rem
-            height: 4rem
-            margin: 1rem auto 0 auto
-            cursor: pointer
-            transition: transform 0.3s ease-out
-            img
-                width: 100%
-                height: 100%
-            &:hover
-                transform: scale(104%)
-        .prop
-            display: grid
-            justify-content: center
-            align-content: center
-            h4, h5
-                cursor: pointer
-                margin-top: 1rem
-                transition: transform 0.3s ease-out
-                &:hover
-                    text-decoration: underline
-                    transform: scale(104%)
-        .help
-            display: grid
-            a
-                margin: auto 0
         .home
             width: 60%
-            height: auto
+            height: 100%
             position: relative
             display: flex
-            align-items: flex-end
-            margin-bottom: 2rem
+            justify-content: center
+            align-items: center
             img
-                width: 100%
+                height: 80%
                 transition: transform 0.3s ease-out
                 cursor: pointer
                 pointer-events: all
                 &:hover
                     transform: scale(104%)
+        .help
+            display: grid
+            a
+                margin: auto 0
     .content
+        height: 100%
+        position: relative
         grid-area: b
         overflow-y: auto
         overflow-x: hidden
         background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
-        border-radius: 25px 0 0 25px
         transition: transform 0.6s ease-in-out
         transform: translateX(0)
         display: grid
-        justify-items: center
-        align-content: start
-        #schedule
-            width: 100%
-            height: auto
+        grid-template-areas: "a b d" "a c d"
+        grid-template-rows: 50% 50%
+        grid-template-columns: 25rem 45rem auto
+        margin: 0 1.6vw
+        form
             position: relative
-            display: flex
-            flex-direction: column
-            align-items: center
-            margin: 0
-            .title
+            height: auto
+            &#schedule
                 width: 100%
                 position: relative
+                grid-area: a
                 display: flex
-                justify-content: center
+                flex-direction: column
                 align-items: center
-                padding-top: 0.6rem
-                img, h1
-                    margin: 0 1rem
-            ul
-                width: 75%
-                height: auto
-                position: relative
-                display: block
-                li
+                margin: 0
+                .title
                     width: 100%
-                    height: auto
-                    position: relative
-                    display: block
-                    background-color: #5e5e7a
-                    border: 1px solid #ccc
-                    color: #555
-                    border-radius: 16px
-                    padding: 0 0.8rem 1rem 0.8rem
-                    margin: 1rem 0
-                    .time
-                        width: 100%
-                        height: 42px
-                        position: relative
-                        display: flex
-                        justify-content: center
-                        align-items: center
-                        color: #fff
-                        input
-                            width: 25%
-                            height: 70%
-                            border: none
-                            text-align: center
-                            border-radius: 12px
-                            font-size: 18px
-                        img
-                            width: 48px
-                            height: 40px
-                            &#middle
-                                width: 20px
-                                height: 20px
-        #pricing
-            display: flex
-            flex-direction: column
-            justify-content: center
-            align-items: center
-            ul
-                width: 100%
-                height: auto
-                position: relative
-                li
-                    width: 90%
-                    height: auto
                     position: relative
                     display: flex
-                    img, .price, div
-                        margin: auto
-                    input[type="number"]
-                        height: 24px
-                        width: 42px
+                    justify-content: center
+                    align-items: center
+                    padding-top: 0.6rem
+                    img, h1
+                        margin: 0 1rem
+                ul
+                    width: 75%
+                    position: relative
+                    display: block
+                    li
+                        width: 100%
+                        position: relative
+                        display: block
+                        background-color: #5e5e7a
+                        border: 1px solid #ccc
+                        color: #555
                         border-radius: 16px
-                        text-align: center
-                        font-size: 16px
-                    .price
-                        background: gray
-                        border-radius: 18px
-                        padding-right: 1rem
-                    h2
-                        font-family: NunitoSans-Light
-                        font-size: 18px
-        #gallery
-            width: 100%
-            height: auto
-            position: relative
-            display: flex
-            flex-direction: column
-            align-items: center
-            padding-bottom: 1rem
-            .item
-                width: 80%
-                height: auto
-                position: relative
+                        padding: 0 0.8rem 1rem 0.8rem
+                        margin: 1rem 0
+                        .time
+                            width: 100%
+                            height: 42px
+                            position: relative
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            color: #fff
+                            input
+                                width: 25%
+                                height: 70%
+                                border: none
+                                text-align: center
+                                border-radius: 12px
+                                font-size: 18px
+                            img
+                                width: 48px
+                                height: 40px
+                                &#middle
+                                    width: 20px
+                                    height: 20px
+            &#pricing
                 display: flex
-                justify-items: center
-                margin: 0.6rem 0
-                border-radius: 12px
-                overflow: clip
-                .close
-                    width: 4rem
-                    height: 5rem
-                    position: absolute
-                    right: 0.5rem
-                    top: 0.5rem
-                    cursor: pointer
-                    transition: transform 0.4s ease
-                    &:hover
-                        transform: scale(104%)
-                img, video
+                grid-area: b
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                ul
                     width: 100%
                     height: auto
+                    position: relative
+                    li
+                        width: 90%
+                        height: auto
+                        position: relative
+                        display: flex
+                        img, .price, div
+                            margin: auto
+                        input[type="number"]
+                            height: 24px
+                            width: 42px
+                            border-radius: 16px
+                            text-align: center
+                            font-size: 16px
+                        .price
+                            background: gray
+                            border-radius: 18px
+                            padding-right: 1rem
+                        h2
+                            font-family: NunitoSans-Light
+                            font-size: 18px
+            &#activities
+                grid-area: c
+                display: inline
+                select
+                    margin: 1rem 0
+                .item
+                    display: none
+                    &[active="true"]
+                        display: block
+            &#gallery
+                grid-area: d
+                padding-bottom: 1rem
+                display: flex
+                .container
+                    width: 50%
+                    height: 100%
+                    position: relative
+                    .content
+                        display: inline-block
+                        height: 80%
+                        position: relative
+                        .item
+                            width: 80%
+                            height: auto
+                            position: relative
+                            display: block
+                            margin: 0.6rem auto
+                            border-radius: 12px
+                            overflow: clip
+                            .close
+                                width: 4rem
+                                height: 5rem
+                                position: absolute
+                                right: 0.5rem
+                                top: 0.5rem
+                                cursor: pointer
+                                transition: transform 0.4s ease
+                                &:hover
+                                    transform: scale(104%)
+                            img, video
+                                width: 100%
+                                height: auto
     form
         width: 100%
         position: relative
@@ -255,7 +235,7 @@ body
         padding: 0.4rem
         &[type="button"]
             display: flex
-            justify-items: center
+            justify-content: center
             align-items: center
         img
             width: 28px
@@ -312,6 +292,6 @@ body
         background-position: 100% 0
 
 
-@media screen and (max-width: 1200px)
-    .admin-panel
-        display: none
+// @media screen and (max-width: 1200px)
+//     .admin-panel
+//         display: none
