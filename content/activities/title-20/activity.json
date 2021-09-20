@@ -1,0 +1,17 @@
+{
+    "type": "event",
+    "title": "TITLE",
+    "date": "20.9.2021",
+    "header_image": "",
+    "content": "Test content goes here",
+    "files": [
+        {
+            "text": "Kilpailuilmoitus",
+            "link": "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf"
+        },
+        {
+            "text": "Olosuhde",
+            "link": "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf"
+        }
+    ]
+}
