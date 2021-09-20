@@ -6,7 +6,8 @@
   right: 0;
   display: inline-block;
   text-align: center;
-  overflow-x: hidden;
+  font-family: Nunito;
+  overflow: clip;
   z-index: 48;
   background: -webkit-gradient(linear, left bottom, left top, from(#041f60), to(#041f60));
   background: linear-gradient(0deg, #041f60, #041f60);
@@ -34,11 +35,13 @@
 
 .admin-panel .nav {
   width: 100%;
-  height: 4.5rem;
+  height: 4.25rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
   background-size: cover;
   -webkit-transition: border-radius 0.4s ease-out;
@@ -86,14 +89,15 @@
 }
 
 .admin-panel .content {
-  height: 100%;
+  height: 94.5%;
   position: relative;
-  -ms-grid-row: 1;
+  -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: b;
+  gap: calc(16px + 1vw);
   overflow-y: auto;
   overflow-x: hidden;
-  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+  background: rgba(0, 0, 0, 0.2);
   -webkit-transition: -webkit-transform 0.6s ease-in-out;
   transition: -webkit-transform 0.6s ease-in-out;
   transition: transform 0.6s ease-in-out;
@@ -102,17 +106,29 @@
           transform: translateX(0);
   display: -ms-grid;
   display: grid;
-      grid-template-areas: "a b d" "a c d";
-  -ms-grid-rows: 50% 50%;
-      grid-template-rows: 50% 50%;
-  -ms-grid-columns: 25rem 45rem auto;
-      grid-template-columns: 25rem 45rem auto;
-  margin: 0 1.6vw;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+      grid-template-areas: "a t t d" "a b c d";
+  -ms-grid-rows: 30% auto;
+      grid-template-rows: 30% auto;
+  -ms-grid-columns: 25rem auto 25vw 45rem;
+      grid-template-columns: 25rem auto 25vw 45rem;
+}
+
+.admin-panel .content h1 {
+  font-family: Sansita-ExtraBold;
+}
+
+.admin-panel .content h2 {
+  font-size: calc(8px + 0.8vw);
 }
 
 .admin-panel .content form {
   position: relative;
   height: auto;
+  min-height: 50%;
+  border-radius: 2rem;
 }
 
 .admin-panel .content form#schedule {
@@ -133,6 +149,7 @@
       -ms-flex-align: center;
           align-items: center;
   margin: 0;
+  padding-top: 0;
 }
 
 .admin-panel .content form#schedule .title {
@@ -169,7 +186,7 @@
   color: #555;
   border-radius: 16px;
   padding: 0 0.8rem 1rem 0.8rem;
-  margin: 1rem 0;
+  margin: 0.8rem 0;
 }
 
 .admin-panel .content form#schedule ul li .time {
@@ -207,11 +224,18 @@
   height: 20px;
 }
 
+.admin-panel .content form#titlecard-title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-area: t;
+}
+
 .admin-panel .content form#pricing {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-grid-row: 1;
+  -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: b;
   -webkit-box-orient: vertical;
@@ -224,12 +248,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding-bottom: 2.5rem;
 }
 
 .admin-panel .content form#pricing ul {
   width: 100%;
   height: auto;
   position: relative;
+  padding: 0 1rem 0 1rem;
 }
 
 .admin-panel .content form#pricing ul li {
@@ -239,6 +265,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0.5rem 0;
 }
 
 .admin-panel .content form#pricing ul li img, .admin-panel .content form#pricing ul li .price, .admin-panel .content form#pricing ul li div {
@@ -261,14 +288,22 @@
 
 .admin-panel .content form#pricing ul li h2 {
   font-family: NunitoSans-Light;
-  font-size: 18px;
 }
 
 .admin-panel .content form#activities {
   -ms-grid-row: 2;
-  -ms-grid-column: 2;
+  -ms-grid-column: 3;
   grid-area: c;
-  display: inline;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .admin-panel .content form#activities select {
@@ -284,29 +319,39 @@
 }
 
 .admin-panel .content form#gallery {
+  max-height: 95%;
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
-  -ms-grid-column: 3;
+  -ms-grid-column: 4;
   grid-area: d;
+  padding-top: 0;
   padding-bottom: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+  background-size: cover;
 }
 
-.admin-panel .content form#gallery .container {
-  width: 50%;
-  height: 100%;
+.admin-panel .content form#gallery h1 {
+  padding: 1rem 0;
+}
+
+.admin-panel .content form#gallery .content, .admin-panel .content form#gallery .file-new-input {
+  width: 100%;
   position: relative;
-}
-
-.admin-panel .content form#gallery .container .content {
   display: inline-block;
-  height: 80%;
-  position: relative;
 }
 
-.admin-panel .content form#gallery .container .content .item {
+.admin-panel .content form#gallery .content {
+  height: 80%;
+}
+
+.admin-panel .content form#gallery .content .item {
   width: 80%;
   height: auto;
   position: relative;
@@ -316,7 +361,7 @@
   overflow: clip;
 }
 
-.admin-panel .content form#gallery .container .content .item .close {
+.admin-panel .content form#gallery .content .item .close {
   width: 4rem;
   height: 5rem;
   position: absolute;
@@ -329,14 +374,23 @@
   transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }
 
-.admin-panel .content form#gallery .container .content .item .close:hover {
+.admin-panel .content form#gallery .content .item .close:hover {
   -webkit-transform: scale(104%);
           transform: scale(104%);
 }
 
-.admin-panel .content form#gallery .container .content .item img, .admin-panel .content form#gallery .container .content .item video {
+.admin-panel .content form#gallery .content .item img, .admin-panel .content form#gallery .content .item video {
   width: 100%;
   height: auto;
+}
+
+.admin-panel .content form#gallery p {
+  margin: 2rem 0;
+}
+
+.admin-panel .content form#gallery .file-new-input {
+  height: 20%;
+  display: inline-block;
 }
 
 .admin-panel form {
@@ -481,6 +535,60 @@
 
 .admin-panel .webflow-style-input:hover {
   color: #BFD2FF;
+}
+
+.admin-panel select, .admin-panel input[type="date"], .admin-panel button[type="button"] {
+  width: 140px;
+  height: 35px;
+  padding: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 8px #999;
+          box-shadow: 2px 2px 8px #999;
+  background: #211630;
+  color: #fff;
+  outline: 2px rgba(255, 255, 255, 0.4) solid;
+  -webkit-transition: outline 0.3s ease-out;
+  transition: outline 0.3s ease-out;
+  border: none;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.admin-panel select:hover, .admin-panel input[type="date"]:hover, .admin-panel button[type="button"]:hover {
+  outline: 2px rgba(255, 255, 255, 0.8) solid;
+}
+
+.admin-panel label {
+  position: relative;
+}
+
+.admin-panel label:after {
+  content: '<>';
+  font: 11px "Consolas", monospace;
+  color: #666;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 8px;
+  top: 2px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #ddd;
+  position: absolute;
+  pointer-events: none;
+}
+
+.admin-panel label:before {
+  content: '';
+  right: 6px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  background: #eee;
+  position: absolute;
+  pointer-events: none;
+  display: block;
 }
 
 @-webkit-keyframes gradient {

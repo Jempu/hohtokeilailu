@@ -11,7 +11,8 @@ $input-text-active: #BFD2FF
     right: 0
     display: inline-block
     text-align: center
-    overflow-x: hidden
+    font-family: Nunito
+    overflow: clip
     z-index: 48
     background: linear-gradient(0deg, rgba(4, 31, 96, 1), rgba(4, 31, 96, 1))
     background-size: cover
@@ -26,9 +27,11 @@ $input-text-active: #BFD2FF
             transform: translateX(100%)
     .nav
         width: 100%
-        height: 4.5rem
+        height: 4.25rem
         display: inline-flex
-        position: relative
+        position: fixed
+        bottom: 0
+        left: 0
         background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
         background-size: cover
         transition: border-radius 0.4s ease-out
@@ -52,22 +55,29 @@ $input-text-active: #BFD2FF
             a
                 margin: auto 0
     .content
-        height: 100%
+        height: 94.5%
         position: relative
         grid-area: b
+        gap: calc(16px + 1vw)
         overflow-y: auto
         overflow-x: hidden
-        background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
+        background: rgba(0, 0, 0, 0.2)
         transition: transform 0.6s ease-in-out
         transform: translateX(0)
         display: grid
-        grid-template-areas: "a b d" "a c d"
-        grid-template-rows: 50% 50%
-        grid-template-columns: 25rem 45rem auto
-        margin: 0 1.6vw
+        align-items: center
+        grid-template-areas: "a t t d" "a b c d"
+        grid-template-rows: 30% auto
+        grid-template-columns: 25rem auto 25vw 45rem
+        h1
+            font-family: Sansita-ExtraBold
+        h2
+            font-size: calc(8px + 0.8vw)
         form
             position: relative
             height: auto
+            min-height: 50%
+            border-radius: 2rem
             &#schedule
                 width: 100%
                 position: relative
@@ -76,6 +86,7 @@ $input-text-active: #BFD2FF
                 flex-direction: column
                 align-items: center
                 margin: 0
+                padding-top: 0
                 .title
                     width: 100%
                     position: relative
@@ -98,7 +109,7 @@ $input-text-active: #BFD2FF
                         color: #555
                         border-radius: 16px
                         padding: 0 0.8rem 1rem 0.8rem
-                        margin: 1rem 0
+                        margin: 0.8rem 0
                         .time
                             width: 100%
                             height: 42px
@@ -120,21 +131,26 @@ $input-text-active: #BFD2FF
                                 &#middle
                                     width: 20px
                                     height: 20px
+            &#titlecard-title
+                grid-area: t
             &#pricing
                 display: flex
                 grid-area: b
                 flex-direction: column
                 justify-content: center
                 align-items: center
+                padding-bottom: 2.5rem
                 ul
                     width: 100%
                     height: auto
                     position: relative
+                    padding: 0 1rem 0 1rem
                     li
                         width: 90%
                         height: auto
                         position: relative
                         display: flex
+                        margin: 0.5rem 0
                         img, .price, div
                             margin: auto
                         input[type="number"]
@@ -149,10 +165,11 @@ $input-text-active: #BFD2FF
                             padding-right: 1rem
                         h2
                             font-family: NunitoSans-Light
-                            font-size: 18px
             &#activities
                 grid-area: c
-                display: inline
+                display: flex
+                flex-direction: column
+                align-items: center
                 select
                     margin: 1rem 0
                 .item
@@ -160,38 +177,48 @@ $input-text-active: #BFD2FF
                     &[active="true"]
                         display: block
             &#gallery
+                max-height: 95%
                 grid-area: d
+                padding-top: 0
                 padding-bottom: 1rem
                 display: flex
-                .container
-                    width: 50%
-                    height: 100%
+                flex-direction: column
+                background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
+                background-size: cover
+                h1
+                    padding: 1rem 0
+                .content, .file-new-input
+                    width: 100%
                     position: relative
-                    .content
-                        display: inline-block
-                        height: 80%
+                    display: inline-block
+                .content
+                    height: 80%
+                    .item
+                        width: 80%
+                        height: auto
                         position: relative
-                        .item
-                            width: 80%
+                        display: block
+                        margin: 0.6rem auto
+                        border-radius: 12px
+                        overflow: clip
+                        .close
+                            width: 4rem
+                            height: 5rem
+                            position: absolute
+                            right: 0.5rem
+                            top: 0.5rem
+                            cursor: pointer
+                            transition: transform 0.4s ease
+                            &:hover
+                                transform: scale(104%)
+                        img, video
+                            width: 100%
                             height: auto
-                            position: relative
-                            display: block
-                            margin: 0.6rem auto
-                            border-radius: 12px
-                            overflow: clip
-                            .close
-                                width: 4rem
-                                height: 5rem
-                                position: absolute
-                                right: 0.5rem
-                                top: 0.5rem
-                                cursor: pointer
-                                transition: transform 0.4s ease
-                                &:hover
-                                    transform: scale(104%)
-                            img, video
-                                width: 100%
-                                height: auto
+                p
+                    margin: 2rem 0
+                .file-new-input
+                    height: 20%
+                    display: inline-block
     form
         width: 100%
         position: relative
@@ -284,6 +311,50 @@ $input-text-active: #BFD2FF
             transition: color .25s
         &:hover
             color: $input-text-active
+    // custom css select
+    select, input[type="date"], button[type="button"]
+        width: 140px
+        height: 35px 
+        padding: 4px 
+        border-radius: 4px 
+        box-shadow: 2px 2px 8px #999 
+        background: #211630
+        color: #fff
+        outline: 2px rgba(255, 255, 255, 0.4) solid
+        transition: outline 0.3s ease-out
+        border: none 
+        display: inline-block 
+        -webkit-appearance: none 
+        -moz-appearance: none 
+        appearance: none 
+        cursor: pointer 
+        &:hover
+            outline: 2px rgba(255, 255, 255, 0.8) solid
+    label 
+        position: relative 
+        &:after 
+            content: '<>' 
+            font: 11px "Consolas", monospace 
+            color: #666 
+            -webkit-transform: rotate(90deg) 
+            -moz-transform: rotate(90deg) 
+            transform: rotate(90deg) 
+            right: 8px 
+            top: 2px 
+            padding: 0 0 2px 
+            border-bottom: 1px solid #ddd 
+            position: absolute 
+            pointer-events: none 
+        &:before 
+            content: '' 
+            right: 6px 
+            top: 0px 
+            width: 20px 
+            height: 20px 
+            background: #eee 
+            position: absolute 
+            pointer-events: none 
+            display: block 
 
 @keyframes gradient
     0%

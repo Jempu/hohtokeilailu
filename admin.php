@@ -199,7 +199,21 @@
                 </button>
             </form>
 
-            <form action="./admin/pricing_post.php" method="post" id="pricing" name="pricing">
+
+            <form id="titlecard-title">
+
+                <h1>Etusivun kansiotsikko</h1>
+
+                <div class="webflow-style-input">
+                    <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
+                    <button type="submit"></button>
+                    <p>80</p>
+                </div>
+
+            </form>
+
+
+            <form id="pricing" name="pricing">
                 <div class="title">
                     <h1>Hinnasto</h1>
                 </div>
@@ -208,8 +222,8 @@
                     <li id="hohto">
                         <img src="./img/bowler.png" alt="Hohto">
                         <div>
-                            <h1>Hohtokeilaus</h1>
-                            <h2>Ti - La 16.00 - 22.00</h2>
+                            <h2>Hohtokeilaus</h2>
+                            <h3>Ti - La 16.00 - 22.00</h3>
                         </div>
                         <div>
                             <div class="price">
@@ -221,8 +235,8 @@
                     <li id="day">
                         <img src="./img/day.png" alt="Päivä">
                         <div>
-                            <h1>Päivä</h1>
-                            <h2>Ti - Pe 12.00 - 17.00</h2>
+                            <h2>Päivä</h2>
+                            <h3>Ti - Pe 12.00 - 17.00</h3>
                         </div>
                         <div>
                             <div class="price">
@@ -234,8 +248,8 @@
                     <li id="night">
                         <img src="./img/night.png" alt="Ilta">
                         <div>
-                            <h1>Ilta</h1>
-                            <h2>Ti - Pe 17.00 - 20.00</h2>
+                            <h2>Ilta</h2>
+                            <h3>Ti - Pe 17.00 - 20.00</h3>
                         </div>
                         <div>
                             <div class="price">
@@ -247,8 +261,8 @@
                     <li id="weekend">
                         <img src="./img/calendar.png" alt="Viikonloppu">
                         <div>
-                            <h1>Viikonloppu</h1>
-                            <h2>Ti - Pe 12.00 - 17.00</h2>
+                            <h2>Viikonloppu</h2>
+                            <h3>Ti - Pe 12.00 - 17.00</h3>
                         </div>
                         <div>
                             <div class="price">
@@ -260,7 +274,7 @@
                     <li id="equipment">
                         <img src="./img/proshop/shoes/shoes.png" alt="Vuokraus">
                         <div>
-                            <h1>Välinevuokraus</h1>
+                            <h2>Välinevuokraus</h2>
                         </div>
                         <div>
                             <div class="price">
@@ -273,7 +287,7 @@
                     <li id="discount">
                         <img src="./img/excellent-service.png" alt="Alennus">
                         <div>
-                            <h1>Keilausalennus</h1>
+                            <h2>Keilausalennus</h2>
                         </div>
                         <div>
                             <div class="price">
@@ -286,7 +300,7 @@
                     <li id="snooker">
                         <img src="./img/snooker.png" alt="Biljardi">
                         <div>
-                            <h1>Biljardi</h1>
+                            <h2>Biljardi</h2>
                         </div>
                         <div>
                             <div class="price">
@@ -299,7 +313,7 @@
                     <li id="birthday_small">
                         <img src="./img/cake.png" alt="Pieni synttäripaketti">
                         <div>
-                            <h1>Pieni synttäripaketti</h1>
+                            <h2>Pieni synttäripaketti</h2>
                         </div>
                         <img src="./img/bowling-pins.png" alt="Normihinta">
                         <div class="price">
@@ -315,7 +329,7 @@
                     <li id="birthday_big">
                         <img src="./img/cake.png" alt="Iso synttäripaketti">
                         <div>
-                            <h1>Iso synttäripaketti</h1>
+                            <h2>Iso synttäripaketti</h2>
                         </div>
                         <img src="./img/bowling-pins.png" alt="Normihinta">
                         <div class="price">
@@ -335,85 +349,132 @@
                 </button>
             </form>
 
-            <form action="" method="post" name="activities" id="activities">
-                <h1>Luo uusi ilmoitus</h1>
-                <select name="" id="activity-select">
-                    <option value="0">Tapahtumailmoitus</option>
-                    <option value="1">Kilpailuilmoitus</option>
-                    <option value="2">Linkki sivustolle</option>
-                </select>
-                
-                <div id="events" class="item">
-                    <div class="webflow-style-input">
-                        <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
-                        <button type="submit"></button>
-                        <p>40</p>
-                    </div>
-                    <div>
-                        <h2>Ilmoituksen ajankohta</h2>
-                        <img src="./img/clock.png" alt="Aloitus">
-                        <input type="date" id="start-time">
-                        <img src="./img/clock.png" alt="Lopetus">
-                        <input type="date" id="end-time">
-                    </div>
+            <div class="activities">
+
+                <!-- List all existing activities -->
+                <div class="activity-view">
+
+
                 </div>
 
-                <div id="competitions" class="item">
-                    <div class="webflow-style-input">
-                        <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
-                        <button type="submit"></button>
-                        <p>40</p>
-                    </div>
-                    <div>
-                        <h2>Ilmoituksen ajankohta</h2>
-                        <img src="./img/clock.png" alt="Aloitus">
-                        <input type="date" id="start-time">
-                        <img src="./img/clock.png" alt="Lopetus">
-                        <input type="date" id="end-time">
-                    </div>
-                    <div>
-                        <h2>Ilmoituksen linkit</h2>
+                <form action="" method="post" name="activities" id="activities">
+                    <h1>Luo uusi ilmoitus</h1>
+                    <select class="custom-select" id="activity-select">
+                        <option value="0">Tapahtumailmoitus</option>
+                        <option value="1">Kilpailuilmoitus</option>
+                        <option value="2">Linkki sivustolle</option>
+                    </select>
+
+                    <div id="events" class="item">
                         <div class="webflow-style-input">
-                            <input type="text" placeholder="Linkki VaraaVuoro.com..." id="link">
+                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
                             <button type="submit"></button>
+                            <p>40</p>
+                        </div>
+                        <div>
+                            <h2>Ilmoituksen ajankohta</h2>
+                            <img src="./img/clock.png" alt="Aloitus">
+                            <input type="date" id="start-time">
+                            <img src="./img/clock.png" alt="Lopetus">
+                            <input type="date" id="end-time">
                         </div>
                     </div>
-                    <div>
-                        <h2>Lisää tiedosto</h2>
-                        <div class="pdf-container"></div>
 
-                        <input type="text" placeholder="Lisää ilmoitukseen...">
-                        <input type="file" name="Lisää tiedosto" multiple id="files">
-                        <input type="button" value="+">
+                    <div id="competitions" class="item">
+                        <div class="cover-image">
+                            <img src="./img/photos/baari1.jpg" alt="Kansikuva">
+                        </div>
+                        <div class="webflow-style-input">
+                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
+                            <button type="submit"></button>
+                            <p>40</p>
+                        </div>
+                        <div>
+                            <h2>Ilmoituksen ajankohta</h2>
+                            <img src="./img/clock.png" alt="Aloitus">
+                            <input type="date" id="start-time">
+                            <img src="./img/clock.png" alt="Lopetus">
+                            <input type="date" id="end-time">
+                        </div>
+                        <div>
+                            <h2>Ilmoituksen linkit</h2>
+                            <div class="webflow-style-input">
+                                <input type="text" placeholder="Linkki VaraaVuoro.com..." id="link">
+                                <button type="submit"></button>
+                            </div>
+                        </div>
+                        <div>
+                            <h2>Lisää tiedosto</h2>
+
+                            <!-- The previews for the uploaded .pdf -->
+                            <div class="pdf-container">
+                                <div class="item">
+                                    <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
+                                    <div class="close">
+                                        <img src="./img/close.png" alt="Poista ilmoitus">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" placeholder="Lisää ilmoitukseen...">
+                            <input type="file" name="Lisää tiedosto" id="files">
+                            <input type="button" value="+">
+                        </div>
                     </div>
-                </div>
 
-                <div id="links" class="item">
-                    <div class="webflow-style-input">
-                        <input class="" type="email" placeholder="Linkki ilmoitukseen..."></input>
+                    <div id="links" class="item">
+                        <div class="webflow-style-input">
+                            <input class="" type="email" placeholder="Linkki ilmoitukseen..."></input>
+                        </div>
                     </div>
-                </div>
 
-                <button type="button">
-                    <img src="./img/save.png" alt="Tallenna">
-                    Tallenna uusi ilmoitus
-                </button>
-            </form>
+                    <button type="button">
+                        <img src="./img/save.png" alt="Tallenna">
+                        Tallenna uusi ilmoitus
+                    </button>
+                </form>
+
+            </div>
+
 
             <form action="./admin/gallery_post.php" method="post" enctype="multipart/form-data" id="gallery">
-                <div class="container" id="old">
-                    <h1>Galleria</h1>
-                    <div class="content"></div>
-                    <p>Galleria tukee .jpg, .png, .gif, .mp4 ja .mov -tiedostoja</p>
-                </div>
-                <div class="container" id="new">
-                    <h2>[YHDISTÄ TÄMÄ OSIO Lisää Galleriaan]</h2>
-                    <div class="content"></div>
+                <h1>Galleria</h1>
+                <div class="content"></div>
+                <p>Galleria tukee .jpg, .png, .gif, .mp4 ja .mov -tiedostoja</p>
+                <div class="gallery-new-input">
                     <input type="file" name="gallery-images[]" multiple id="file-input">
                     <input type="submit" value="Lisää uudet kuvat">
                 </div>
             </form>
 
+        </div>
+    </div>
+
+    <!-- all viewable activities are here -->
+    <div class="overlay-container">
+        <div class="item">
+            <div class="content">
+                <div class="left">
+                    <div class="header-img"></div>
+                    <h1>
+                        Aamukeilaus nyt käynnissä. Tule mukaan!
+                    </h1>
+                    <p>
+                        Alkukilpailu 5.s EU. Rajaton uusinta. Tasoitukset 210-155 70%, maksimitasoitus 39p/s. Lämmittely 5 min. Kilpailumaksu 25€. Finaali lauantaina 4.9.2021 klo 12.00 alkaen. Finaaliin 20 parasta seuraavasti: 12 parasta 5.s EU tuloksella sekä 12 parhaan ulkopuolelta: paras B-luokan mies ja nainen, paras C-luokan mies ja nainen, paras D-luokan mies ja nainen sekä paras veteraanimies ja -nainen. Finaalin ensimäisessä osassa pelataan 5s. Am, jonka jälkeen ensimmäisen osion 6 parasta pelaa Round Robin kierroksen ilman sijoitussarjaa.
+                    </p>
+                    <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
+                    <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
+                </div>
+                <div class="right">
+                    <div class="media">
+                        <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
+                        <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="close">
+                    <img src="./img/close.png" alt="Sulje näkymä">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -423,21 +484,22 @@
     <script src="./js/admin.js"></script>
 
     <?php
-        $arr = [];
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator('content/gallery'),
-            RecursiveIteratorIterator::SELF_FIRST
-        );
-        function addToArr($item) {
-            if (strlen($item) < 4) return;
-            global $arr;
-            array_push($arr, "./$item");
-        }
-        foreach ($iterator as $file) {
-            addToArr(str_replace("\\", "/", $file));
-        }
-        $data = json_encode($arr, JSON_HEX_AMP | JSON_HEX_TAG);
-        echo "<script type='text/javascript'>galleryAddOldPreviews(" . $data . ");</script>";
+    $arr = [];
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator('content/gallery'),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+    function addToArr($item)
+    {
+        if (strlen($item) < 4) return;
+        global $arr;
+        array_push($arr, "./$item");
+    }
+    foreach ($iterator as $file) {
+        addToArr(str_replace("\\", "/", $file));
+    }
+    $data = json_encode($arr, JSON_HEX_AMP | JSON_HEX_TAG);
+    echo "<script type='text/javascript'>galleryAddOldPreviews(" . $data . ");</script>";
     ?>
 </footer>
 

@@ -76,7 +76,7 @@ function pdfEmbed(pdf, target) {
 
 // called by .php
 function galleryAddOldPreviews(data) {
-    const parent = $('.admin-panel').find('#gallery .container#old .content');
+    const parent = $('.admin-panel').find('#gallery .content');
     data.forEach(e => {
         if (e.substr(e.length - 1, 1) != '.') {
             var type = '';
@@ -269,7 +269,6 @@ $(function () {
     function postNewActivity() {
 
         console.log($(currentActivityForm).find('input'));
-        return;
 
         var title = "TITLE";
         var date = "20.9.2021";
@@ -332,19 +331,19 @@ $(function () {
         }
     }
     $(activityForm).find('button[type="button"]').on('click', function () {
-        postNewActivity();
+        // postNewActivity();
     });
 
     // gallery
     const gallery = $(panel).find('#gallery');
-    const galleryPreviewHolder = $(gallery).find('.container#new .content');
+    const galleryContent = $(gallery).find('.content');
     const galleryInput = $(gallery).find('#file-input');
     $(galleryInput).change(function () {
         const files = $(galleryInput).prop('files');
         $(files).each(function (i, l) {
             const reader = new FileReader();
             reader.onload = function (e) {
-                addPreviewToGallery(l['type'].split('/')[0], e.target.result, galleryPreviewHolder);
+                addPreviewToGallery(l['type'].split('/')[0], e.target.result, galleryContent);
             }
             reader.readAsDataURL(l);
         });
