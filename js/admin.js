@@ -1,4 +1,6 @@
 
+const html = $('html');
+
 /**
  * sends a request to the specified url from a form. this will change the window location.
  * @param {string} path the path to send the post request to
@@ -52,6 +54,28 @@ function addInputLogic(inputs, arr) {
             }
         });
     });
+}
+
+
+// limit inputs to a certain range of characters
+// and limit the amount of characters
+function check(e, value) {
+    //Check Charater
+    // var unicode = e.charCode ? e.charCode : e.keyCode;
+    // if (value.indexOf(".") != -1) if (unicode == 46) return false;
+    // if (unicode != 8) if ((unicode < 48 || unicode > 57) && unicode != 46) return false;
+    return true;
+}
+function checkLength(l, e) {
+    var fieldLength = e.value.length;
+    if (fieldLength <= l) {
+        return true;
+    }
+    else {
+        var str = e.value;
+        str = str.substring(0, str.length - 1);
+        e.value = str;
+    }
 }
 
 
@@ -137,6 +161,20 @@ $(function () {
     const panel = $('.admin-panel');
     const anchors = $(panel).find('.anchors');
     const content = $(panel).find('.content');
+    const overlayContainer = $('.overlay-container');
+
+    //limit inputs to their character limits
+    $('.webflow-style-input').each(function (i, l) {
+        const p = $(l).find('p');
+        const v = $(p).html() ?? null;
+        if (v !== null) {
+            checkLength(v, $(l).find('input').get(0));
+            const input = $(l).find('input');
+            $(input).on('input', function () {
+                $(p).html(v - $(input).val().length)
+            });
+        }
+    });
 
     // schedule
     const scheduleForm = $(content).find('#schedule');
@@ -151,7 +189,7 @@ $(function () {
                 });
             } else openingArr.push('00', '00', '00', '00');
         });
-        
+
         addInputLogic(timeInputs, openingArr);
 
         // create a submittable .json-format xhr-request. more about the format in 'README.md'.
@@ -160,15 +198,13 @@ $(function () {
             for (let i = 0; i < timeInputs.length; i++) {
                 const a = timeInputs[i];
                 const b = timeInputs[i + 1];
-                if (Number.parseInt(a.value) == 0) {
-                    arr.push('');
-                } else {
+                if (Number.parseInt(a.value) != 0) {
                     arr.push(a.value);
                     if (i % 2 == 0) {
                         arr.push(Number.parseInt(b.value) != 0 ? b.value : '00');
                         i++;
                     }
-                }
+                } else arr.push('');
             }
             var arr2 = [];
             for (let i = 0; i < arr.length; i += 4)
@@ -190,8 +226,14 @@ $(function () {
     // - Iltakeilaus alkaa 17 ja kestää niin pitkään kun halli on auki
     // - viikonloppu koko päivän (La & Su)
 
-    // add already existing pricing data to the form.
     fetch('./content/index.json').then(v => v.json()).then(data => {
+        
+        // add title text to the input
+        if (data['titlecard_title'] != "") {
+            $(panel).find('#titlecard-title input').val(data['titlecard_title']);
+        }
+        
+        // add already existing pricing data to the form.
         const p = data['pricing'];
         function f(id) {
             $(pricingForm).find(`#${id} input`).attr('value', p[id]);
@@ -203,7 +245,7 @@ $(function () {
         f('equipment');
         f('snooker');
         f('discount');
-        
+
         const bs = $(pricingForm).find('#birthday_small input');
         $(bs[0]).attr('value', p['birthday_small']['normal']);
         $(bs[1]).attr('value', p['birthday_small']['hohto']);
@@ -247,19 +289,169 @@ $(function () {
 
     // activity
     const activityForm = $(panel).find('#activities');
-    const eventForm = $(activityForm).find('#events');
-    const competitionForm = $(activityForm).find('#competitions');
+    const activityView = $(panel).find('.content .activities .activity-view')
+
+    // load already existing activities
+    function setOverlayContainer(item) {
+        if (item != "") {
+            overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
+            html.css({ overflowX: 'clip', overflowY: 'clip' });
+            overlayContainer.children().each(function(i, l) {
+                $(l).css({ display: l.id == item ? 'block' : 'none' });
+            });
+            overlayContainer.animate({ now: 108 }, {
+                duration: '400',
+                step: function (now, fx) {
+                    $(this).css('transform', `translateX(-50%) scale(${now}%)`);
+                }
+            });
+        } else {
+            overlayContainer.animate({ now: 0 }, {
+                duration: '400',
+                step: function (now, fx) {
+                    $(this).css('transform', `translateX(-50%) scale(${now}%)`);
+                },
+                complete: function () {
+                    overlayContainer.css({ display: 'none' });
+                    html.css({ overflowX: 'clip', overflowY: 'scroll' });
+                }
+            });
+        }
+    }
+    setOverlayContainer("");
+    const directory = './content/activities/';
+    function createActivityViewItem(item, title, date, content, headerImg, dateStatus) {
+        // container item
+        const e = document.createElement('div');
+        e.className = 'item';
+        e.id = item;
+        e.innerHTML = `
+            <div class="content">
+                ${headerImg}
+                <div class="bo" id="a"></div>
+                <h2>${title}</h2>
+                <h3>${date}</h3>
+                <div class="bo" id="b"></div>
+            </div>
+            <div class="control">
+                <h1>Tapahtuma ${dateStatus}</h1>
+                <h2 onclick="deleteActivityItem(${item});">Poista Ilmoitus<h2>
+            </div>
+        `;
+        $(activityView).append(e);
+        // On container item click open overlay window
+        $(e).find('.content').on('click', function () {
+            setOverlayContainer(item);
+        });
+        $(e).find('.control h2').on('click', function () {
+            deleteActivityItem(e, item);
+        });
+        // overlay item
+        const o = document.createElement('div');
+        o.className = 'item';
+        o.id = item;
+        o.innerHTML = `
+            <div class="item">
+                <div class="content">
+                    <div class="left">
+                        <div class="header-img"></div>
+                        <h1>${title}</h1>
+                        <h2>${date}</h2>
+                        <p>${content}</p>
+                        <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
+                        <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
+                    </div>
+                    <div class="right">
+                        <div class="media">
+                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
+                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <div class="close">
+                        <img src="./img/close.png" alt="Sulje näkymä">
+                    </div>
+                </div>
+            </div>
+        `;
+        overlayContainer.append(o);
+        // On overlay item click close overlay window
+        $(o).find('.close').on('click', function () {
+            setOverlayContainer("");
+        });
+    }
+    function deleteActivityItem(e, id) {
+        console.log(e, id);
+    }
+    function createFooterEventItem(item, img, title, date) {
+        let e = document.createElement('div');
+        e.className = 'item';
+        e.innerHTML = `
+            <div>
+                ${img}
+                <h1>${title}</h1>
+                <h2>${date}</h2>
+            </div>
+            <div>
+                päivämäärä-status
+                poista-ilmoitus
+            </div>
+        `;
+        $(e).on('click', function () {
+            setOverlayContainer(item);
+        });
+    }
+    fetch('./content/index.json').then(v => v.json()).then(data => {
+        data['activities'].forEach(item => {
+            const folder = `${directory}${item}/`;
+            fetch(`${folder}/activity.json`).then(v => v.json()).then(child => {
+                // date
+                const vdate = getDisplayableDate(child['date'], true, 3);
+                const vdateStart = getDisplayableDate(child['date'], false, 1, false);
+                const vdateEnd = getDisplayableDate(child['date'], false, 2, false);
+
+                // title
+                const vtitle = child['title'];
+                const vimg = child['header-image'] != ''
+                    ? `<img src="${folder}${child['header-image']}" alt="Tapahtumakuva">`
+                    : '';
+
+                let vfiles = child['files'];
+                let vlink = child['links'];
+
+                const vcontent = child['content'] != '' ? child['content'] : 'Tapahtumalla ei ole kuvausta.';
+
+                const dateStatus = getDateStatus(vdateStart, vdateEnd, 'abc', 'fi');
+                
+                // create the default activity item, on click open overlay
+                // create the link activity item, on click open url
+                
+                switch (child['type']) {
+                    case 'event':
+                    case 'link':
+                        switch (dateStatus) {
+                            case 0:
+                            case 1:
+                                createFooterEventItem(item, vimg, vtitle, vdate);
+                                break;
+                        }
+                        break;
+                    case 'competition':
+                        createActivityViewItem(item, vtitle, vdate, vcontent, vimg, dateStatus);
+                        break;
+                }
+            });
+        });
+    });
+
+    const defaultForm = $(activityForm).find('#default');
     const linkForm = $(activityForm).find('#links');
     var currentActivityIndex = -1;
     var currentActivityForm = null;
     function setActivityForm(index) {
-        eventForm.attr('active', index == 0 ? 'true' : 'false');
-        competitionForm.attr('active', index == 1 ? 'true' : 'false');
+        defaultForm.attr('active', index < 2 ? 'true' : 'false');
         linkForm.attr('active', index == 2 ? 'true' : 'false');
         currentActivityIndex = index;
-        if (index == 0) currentActivityForm = eventForm;
-        else if (index == 1) currentActivityForm = competitionForm;
-        else currentActivityForm = linkForm;
+        currentActivityForm = index < 2 ? defaultForm : linkForm;
     }
     $(panel).find('#activity-select').change(function () {
         setActivityForm($(this).val());
@@ -270,14 +462,17 @@ $(function () {
 
         console.log($(currentActivityForm).find('input'));
 
-        var title = "TITLE";
-        var date = "20.9.2021";
-        var header_image = "";
+        var output = {};
+        output.title = "TITLE";
+        output.date = "20.9.2021-22.9.2021";
+        output.header_image = "";
         var content = "Test content goes here";
-        
-        var processed_title = "title-20";
 
-        var output = null;
+        var processed_title = `${title.toLower()}-20`;
+
+        console.log(output);
+        return;
+
         if (currentActivityIndex == 1) {
             output = {
                 type: "competition",
@@ -313,7 +508,7 @@ $(function () {
                         link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf"
                     }
                 ]
-            }; 
+            };
         } else {
             output = {
                 type: "link",
@@ -331,7 +526,7 @@ $(function () {
         }
     }
     $(activityForm).find('button[type="button"]').on('click', function () {
-        // postNewActivity();
+        postNewActivity();
     });
 
     // gallery

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/admin.css">
 
-    <script src="./js/jquery-3.6.0.min/jquery.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.6.0.min/jquery.js"></script>
+    <script type="text/javascript" src="./js/limit-input.js"></script>
 </head>
 
 <body>
@@ -200,154 +201,161 @@
             </form>
 
 
-            <form id="titlecard-title">
+            <div>
+                
+                <form id="titlecard-title">
+    
+                    <div class="webflow-style-input">
+                        <input type="text" placeholder="Etusivun kansiotsikko..." id="title"onKeyPress="return check(event,value)" onInput="checkLength(40,this)">
+                        <button type="submit"></button>
+                        <p>40</p>
+                    </div>
 
-                <h1>Etusivun kansiotsikko</h1>
+                    <button type="button">
+                        <img src="./img/save.png" alt="Tallenna">
+                        Tallenna uusi otsikko
+                    </button>
+    
+                </form>
 
-                <div class="webflow-style-input">
-                    <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
-                    <button type="submit"></button>
-                    <p>80</p>
-                </div>
-
-            </form>
-
-
-            <form id="pricing" name="pricing">
-                <div class="title">
-                    <h1>Hinnasto</h1>
-                </div>
-
-                <ul>
-                    <li id="hohto">
-                        <img src="./img/bowler.png" alt="Hohto">
-                        <div>
-                            <h2>Hohtokeilaus</h2>
-                            <h3>Ti - La 16.00 - 22.00</h3>
-                        </div>
-                        <div>
+                <form id="pricing" name="pricing">
+                    <div class="title">
+                        <h1>Hinnasto</h1>
+                    </div>
+    
+                    <ul>
+                        <li id="hohto">
+                            <img src="./img/bowler.png" alt="Hohto">
+                            <div>
+                                <h2>Hohtokeilaus</h2>
+                                <h3>Ti - La 16.00 - 22.00</h3>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+                        <li id="day">
+                            <img src="./img/day.png" alt="Päivä">
+                            <div>
+                                <h2>Päivä</h2>
+                                <h3>Ti - Pe 12.00 - 17.00</h3>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+                        <li id="night">
+                            <img src="./img/night.png" alt="Ilta">
+                            <div>
+                                <h2>Ilta</h2>
+                                <h3>Ti - Pe 17.00 - 20.00</h3>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+                        <li id="weekend">
+                            <img src="./img/calendar.png" alt="Viikonloppu">
+                            <div>
+                                <h2>Viikonloppu</h2>
+                                <h3>Ti - Pe 12.00 - 17.00</h3>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+                        <li id="equipment">
+                            <img src="./img/proshop/shoes/shoes.png" alt="Vuokraus">
+                            <div>
+                                <h2>Välinevuokraus</h2>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li id="discount">
+                            <img src="./img/excellent-service.png" alt="Alennus">
+                            <div>
+                                <h2>Keilausalennus</h2>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li id="snooker">
+                            <img src="./img/snooker.png" alt="Biljardi">
+                            <div>
+                                <h2>Biljardi</h2>
+                            </div>
+                            <div>
+                                <div class="price">
+                                    <input type="number" name="" id="" min="0" placeholder="0">
+                                    €
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li id="birthday_small">
+                            <img src="./img/cake.png" alt="Pieni synttäripaketti">
+                            <div>
+                                <h2>Pieni synttäripaketti</h2>
+                            </div>
+                            <img src="./img/bowling-pins.png" alt="Normihinta">
                             <div class="price">
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
                             </div>
-                        </div>
-                    </li>
-                    <li id="day">
-                        <img src="./img/day.png" alt="Päivä">
-                        <div>
-                            <h2>Päivä</h2>
-                            <h3>Ti - Pe 12.00 - 17.00</h3>
-                        </div>
-                        <div>
+                            <img src="./img/musical.png" alt="Hohtohinta">
                             <div class="price">
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
                             </div>
-                        </div>
-                    </li>
-                    <li id="night">
-                        <img src="./img/night.png" alt="Ilta">
-                        <div>
-                            <h2>Ilta</h2>
-                            <h3>Ti - Pe 17.00 - 20.00</h3>
-                        </div>
-                        <div>
+                        </li>
+                        <li id="birthday_big">
+                            <img src="./img/cake.png" alt="Iso synttäripaketti">
+                            <div>
+                                <h2>Iso synttäripaketti</h2>
+                            </div>
+                            <img src="./img/bowling-pins.png" alt="Normihinta">
                             <div class="price">
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
                             </div>
-                        </div>
-                    </li>
-                    <li id="weekend">
-                        <img src="./img/calendar.png" alt="Viikonloppu">
-                        <div>
-                            <h2>Viikonloppu</h2>
-                            <h3>Ti - Pe 12.00 - 17.00</h3>
-                        </div>
-                        <div>
+                            <img src="./img/musical.png" alt="Hohtohinta">
                             <div class="price">
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
                             </div>
-                        </div>
-                    </li>
-                    <li id="equipment">
-                        <img src="./img/proshop/shoes/shoes.png" alt="Vuokraus">
-                        <div>
-                            <h2>Välinevuokraus</h2>
-                        </div>
-                        <div>
-                            <div class="price">
-                                <input type="number" name="" id="" min="0" placeholder="0">
-                                €
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    </ul>
+                    <button type="button">
+                        <img src="./img/save.png" alt="Tallenna">
+                        Tallenna hinnan muutos
+                    </button>
+                </form>
 
-                    <li id="discount">
-                        <img src="./img/excellent-service.png" alt="Alennus">
-                        <div>
-                            <h2>Keilausalennus</h2>
-                        </div>
-                        <div>
-                            <div class="price">
-                                <input type="number" name="" id="" min="0" placeholder="0">
-                                €
-                            </div>
-                        </div>
-                    </li>
+            </div>
 
-                    <li id="snooker">
-                        <img src="./img/snooker.png" alt="Biljardi">
-                        <div>
-                            <h2>Biljardi</h2>
-                        </div>
-                        <div>
-                            <div class="price">
-                                <input type="number" name="" id="" min="0" placeholder="0">
-                                €
-                            </div>
-                        </div>
-                    </li>
-
-                    <li id="birthday_small">
-                        <img src="./img/cake.png" alt="Pieni synttäripaketti">
-                        <div>
-                            <h2>Pieni synttäripaketti</h2>
-                        </div>
-                        <img src="./img/bowling-pins.png" alt="Normihinta">
-                        <div class="price">
-                            <input type="number" name="" id="" min="0" placeholder="0">
-                            €
-                        </div>
-                        <img src="./img/musical.png" alt="Hohtohinta">
-                        <div class="price">
-                            <input type="number" name="" id="" min="0" placeholder="0">
-                            €
-                        </div>
-                    </li>
-                    <li id="birthday_big">
-                        <img src="./img/cake.png" alt="Iso synttäripaketti">
-                        <div>
-                            <h2>Iso synttäripaketti</h2>
-                        </div>
-                        <img src="./img/bowling-pins.png" alt="Normihinta">
-                        <div class="price">
-                            <input type="number" name="" id="" min="0" placeholder="0">
-                            €
-                        </div>
-                        <img src="./img/musical.png" alt="Hohtohinta">
-                        <div class="price">
-                            <input type="number" name="" id="" min="0" placeholder="0">
-                            €
-                        </div>
-                    </li>
-                </ul>
-                <button type="button">
-                    <img src="./img/save.png" alt="Tallenna">
-                    Tallenna hinnan muutos
-                </button>
-            </form>
 
             <div class="activities">
 
@@ -365,29 +373,16 @@
                         <option value="2">Linkki sivustolle</option>
                     </select>
 
-                    <div id="events" class="item">
-                        <div class="webflow-style-input">
-                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
-                            <button type="submit"></button>
-                            <p>40</p>
-                        </div>
-                        <div>
-                            <h2>Ilmoituksen ajankohta</h2>
-                            <img src="./img/clock.png" alt="Aloitus">
-                            <input type="date" id="start-time">
-                            <img src="./img/clock.png" alt="Lopetus">
-                            <input type="date" id="end-time">
-                        </div>
-                    </div>
-
-                    <div id="competitions" class="item">
+                    <div id="default" class="item">
                         <div class="cover-image">
-                            <img src="./img/photos/baari1.jpg" alt="Kansikuva">
+                            <h2>Ilmoituksen kansikuva</h2>
+                            <img src="./img/missing-image.jpg" alt="Kansikuva">
+                            <input type="file" id="cover-image-file-input">
                         </div>
                         <div class="webflow-style-input">
-                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title">
+                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
                             <button type="submit"></button>
-                            <p>40</p>
+                            <p>50</p>
                         </div>
                         <div>
                             <h2>Ilmoituksen ajankohta</h2>
@@ -406,7 +401,6 @@
                         <div>
                             <h2>Lisää tiedosto</h2>
 
-                            <!-- The previews for the uploaded .pdf -->
                             <div class="pdf-container">
                                 <div class="item">
                                     <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
@@ -416,16 +410,31 @@
                                 </div>
                             </div>
 
-                            <input type="text" placeholder="Lisää ilmoitukseen...">
+                            <input type="text" placeholder="Tiedoston otsikko...">
                             <input type="file" name="Lisää tiedosto" id="files">
-                            <input type="button" value="+">
+                            
+                            <button type="button">Lisää toinen tiedosto</button>
                         </div>
                     </div>
 
                     <div id="links" class="item">
+                        
                         <div class="webflow-style-input">
-                            <input class="" type="email" placeholder="Linkki ilmoitukseen..."></input>
+                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
+                            <button type="submit"></button>
+                            <p>50</p>
                         </div>
+                        <div>
+                            <h2>Ilmoituksen ajankohta</h2>
+                            <img src="./img/clock.png" alt="Aloitus">
+                            <input type="date" id="start-time">
+                            <img src="./img/clock.png" alt="Lopetus">
+                            <input type="date" id="end-time">
+                        </div>
+                        <div class="webflow-style-input">
+                            <input class="" type="email" placeholder="Linkin osoite..."></input>
+                        </div>
+
                     </div>
 
                     <button type="button">
@@ -451,7 +460,7 @@
     </div>
 
     <!-- all viewable activities are here -->
-    <div class="overlay-container">
+    <div class="overlay-container" style="display:none;">
         <div class="item">
             <div class="content">
                 <div class="left">
@@ -481,7 +490,9 @@
 </body>
 
 <footer>
-    <script src="./js/admin.js"></script>
+    <script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/admin.js"></script>
 
     <?php
     $arr = [];

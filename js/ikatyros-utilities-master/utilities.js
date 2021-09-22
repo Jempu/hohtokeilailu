@@ -216,7 +216,7 @@ function getDisplayableDate(date, withDay = true, dayParts = 1, clipped = true, 
 // 0 = current
 // 1 = future
 // 2 = past
-function getDateStatus(targetDateStart, targetDateEnd) {
+function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang = 'en') {
     const s1 = targetDateStart.split('.');
     const s2 = targetDateEnd.split('.');
     const d = new Date();
@@ -230,16 +230,34 @@ function getDateStatus(targetDateStart, targetDateEnd) {
         const a = d.getDate() - day <= 0;
         const b = d.getMonth() + 1 - mon <= 0;
         const c = d.getFullYear() - yea <= 0;
-        return !(!c && (!b || !a));
+        return !(c && (!b || !a));
     }
     // current
-    if (isAfterDate(s1[0], s1[1], s1[2]) && isBeforeDate(s2[0], s2[1], s2[2]))
-        return 0;
+    if (isAfterDate(s1[0], s1[1], s1[2]) && isBeforeDate(s2[0], s2[1], s2[2])) {
+        if (format == 'number') return 0;
+        else {
+            switch (lang) {
+                case 'en': return 'current';
+                case 'fi': return 'meneillään';
+            }
+        }
+    }
     // future
-    else if (isAfterDate(s2[0], s2[1], s2[2]) && isBeforeDate(s1[0], s1[1], s1[2]))
-        return 2;
+    else if (isAfterDate(s2[0], s2[1], s2[2]) && isBeforeDate(s1[0], s1[1], s1[2])) {
+        if (format == 'number') return 2;
+        else {
+            switch (lang) {
+                case 'en': return 'future';
+                case 'fi': return 'tulossa';
+            }
+        }
+    }
     // past
-    return 1;
+    if (format == 'number') return 1;
+    switch (lang) {
+        case 'en': return 'past';
+        case 'fi': return 'mennyt';
+    }
 }
 
 
