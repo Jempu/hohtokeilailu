@@ -211,6 +211,12 @@
                         <p>40</p>
                     </div>
 
+                    <div class="webflow-style-input">
+                        <input type="text" placeholder="Etusivun alaotsikko..." id="title"onKeyPress="return check(event,value)" onInput="checkLength(40,this)">
+                        <button type="submit"></button>
+                        <p>20</p>
+                    </div>
+
                     <button type="button">
                         <img src="./img/save.png" alt="Tallenna">
                         Tallenna uusi otsikko
@@ -387,20 +393,17 @@
                         <div>
                             <h2>Ilmoituksen ajankohta</h2>
                             <img src="./img/clock.png" alt="Aloitus">
-                            <input type="date" id="start-time">
+                            <input type="date" id="start-date">
                             <img src="./img/clock.png" alt="Lopetus">
-                            <input type="date" id="end-time">
+                            <input type="date" id="end-date">
                         </div>
+                        
                         <div>
-                            <h2>Ilmoituksen linkit</h2>
+                            <h2>Lisää liitetiedosto</h2>
                             <div class="webflow-style-input">
                                 <input type="text" placeholder="Linkki VaraaVuoro.com..." id="link">
                                 <button type="submit"></button>
                             </div>
-                        </div>
-                        <div>
-                            <h2>Lisää tiedosto</h2>
-
                             <div class="pdf-container">
                                 <div class="item">
                                     <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
@@ -410,11 +413,12 @@
                                 </div>
                             </div>
 
-                            <input type="text" placeholder="Tiedoston otsikko...">
+                            <input type="text" placeholder="Liitetiedoston otsikko...">
                             <input type="file" name="Lisää tiedosto" id="files">
-                            
-                            <button type="button">Lisää toinen tiedosto</button>
                         </div>
+                            
+                        <button type="button">Lisää toinen tiedosto</button>
+
                     </div>
 
                     <div id="links" class="item">
@@ -427,9 +431,9 @@
                         <div>
                             <h2>Ilmoituksen ajankohta</h2>
                             <img src="./img/clock.png" alt="Aloitus">
-                            <input type="date" id="start-time">
+                            <input type="date" id="start-date">
                             <img src="./img/clock.png" alt="Lopetus">
-                            <input type="date" id="end-time">
+                            <input type="date" id="end-date">
                         </div>
                         <div class="webflow-style-input">
                             <input class="" type="email" placeholder="Linkin osoite..."></input>
@@ -437,7 +441,7 @@
 
                     </div>
 
-                    <button type="button">
+                    <button type="button" id="submit">
                         <img src="./img/save.png" alt="Tallenna">
                         Tallenna uusi ilmoitus
                     </button>
@@ -491,6 +495,7 @@
 
 <footer>
     <script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
+    <script type="text/javascript" src="./js/moment.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/admin.js"></script>
 

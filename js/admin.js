@@ -462,72 +462,74 @@ $(function () {
 
         console.log($(currentActivityForm).find('input'));
 
+        const title = $(currentActivityForm).find('input#title').val();
+        if (title == '') {
+            alert('Ilmoituksissa täytyy olla otsikko.');
+            return;
+        }
+        const startDate = $(currentActivityForm).find('input#start-date').val();
+        if (startDate == '') {
+            alert('Ilmoituksissa täytyy olla alkamispäivä.');
+            return;
+        }
+        const endDate = $(currentActivityForm).find('input#end-date').val();
+        if (startDate == '') {
+            alert('Ilmoituksissa täytyy olla loppumispäivä.');
+            return;
+        }
+
         var output = {};
-        output.title = "TITLE";
-        output.date = "20.9.2021-22.9.2021";
-        output.header_image = "";
+        
+        output.type = currentActivityIndex == 0 ? "event" : currentActivityIndex == 1 ? "competition" : "link";
+        output.title = title;
+        
+        output.date = `${moment(startDate).format('DD.MM.YYYY')}-${moment(endDate).format('DD.MM.YYYY')}`;
+        
+        const file = $(currentActivityForm).find('input#cover-image-file-input')[0].files[0];
+        if (file) output.header_image = file.name;
+
         var content = "Test content goes here";
 
-        var processed_title = `${title.toLower()}-20`;
+        var processed_title = `${title.toLowerCase()}-20`;
 
-        console.log(output);
+        if (currentActivityForm != linkForm) {
+            output.content = content;
+            output.files = [
+                {
+                    text: "Kilpailuilmoitus",
+                    link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf"
+                },
+                {
+                    text: "Olosuhde",
+                    link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf"
+                }
+            ];
+        } else {
+            output.link = "https://www.ikatyros.com";
+        }
+
+        console.log(processed_title, output);
         return;
 
-        if (currentActivityIndex == 1) {
-            output = {
-                type: "competition",
-                title: title,
-                date: date,
-                header_image: header_image,
-                content: content,
-                files: [
-                    {
-                        text: "Kilpailuilmoitus",
-                        link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf"
-                    },
-                    {
-                        text: "Olosuhde",
-                        link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf"
-                    }
-                ]
-            };
-        } else if (currentActivityIndex == 0) {
-            output = {
-                type: "event",
-                title: title,
-                date: date,
-                header_image: header_image,
-                content: content,
-                files: [
-                    {
-                        text: "Kilpailuilmoitus",
-                        link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf"
-                    },
-                    {
-                        text: "Olosuhde",
-                        link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf"
-                    }
-                ]
-            };
-        } else {
-            output = {
-                type: "link",
-                title: title,
-                date: date,
-                header_image: header_image,
-                link: "https://www.ikatyros.com"
-            };
-        }
+        // check if a folder with the same title exists
         if (output != null) {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", './admin/admin_post.php', true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.send(JSON.stringify({ activity: output, title: processed_title }));
+            fetch(`./content/${processed_title}/activity.json`).then(
+                v => {
+                    // if not, then post the new activity
+                    if (v.status == 404) {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", './admin/admin_post.php', true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                        xhr.send(JSON.stringify({ activity: output, title: processed_title }));
+                    } else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
+                }
+            );
         }
     }
-    $(activityForm).find('button[type="button"]').on('click', function () {
+    $(activityForm).find('button[type="button"]#submit').on('click', function () {
         postNewActivity();
     });
+
 
     // gallery
     const gallery = $(panel).find('#gallery');
