@@ -1,8 +1,4 @@
-// ------------------------------------------------------------------------------------ //
-// Requires 'ika-utils-master/main.js' and JQuery to work. No other libraries are required.
-// ------------------------------------------------------------------------------------ //
-
-const responsiveBarrel = {
+const barrel = {
     main: null,
     holder: null,
     fullWidthContainer: null,
@@ -18,21 +14,21 @@ const responsiveBarrel = {
     },
     selectedCategory: -1,
     getRes: function () {
-        return responsiveBarrel.main.getAttribute('ika-responsive');
+        return barrel.main.getAttribute('ika-responsive');
     },
     resize: function (fullWidth) {
         // set barrel size
-        const elWidth = !fullWidth ? `${100 / responsiveBarrel.columnCount}%` : '100%';
-        const elHeight = !fullWidth ? `${100 / responsiveBarrel.rowCount + 2}%` : '100%';
+        const elWidth = !fullWidth ? `${100 / barrel.columnCount}%` : '100%';
+        const elHeight = !fullWidth ? `${100 / barrel.rowCount + 2}%` : '100%';
         document.documentElement.style.setProperty('--barrel-width', elWidth);
         document.documentElement.style.setProperty('--barrel-height', elHeight);
 
-        for (let i = 0; i < responsiveBarrel.container.items.length; i++) {
+        for (let i = 0; i < barrel.container.items.length; i++) {
             // Set position: absolute values (left+top / right+bottom)
-            const e = responsiveBarrel.container.items[i];
-            const p = getPlaceInGrid(responsiveBarrel.columnCount, responsiveBarrel.rowCount, i);
+            const e = barrel.container.items[i];
+            const p = getPlaceInGrid(barrel.columnCount, barrel.rowCount, i);
             // the item can be on either left or right side
-            if (responsiveBarrel.columnCount > 2) {
+            if (barrel.columnCount > 2) {
                 if (p.horizontal.val != '0') {
                     e.style.transform = p.transform;
                 }
@@ -46,7 +42,7 @@ const responsiveBarrel = {
                 }
             }
             // the item can be on either top or bottom side
-            if (responsiveBarrel.rowCount > 1) {
+            if (barrel.rowCount > 1) {
                 switch (p.vertical.side) {
                     case 'top':
                         e.style.top = p.vertical.val;
@@ -63,33 +59,32 @@ const responsiveBarrel = {
         }
     },
     setCategory: function (index) {
-        const e = responsiveBarrel.container.items[index];
-        const v = responsiveBarrel.selectedCategory == -1;
+        const e = barrel.container.items[index];
+        const v = barrel.selectedCategory == -1;
         setTimeout(() => {
             e.setAttribute('open', e.getAttribute('open') == 'true' ? 'false' : 'true');
         }, 220);
         if (v) {
-            responsiveBarrel.selectedCategory = index;
-            e.style.zIndex = responsiveBarrel.container.items.length + 10;
+            barrel.selectedCategory = index;
+            e.style.zIndex = barrel.container.items.length + 10;
         } else {
-            responsiveBarrel.selectedCategory = -1;
+            barrel.selectedCategory = -1;
             setTimeout(() => {
                 e.style.zIndex = index + 10;
             }, 720);
         }
-
-        if (responsiveBarrel.getRes() == 'pc') {
+        if (barrel.getRes() == 'pc') {
             var oh1 = 0;
             if (v) {
-                responsiveBarrel.fullWidthContainer.style.display = 'block';
-                for (let i = 0; i < responsiveBarrel.fullWidthContainer.children.length; i++) {
-                    responsiveBarrel.fullWidthContainer.children[i].style.display = i == index ? 'block' : 'none';
+                $(barrel.fullWidthContainer).css({ display: 'block' });
+                for (let i = 0; i < barrel.fullWidthContainer.children.length; i++) {
+                    barrel.fullWidthContainer.children[i].style.display = i == index ? 'block' : 'none';
                 }
-                oh1 = responsiveBarrel.holder.offsetHeight;
+                oh1 = barrel.holder.offsetHeight;
                 // document.documentElement.style.setProperty('--fullwidth-height', `${oh1}px`);
             } else {
                 setTimeout(() => {
-                    responsiveBarrel.fullWidthContainer.style.display = 'none';
+                    barrel.fullWidthContainer.style.display = 'none';
                 }, 1200);
                 // document.documentElement.style.setProperty('--fullwidth-height', '0');
             }
@@ -104,28 +99,24 @@ const responsiveBarrel = {
             //     document.documentElement.style.setProperty('--fullwidth-height', '0');
             // }
         }
-        
         setTimeout(() => {
-            responsiveBarrel.isTransitioning = false;
+            barrel.isTransitioning = false;
         }, 720);
     },
     start: function (main) {
-        this.main = main;
-        this.holder = main.querySelector('.item-container');
-
-        responsiveBarrel.fullWidthContainer = main.querySelector('.fullwidth-container');
+        this.main = $(main).get(0);
+        this.holder = $(main).find('.item-container').get(0);
+        barrel.fullWidthContainer = $(main).find('.fullwidth-container').get(0);
         function createBodyCopy(body) {
             const e = document.createElement('div');
             e.className = 'body';
             e.id = body.id;
             e.innerHTML = body.innerHTML;
-            responsiveBarrel.fullWidthContainer.appendChild(e);
+            barrel.fullWidthContainer.appendChild(e);
         }
-
-        $(responsiveBarrel.fullWidthContainer).css({
+        $(barrel.fullWidthContainer).css({
             display: 'none'
         });
-
         // items
         for (let i = 0; i < this.holder.children.length; i++) {
             const item = this.holder.children[i];
@@ -139,24 +130,22 @@ const responsiveBarrel = {
             this.container.contents.push(body);
             // set click functionality to categories
             this.container.selectors[i].addEventListener('click', function () {
-                if (responsiveBarrel.isTransitioning) return;
-                if (responsiveBarrel.getRes() == 'pc')
-                    if (responsiveBarrel.selectedCategory != -1 && i != responsiveBarrel.selectedCategory)
+                if (barrel.isTransitioning) return;
+                if (barrel.getRes() == 'pc')
+                    if (barrel.selectedCategory != -1 && i != barrel.selectedCategory)
                         return;
                 this.selectedCategory = i;
-                responsiveBarrel.isTransitioning = true;
-                responsiveBarrel.setCategory(i);
+                barrel.isTransitioning = true;
+                barrel.setCategory(i);
             });
         }
-
         // Set the barrel layout.
-        this.columnCount = Number.parseInt(main.getAttribute('row'));
-        this.rowCount = Math.round(responsiveBarrel.container.items.length / this.columnCount);
-
+        this.columnCount = Number.parseInt(this.main.getAttribute('row'));
+        this.rowCount = Math.round(barrel.container.items.length / this.columnCount);
         // Add an ika-responsiveness listener
         ikaResponsive.registerListener(function(val) {
-            responsiveBarrel.resize(val);
+            barrel.resize(val);
         });
-        responsiveBarrel.resize(ikaResponsive.a);
+        barrel.resize(ikaResponsive.a);
     }
 };

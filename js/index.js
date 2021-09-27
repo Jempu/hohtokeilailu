@@ -1,9 +1,7 @@
 const html = $("html");
 const overlayContainer = $('.overlay-container');
-
 const titlecard = $('.titlecard');
 const aboutContainer = $('.about-container');
-
 const schedule = $(aboutContainer).find('#schedule');
 
 const indexJsonPath = './content/index.json';
@@ -11,21 +9,18 @@ const galleryPath = './content/gallery/';
 const galleryImageLimit = 20;
 
 /// Titlecard Carousel & Slides ///
-
 $(function () {
     const monitor = $(".monitor");
     const monitorContainer = $(monitor).find(".container");
-
     const carousel = $("#cloud9-carousel");
     var carouselChildren = $(carousel).children();
     var carouselChildCount = 0;
-
     const slider = $(".slider");
     const sliderUl = $(slider).find("ul");
     var sliderSlides = $(sliderUl).children();
 
     function selectBarrelCategory(index) {
-        responsiveBarrel.setCategory(index);
+        barrel.setCategory(index);
         smoothScroll($('.barrel').get(0).offsetTop);
     }
 
@@ -45,10 +40,8 @@ $(function () {
     var slideWidth = $(".slider ul li").width();
     var slideHeight = $(".slider ul li").height();
     var slideUlWidth = slideCount * slideWidth;
-
     var currentSlide = -1;
     var isTransitioning = false;
-
     const slideVideos = monitorContainer.find('iframe');
 
     function setCarousel(index) {
@@ -202,7 +195,6 @@ $(function () {
 
 
 /// Opening Hours ///
-
 createSchedule($(schedule).find('ul'), $(schedule).find('#title').find('h1').get(0));
 
 
@@ -250,7 +242,6 @@ function setReviews(data) {
 }
 
 /// Activities ///
-
 const compContainer = $('.submarine').children();
 
 // titlecard events
@@ -258,7 +249,6 @@ const titlecardEventLog = $(titlecard).find('.events').get(0);
 // footer events
 const mainCategoryEvents = $('.main-category.events .container').get(0);
 // comp list events
-
 var competitionItems = [0, 0, 0];
 function setActivities(data) {
     function setOverlayContainer(item) {
@@ -289,7 +279,6 @@ function setActivities(data) {
     }
     setOverlayContainer("");
     const directory = './content/activities/';
-
     function createTitlecardEventItem(item, title, date) {
         if (titlecardEventLog == null) return;
         if (titlecardEventLog.children.length < 3) {
@@ -368,7 +357,6 @@ function setActivities(data) {
             setOverlayContainer("");
         });
     }
-    
     data.forEach(item => {
         const folder = `${directory}${item}/`;
         loadJson(`${folder}/activity.json`, function (child) {
@@ -409,7 +397,6 @@ function setActivities(data) {
             }
         });
     });
-
     setTimeout(() => {
         $('.submarine').children().each(function (i, l) {
             $(l).css({ display: $(l).find('.content').children()['length'] != 0 ? 'block' : 'none' });
@@ -424,26 +411,21 @@ function setActivities(data) {
 $(function() {
     const middle = $('.map .middle');
     const controls = $('.map .bottom .controls');
-    
     function setCategory(map) {
         $(middle).find('#gmap').css({ display: map ? 'block' : 'none' });
         $(middle).find('#video').css({ display: map ? 'none' : 'block' });
     }
-
     $(controls).find('#gmap').on('click', function() {
         setCategory(true);
     });
-
     $(controls).find('#video').on('click', function () {
         setCategory(false);
     });
-
     setCategory(false);
 });
 
 
 /// Load 'index.json' ///
-
 fetch(indexJsonPath).then(v => v.json()).then(data => {
     setActivities(data['activities']);
     
@@ -464,11 +446,10 @@ fetch(indexJsonPath).then(v => v.json()).then(data => {
 
 
 /// Get the anchor from the url ///
-
 function setAnchors() {
     function setBarrel(index) {
-        if (responsiveBarrel.selectedCategory != -1 && responsiveBarrel.selectedCategory != index) return;
-        responsiveBarrel.setCategory(index);
+        if (barrel.selectedCategory != -1 && barrel.selectedCategory != index) return;
+        barrel.setCategory(index);
     }
     function op(val) { smoothScroll($(val).offset().top); }
     const anchor = window.location.hash != '' ? window.location.hash.slice(1) : '';
@@ -523,8 +504,6 @@ function setAnchors() {
 }
 
 
-// Functionality done
-
 $(window).on('load', function () {
     $('img').on('dragstart', function (e) {
         e.preventDefault()
@@ -533,5 +512,5 @@ $(window).on('load', function () {
         setAnchors();
     }, 200);
     // Once all of the other data has been loaded, finally load the barrel.
-    responsiveBarrel.start(document.querySelector('.barrel'));
+    barrel.start($('.barrel'));
 });

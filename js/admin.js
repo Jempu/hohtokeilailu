@@ -229,10 +229,9 @@ $(function () {
     fetch('./content/index.json').then(v => v.json()).then(data => {
         
         // add title text to the input
-        if (data['titlecard_title'] != "") {
-            $(panel).find('#titlecard-title input').val(data['titlecard_title']);
-        }
-        
+        $(panel).find('#titlecard-title input#title-main').val(data['titlecard_title']);
+        $(panel).find('#titlecard-title input#title-sub').val(data['titlecard_subtitle']);
+
         // add already existing pricing data to the form.
         const p = data['pricing'];
         function f(id) {
@@ -458,10 +457,25 @@ $(function () {
     });
     setActivityForm(0);
 
+    // set input's header_image preview
+    $(currentActivityForm).find('input#cover-image-file-input').change(function () {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $(currentActivityForm).find('.cover-image img').attr('src', e.target.result);
+        }
+        reader.readAsDataURL($(this)[0].files[0]);
+    });
+    // set correct input for attachment file
+    function setAttachmentType(index) {
+        $(currentActivityForm).find('.sub-item#0').css({ display: index == 0 ? 'block' : 'none' });
+        $(currentActivityForm).find('.sub-item#1').css({ display: index == 1 ? 'block' : 'none' });
+    }
+    $(currentActivityForm).find('select#attachment-type').change(function () {
+        setAttachmentType($(this).val());
+    });
+    setAttachmentType(0);
+    // create a new activity to the database
     function postNewActivity() {
-
-        console.log($(currentActivityForm).find('input'));
-
         const title = $(currentActivityForm).find('input#title').val();
         if (title == '') {
             alert('Ilmoituksissa täytyy olla otsikko.');
@@ -477,23 +491,15 @@ $(function () {
             alert('Ilmoituksissa täytyy olla loppumispäivä.');
             return;
         }
-
-        var output = {};
-        
+        let output = {};
         output.type = currentActivityIndex == 0 ? "event" : currentActivityIndex == 1 ? "competition" : "link";
         output.title = title;
-        
         output.date = `${moment(startDate).format('DD.MM.YYYY')}-${moment(endDate).format('DD.MM.YYYY')}`;
-        
         const file = $(currentActivityForm).find('input#cover-image-file-input')[0].files[0];
         if (file) output.header_image = file.name;
-
-        var content = "Test content goes here";
-
-        var processed_title = `${title.toLowerCase()}-20`;
-
+        const processed_title = `${title.toLowerCase()}-20`;
         if (currentActivityForm != linkForm) {
-            output.content = content;
+            output.content = $(currentActivityForm).find('input#content').val();
             output.files = [
                 {
                     text: "Kilpailuilmoitus",
@@ -507,10 +513,8 @@ $(function () {
         } else {
             output.link = "https://www.ikatyros.com";
         }
-
         console.log(processed_title, output);
         return;
-
         // check if a folder with the same title exists
         if (output != null) {
             fetch(`./content/${processed_title}/activity.json`).then(

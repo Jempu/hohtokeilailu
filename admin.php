@@ -10,9 +10,7 @@
     <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-admin-round.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/admin.css">
-
     <script type="text/javascript" src="./js/jquery-3.6.0.min/jquery.js"></script>
-    <script type="text/javascript" src="./js/limit-input.js"></script>
 </head>
 
 <body>
@@ -205,15 +203,15 @@
                 
                 <form id="titlecard-title">
     
+                    <h2>Pääotsikko</h2>
                     <div class="webflow-style-input">
-                        <input type="text" placeholder="Etusivun kansiotsikko..." id="title"onKeyPress="return check(event,value)" onInput="checkLength(40,this)">
-                        <button type="submit"></button>
+                        <input type="text" placeholder="Etusivun kansiotsikko..." id="title-main" onKeyPress="return check(event,value)" onInput="checkLength(40,this)">
                         <p>40</p>
                     </div>
 
+                    <h2>Alaotsikko</h2>
                     <div class="webflow-style-input">
-                        <input type="text" placeholder="Etusivun alaotsikko..." id="title"onKeyPress="return check(event,value)" onInput="checkLength(40,this)">
-                        <button type="submit"></button>
+                        <input type="text" placeholder="Etusivun alaotsikko..." id="title-sub" onKeyPress="return check(event,value)" onInput="checkLength(20,this)">
                         <p>20</p>
                     </div>
 
@@ -387,7 +385,6 @@
                         </div>
                         <div class="webflow-style-input">
                             <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
-                            <button type="submit"></button>
                             <p>50</p>
                         </div>
                         <div>
@@ -399,33 +396,54 @@
                         </div>
                         
                         <div>
-                            <h2>Lisää liitetiedosto</h2>
+                            <h2>Ilmoituksen sisältö</h2>
                             <div class="webflow-style-input">
-                                <input type="text" placeholder="Linkki VaraaVuoro.com..." id="link">
-                                <button type="submit"></button>
+                                <input type="text" placeholder="Ilmoituksen sisältö..." id="content">
                             </div>
-                            <div class="pdf-container">
-                                <div class="item">
-                                    <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
-                                    <div class="close">
-                                        <img src="./img/close.png" alt="Poista ilmoitus">
-                                    </div>
+                            
+                            <h2>Ilmoituksen liitteet</h2>
+
+                            <h3>Liitteen tyyppi</h3>
+                            <select id="attachment-type">
+                                <option value="0">Linkki</option>
+                                <option value="1">Tiedosto</option>
+                            </select>
+
+                            <div class="sub-item" id="0">
+                                <div class="webflow-style-input">
+                                    <input type="text" placeholder="Liitteen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(30,this)">
+                                    <p>30</p>
+                                </div>
+                                <div class="webflow-style-input">
+                                    <input type="text" placeholder="Liitteen linkki..." id="link">
                                 </div>
                             </div>
 
-                            <input type="text" placeholder="Liitetiedoston otsikko...">
-                            <input type="file" name="Lisää tiedosto" id="files">
+                            <div class="sub-item" id="1">
+                                <div class="webflow-style-input">
+                                    <input type="text" placeholder="Liitteen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(30,this)">
+                                    <p>30</p>
+                                </div>
+                                <div class="pdf-container">
+                                    <div class="item">
+                                        <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
+                                        <div class="close">
+                                            <img src="./img/close.png" alt="Poista ilmoitus">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" name="Lisää tiedosto" id="files">
+                            </div>
+                        
                         </div>
-                            
-                        <button type="button">Lisää toinen tiedosto</button>
-
+                        
+                        <button type="button">Lisää toinen liite</button>
                     </div>
 
                     <div id="links" class="item">
                         
                         <div class="webflow-style-input">
                             <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
-                            <button type="submit"></button>
                             <p>50</p>
                         </div>
                         <div>
@@ -494,29 +512,27 @@
 </body>
 
 <footer>
-    <script type="text/javascript" src="./js/ikatyros-utilities-master/utilities.js"></script>
-    <script type="text/javascript" src="./js/moment.js"></script>
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/admin.js"></script>
-
-    <?php
-    $arr = [];
-    $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator('content/gallery'),
-        RecursiveIteratorIterator::SELF_FIRST
-    );
-    function addToArr($item)
-    {
-        if (strlen($item) < 4) return;
-        global $arr;
-        array_push($arr, "./$item");
-    }
-    foreach ($iterator as $file) {
-        addToArr(str_replace("\\", "/", $file));
-    }
-    $data = json_encode($arr, JSON_HEX_AMP | JSON_HEX_TAG);
-    echo "<script type='text/javascript'>galleryAddOldPreviews(" . $data . ");</script>";
-    ?>
+<script type="text/javascript" src="./js/moment.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="./js/admin.js"></script>
+<?php
+$arr = [];
+$iterator = new RecursiveIteratorIterator(
+    new RecursiveDirectoryIterator('content/gallery'),
+    RecursiveIteratorIterator::SELF_FIRST
+);
+function addToArr($item)
+{
+    if (strlen($item) < 4) return;
+    global $arr;
+    array_push($arr, "./$item");
+}
+foreach ($iterator as $file) {
+    addToArr(str_replace("\\", "/", $file));
+}
+$data = json_encode($arr, JSON_HEX_AMP | JSON_HEX_TAG);
+echo "<script type='text/javascript'>galleryAddOldPreviews(" . $data . ");</script>";
+?>
 </footer>
 
 </html>

@@ -288,27 +288,27 @@ root {
 }
 
 .titlecard .slider ul li[x="0"] {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.025) 50.52%, rgba(0, 0, 0, 0) 100%), linear-gradient(92.51deg, #8E3F86 12.02%, #907941 38.31%, #8F5B64 48.9%, #907941 64.99%, #8F5B64 71.66%, #253D78 87.36%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(92.51deg, #782566 12.02%, #763281 23.79%, #4966B0 67.75%, #7B59A9 77.55%, #8E3F86 87.36%);
 }
 
 .titlecard .slider ul li[x="1"] {
-  background: linear-gradient(92.51deg, #253D78 12.02%, #C54A58 67.75%, #934BAC 87.36%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.025) 50.52%, rgba(0, 0, 0, 0) 100%), linear-gradient(92.51deg, #8E3F86 12.02%, #907941 38.31%, #8F5B64 48.9%, #907941 64.99%, #8F5B64 71.66%, #253D78 87.36%);
 }
 
 .titlecard .slider ul li[x="2"] {
-  background: linear-gradient(91.3deg, #253D78 10.39%, #426672 31.58%, #547E6F 60.81%, #3E6073 81.4%, #243C78 99.6%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(91.3deg, #253D78 10.39%, #427256 31.58%, #547E60 60.81%, #3E735D 81.4%, #243C78 99.6%);
 }
 
 .titlecard .slider ul li[x="3"] {
-  background: linear-gradient(92.51deg, #8E3F86 12.02%, #C54A58 64.99%, #253D78 87.36%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(88.15deg, #253D78 7.99%, #7A7CA1 36.08%, #7A8CA1 67.86%, #934BAC 93.14%);
 }
 
 .titlecard .slider ul li[x="4"] {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(22, 20, 20, 0.098) 70.34%, rgba(101, 93, 93, 0) 109.8%), linear-gradient(92.51deg, #253D78 12.02%, #C54A58 67.75%, #934BAC 87.36%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(89.54deg, #934BAC 6.55%, #563494 34.59%, #563494 79.02%, #934BAC 96.32%);
 }
 
 .titlecard .slider ul li[x="5"] {
-  background: linear-gradient(89.54deg, #934BAC 6.55%, #563494 34.59%, #563494 79.02%, #934BAC 96.32%);
+  background: linear-gradient(92.51deg, #7D4092 12.02%, #C54A58 67.75%, #661F56 87.36%);
 }
 
 .titlecard .slider ul li p {

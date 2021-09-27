@@ -1,22 +1,6 @@
 @font-face
-    font-family: Sansita
-    src: url('./fonts/sansita/Sansita-Regular.ttf')
-
-@font-face
-    font-family: Sansita-ExtraBold
-    src: url('./fonts/sansita/Sansita-ExtraBold.ttf')
-
-@font-face
-    font-family: Sansita-ExtraBold-Italic
-    src: url('./fonts/sansita/Sansita-ExtraBoldItalic.ttf')
-
-@font-face
-    font-family: RedHatDisplay-Regular
-    src: url('./fonts/red-hat-display/RedHatDisplay-Regular.ttf')
-
-@font-face
-    font-family: Roboto
-    src: url('./fonts/roboto/Roboto-Regular.ttf')
+    font-family: Montserrat
+    src: url('./fonts/montserrat/Montserrat-Regular.ttf')
 
 @font-face
     font-family: NunitoSans
@@ -30,7 +14,29 @@
     font-family: NunitoSans-Light
     src: url('./fonts/nunito-sans/NunitoSans-Light.ttf')
 
-// background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+    @font-face
+    font-family: Sansita
+    src: url('./fonts/sansita/Sansita-Regular.ttf')
+
+@font-face
+    font-family: Sansita-ExtraBold
+    src: url('./fonts/sansita/Sansita-ExtraBold.ttf')
+
+@font-face
+    font-family: Sansita-ExtraBold-Italic
+    src: url('./fonts/sansita/Sansita-ExtraBoldItalic.ttf')
+
+@font-face
+    font-family: RedHatDisplay
+    src: url('./fonts/red-hat-display/RedHatDisplay-Regular.ttf')
+
+@font-face
+    font-family: Roboto
+    src: url('./fonts/roboto/Roboto-Regular.ttf')
+
+@font-face
+    font-family: Russo
+    src: url('./fonts/russo-one/RussoOne-Regular.ttf')
 
 *
     padding: 0
@@ -288,12 +294,528 @@ img
                     height: 100%
 
 
+// Navbar
+$nav-height-full: 7.5rem
+$nav-height-minimized: 5rem
+
+// Mobile Burger Menu
+$burgerMenuZ: 10
+$burgerColor: #e5dcdc
+$sidePieceMove: 195%
+
+.nav
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: $nav-height-full
+    transition: height .3s ease-out
+    z-index: 42
+    background: url('../img/stars-align.png'), linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.48) 43.23%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, rgba(30, 46, 69, 0.5) 0%, rgba(38, 62, 99, 0.263021) 58.33%, rgba(0, 0, 0, 0) 100%)
+    background-size: auto 100%
+    background-repeat: no-repeat
+    background-position: left
+    font-family: NunitoSans
+    &[minimized="true"]
+        height: $nav-height-minimized
+        .link#home
+            width: 180px
+            height: 55px
+            margin: 0.7rem 0 0 10rem
+    img
+        height: 100%
+    // normal links that open a new window or scroll to
+    .link
+        cursor: pointer
+        position: relative
+        text-align: center
+        color: #fff
+        pointer-events: visible
+        margin: auto 0
+        font-size: calc( 18px + 0.6vw )
+        text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5)
+        transition: transform 0.4s ease-in-out
+        &:hover
+            transform: scale(104%)
+            text-decoration: underline
+            text-decoration-color: #fff
+        // elements only visible in mobile view
+        &.mobile
+            display: none
+        // hoverable links
+        &.hover
+            cursor: pointer
+            width: 55px
+            height: 55px
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            &:hover
+                transform: translateY(-50%) scale(104%)
+                & > p
+                    opacity: 1
+            p
+                margin: .7rem 0
+                width: auto
+                height: 100%
+                position: absolute
+                right: 0
+                bottom: 0
+                transform: translateY(140%)
+                font-family: NunitoSans
+                font-size: 24px
+                color: #fff
+                pointer-events: none
+                transition: opacity 0.25s ease-in-out
+                opacity: 0
+                white-space: nowrap
+            img
+                width: 100%
+            &#facebook
+                right: 9rem
+            &#reserve
+                right: 4rem
+        // home button
+        &#home
+            width: 250px
+            height: 86px
+            float: left
+            margin-left: 10.5rem
+            background: linear-gradient(88.84deg, rgba(145, 134, 134, 0.5) 0.66%, rgba(119, 103, 103, 0.448182) 19.61%, rgba(132, 115, 115, 0.264943) 50.34%, rgba(140, 122, 122, 0.155) 66.22%, rgba(192, 192, 192, 0) 99.01%)
+            border-radius: 50px 0px 0px 50px
+            transition: width .3s ease-out, height .3s ease-out, opacity 0.5s ease-in-out, border-radius 0.5s ease-in-out, transform 0.5s ease-in-out
+            pointer-events: all
+            overflow: hidden
+            z-index: 42
+            margin: 0.9rem 0 0 10rem
+            &::before
+                content: ''
+                position: absolute
+                width: 100%
+                height: 100%
+                opacity: 0
+                transition: opacity 0.5s ease-in-out
+                pointer-events: none
+                z-index: 40
+            &:hover
+                border-radius: 50px
+                transform: scale(104%)
+                &::before
+                    opacity: 0.1
+                    background-color: rgb(150, 150, 150)
+            img
+                width: 100%
+    .content
+        width: auto
+        height: 100%
+        top: 0
+        position: relative
+        display: grid
+        margin-right: 12rem
+        grid-auto-flow: column
+        z-index: 44
+        &::before, &::after
+            content: ''
+            position: absolute
+            height: 4px
+            border-radius: 4px
+        &::before
+            width: 72vw
+            left: 0
+            bottom: 20%
+            background: #DC8D89
+            opacity: 0.60
+        &::after
+            width: 73vw
+            left:   10%
+            bottom: 12%
+            background: #D3A9A7
+            opacity: 0.3
+        .column
+            position: relative
+            display: grid
+            .holder
+                width: 20rem
+                position: absolute
+                top: -30vh
+                left: 50%
+                transform: translateX(-50%)
+                background-color: #6D9AB4
+                border-radius: 10px
+                z-index: 11
+                transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out, transform 0.3s ease-out
+                pointer-events: none
+                opacity: 0
+                &[active="true"]
+                    pointer-events: visible
+                    opacity: 1
+                    top: 5rem
+                p
+                    padding: 0.7rem
+                    cursor: pointer
+                    border-radius: 10px
+                    &:hover
+                        background-color: #ACB6CB
+    // Burger Menu
+    .burger
+        margin: 0
+        padding: 0
+        position: absolute
+        right: 3rem
+        top: 50%
+        transform: translateY(-50%)
+        cursor: pointer
+        width: 60px
+        height: 52px
+        z-index: 999
+        flex-flow: column
+        display: none
+        div
+            flex: 1 1 auto
+            pointer-events: none
+            width: inherit
+            border-radius: 20px
+            background-color: $burgerColor
+        *:nth-child(1), *:nth-child(2)
+            margin-bottom: 10px
+    .mobile-side-bar
+        width: 0
+        min-height: 100vh
+        right: 0
+        top: 0
+        position: absolute
+        opacity: 0
+        z-index: 45
+        background-color: blue
+        pointer-events: none
+        transition: width 0.5s ease-out, opacity 0.5s ease-out
+        &[enabled="true"]
+            opacity: 1
+
+// rotate middle 90deg
+@keyframes burgerIconAnim1
+    from
+        transform: none
+    to
+        transform: rotate(90deg)
+// rotate all 90deg
+@keyframes burgerIconAnim2
+    from
+        transform: translate(-50%, -50%)
+    to
+        transform: translate(-50%, -50%) rotate(270deg)
+// add sparkling glow to borders
+@keyframes burgerIconAnim3
+    from
+        transform: translate(-50%, -50%) rotate(90deg)
+    to
+        transform: translate(-50%, -50%) rotate(90deg)
+// rotate all 45deg anti-clockwise
+@keyframes burgerIconAnim4
+    from
+        transform: translate(-50%, -50%) rotate(90deg)
+    to
+        transform: translate(-50%, -50%) rotate(315deg)
+// move side pieces to middle
+@keyframes burgerIconAnim5L
+    from
+        transform: translateY(0)
+    to
+        transform: translateY($sidePieceMove)
+@keyframes burgerIconAnim5R
+    from
+        transform: translateY(0)
+    to
+        transform: translateY(-$sidePieceMove)
+
+// REVERSE
+
+// move side pieces to middle
+@keyframes burgerIconAnim6L
+    from
+        transform: translateY($sidePieceMove)
+    to
+        transform: translateY(0%)
+@keyframes burgerIconAnim6R
+    from
+        transform: translateY(-$sidePieceMove)
+    to
+        transform: translateY(0%)
+// rotate all 45deg anti-clockwise
+@keyframes burgerIconAnim9
+    from
+        transform: translate(-50%, -50%) rotate(-45deg)
+    to
+        transform: translate(-50%, -50%) rotate(90deg)
+// rotate all aroung,
+@keyframes burgerIconAnim7
+    from
+        transform: translate(-50%, -50%) rotate(90deg)
+    to
+        transform: translate(-50%, -50%) rotate(360deg)
+// while middle piece is rotated to original rotation
+@keyframes burgerIconAnim8
+    from
+        transform: rotate(90deg)
+    to
+        transform: rotate(0)
+
+
+// footer
+.footer
+    width: 100%
+    position: relative
+    background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(173.68deg, #172E67 -2.03%, #6B306C 9.85%, #AB568E 48.71%, #892E65 99.16%)
+    .container
+        width: 100%
+        position: relative
+        padding: 2rem 2vw 1vw 2vw
+        display: grid
+        grid-template-areas: "a b" "c b"
+        h1, a, li, img
+            transition: transform 0.4s ease-out
+            &:hover
+                transform: scale(104%)
+        .title
+            width: 22rem
+            position: relative
+            left: 50%
+            transform: translateX(-50%)
+            text-align: center
+            &::after
+                content: ''
+                width: 100%
+                height: 2px
+                position: absolute
+                left: 50%
+                bottom: 0
+                transform: translateX(-50%)
+                background-color: #fff
+        .content, .middle
+            width: 60vw
+            height: auto
+            position: relative
+            margin: 0 auto
+        .content
+            grid-area: a
+            float: left
+            .sponsors
+                width: 100%
+                height: auto
+                display: inline-block
+                text-align: center
+                img
+                    pointer-events: all
+                    width: auto
+                    height: 7rem
+                    margin: 1rem
+        .middle
+            grid-area: c
+            position: relative
+            margin: 1.5rem auto
+            display: grid
+            grid-template-areas: "a b c d"
+            .item
+                width: auto
+                height: 100%
+                display: inline-block
+                position: relative
+                top: 0
+                left: 0
+                margin: 2rem
+                &#logo
+                    grid-area: a
+                    img
+                        width: 5rem
+                        height: 5rem
+                &#contacts
+                    grid-area: b
+                    img
+                        width: 4rem
+                        height: 4rem
+                    ul
+                        width: 100%
+                        height: auto
+                        position: relative
+                        li
+                            width: 100%
+                            height: auto
+                            display: inline-flex
+                            margin: 0.5rem 0
+                            cursor: pointer
+                            div
+                                width: 100%
+                            h1
+                                pointer-events: none
+                                margin: auto auto auto 2rem
+                                white-space: nowrap
+                                font-size: calc(16px + 0.4vw)
+                &#reserve
+                    grid-area: c
+                    text-align: center
+                    cursor: pointer
+                    transition: transform 0.4s ease-out
+                    img
+                        margin-top: 2rem
+                    &:hover
+                        transform: scale(104%)
+                &#notice
+                    grid-area: d
+                    text-align: center
+                    ul
+                        height: 100%
+                        li
+                            margin: auto
+                        a
+                            font-size: 2rem
+                            margin: auto
+            img
+               width: 100%
+        iframe
+            grid-area: b
+            position: relative
+            margin: auto
+            box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5)
+            img
+                width: 100%
+                border-radius: 20px 20px 10px 10px
+    .mobile-width
+        display: none
+    .watermark
+        width: 100%
+        height: 9rem
+        position: relative
+        display: flex
+        justify-content: center
+        font-family: NunitoSans
+        background-color: #892E65
+        padding: 2.5rem 0
+        &::before, &::after
+            content: ''
+            position: absolute
+            width: 100%
+            height: 5px
+            border-radius: 5px
+            background-color: #fff
+            left: 0
+            opacity: 20%
+        &::before
+            top: 0
+        &::after
+            bottom: 0
+        h1
+            font-size: 26px
+        .item
+            max-width: 650px
+            height: auto
+            position: absolute
+            display: inline-flex
+            margin: 0 auto
+            cursor: pointer
+            &:hover
+                & > img
+                    animation: ikaLogoAnim 1.7s ease-in-out infinite
+                & > a
+                    text-decoration: underline
+                    text-decoration-color: #fff
+            img
+                height: 5rem
+                width: 5rem
+                left: 723px
+                top: 33px
+            a
+                color: #fff
+                width: fit-content
+                margin: auto
+                margin-left: 2rem
+                font-size: calc(16px + 0.5vw)
+                white-space: nowrap
+                text-decoration: none
+                &:hover
+                    text-decoration: underline
+
+@keyframes ikaLogoAnim
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(-360deg)
+
+
+@media screen and (max-width: 1200px)
+    .footer
+        .container
+            grid-template-areas: "a" "c" "b"
+            justify-items: center
+            .content, .middle
+                width: 100vw
+
 @media screen and (max-width: 1028px)
     body
         width: 100vw
+    .nav
+        .content
+            .link, .column
+                display: none
+            &::after
+                display: none
+            &::before
+                width: 100vw
+                left: 0
+        .link
+            &#home
+                margin-left: 12vw
+            &.hover
+                &#facebook
+                    right: 15.5rem
+                &#reserve
+                    right: 10rem
+        .burger
+            display: flex
+        .mobile-side-bar[enabled="true"]
+            width: 60%
+    .footer
+        .container
+            .middle
+                grid-template-areas: "a b d" "c c c"
+        .watermark .item img
+            width: 4rem
+            height: 4rem
 
 @media screen and (max-width: 600px)
     html
         scrollbar-width: none
         &::-webkit-scrollbar
             display: none
+    .nav
+        .content
+            &::before
+                display: none
+        .mobile-side-bar[enabled="true"]
+            width: 100%
+        .link
+            &.hover#facebook, &.hover#reserve
+                display: none
+            &.mobile
+                display: block
+            &#home
+                margin-top: 1.3rem
+                width: 200px
+                height: 65px
+    .footer
+        .container
+            .middle
+                grid-template-areas: "a" "b" "d" "c"
+                justify-items: center
+                .item
+                    width: 90%
+                    margin: 2rem 0
+            .full-width
+                display: none
+            .mobile-width
+                display: block
+        .watermark .item
+            margin: 0 2rem
+            a
+                margin-left: 1rem
+                white-space: normal
+                text-align: center
