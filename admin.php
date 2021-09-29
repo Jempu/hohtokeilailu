@@ -15,7 +15,7 @@
 
 <body>
     <div class="admin-panel">
-        <div class="nav">
+        <div class="sidepanel">
             <div class="home" onclick="window.location = './';">
                 <img src="./img/home.png" alt="Palaa etusivulle">
             </div>

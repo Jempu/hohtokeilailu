@@ -14,16 +14,16 @@
   background-size: cover;
 }
 
-.admin-panel[expanded="true"] .nav {
+.admin-panel[expanded="true"] .sidepanel {
   border-radius: 25px 0 0 25px;
 }
 
-.admin-panel[expanded="true"] .nav .control {
+.admin-panel[expanded="true"] .sidepanel .control {
   -webkit-transform: rotateZ(180deg);
           transform: rotateZ(180deg);
 }
 
-.admin-panel[expanded="true"] .nav .control:hover {
+.admin-panel[expanded="true"] .sidepanel .control:hover {
   -webkit-transform: scale(104%) rotateZ(180deg);
           transform: scale(104%) rotateZ(180deg);
 }
@@ -33,8 +33,8 @@
           transform: translateX(100%);
 }
 
-.admin-panel .nav {
-  width: 100%;
+.admin-panel .sidepanel {
+  width: 50%;
   height: 4.25rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -49,7 +49,7 @@
   z-index: 49;
 }
 
-.admin-panel .nav .home {
+.admin-panel .sidepanel .home {
   width: 60%;
   height: 100%;
   position: relative;
@@ -64,7 +64,7 @@
           align-items: center;
 }
 
-.admin-panel .nav .home img {
+.admin-panel .sidepanel .home img {
   height: 80%;
   -webkit-transition: -webkit-transform 0.3s ease-out;
   transition: -webkit-transform 0.3s ease-out;
@@ -74,17 +74,17 @@
   pointer-events: all;
 }
 
-.admin-panel .nav .home img:hover {
+.admin-panel .sidepanel .home img:hover {
   -webkit-transform: scale(104%);
           transform: scale(104%);
 }
 
-.admin-panel .nav .help {
+.admin-panel .sidepanel .help {
   display: -ms-grid;
   display: grid;
 }
 
-.admin-panel .nav .help a {
+.admin-panel .sidepanel .help a {
   margin: auto 0;
 }
 

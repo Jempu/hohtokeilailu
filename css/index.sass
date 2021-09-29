@@ -22,6 +22,7 @@ $barrelHeight: 44vw
     position: relative
     .monitor
         width: 100%
+        min-height: 400px
         height: $monitorHeight
         position: relative
         margin: auto
@@ -38,10 +39,12 @@ $barrelHeight: 44vw
             z-index: 5
         .container
             width: 100%
+            min-height: 400px
             height: 100%
             position: relative
             .item
                 width: 100%
+                min-height: 400px
                 height: $monitorSlideHeight
                 position: absolute
                 top: 0
@@ -727,15 +730,7 @@ $barrelHeight: 44vw
         &#sauna
             background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%)
             justify-items: center
-            .gallery
-                width: 90%
-                background: #62255B
-                border: 5px solid rgba(254, 254, 254, 0.5)
-                border-radius: 60px
-                text-align: center
-                img
-                    width: 28%
-                    height: 20%
+            text-align: center
             .prop
                 width: auto
                 position: relative
@@ -913,7 +908,18 @@ $barrelHeight: 44vw
                     grid-area: d1
                     height: 65%
                     margin: 0.5rem
-
+    .three-layout
+        width: 90%
+        background: #62255B
+        border: 5px solid rgba(254, 254, 254, 0.5)
+        border-radius: 60px
+        text-align: center
+        img
+            width: 28%
+            height: 20%
+            border: 3px solid rgba(255, 255, 255, 0.6)
+            box-sizing: border-box
+            border-radius: 40px
 
 .contact-barrel
     width: 100%
@@ -1037,13 +1043,13 @@ $barrelHeight: 44vw
         h1, h2
             text-decoration: underline
         h1
-            font-size: 64px
+            font-size: calc(22px + 1.4vw)
             font-family: Sansita-ExtraBold-Italic
         h2
-            font-size: 56px
+            font-size: calc(18px + 1.3vw)
             font-family: Sansita-ExtraBold
         p
-            font-size: 36px
+            font-size: calc(20px + 1.2vw)
         &#mk
             width: 100%
             height: 8.5vw
@@ -1734,18 +1740,6 @@ $barrelHeight: 44vw
             &:hover
                 transform: scale(112%)
 
-@media screen and (min-width: 970px)
-    .pricing .container .benefit:hover
-        filter: contrast(90%) hue-rotate(80deg)
-        transform: translateX(-50%) rotateZ(0) scale(108%)
-        & ~ .item
-            filter: brightness(0.95) contrast(120%)
-            .price
-                .normal
-                    opacity: 0.15
-                .reduced
-                    opacity: 1
-
 @media screen and (max-width: 1480px)
     .pricing
         .container
@@ -1757,9 +1751,72 @@ $barrelHeight: 44vw
                     &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
                         transform: none
 
+@media screen and (max-width: 1028px)
+    .overlay-container
+        .item
+            justify-content: normal
+            flex-direction: column
+            align-items: center
+            text-align: center
+            .left, .right
+                width: 80%
+            .left
+                margin-right: 0
+            .right
+                iframe
+                    margin: 1rem 0 0 0
+    .titlecard
+        .slider ul li p
+            font-size: 14px
+        .events
+            display: none
+    .category-desc
+        .desc
+            font-size: 21px
+    .category-holder
+        height: 330vw // 55vw * 6 items
+        .selection
+            height: 330vw // 55vw * 6 items
+            display: inline
+            .item
+                position: relative
+                height: 25%
+                width: 100%
+                &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+                    clip-path: none
+                &:nth-child(4), &:nth-child(5), &:nth-child(6)
+                    top: 0
+    .about-container
+        .content
+            width: 95%
+            margin: 0 auto
+            .split
+                display: inline-block
+            .item
+                &#a, &#b, &#c, &#schedule
+                    margin-top: 2vw
+                &#a, &#b, &#c, &#d
+                    width: 100%
+                    margin-left: 0
+                    margin-right: 0
+                    text-align: center
+                &#schedule
+                    left: 50%
+                    transform: translateX(-53%)
+
 @media screen and (max-width: 970px)
     .pricing
         .container
+            filter: contrast(90%) hue-rotate(80deg)
+            transform: translateX(-50%) rotateZ(0) scale(108%)
+            .benefit:hover
+                & ~ .item
+                    filter: brightness(0.95) contrast(120%)
+                    .price
+                        .normal
+                            opacity: 0.15
+                        .reduced
+                            opacity: 1
             .cards
                 display: inline-grid
                 grid-template-areas: "c2 a2" "b2 d2" "e2 e2"
@@ -1773,7 +1830,30 @@ $barrelHeight: 44vw
         .mobile-width
             display: block
 
+@media screen and (max-width: 801px)
+    .titlecard
+        .monitor
+            .categories
+                display: none
+            .container
+                width: 800px
+                transform: translateX(-50%)
+                .item
+                    width: 800px
+
 @media screen and (max-width: 600px)
+    .barrel
+        .item-container
+            .item
+                .head div
+                    transform: scale(190%) translateY(3%)
+    .about-container
+        background: #5A1D50
+        width: 100vw
+        .content
+            width: 100vw
+            .split
+                width: 100vw
     .pricing
         .container
             .benefit
@@ -1798,61 +1878,3 @@ $barrelHeight: 44vw
                         &:hover
                             width: 320px
                             height: 420px
-
-@media screen and (max-width: 1028px)
-    .overlay-container
-        .item
-            justify-content: normal
-            flex-direction: column
-            align-items: center
-            text-align: center
-            .left, .right
-                width: 80%
-            .left
-                margin-right: 0
-            .right
-                iframe
-                    margin: 1rem 0 0 0
-
-    .titlecard .slider ul li p
-        font-size: 14px
-    
-    .titlecard
-        .events
-            display: none
-
-    .category-desc
-        .desc
-            font-size: 21px
-    
-    .category-holder
-        height: 330vw // 55vw * 6 items
-        .selection
-            height: 330vw // 55vw * 6 items
-            display: inline
-            .item
-                position: relative
-                height: 25%
-                width: 100%
-                &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
-                    clip-path: none
-                &:nth-child(4), &:nth-child(5), &:nth-child(6)
-                    top: 0
-    
-    .about-container
-        .content
-            width: 95%
-            margin: 0 auto
-            .split
-                display: inline-block
-            .item
-                &#a, &#b, &#c, &#schedule
-                    margin-top: 2vw
-                &#a, &#b, &#c, &#d
-                    width: 100%
-                    margin-left: 0
-                    margin-right: 0
-                    text-align: center
-                &#schedule
-                    left: 50%
-                    transform: translateX(-53%)

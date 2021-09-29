@@ -17,6 +17,7 @@ root {
 
 .titlecard .monitor {
   width: 100%;
+  min-height: 400px;
   height: 47vw;
   position: relative;
   margin: auto;
@@ -38,12 +39,14 @@ root {
 
 .titlecard .monitor .container {
   width: 100%;
+  min-height: 400px;
   height: 100%;
   position: relative;
 }
 
 .titlecard .monitor .container .item {
   width: 100%;
+  min-height: 400px;
   height: 58vw;
   position: absolute;
   top: 0;
@@ -1126,19 +1129,7 @@ root {
   background: -webkit-gradient(linear, left top, right top, from(#394185), color-stop(16.67%, #272B4B), color-stop(51.04%, #1F202D), color-stop(90.37%, #22285E), to(#394185));
   background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%);
   justify-items: center;
-}
-
-.barrel .body#sauna .gallery {
-  width: 90%;
-  background: #62255B;
-  border: 5px solid rgba(254, 254, 254, 0.5);
-  border-radius: 60px;
   text-align: center;
-}
-
-.barrel .body#sauna .gallery img {
-  width: 28%;
-  height: 20%;
 }
 
 .barrel .body#sauna .prop {
@@ -1421,6 +1412,23 @@ root {
   grid-area: d1;
   height: 65%;
   margin: 0.5rem;
+}
+
+.barrel .three-layout {
+  width: 90%;
+  background: #62255B;
+  border: 5px solid rgba(254, 254, 254, 0.5);
+  border-radius: 60px;
+  text-align: center;
+}
+
+.barrel .three-layout img {
+  width: 28%;
+  height: 20%;
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 40px;
 }
 
 .contact-barrel {
@@ -1719,17 +1727,17 @@ root {
 }
 
 .about-container .item h1 {
-  font-size: 64px;
+  font-size: calc(22px + 1.4vw);
   font-family: Sansita-ExtraBold-Italic;
 }
 
 .about-container .item h2 {
-  font-size: 56px;
+  font-size: calc(18px + 1.3vw);
   font-family: Sansita-ExtraBold;
 }
 
 .about-container .item p {
-  font-size: 36px;
+  font-size: calc(20px + 1.2vw);
 }
 
 .about-container .item#mk {
@@ -2862,25 +2870,6 @@ root {
           transform: scale(112%);
 }
 
-@media screen and (min-width: 970px) {
-  .pricing .container .benefit:hover {
-    -webkit-filter: contrast(90%) hue-rotate(80deg);
-            filter: contrast(90%) hue-rotate(80deg);
-    -webkit-transform: translateX(-50%) rotateZ(0) scale(108%);
-            transform: translateX(-50%) rotateZ(0) scale(108%);
-  }
-  .pricing .container .benefit:hover ~ .item {
-    -webkit-filter: brightness(0.95) contrast(120%);
-            filter: brightness(0.95) contrast(120%);
-  }
-  .pricing .container .benefit:hover ~ .item .price .normal {
-    opacity: 0.15;
-  }
-  .pricing .container .benefit:hover ~ .item .price .reduced {
-    opacity: 1;
-  }
-}
-
 @media screen and (max-width: 1480px) {
   .pricing .container .cards {
     display: -ms-inline-grid;
@@ -2893,57 +2882,6 @@ root {
   .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(4), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
     -webkit-transform: none;
             transform: none;
-  }
-}
-
-@media screen and (max-width: 970px) {
-  .pricing .container .cards {
-    display: -ms-inline-grid;
-    display: inline-grid;
-        grid-template-areas: "c2 a2" "b2 d2" "e2 e2";
-  }
-  .pricing .container .cards .item {
-    display: inline-block;
-  }
-  .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(4), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
-    -webkit-transform: none;
-            transform: none;
-  }
-  .main-category.events .full-width {
-    display: none;
-  }
-  .main-category.events .mobile-width {
-    display: block;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .pricing .container .benefit {
-    position: relative;
-    right: 0;
-    margin: 0 auto;
-    -webkit-transform: none;
-            transform: none;
-  }
-  .pricing .container .cards {
-        grid-template-areas: "c2" "a2" "b2" "d2" "d2" "e2";
-    justify-items: center;
-  }
-  .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(4), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
-    -webkit-transform: none;
-            transform: none;
-  }
-  .pricing .container .cards .item:nth-child(4):hover {
-    width: 320px;
-    height: 470px;
-  }
-  .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
-    width: 320px;
-    height: 420px;
-  }
-  .pricing .container .cards .item:nth-child(2):hover, .pricing .container .cards .item:nth-child(3):hover, .pricing .container .cards .item:nth-child(5):hover, .pricing .container .cards .item:nth-child(6):hover {
-    width: 320px;
-    height: 420px;
   }
 }
 
@@ -3018,6 +2956,101 @@ root {
     left: 50%;
     -webkit-transform: translateX(-53%);
             transform: translateX(-53%);
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .pricing .container {
+    -webkit-filter: contrast(90%) hue-rotate(80deg);
+            filter: contrast(90%) hue-rotate(80deg);
+    -webkit-transform: translateX(-50%) rotateZ(0) scale(108%);
+            transform: translateX(-50%) rotateZ(0) scale(108%);
+  }
+  .pricing .container .benefit:hover ~ .item {
+    -webkit-filter: brightness(0.95) contrast(120%);
+            filter: brightness(0.95) contrast(120%);
+  }
+  .pricing .container .benefit:hover ~ .item .price .normal {
+    opacity: 0.15;
+  }
+  .pricing .container .benefit:hover ~ .item .price .reduced {
+    opacity: 1;
+  }
+  .pricing .container .cards {
+    display: -ms-inline-grid;
+    display: inline-grid;
+        grid-template-areas: "c2 a2" "b2 d2" "e2 e2";
+  }
+  .pricing .container .cards .item {
+    display: inline-block;
+  }
+  .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(4), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
+    -webkit-transform: none;
+            transform: none;
+  }
+  .main-category.events .full-width {
+    display: none;
+  }
+  .main-category.events .mobile-width {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 801px) {
+  .titlecard .monitor .categories {
+    display: none;
+  }
+  .titlecard .monitor .container {
+    width: 800px;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  .titlecard .monitor .container .item {
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .barrel .item-container .item .head div {
+    -webkit-transform: scale(190%) translateY(3%);
+            transform: scale(190%) translateY(3%);
+  }
+  .about-container {
+    background: #5A1D50;
+    width: 100vw;
+  }
+  .about-container .content {
+    width: 100vw;
+  }
+  .about-container .content .split {
+    width: 100vw;
+  }
+  .pricing .container .benefit {
+    position: relative;
+    right: 0;
+    margin: 0 auto;
+    -webkit-transform: none;
+            transform: none;
+  }
+  .pricing .container .cards {
+        grid-template-areas: "c2" "a2" "b2" "d2" "d2" "e2";
+    justify-items: center;
+  }
+  .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(4), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
+    -webkit-transform: none;
+            transform: none;
+  }
+  .pricing .container .cards .item:nth-child(4):hover {
+    width: 320px;
+    height: 470px;
+  }
+  .pricing .container .cards .item:nth-child(2), .pricing .container .cards .item:nth-child(3), .pricing .container .cards .item:nth-child(5), .pricing .container .cards .item:nth-child(6) {
+    width: 320px;
+    height: 420px;
+  }
+  .pricing .container .cards .item:nth-child(2):hover, .pricing .container .cards .item:nth-child(3):hover, .pricing .container .cards .item:nth-child(5):hover, .pricing .container .cards .item:nth-child(6):hover {
+    width: 320px;
+    height: 420px;
   }
 }
 /*# sourceMappingURL=index.css.map */

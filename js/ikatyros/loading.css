@@ -46,7 +46,7 @@
 }
 
 .page-loader .content .title p {
-  font-family: NunitoSans-Light;
+  font-family: NunitoSans;
   font-size: calc( 24px + 1.5vw);
 }
 
@@ -216,4 +216,4 @@
     white-space: normal;
   }
 }
-/*# sourceMappingURL=loading-screen.css.map */
+/*# sourceMappingURL=loading.css.map */

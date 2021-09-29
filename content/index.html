@@ -14,7 +14,6 @@
     <title>Etusivu - Mikkelin Keilahalli</title>
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/index.css" />
-    <link rel="stylesheet" href="./css/nav.css" />
     <link rel="stylesheet" href="./js/freewall-master/gallery.css" />
     <link rel="stylesheet" href="./js/ikatyros/loading.css" />
     
@@ -49,7 +48,7 @@
     </div>
 
     <div
-        ika-instance='{"html":"content/nav.html", "scripts":[{ "src":"js/nav.js", "callback": null }], "styles":["css/nav.css"] }'>
+        ika-instance='{"html":"content/nav.html", "scripts":[{ "src":"js/nav.js", "callback": null }], "styles":null }'>
     </div>
 
     <div class="titlecard">
@@ -242,13 +241,18 @@
                             vauhdissa.
                         </h1>
                     </div>
-                    <p>
-                        Hohtokeilaus on hauskaa hyvän musiikin soidessa ja valoefektien
-                        loistaessa. Voimme käytännössä soittaa minkä tahansalaista
-                        musiikkia. Lapsille on pieniä keilakenkiä ja keveitä palloja sekä
-                        mahdollisuus pelaajakohtaisesti kouruesteisiin.
-                    </p>
-                    <img src="./img/musical.png" />
+                    <img src="./img/notes.png" />
+                    <div class="three-layout">
+                        <img src="./img/photos/sauna3.jpg" alt="Sauna" />
+                        <img src="./img/photos/glasses.jpg" alt="Juomat" />
+                        <img src="./img/photos/kabinetti-cropped.jpg" alt="Kabinetti" />
+                        <p>
+                            Hohtokeilaus on hauskaa hyvän musiikin soidessa ja valoefektien
+                            loistaessa. Voimme käytännössä soittaa minkä tahansalaista
+                            musiikkia. Lapsille on pieniä keilakenkiä ja keveitä palloja sekä
+                            mahdollisuus pelaajakohtaisesti kouruesteisiin.
+                        </p>
+                    </div>
                 </div>
 
                 <div class="contact-barrel tt-bb">
@@ -269,13 +273,11 @@
                     <div style="padding: 56.25% 0 0 0; position: relative">
                         <iframe class="head-video" id="v2"
                             src="https://player.vimeo.com/video/603431703?api=1&badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=v2&amp;app_id=58479&amp;h=0ce791b002"
-                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                " title="Mikkelin Keilahalli lasten synttarit.mp4">
+                            frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowfullscreen
+                            title="Mikkelin Keilahalli lasten synttarit.mp4"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;">
                         </iframe>
                     </div>
                     <div class="cap">
@@ -310,14 +312,12 @@
                                 <div style="padding: 56.5% 0 0 0; position: relative">
                                     <iframe
                                         src="https://player.vimeo.com/video/603432044?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=ddd4f82627"
-                                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
-                                        style="
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                      " title="Mikkelin Keilahalli lasten synttarit 2.mp4"></iframe>
+                                        frameborder="0"
+                                        allow="autoplay; fullscreen; picture-in-picture"
+                                        allowfullscreen
+                                        title="Mikkelin Keilahalli lasten synttarit 2.mp4"
+                                        style="position: absolute;top: 0;left: 0;width: 100%;height:100%;">
+                                    </iframe>
                                 </div>
                             </div>
                         </div>
@@ -424,14 +424,13 @@
                 <div class="body">
                     <div class="title">
                         <h1>
-                            Keilailun jälkeen on mukava mennä tilavan ja viihtyisän saunamme
-                            löylyihin.
+                            Keilailun jälkeen on mukava mennä tilavan ja viihtyisän saunamme löylyihin.
                         </h1>
                     </div>
-                    <div class="gallery">
-                        <img src="./img/photos/glasses.jpg" alt="" />
-                        <img src="./img/photos/glasses.jpg" alt="" />
-                        <img src="./img/photos/glasses.jpg" alt="" />
+                    <div class="three-layout">
+                        <img src="./img/photos/sauna3.jpg" alt="Sauna" />
+                        <img src="./img/photos/glasses.jpg" alt="Juomat" />
+                        <img src="./img/photos/kabinetti-cropped.jpg" alt="Kabinetti" />
                         <p>
                             Saunakabinetissa voi katsella peililasin takaa radoille ja
                             kabinetti käy myös kokouskäyttöön oheislaitteiden avulla.
@@ -871,7 +870,7 @@
 
     <!-- Sivun pohja -->
     <div
-        ika-instance='{"html":"content/footer.html", "scripts": [{ "src":"js/footer.js", "callback": null }], "styles":["css/footer.css"]}'>
+        ika-instance='{"html":"content/footer.html", "scripts": [{ "src":"js/footer.js", "callback": null }], "styles":null}'>
     </div>
 
     <!-- Smooth Scroll Buttons -->
@@ -917,7 +916,7 @@
     <script src="./js/froogaloop.js"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
     
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(function () {
             // clicking on barrel heads to play and pause vimeo videos
             $(".barrel .item-container").find(".head").each(function (i, l) {
@@ -934,7 +933,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
 </body>
 
 <footer>

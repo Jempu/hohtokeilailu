@@ -157,7 +157,7 @@ $(function () {
     });
 
     // Parallax scroll effect for container items
-    $(window).on('scroll', function () {
+    function setMonitorScollParallax() {
         var scrollTop = $(window).scrollTop();
         if (scrollTop < $(monitorContainer).height()) {
             $(monitor).find(".title").eq(0).css({ transform: `translate(-50%, ${scrollTop / -20}%)` });
@@ -165,7 +165,11 @@ $(function () {
                 $(l).css({ transform: `translateY(${scrollTop / -110}%)` });
             });
         }
-    })
+    }
+    $(window).on('scroll', function () {
+        if (window.outerWidth > 799) setMonitorScollParallax();
+    });
+    setMonitorScollParallax();
 
     $(monitorContainer).children().each(function (i, l) {
         l.setAttribute('x', i);

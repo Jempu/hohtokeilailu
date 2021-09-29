@@ -10,6 +10,7 @@ const barrel = {
         items: [],
         selectors: [],
         contents: [],
+        playing: [],
         template: null
     },
     selectedCategory: -1,
@@ -63,6 +64,16 @@ const barrel = {
         const v = barrel.selectedCategory == -1;
         setTimeout(() => {
             e.setAttribute('open', e.getAttribute('open') == 'true' ? 'false' : 'true');
+            // video playback
+            const hv = $(e).find(".head-video");
+            if ($(hv).length != 0) {
+                const player = $f(hv[0]);
+                this.container.playing[index] = !this.container.playing[index];
+                player.addEvent('ready', function() {
+                    // Code goes here
+                });
+                player.api(!this.container.playing[index] ? "play" : "pause");
+            }
         }, 220);
         if (v) {
             barrel.selectedCategory = index;
@@ -88,7 +99,7 @@ const barrel = {
                 }, 1200);
                 // document.documentElement.style.setProperty('--fullwidth-height', '0');
             }
-            // responsiveBarrel.fullWidthContainer.style.marginTop = `${oh1}px`;
+            // $(responsiveBarrel.fullWidthContainer).css({ marginTop: `${oh1}px` });
         } else {
             // if (v) {
             //     setTimeout(() => {
@@ -101,7 +112,7 @@ const barrel = {
         }
         setTimeout(() => {
             barrel.isTransitioning = false;
-        }, 720);
+        }, 1200);
     },
     start: function (main) {
         this.main = $(main).get(0);
@@ -128,6 +139,7 @@ const barrel = {
             this.container.items.push(item);
             this.container.selectors.push(head);
             this.container.contents.push(body);
+            this.container.playing.push(true);
             // set click functionality to categories
             this.container.selectors[i].addEventListener('click', function () {
                 if (barrel.isTransitioning) return;
