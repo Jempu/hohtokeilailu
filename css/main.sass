@@ -3,12 +3,12 @@
     src: url('./fonts/montserrat/Montserrat-Regular.ttf')
 
 @font-face
-    font-family: NunitoSans
-    src: url('./fonts/nunito-sans/NunitoSans-Regular.ttf')
-
-@font-face
     font-family: Nunito
     src: url('./fonts/nunito/Nunito-Regular.ttf')
+
+@font-face
+    font-family: NunitoSans
+    src: url('./fonts/nunito-sans/NunitoSans-Regular.ttf')
 
 @font-face
     font-family: NunitoSans-Light
@@ -57,6 +57,8 @@ body
     -moz-osx-font-smoothing: grayscale
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
     background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26)
+    font-size: calc(0.75em + 1vmin)
+    scrollbar-color: #668cb7 #303260 
 
 h1, h2, h3, h4, h5, h6
     cursor: default
@@ -163,7 +165,7 @@ img
         justify-items: center
         justify-content: center
         color: white
-        padding: 15px 32px
+        padding: 15px 26px
         background-color: #5A1D50
         text-align: center
         text-decoration: none
@@ -175,7 +177,7 @@ img
         &:hover
             transform: scale(110%)
         img
-            height: 100%
+            width: 100%
 
     
 .overlay-container
@@ -307,7 +309,7 @@ $sidePieceMove: 195%
     position: fixed
     top: 0
     left: 0
-    width: 100%
+    width: 100vw
     height: $nav-height-full
     transition: height .3s ease-out
     z-index: 42
@@ -458,8 +460,6 @@ $sidePieceMove: 195%
                         background-color: #ACB6CB
     // Burger Menu
     .burger
-        margin: 0
-        padding: 0
         position: absolute
         right: 2.5rem
         top: 50%
@@ -467,15 +467,15 @@ $sidePieceMove: 195%
         cursor: pointer
         width: 60px
         height: 52px
-        z-index: 999
+        z-index: 51
         flex-flow: column
         display: none
-        div
+        el
             flex: 1 1 auto
             pointer-events: none
             width: inherit
             border-radius: 20px
-            background-color: #cecece
+            background-color: rgb(206, 206, 206)
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
         *:nth-child(1), *:nth-child(2)
             margin-bottom: 10px
@@ -753,6 +753,7 @@ $sidePieceMove: 195%
 @media screen and (max-width: 1028px)
     body
         width: 100vw
+        overflow-x: clip
     .nav
         .content
             .link, .column
@@ -788,7 +789,11 @@ $sidePieceMove: 195%
         &::-webkit-scrollbar
             display: none
     .nav
-        .home, .link.hover
+        height: 5rem
+        background: url('../img/stars-align-mobile.png')
+        background-repeat: no-repeat
+        background-size: cover
+        #home, .link.hover
             display: none
         .content
             &::before

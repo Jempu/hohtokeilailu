@@ -2,9 +2,12 @@
     "titlecard_title": "Keilahalli avoinna koko kesän",
     "titlecard_subtitle": "",
     "activities": [
-        "aamukeilaus-01",
-        "kevatkiekaus-03",
-        "title-20"
+        "aamukeilaus-30.09.2021",
+        "kevatkiekaus-30.09.2021",
+        "testi lorem-30.09.2021",
+        "testi2-30.09.2021",
+        "testi-2-30.09.2021",
+        "testi23-30.09.2021"
     ],
     "gallery": [
         "001.jpg",
@@ -44,105 +47,30 @@
         "discount": 2
     },
     "reviews": [
-        {
-            "reviewer": "Tanja Nyman",
-            "text": "Loistava palvelu ja asiansa osaava henkilökunta👍"
-        },
-        {
-            "reviewer": "Sanna",
-            "text": "Mukava rento paikka. Hyvät turvavälit."
-        },
-        {
-            "reviewer": "Arvo Haikonen",
-            "text": "Hyvää seuraa ja tunnelma."
-        },
-        {
-            "reviewer": "Anssi Sinisalo",
-            "text": "Mahtava #palvelu #paras"
-        },
-        {
-            "reviewer": "Vili Lång",
-            "text": "Erittäin hyvä palvelu, radat ja biljardi pöytä. On kyllä kulunut, mutta edelleen kuin uusi."
-        },
-        {
-            "reviewer": "Arto Nykänen",
-            "text": "Vapaita ratoja, asiallinen palvelu ja muutenkin mukava ilmapiiri. Suosittelen lämpimästi."
-        },
-        {
-            "reviewer": "Simo Singh",
-            "text": "Hyvä palvelu, kohtuulliset hinnat ja mukava henkilökunta!"
-        },
-        {
-            "reviewer": "ONSS TMI",
-            "text": "Sopii myös alkuillasta ennen baaria, ja kokoustamista varten neukkari ja sauna. Proshopista ammattimaista palvelua."
-        },
-        {
-            "reviewer": "ONSS TMI",
-            "text": "Hyvät radat. Kelpaa vaikka ammattilaisille. Hallin omat välineet kunnossa."
-        },
-        {
-            "reviewer": "Max Räsänen",
-            "text": "Olin tänään kisaamassa kyseisessä hallissa. Oli todella hyvä palvelu ja siisti halli."
-        },
-        {
-            "reviewer": "Nikolas Nikolad",
-            "text": "KEILAUS ON PARASTA hyvä kahvila kanssa"
-        },
-        {
-            "reviewer": "Aleksi :D",
-            "text": "Erittäin hyvä paikka pystyy syödä keilauksen jälkeen ellei vetää kännejä"
-        },
-        {
-            "reviewer": "Iina Väisänen",
-            "text": "Aivan mahtava paikka! Suosittelen kaikille!🎳"
-        },
-        {
-            "reviewer": "Urho Hirvonen",
-            "text": "Perheen kanssa huippu mesta.."
-        },
-        {
-            "reviewer": "Mikko Harlin",
-            "text": "Kaikki jees jos tykkää keilata."
-        },
-        {
-            "reviewer": "Ari Rinne",
-            "text": "🎳 hyvin kaatuu!"
-        },
-        {
-            "reviewer": "Jussi Haapalainen",
-            "text": "Mukavaa toimintaa ja ystävällinen palvelu"
-        },
-        {
-            "reviewer": "Teemu",
-            "text": "Hyvää palvelua"
-        },
-        {
-            "reviewer": "Liisa Gummerus",
-            "text": "Oikein mukava hetki hohtokeilailulle"
-        },
-        {
-            "reviewer": "Jere Mikkonen",
-            "text": "Hyvä keilailla täällä"
-        },
-        {
-            "reviewer": "Kalevi Purhonen",
-            "text": "Mukavaa tekemistä 😀"
-        },
-        {
-            "reviewer": "Mika Pekkanen",
-            "text": "Mukava paikka ja ystävällinen henkilökunta"
-        },
-        {
-            "reviewer": "Janne Sammatti",
-            "text": "Hyvä palvelu. Lapset viihtyi"
-        },
-        {
-            "reviewer": "Markus Tuukkanen",
-            "text": "Hyvä paikka ja hyvää palvelua."
-        },
-        {
-            "reviewer": "Miia Koppi",
-            "text": "Onnistuneet 10-vuotis synttärit vietettiin keilailun ja herkkujen kera. Suosittelen👍"
-        }
+        "Loistava palvelu ja asiansa osaava henkilökunta👍",
+        "Mukava rento paikka. Hyvät turvavälit.",
+        "Hyvää seuraa ja tunnelma.",
+        "Mahtava #palvelu #paras",
+        "Erittäin hyvä palvelu, radat ja biljardi pöytä. On kyllä kulunut, mutta edelleen kuin uusi.",
+        "Vapaita ratoja, asiallinen palvelu ja muutenkin mukava ilmapiiri. Suosittelen lämpimästi.",
+        "Hyvä palvelu, kohtuulliset hinnat ja mukava henkilökunta!",
+        "Sopii myös alkuillasta ennen baaria, ja kokoustamista varten neukkari ja sauna. Proshopista ammattimaista palvelua.",
+        "Hyvät radat. Kelpaa vaikka ammattilaisille. Hallin omat välineet kunnossa.",
+        "Olin tänään kisaamassa kyseisessä hallissa. Oli todella hyvä palvelu ja siisti halli.",
+        "KEILAUS ON PARASTA hyvä kahvila kanssa",
+        "Erittäin hyvä paikka pystyy syödä keilauksen jälkeen ellei vetää kännejä",
+        "Aivan mahtava paikka! Suosittelen kaikille!🎳",
+        "Perheen kanssa huippu mesta..",
+        "Kaikki jees jos tykkää keilata.",
+        "🎳 hyvin kaatuu!",
+        "Mukavaa toimintaa ja ystävällinen palvelu",
+        "Hyvää palvelua",
+        "Oikein mukava hetki hohtokeilailulle",
+        "Hyvä keilailla täällä",
+        "Mukavaa tekemistä 😀",
+        "Mukava paikka ja ystävällinen henkilökunta",
+        "Hyvä palvelu. Lapset viihtyi",
+        "Hyvä paikka ja hyvää palvelua.",
+        "Onnistuneet 10-vuotis synttärit vietettiin keilailun ja herkkujen kera. Suosittelen👍"
     ]
 }

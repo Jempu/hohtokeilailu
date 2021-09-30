@@ -9,6 +9,11 @@ function gp(isRoot = false) {
     return isIndex() || isRoot ? './' : '../';
 }
 
+function setPageScrolling(v) {
+    $('html').css({ overflowX: 'clip', overflowY: v ? 'auto' : 'clip' });
+}
+setPageScrolling(false);
+
 // Mathematical functions
 
 // Clamp number between two values with the following line:
@@ -376,5 +381,6 @@ $(window).on('load', function () {
         opacity: 0
     }, 750, function () {
         $(this).css({ display: 'none' });
+        setPageScrolling(true);
     });
 });

@@ -2,12 +2,8 @@
 const html = $('html');
 
 /**
- * sends a request to the specified url from a form. this will change the window location.
- * @param {string} path the path to send the post request to
- * @param {object} params the parameters to add to the url
- * @param {string} [method=post] the method to use on the form
- */
-
+* sends a request to the specified url from a form. this will change the window location.
+*/
 function post(path, params, method = 'post') {
 
     // The rest of this code assumes you are not using a library.
@@ -294,7 +290,6 @@ $(function () {
     function setOverlayContainer(item) {
         if (item != "") {
             overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
-            html.css({ overflowX: 'clip', overflowY: 'clip' });
             overlayContainer.children().each(function(i, l) {
                 $(l).css({ display: l.id == item ? 'block' : 'none' });
             });
@@ -312,14 +307,13 @@ $(function () {
                 },
                 complete: function () {
                     overlayContainer.css({ display: 'none' });
-                    html.css({ overflowX: 'clip', overflowY: 'scroll' });
                 }
             });
         }
     }
     setOverlayContainer("");
     const directory = './content/activities/';
-    function createActivityViewItem(item, title, date, content, headerImg, dateStatus) {
+    function createActivityItem(item, title, date, content, headerImg, dateStatus, type) {
         // container item
         const e = document.createElement('div');
         e.className = 'item';
@@ -333,6 +327,7 @@ $(function () {
                 <div class="bo" id="b"></div>
             </div>
             <div class="control">
+                <h1>${type}</h1>
                 <h1>Tapahtuma ${dateStatus}</h1>
                 <h2 onclick="deleteActivityItem(${item});">Poista Ilmoitus<h2>
             </div>
@@ -340,7 +335,14 @@ $(function () {
         $(activityView).append(e);
         // On container item click open overlay window
         $(e).find('.content').on('click', function () {
-            setOverlayContainer(item);
+            switch (type) {
+                case 'Linkki-ilmoitus':
+                    window.open('');
+                    break;
+                default:
+                    setOverlayContainer(item);
+                    break;
+            }
         });
         $(e).find('.control h2').on('click', function () {
             deleteActivityItem(e, item);
@@ -411,7 +413,7 @@ $(function () {
                 // title
                 const vtitle = child['title'];
                 const vimg = child['header-image'] != ''
-                    ? `<img src="${folder}${child['header-image']}" alt="Tapahtumakuva">`
+                    ? `<img src="${folder}${child['header-image']}" alt="Ei Kansikuvaa">`
                     : '';
 
                 let vfiles = child['files'];
@@ -423,21 +425,14 @@ $(function () {
                 
                 // create the default activity item, on click open overlay
                 // create the link activity item, on click open url
-                
-                switch (child['type']) {
-                    case 'event':
-                    case 'link':
-                        switch (dateStatus) {
-                            case 0:
-                            case 1:
-                                createFooterEventItem(item, vimg, vtitle, vdate);
-                                break;
-                        }
-                        break;
-                    case 'competition':
-                        createActivityViewItem(item, vtitle, vdate, vcontent, vimg, dateStatus);
-                        break;
+                function getType(v) {
+                    switch (v) {
+                        case 'event': return 'Tapahtumailmoitus';
+                        case 'competition': return 'Kilpailuilmoitus';
+                        case 'link': return 'Linkki-ilmoitus';
+                    }
                 }
+                createActivityItem(item, vtitle, vdate, vcontent, vimg, dateStatus, getType(child['type']));
             });
         });
     });
@@ -466,9 +461,13 @@ $(function () {
         reader.readAsDataURL($(this)[0].files[0]);
     });
     // set correct input for attachment file
+    var categorySubItem = null;
+    const categorySubItem0 = $(currentActivityForm).find('.category-sub-item#0');
+    const categorySubItem1 = $(currentActivityForm).find('.category-sub-item#1');
     function setAttachmentType(index) {
-        $(currentActivityForm).find('.sub-item#0').css({ display: index == 0 ? 'block' : 'none' });
-        $(currentActivityForm).find('.sub-item#1').css({ display: index == 1 ? 'block' : 'none' });
+        $(categorySubItem0).css({ display: index == 0 ? 'block' : 'none' });
+        $(categorySubItem1).css({ display: index == 1 ? 'block' : 'none' });
+        categorySubItem = index == 0 ? categorySubItem0 : categorySubItem1;
     }
     $(currentActivityForm).find('select#attachment-type').change(function () {
         setAttachmentType($(this).val());
@@ -494,40 +493,46 @@ $(function () {
         let output = {};
         output.type = currentActivityIndex == 0 ? "event" : currentActivityIndex == 1 ? "competition" : "link";
         output.title = title;
-        output.date = `${moment(startDate).format('DD.MM.YYYY')}-${moment(endDate).format('DD.MM.YYYY')}`;
+        const sdate = moment(startDate).format('DD.MM.YYYY');
+        output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
         const file = $(currentActivityForm).find('input#cover-image-file-input')[0].files[0];
         if (file) output.header_image = file.name;
-        const processed_title = `${title.toLowerCase()}-20`;
+        const processed_title = (`${title.toLowerCase()}-${sdate}`).replace(' ', '-');
         if (currentActivityForm != linkForm) {
             output.content = $(currentActivityForm).find('input#content').val();
-            output.files = [
-                {
-                    text: "Kilpailuilmoitus",
-                    link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf"
-                },
-                {
-                    text: "Olosuhde",
-                    link: "https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf"
-                }
-            ];
+            function getC(item) {
+                return {
+                    text: $(item).find('input#title').val(),
+                    link: $(item).find('input#link').val()
+                };
+            }
+            output.files = [getC(categorySubItem), getC(categorySubItem)];
         } else {
             output.link = "https://www.ikatyros.com";
         }
-        console.log(processed_title, output);
-        return;
-        // check if a folder with the same title exists
+        const attachments = files
+        console.log(processed_title, attachments, output);
         if (output != null) {
-            fetch(`./content/${processed_title}/activity.json`).then(
-                v => {
-                    // if not, then post the new activity
-                    if (v.status == 404) {
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("POST", './admin/admin_post.php', true);
-                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                        xhr.send(JSON.stringify({ activity: output, title: processed_title }));
-                    } else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
+            fetch('./content/index.json').then(v => v.json()).then(v => {
+                var isSameName = false;
+                for (let i = 0; i < v['activities'].length; i++) {
+                    const e = v['activities'][i];
+                    if (e == processed_title) {
+                        isSameName = true;
+                        break;
+                    }
                 }
-            );
+                if (!isSameName) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", './admin/admin_post.php', true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                    xhr.send(JSON.stringify({
+                        title: processed_title,
+                        activity: output,
+                        attachments: attachments
+                    }));
+                } else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');   
+            });
         }
     }
     $(activityForm).find('button[type="button"]#submit').on('click', function () {

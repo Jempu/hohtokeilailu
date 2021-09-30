@@ -4,7 +4,7 @@
   height: 100%;
   top: 0;
   right: 0;
-  display: inline-block;
+  display: block;
   text-align: center;
   font-family: Nunito;
   overflow: clip;
@@ -34,7 +34,7 @@
 }
 
 .admin-panel .sidepanel {
-  width: 50%;
+  width: 100%;
   height: 4.25rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -47,6 +47,9 @@
   -webkit-transition: border-radius 0.4s ease-out;
   transition: border-radius 0.4s ease-out;
   z-index: 49;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
 }
 
 .admin-panel .sidepanel .home {
@@ -91,27 +94,22 @@
 .admin-panel .content {
   height: 94.5%;
   position: relative;
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
   grid-area: b;
   gap: calc(16px + 1vw);
   padding: 0 1.5vw;
-  overflow-y: auto;
   overflow-x: auto;
+  overflow-y: auto;
   background: rgba(0, 0, 0, 0.2);
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: start;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-      grid-template-areas: "a t c d" "a b c d";
-  -ms-grid-rows: auto auto;
-      grid-template-rows: auto auto;
-  -ms-grid-columns: 25rem auto 40rem 40rem;
-      grid-template-columns: 25rem auto 40rem 40rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .admin-panel .content h1 {
@@ -122,8 +120,17 @@
   font-size: calc(8px + 0.8vw);
 }
 
+.admin-panel .content .rrow {
+  display: inline-block;
+}
+
+.admin-panel .content #second {
+  width: calc( 20em + 1vmin);
+}
+
 .admin-panel .content .activities {
   position: relative;
+  width: 500px;
   height: 100%;
 }
 
@@ -218,11 +225,8 @@
 }
 
 .admin-panel .content form#schedule {
-  width: 100%;
+  width: 340px;
   position: relative;
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 1;
   grid-area: a;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -311,8 +315,6 @@
 }
 
 .admin-panel .content form#titlecard-title {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
   grid-area: t;
   width: 480px;
 }
@@ -321,8 +323,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
   grid-area: b;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -335,6 +335,7 @@
       -ms-flex-align: center;
           align-items: center;
   padding-bottom: 2.5rem;
+  margin-top: 1.2rem;
 }
 
 .admin-panel .content form#pricing ul {
@@ -377,9 +378,6 @@
 }
 
 .admin-panel .content form#activities {
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 3;
   grid-area: c;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -406,11 +404,8 @@
 }
 
 .admin-panel .content form#gallery {
+  width: calc(20em + 1vmin);
   max-height: 95%;
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 4;
-  grid-area: d;
   padding-top: 0;
   padding-bottom: 1rem;
   display: -webkit-box;
@@ -429,7 +424,6 @@
 }
 
 .admin-panel .content form#gallery .content, .admin-panel .content form#gallery .file-new-input {
-  width: 100%;
   position: relative;
   display: inline-block;
 }
@@ -575,7 +569,7 @@
   max-width: 400px;
   margin: 0 auto;
   border-radius: 2px;
-  padding: 1.4rem 2rem 1.6rem;
+  padding: 0.5rem 1.7rem;
   background: rgba(57, 63, 84, 0.8);
 }
 
@@ -693,6 +687,13 @@
   }
   100% {
     background-position: 100% 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .admin-panel form#schedule ul li {
+    margin: 0 0;
+    padding: 0 0.3rem 0 0.3rem;
   }
 }
 /*# sourceMappingURL=admin.css.map */

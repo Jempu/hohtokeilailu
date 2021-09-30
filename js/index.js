@@ -204,7 +204,6 @@ createSchedule($(schedule).find('ul'), $(schedule).find('#title').find('h1').get
 
 /// Arvostelut ///
 function setReviews(data) {
-    var currentReview = -1;
     let reviews = [];
     const reviewObj = $('.stats .content .reviews');
     const typewriter1 = new Typewriter($(reviewObj).find('h2').get(0), {
@@ -212,19 +211,11 @@ function setReviews(data) {
         loop: false,
         delay: 2
     });
-    const typewriter2 = new Typewriter($(reviewObj).find('h3').get(0), {
-        cursor: '',
-        loop: false,
-        delay: 4
-    });
     function setReview() {
         if (reviews.length == 0) return;
-        const item = getArrayRandom(reviews);
-        if (item !== undefined) {
-            typewriter1.deleteAll().typeString(`"${item['text']}"`).start();
-            typewriter2.deleteAll().pauseFor(600).typeString(`– ${item['reviewer']}`).start();
-        }
-        resetTimer();
+        typewriter1.deleteAll().typeString(`"${getArrayRandom(reviews)}"`).pauseFor(12000).callFunction(function () {
+            setReview();
+        }).start();
     }
     if (reviewObj != null) {
         reviews = data;
@@ -233,16 +224,6 @@ function setReviews(data) {
         });
     }
     setReview();
-
-    var timer = 0;
-    function resetTimer() { timer = 0; }
-    function startTimer() {
-        setTimeout(() => {
-            if (timer > 6) setReview(); else timer++;
-            startTimer();
-        }, 2000);
-    }
-    startTimer();
 }
 
 /// Activities ///
@@ -254,11 +235,13 @@ const titlecardEventLog = $(titlecard).find('.events').get(0);
 const mainCategoryEvents = $('.main-category.events .container').get(0);
 // comp list events
 var competitionItems = [0, 0, 0];
+
 function setActivities(data) {
     function setOverlayContainer(item) {
-        if (item != "") {
+        const v = item != "";
+        setPageScrolling(v);
+        if (v) {
             overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
-            html.css({ overflowX: 'clip', overflowY: 'clip' });
             overlayContainer.children().each(function(i, l) {
                 $(l).css({ display: l.id == item ? 'block' : 'none' });
             });

@@ -1299,8 +1299,8 @@ $barrelHeight: 44vw
                 &:hover
                     transform: translateX(-50%) scale(105%) rotateZ(-2deg)
             .satisfied, .amount
-                width: 250px
-                height: 250px
+                width: 150px
+                height: 150px
             .reviews
                 width: auto
                 height: auto
@@ -1741,6 +1741,8 @@ $barrelHeight: 44vw
                 transform: scale(112%)
 
 @media screen and (max-width: 1480px)
+    body
+        width: 100vw
     .pricing
         .container
             .cards
@@ -1766,8 +1768,10 @@ $barrelHeight: 44vw
                 iframe
                     margin: 1rem 0 0 0
     .titlecard
-        .slider ul li p
-            font-size: 14px
+        .slider
+            height: 200px
+            ul li p
+                font-size: 14px
         .events
             display: none
     .category-desc
@@ -1803,6 +1807,13 @@ $barrelHeight: 44vw
                 &#schedule
                     left: 50%
                     transform: translateX(-53%)
+    .stats
+        &::before
+            content: none
+        .content
+            background: linear-gradient(123.03deg, rgba(0, 0, 0, 0.2) 24.49%, rgba(0, 0, 0, 0.153125) 41.94%, rgba(0, 0, 0, 0) 71%), linear-gradient(91.03deg, #396AB4 0.3%, #8C7EC4 23.84%, #7E67DA 55.58%, #8073D0 80.15%, #396AB4 98.58%)
+            &::before, &::after
+                content: none
 
 @media screen and (max-width: 970px)
     .pricing
@@ -1836,10 +1847,17 @@ $barrelHeight: 44vw
             .categories
                 display: none
             .container
-                width: 800px
                 transform: translateX(-50%)
                 .item
                     width: 800px
+    .pricing
+        .snooker
+            height: 230px
+            .vid
+                transform: translateX(5%) scale(2.5)
+        .container
+            left: 50%
+            padding: 0
 
 @media screen and (max-width: 600px)
     .barrel

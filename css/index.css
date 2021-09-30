@@ -2156,8 +2156,8 @@ root {
             transform: translateX(-50%) scale(105%) rotateZ(-2deg);
   }
   .stats .content .satisfied, .stats .content .amount {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
   }
   .stats .content .reviews {
     width: auto;
@@ -2871,6 +2871,9 @@ root {
 }
 
 @media screen and (max-width: 1480px) {
+  body {
+    width: 100vw;
+  }
   .pricing .container .cards {
     display: -ms-inline-grid;
     display: inline-grid;
@@ -2907,6 +2910,9 @@ root {
   }
   .overlay-container .item .right iframe {
     margin: 1rem 0 0 0;
+  }
+  .titlecard .slider {
+    height: 200px;
   }
   .titlecard .slider ul li p {
     font-size: 14px;
@@ -2957,6 +2963,15 @@ root {
     -webkit-transform: translateX(-53%);
             transform: translateX(-53%);
   }
+  .stats::before {
+    content: none;
+  }
+  .stats .content {
+    background: linear-gradient(123.03deg, rgba(0, 0, 0, 0.2) 24.49%, rgba(0, 0, 0, 0.153125) 41.94%, rgba(0, 0, 0, 0) 71%), linear-gradient(91.03deg, #396AB4 0.3%, #8C7EC4 23.84%, #7E67DA 55.58%, #8073D0 80.15%, #396AB4 98.58%);
+  }
+  .stats .content::before, .stats .content::after {
+    content: none;
+  }
 }
 
 @media screen and (max-width: 970px) {
@@ -3001,12 +3016,22 @@ root {
     display: none;
   }
   .titlecard .monitor .container {
-    width: 800px;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
   }
   .titlecard .monitor .container .item {
     width: 800px;
+  }
+  .pricing .snooker {
+    height: 230px;
+  }
+  .pricing .snooker .vid {
+    -webkit-transform: translateX(5%) scale(2.5);
+            transform: translateX(5%) scale(2.5);
+  }
+  .pricing .container {
+    left: 50%;
+    padding: 0;
   }
 }
 
