@@ -1,17 +1,11 @@
-
 const html = $('html');
 
-/**
-* sends a request to the specified url from a form. this will change the window location.
-*/
 function post(path, params, method = 'post') {
-
     // The rest of this code assumes you are not using a library.
     // It can be made less verbose if you use one.
     const form = document.createElement('form');
     form.method = method;
     form.action = path;
-
     for (const key in params) {
         if (params.hasOwnProperty(key)) {
             const hiddenField = document.createElement('input');
@@ -22,7 +16,6 @@ function post(path, params, method = 'post') {
             form.appendChild(hiddenField);
         }
     }
-
     document.body.appendChild(form);
     form.submit();
 }
@@ -159,6 +152,13 @@ $(function () {
     const content = $(panel).find('.content');
     const overlayContainer = $('.overlay-container');
 
+    // all of the different forms
+    const scheduleForm = $(content).find('#schedule');
+    const titleForm = $(content).find('#titlecard-title');
+    const pricingForm = $(content).find('#pricing');
+    const activityForm = $(content).find('#activities');
+    const galleryForm = $(content).find('#gallery');
+
     //limit inputs to their character limits
     $('.webflow-style-input').each(function (i, l) {
         const p = $(l).find('p');
@@ -173,7 +173,6 @@ $(function () {
     });
 
     // schedule
-    const scheduleForm = $(content).find('#schedule');
     const timeInputs = $(scheduleForm).find('input[type=number]');
     // load the opening.json that has all of the openings
     var openingArr = [];
@@ -215,18 +214,16 @@ $(function () {
 
 
     // pricing
-    const pricingForm = $(panel).find('#pricing');
-
     // - Hohtokeilaus hae kellonajat "opening.json" (16.00-22.00)
     // - Päiväkeilaus koko päivän 17 asti.
     // - Iltakeilaus alkaa 17 ja kestää niin pitkään kun halli on auki
     // - viikonloppu koko päivän (La & Su)
 
     fetch('./content/index.json').then(v => v.json()).then(data => {
-        
+
         // add title text to the input
-        $(panel).find('#titlecard-title input#title-main').val(data['titlecard_title']);
-        $(panel).find('#titlecard-title input#title-sub').val(data['titlecard_subtitle']);
+        $(titleForm).find('input#title-main').val(data['titlecard_title']);
+        $(titleForm).find('input#title-sub').val(data['titlecard_subtitle']);
 
         // add already existing pricing data to the form.
         const p = data['pricing'];
@@ -250,12 +247,28 @@ $(function () {
         $(ss[1]).attr('value', p['birthday_big']['hohto']);
     });
 
+    // save new titlecard's titles
+    $(titleForm).find('button[type="button"]').on('click', function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", './admin/admin_post.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.send(JSON.stringify({
+            titles: {
+                title: $(titleForm).find('input#title-main').val(),
+                subtitle: $(titleForm).find('input#title-sub').val()
+            }
+        }));
+    });
+
     $(pricingForm).find('button[type="button"]').on('click', function () {
         function f(id, index = 0) {
             return Number.parseInt(
                 $(pricingForm).find(`#${id} input`).eq(index).val());
         }
-        var output = JSON.stringify({
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", './admin/admin_post.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.send(JSON.stringify({
             pricing: {
                 birthday_small: {
                     normal: f('birthday_small'),
@@ -273,24 +286,16 @@ $(function () {
                 snooker: f('snooker'),
                 discount: f('discount')
             }
-        });
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", './admin/admin_post.php', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.send(output);
-
+        }));
     });
 
-
     // activity
-    const activityForm = $(panel).find('#activities');
     const activityView = $(panel).find('.content .activities .activity-view')
-
     // load already existing activities
     function setOverlayContainer(item) {
         if (item != "") {
             overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
-            overlayContainer.children().each(function(i, l) {
+            overlayContainer.children().each(function (i, l) {
                 $(l).css({ display: l.id == item ? 'block' : 'none' });
             });
             overlayContainer.animate({ now: 108 }, {
@@ -313,7 +318,8 @@ $(function () {
     }
     setOverlayContainer("");
     const directory = './content/activities/';
-    function createActivityItem(item, title, date, content, headerImg, dateStatus, type) {
+    function createActivityItem(folder, item, title, date,
+        content, headerImg, dateStatus, type, files, links) {
         // container item
         const e = document.createElement('div');
         e.className = 'item';
@@ -329,7 +335,7 @@ $(function () {
             <div class="control">
                 <h1>${type}</h1>
                 <h1>Tapahtuma ${dateStatus}</h1>
-                <h2 onclick="deleteActivityItem(${item});">Poista Ilmoitus<h2>
+                <h2 id="delete">Poista Ilmoitus<h2>
             </div>
         `;
         $(activityView).append(e);
@@ -344,13 +350,50 @@ $(function () {
                     break;
             }
         });
-        $(e).find('.control h2').on('click', function () {
+        $(e).find('.control h2#delete').on('click', function () {
             deleteActivityItem(e, item);
         });
         // overlay item
         const o = document.createElement('div');
         o.className = 'item';
         o.id = item;
+        // links
+        function getAnchors(links) {
+            if (links === undefined) return '';
+            var output = '';
+            links.forEach(e => {
+                output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
+            });
+            return output;
+        }
+        function getFiles(v) {
+            if (v === undefined || v.length == 0) return '';
+            var output = '';
+            v.forEach(e => {
+                switch (e['link'].split('.').pop()) {
+                    case 'pdf':
+                        output += `<iframe src="${folder}${e['link']}" frameborder="0"></iframe>`;
+                        break;
+                    case 'png':
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'gif':
+                        output += `<img src="${folder}${e['text']}" />`
+                        break;
+                    case 'mp4':
+                    case 'mov':
+                        output += `<video src="${folder}${e['text']} controls"></video>`
+                        break;
+                }
+            });
+            return output != '' ? `
+                <div class="right">
+                    <div class="media">
+                        ${output}
+                    </div>
+                </div>
+            ` : '';
+        }
         o.innerHTML = `
             <div class="item">
                 <div class="content">
@@ -359,15 +402,9 @@ $(function () {
                         <h1>${title}</h1>
                         <h2>${date}</h2>
                         <p>${content}</p>
-                        <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
-                        <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
+                        ${getAnchors(links)}
                     </div>
-                    <div class="right">
-                        <div class="media">
-                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
-                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
-                        </div>
-                    </div>
+                    ${getFiles(files)}
                     <div class="close">
                         <img src="./img/close.png" alt="Sulje näkymä">
                     </div>
@@ -380,27 +417,11 @@ $(function () {
             setOverlayContainer("");
         });
     }
+
     function deleteActivityItem(e, id) {
         console.log(e, id);
     }
-    function createFooterEventItem(item, img, title, date) {
-        let e = document.createElement('div');
-        e.className = 'item';
-        e.innerHTML = `
-            <div>
-                ${img}
-                <h1>${title}</h1>
-                <h2>${date}</h2>
-            </div>
-            <div>
-                päivämäärä-status
-                poista-ilmoitus
-            </div>
-        `;
-        $(e).on('click', function () {
-            setOverlayContainer(item);
-        });
-    }
+    
     fetch('./content/index.json').then(v => v.json()).then(data => {
         data['activities'].forEach(item => {
             const folder = `${directory}${item}/`;
@@ -413,8 +434,8 @@ $(function () {
                 // title
                 const vtitle = child['title'];
                 const vimg = child['header-image'] != ''
-                    ? `<img src="${folder}${child['header-image']}" alt="Ei Kansikuvaa">`
-                    : '';
+                    ? `<img src="${folder}${child['header-image']}" alt="Ei Kansikuvaa" />`
+                    : '<img alt="Ei Kansikuvaa" />';
 
                 let vfiles = child['files'];
                 let vlink = child['links'];
@@ -422,7 +443,7 @@ $(function () {
                 const vcontent = child['content'] != '' ? child['content'] : 'Tapahtumalla ei ole kuvausta.';
 
                 const dateStatus = getDateStatus(vdateStart, vdateEnd, 'abc', 'fi');
-                
+
                 // create the default activity item, on click open overlay
                 // create the link activity item, on click open url
                 function getType(v) {
@@ -432,47 +453,47 @@ $(function () {
                         case 'link': return 'Linkki-ilmoitus';
                     }
                 }
-                createActivityItem(item, vtitle, vdate, vcontent, vimg, dateStatus, getType(child['type']));
+                createActivityItem(folder, item, vtitle, vdate, vcontent, vimg, dateStatus,
+                    getType(child['type']), vfiles, vlink);
             });
         });
     });
-
-    const defaultForm = $(activityForm).find('#default');
-    const linkForm = $(activityForm).find('#links');
+    const defaultActivityForm = $(activityForm).find('#default');
+    const linkActivityForm = $(activityForm).find('#links');
     var currentActivityIndex = -1;
     var currentActivityForm = null;
     function setActivityForm(index) {
-        defaultForm.attr('active', index < 2 ? 'true' : 'false');
-        linkForm.attr('active', index == 2 ? 'true' : 'false');
+        defaultActivityForm.attr('active', index < 2 ? 'true' : 'false');
+        linkActivityForm.attr('active', index == 2 ? 'true' : 'false');
         currentActivityIndex = index;
-        currentActivityForm = index < 2 ? defaultForm : linkForm;
+        currentActivityForm = index < 2 ? defaultActivityForm : linkActivityForm;
     }
     $(panel).find('#activity-select').change(function () {
         setActivityForm($(this).val());
     });
     setActivityForm(0);
-
+    
     // set input's header_image preview
-    $(currentActivityForm).find('input#cover-image-file-input').change(function () {
+    $(activityForm).find('input#cover-image-file-input').change(function () {
         const reader = new FileReader();
         reader.onload = function (e) {
-            $(currentActivityForm).find('.cover-image img').attr('src', e.target.result);
+            $(activityForm).find('.cover-image img').attr('src', e.target.result);
         }
         reader.readAsDataURL($(this)[0].files[0]);
     });
+    
+    // attachments
     // set correct input for attachment file
     var categorySubItem = null;
-    const categorySubItem0 = $(currentActivityForm).find('.category-sub-item#0');
-    const categorySubItem1 = $(currentActivityForm).find('.category-sub-item#1');
-    function setAttachmentType(index) {
-        $(categorySubItem0).css({ display: index == 0 ? 'block' : 'none' });
-        $(categorySubItem1).css({ display: index == 1 ? 'block' : 'none' });
-        categorySubItem = index == 0 ? categorySubItem0 : categorySubItem1;
+    function setAttachmentForm(e, v) {
+        const categorySubItem0 = $(e).find('.category-sub-item#0');
+        const categorySubItem1 = $(e).find('.category-sub-item#1');
+        $(categorySubItem0).css({ display: v == 0 ? 'block' : 'none' });
+        $(categorySubItem1).css({ display: v == 1 ? 'block' : 'none' });
+        categorySubItem = v == 0 ? categorySubItem0 : categorySubItem1;
     }
-    $(currentActivityForm).find('select#attachment-type').change(function () {
-        setAttachmentType($(this).val());
-    });
-    setAttachmentType(0);
+    setAttachmentForm(0);
+
     // create a new activity to the database
     function postNewActivity() {
         const title = $(currentActivityForm).find('input#title').val();
@@ -491,59 +512,128 @@ $(function () {
             return;
         }
         let output = {};
+        let attachments = [];
         output.type = currentActivityIndex == 0 ? "event" : currentActivityIndex == 1 ? "competition" : "link";
         output.title = title;
         const sdate = moment(startDate).format('DD.MM.YYYY');
         output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
-        const file = $(currentActivityForm).find('input#cover-image-file-input')[0].files[0];
-        if (file) output.header_image = file.name;
+        const coverImage = $(currentActivityForm).find('input#cover-image-file-input')[0].files[0];
+        if (coverImage) {
+            output.header_image = coverImage.name;
+            attachments.push(coverImage);
+        }
         const processed_title = (`${title.toLowerCase()}-${sdate}`).replace(' ', '-');
-        if (currentActivityForm != linkForm) {
+        if (currentActivityForm != linkActivityForm) {
             output.content = $(currentActivityForm).find('input#content').val();
+            // additional attachment files if not linkForm
+            output.files = [];
             function getC(item) {
                 return {
                     text: $(item).find('input#title').val(),
                     link: $(item).find('input#link').val()
                 };
             }
-            output.files = [getC(categorySubItem), getC(categorySubItem)];
+            categorySubItem.find('.attachment-container').each(function (i, l) {
+                output.files.push(getC(l));
+            });
         } else {
             output.link = "https://www.ikatyros.com";
         }
-        const attachments = files
         console.log(processed_title, attachments, output);
-        if (output != null) {
-            fetch('./content/index.json').then(v => v.json()).then(v => {
-                var isSameName = false;
-                for (let i = 0; i < v['activities'].length; i++) {
-                    const e = v['activities'][i];
-                    if (e == processed_title) {
-                        isSameName = true;
-                        break;
-                    }
-                }
-                if (!isSameName) {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("POST", './admin/admin_post.php', true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                    xhr.send(JSON.stringify({
-                        title: processed_title,
-                        activity: output,
-                        attachments: attachments
-                    }));
-                } else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');   
-            });
-        }
+        if (output != null) return;
+        fetch('./content/index.json').then(v => v.json()).then(v => {
+            var isSameName = false;
+            for (let i = 0; i < v['activities'].length; i++) {
+                const e = v['activities'][i];
+                if (e != processed_title) continue;
+                isSameName = true;
+                break;
+            }
+            if (!isSameName) {
+                // const xhr = new XMLHttpRequest();
+                // xhr.open("POST", './admin/admin_post.php', true);
+                // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                // xhr.send(JSON.stringify({
+                //     add_activity: output,
+                //     title: processed_title
+                // }));
+            } else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
+        });
     }
     $(activityForm).find('button[type="button"]#submit').on('click', function () {
         postNewActivity();
     });
 
-
+    // add new attachments
+    var attachmentsArr = [];
+    const attachmentContainer = $(defaultActivityForm).find('.attachment-container');
+    function getAttachmentItemHtml() {
+        return `
+            <div class="top">
+                <h1 id="index">${attachmentsArr.length}.</h1>
+                <select id="attachment-type">
+                    <option value="0">Linkki</option>
+                    <option value="1">Tiedosto</option>
+                </select>
+                <div class="close">
+                    <img src="./img/close.png" alt="Sulje näkymä">
+                </div>
+            </div>
+            <div class="category-sub-item" id="0">
+                <div class="webflow-style-input">
+                    <input type="text" placeholder="Liitteen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(30,this)">
+                    <p>30</p>
+                </div>
+                <div class="webflow-style-input">
+                    <input type="text" placeholder="Liitteen linkki..." id="link">
+                </div>
+            </div>
+            <div class="category-sub-item" id="1">
+                <div class="pdf-container">
+                    <div class="item">
+                        <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
+                        <div class="close">
+                            <img src="./img/close.png" alt="Poista ilmoitus">
+                        </div>
+                    </div>
+                </div>
+                <input type="file" name="Lisää tiedosto" id="files">
+                <p>Tukee .pdf, .png, .jpg, .jpeg, .gif, .mp4 ja .mov -tiedostoja.</p>
+            </div>
+        `;
+    }
+    function removeAttachmentForm(e) {
+        attachmentsArr.splice(attachmentsArr.indexOf(e), 1);
+        $(e).remove();
+        // update attachments' indexes
+        if (attachmentsArr !== undefined || attachmentsArr.length > 0) {
+            for (let i = 0; i < attachmentsArr.length; i++) {
+                const e = attachmentsArr[i];
+                $(e).find('.top h1').html(`${i + 1}.`);
+            }
+        }
+    }
+    function addAttachmentForm() {
+        const o = document.createElement('div');
+        attachmentsArr.push(o);
+        o.className = 'att-item';
+        o.innerHTML = getAttachmentItemHtml();
+        $(o).find('.top select#attachment-type').change(function () {
+            setAttachmentForm($(o), $(this).val());
+        });
+        $(o).find('.top .close').on('click', function () {
+            removeAttachmentForm(o);
+        });
+        setAttachmentForm($(o), 0);
+        $(attachmentContainer).append(o);
+    }
+    $(activityForm).find('button#add-attachment').on('click', function () {
+        addAttachmentForm();
+    });
+    
     // gallery
-    const gallery = $(panel).find('#gallery');
-    const galleryContent = $(gallery).find('.content');
-    const galleryInput = $(gallery).find('#file-input');
+    const galleryContent = $(galleryForm).find('.content');
+    const galleryInput = $(galleryForm).find('#file-input');
     $(galleryInput).change(function () {
         const files = $(galleryInput).prop('files');
         $(files).each(function (i, l) {
@@ -554,7 +644,6 @@ $(function () {
             reader.readAsDataURL(l);
         });
     });
-
 
     // panel expansion
     var expanded = true;

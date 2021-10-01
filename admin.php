@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikkelin Keilahalli - Admin</title>
     <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-admin-round.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/main.css">
+    <title>Mikkelin Keilahalli - Admin</title>
     <link rel="stylesheet" href="./css/admin.css">
     <script type="text/javascript" src="./js/jquery-3.6.0.min/jquery.js"></script>
 </head>
@@ -20,7 +19,7 @@
                 <img src="./img/home.png" alt="Palaa etusivulle">
             </div>
             <div class="help">
-                <a href="./content/uploads/sivusto-manuaali.pdf#page=4" target="#">Tarvitsetko apua? Lue manuaalin Admin-sivuston osio.</a>
+                <a href="./content/uploads/sivusto-manuaali.pdf#page=9" target="#">Tarvitsetko apua? Lue manuaalin Admin-sivuston osio.</a>
             </div>
         </div>
         <div class="content">
@@ -349,90 +348,52 @@
             <div class="activities rrow">
                 <!-- List all existing activities -->
                 <div class="activity-view"></div>
-                <form action="" method="post" name="activities" id="activities">
-                    <h1>Luo uusi ilmoitus</h1>
-                    <select class="custom-select" id="activity-select">
-                        <option value="0">Tapahtumailmoitus</option>
-                        <option value="1">Kilpailuilmoitus</option>
-                        <option value="2">Linkki sivustolle</option>
-                    </select>
+                <form id="activities">
+                    <div class="top">
+                        <h1>Luo uusi ilmoitus</h1>
+                        <select id="activity-select">
+                            <option value="0">Tapahtumailmoitus</option>
+                            <option value="1">Kilpailuilmoitus</option>
+                            <option value="2">Linkki sivustolle</option>
+                        </select>
+                    </div>
+                    
+                    <!-- standard content for every activity -->
+                    <div class="cover-image">
+                        <h2>Ilmoituksen kansikuva</h2>
+                        <img src="./img/missing-image.jpg" alt="Kansikuva">
+                        <input type="file" id="cover-image-file-input">
+                    </div>
+                    <div class="webflow-style-input">
+                        <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
+                        <p>50</p>
+                    </div>
+                    <div>
+                        <h2>Ilmoituksen ajankohta</h2>
+                        <img src="./img/clock.png" alt="Aloitus">
+                        <input type="date" id="start-date">
+                        <img src="./img/clock.png" alt="Lopetus">
+                        <input type="date" id="end-date">
+                    </div>
+
                     <div id="default" class="item">
-                        <div class="cover-image">
-                            <h2>Ilmoituksen kansikuva</h2>
-                            <img src="./img/missing-image.jpg" alt="Kansikuva">
-                            <input type="file" id="cover-image-file-input">
-                        </div>
-                        <div class="webflow-style-input">
-                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
-                            <p>50</p>
-                        </div>
                         <div>
-                            <h2>Ilmoituksen ajankohta</h2>
-                            <img src="./img/clock.png" alt="Aloitus">
-                            <input type="date" id="start-date">
-                            <img src="./img/clock.png" alt="Lopetus">
-                            <input type="date" id="end-date">
-                        </div>
-                        <div>
-                            <h2>Ilmoituksen sisältö</h2>
                             <div class="webflow-style-input">
-                                <input type="text" placeholder="Ilmoituksen sisältö..." id="content">
+                                <input type="text" placeholder="Ilmoituksen tekstisisältö..." id="content">
                             </div>
                             <div class="attachment-container">
                                 <h2>Ilmoituksen liitteet</h2>
-                                <div class="att-item">
-                                    <h1 id="index">1.</h1>
-                                    <h3>Liitteen tyyppi</h3>
-                                    <select id="attachment-type">
-                                        <option value="0">Linkki</option>
-                                        <option value="1">Tiedosto</option>
-                                    </select>
-                                    <div class="category-sub-item" id="0">
-                                        <div class="webflow-style-input">
-                                            <input type="text" placeholder="Liitteen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(30,this)">
-                                            <p>30</p>
-                                        </div>
-                                        <div class="webflow-style-input">
-                                            <input type="text" placeholder="Liitteen linkki..." id="link">
-                                        </div>
-                                    </div>
-                                    <div class="category-sub-item" id="1">
-                                        <div class="webflow-style-input">
-                                            <input type="text" placeholder="Liitteen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(30,this)">
-                                            <p>30</p>
-                                        </div>
-                                        <div class="pdf-container">
-                                            <div class="item">
-                                                <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
-                                                <div class="close">
-                                                    <img src="./img/close.png" alt="Poista ilmoitus">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="file" name="Lisää tiedosto" id="files">
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <button type="button">Lisää toinen liite</button>
+                        <button type="button" id="add-attachment">Lisää toinen liite</button>
                     </div>
 
                     <div id="links" class="item">
                         <div class="webflow-style-input">
-                            <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
-                            <p>50</p>
-                        </div>
-                        <div>
-                            <h2>Ilmoituksen ajankohta</h2>
-                            <img src="./img/clock.png" alt="Aloitus">
-                            <input type="date" id="start-date">
-                            <img src="./img/clock.png" alt="Lopetus">
-                            <input type="date" id="end-date">
-                        </div>
-                        <div class="webflow-style-input">
                             <input class="" type="email" placeholder="Linkin osoite..."></input>
                         </div>
                     </div>
+
                     <button type="button" id="submit">
                         <img src="./img/save.png" alt="Tallenna">
                         Tallenna uusi ilmoitus
@@ -453,6 +414,7 @@
 
     <!-- all viewable activities are here -->
     <div class="overlay-container" style="display:none;">
+    <!--
         <div class="item">
             <div class="content">
                 <div class="left">
@@ -477,6 +439,7 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
 
 </body>

@@ -1,13 +1,9 @@
 {
-    "titlecard_title": "Keilahalli avoinna koko kesän",
+    "titlecard_title": "Mikkelin Keilahalli auki koko kesän",
     "titlecard_subtitle": "",
     "activities": [
         "aamukeilaus-30.09.2021",
-        "kevatkiekaus-30.09.2021",
-        "testi lorem-30.09.2021",
-        "testi2-30.09.2021",
-        "testi-2-30.09.2021",
-        "testi23-30.09.2021"
+        "kevatkiekaus-30.09.2021"
     ],
     "gallery": [
         "001.jpg",
@@ -72,5 +68,7 @@
         "Hyvä palvelu. Lapset viihtyi",
         "Hyvä paikka ja hyvää palvelua.",
         "Onnistuneet 10-vuotis synttärit vietettiin keilailun ja herkkujen kera. Suosittelen👍"
-    ]
+    ],
+    "titlescard_title": "LOREM",
+    "titlescard_subtitle": "IPSUM"
 }
