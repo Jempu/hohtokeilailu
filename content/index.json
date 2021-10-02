@@ -3,7 +3,11 @@
     "titlecard_subtitle": "",
     "activities": [
         "aamukeilaus-30.09.2021",
-        "kevatkiekaus-30.09.2021"
+        "kevatkiekaus-30.09.2021",
+        "usa-02.10.2021",
+        "link-test-02.10.2021",
+        "link-test2-02.10.2021",
+        "testiilmoitus-02.10.2021"
     ],
     "gallery": [
         "001.jpg",
@@ -68,7 +72,5 @@
         "Hyvä palvelu. Lapset viihtyi",
         "Hyvä paikka ja hyvää palvelua.",
         "Onnistuneet 10-vuotis synttärit vietettiin keilailun ja herkkujen kera. Suosittelen👍"
-    ],
-    "titlescard_title": "LOREM",
-    "titlescard_subtitle": "IPSUM"
+    ]
 }

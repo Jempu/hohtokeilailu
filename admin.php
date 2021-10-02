@@ -1,3 +1,9 @@
+<?php
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Cache-Control: no-cache");
+header("Pragma: no-cache");
+?>
+
 <!DOCTYPE html>
 <!-- © Suunnitellut & toteuttanut Ikatyros NY 2021 -->
 <html lang="fi">
@@ -6,6 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
     <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-admin-round.png" type="image/x-icon">
     <title>Mikkelin Keilahalli - Admin</title>
     <link rel="stylesheet" href="./css/admin.css">
@@ -42,7 +49,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -65,7 +72,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -88,7 +95,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -111,7 +118,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -134,7 +141,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -157,7 +164,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -180,7 +187,7 @@
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
-                            <img src="./img/musical.png" alt="Hohtokeilaus">
+                            <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
                             :
                             <input type="number" min="0" max="59" placeholder="00">
@@ -222,7 +229,6 @@
                             <img src="./img/bowler.png" alt="Hohto">
                             <div>
                                 <h2>Hohtokeilaus</h2>
-                                <h3>Ti - La 16.00 - 22.00</h3>
                             </div>
                             <div>
                                 <div class="price">
@@ -235,7 +241,6 @@
                             <img src="./img/day.png" alt="Päivä">
                             <div>
                                 <h2>Päivä</h2>
-                                <h3>Ti - Pe 12.00 - 17.00</h3>
                             </div>
                             <div>
                                 <div class="price">
@@ -248,7 +253,6 @@
                             <img src="./img/night.png" alt="Ilta">
                             <div>
                                 <h2>Ilta</h2>
-                                <h3>Ti - Pe 17.00 - 20.00</h3>
                             </div>
                             <div>
                                 <div class="price">
@@ -261,7 +265,6 @@
                             <img src="./img/calendar.png" alt="Viikonloppu">
                             <div>
                                 <h2>Viikonloppu</h2>
-                                <h3>Ti - Pe 12.00 - 17.00</h3>
                             </div>
                             <div>
                                 <div class="price">
@@ -316,7 +319,7 @@
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
                             </div>
-                            <img src="./img/musical.png" alt="Hohtohinta">
+                            <img src="./img/notes.png" alt="Hohtohinta">
                             <div class="price">
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
@@ -332,7 +335,7 @@
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €
                             </div>
-                            <img src="./img/musical.png" alt="Hohtohinta">
+                            <img src="./img/notes.png" alt="Hohtohinta">
                             <div class="price">
                                 <input type="number" name="" id="" min="0" placeholder="0">
                                 €

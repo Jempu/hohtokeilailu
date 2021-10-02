@@ -3,7 +3,7 @@ $(function () {
     if (nav == null) return;
     const burger = $(nav).find('.burger');
     const mobileSideBar = $(nav).find('.mobile-side-bar');
-    
+
     // links
     linkUrls = {
         onlineScoring: "http://onlinescore.qubicaamf.com/?idcenter=7054",
@@ -38,8 +38,8 @@ $(function () {
     });
 
     function setBarrel(index) {
-        if (responsiveBarrel.selectedCategory != -1 && responsiveBarrel.selectedCategory != index) return;
-        responsiveBarrel.setCategory(index);
+        if (barrel.selectedCategory != -1 && barrel.selectedCategory != index) return;
+        barrel.setCategory(index);
     }
 
     $(links).each(function (i, l) {
@@ -123,7 +123,7 @@ $(function () {
             }
         });
     });
-    
+
     // burger and side-bar
     let sideBarActive = true;
     function setSideBar(val) {
@@ -131,6 +131,13 @@ $(function () {
         $(mobileSideBar).get(0).setAttribute('enabled', sideBarActive);
     }
     setSideBar(sideBarActive);
+    // hide sidebar on link click
+    $(mobileSideBar).find('.column .link').each(function (i, l) {
+        $(l).on('click', function () {
+            setSideBar(sideBarActive);
+            toggleBurgerIcon();
+        });
+    });
 
     // burger.js
     var isBurgerOpen = false, canBurgerOpen = true;
@@ -191,7 +198,7 @@ $(function () {
             }, 800);
         }, 300);
     }
-    
+
     $(burger).on('click', function () {
         setSideBar(sideBarActive);
         toggleBurgerIcon();

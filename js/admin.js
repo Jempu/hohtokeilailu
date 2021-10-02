@@ -1,25 +1,12 @@
 const html = $('html');
 
-function post(path, params, method = 'post') {
-    // The rest of this code assumes you are not using a library.
-    // It can be made less verbose if you use one.
-    const form = document.createElement('form');
-    form.method = method;
-    form.action = path;
-    for (const key in params) {
-        if (params.hasOwnProperty(key)) {
-            const hiddenField = document.createElement('input');
-            hiddenField.type = 'hidden';
-            hiddenField.name = key;
-            hiddenField.value = params[key];
-
-            form.appendChild(hiddenField);
-        }
-    }
-    document.body.appendChild(form);
-    form.submit();
+function post(body, file = '') {
+    const f = file == '' ? './admin/admin_post.php' : file;
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", f, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    xhr.send(JSON.stringify(body));
 }
-
 
 function addInputLogic(inputs, arr) {
     var currKey;
@@ -143,7 +130,7 @@ function addPreviewToGallery(type, src, parent, deletable = false) {
 function removePreview(item, src) {
     const t = item.parentNode;
     t.parentNode.removeChild(t);
-    post('./admin/gallery_post.php', { gallery_remove_media: src.split('/').pop() });
+    post({ gallery_remove_media: src.split('/').pop() }, './admin/gallery_post.php');
 }
 
 $(function () {
@@ -201,14 +188,10 @@ $(function () {
                     }
                 } else arr.push('');
             }
-            var arr2 = [];
+            var weekdays = [];
             for (let i = 0; i < arr.length; i += 4)
-                arr2.push(arr[i].length != 0 ? `${arr[i]}.${arr[i + 1]},${arr[i + 2]}.${arr[i + 3]}` : '');
-            var output = JSON.stringify({ days: arr2 });
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", './admin/admin_post.php', true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.send(output);
+                weekdays.push(arr[i].length != 0 ? `${arr[i]}.${arr[i + 1]},${arr[i + 2]}.${arr[i + 3]}` : '');
+            post({ days:weekdays });
         });
     });
 
@@ -249,15 +232,10 @@ $(function () {
 
     // save new titlecard's titles
     $(titleForm).find('button[type="button"]').on('click', function () {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", './admin/admin_post.php', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.send(JSON.stringify({
-            titles: {
-                title: $(titleForm).find('input#title-main').val(),
-                subtitle: $(titleForm).find('input#title-sub').val()
-            }
-        }));
+        post({ titles:{
+            title:$(titleForm).find('input#title-main').val(),
+            subtitle:$(titleForm).find('input#title-sub').val()
+        }});
     });
 
     $(pricingForm).find('button[type="button"]').on('click', function () {
@@ -265,33 +243,31 @@ $(function () {
             return Number.parseInt(
                 $(pricingForm).find(`#${id} input`).eq(index).val());
         }
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", './admin/admin_post.php', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.send(JSON.stringify({
-            pricing: {
-                birthday_small: {
-                    normal: f('birthday_small'),
-                    hohto: f('birthday_small', 1)
-                },
-                birthday_big: {
-                    normal: f('birthday_big'),
-                    hohto: f('birthday_big', 1)
-                },
-                hohto: f('hohto'),
-                day: f('day'),
-                night: f('night'),
-                weekend: f('weekend'),
-                equipment: f('equipment'),
-                snooker: f('snooker'),
-                discount: f('discount')
-            }
-        }));
+        post({ pricing:{
+            birthday_small: {
+                normal: f('birthday_small'),
+                hohto: f('birthday_small', 1)
+            },
+            birthday_big: {
+                normal: f('birthday_big'),
+                hohto: f('birthday_big', 1)
+            },
+            hohto: f('hohto'),
+            day: f('day'),
+            night: f('night'),
+            weekend: f('weekend'),
+            equipment: f('equipment'),
+            snooker: f('snooker'),
+            discount: f('discount')
+        }});
     });
 
     // activity
     const activityView = $(panel).find('.content .activities .activity-view')
     // load already existing activities
+    function closeOverlay() {
+        setOverlayContainer("");
+    }
     function setOverlayContainer(item) {
         if (item != "") {
             overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
@@ -318,7 +294,7 @@ $(function () {
     }
     setOverlayContainer("");
     const directory = './content/activities/';
-    function createActivityItem(folder, item, title, date,
+    function addActivityItem(folder, item, title, date,
         content, headerImg, dateStatus, type, files, links) {
         // container item
         const e = document.createElement('div');
@@ -343,7 +319,7 @@ $(function () {
         $(e).find('.content').on('click', function () {
             switch (type) {
                 case 'Linkki-ilmoitus':
-                    window.open('');
+                    window.open(links);
                     break;
                 default:
                     setOverlayContainer(item);
@@ -351,21 +327,12 @@ $(function () {
             }
         });
         $(e).find('.control h2#delete').on('click', function () {
-            deleteActivityItem(e, item);
+            removeActivity(e, item);
         });
         // overlay item
         const o = document.createElement('div');
         o.className = 'item';
         o.id = item;
-        // links
-        function getAnchors(links) {
-            if (links === undefined) return '';
-            var output = '';
-            links.forEach(e => {
-                output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
-            });
-            return output;
-        }
         function getFiles(v) {
             if (v === undefined || v.length == 0) return '';
             var output = '';
@@ -394,6 +361,15 @@ $(function () {
                 </div>
             ` : '';
         }
+        if (type == 'Linkki-ilmoitus') return;
+        function getLinks(links) {
+            if (links === undefined) return '';
+            var output = '';
+            links.forEach(e => {
+                output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
+            });
+            return output;
+        }
         o.innerHTML = `
             <div class="item">
                 <div class="content">
@@ -402,7 +378,7 @@ $(function () {
                         <h1>${title}</h1>
                         <h2>${date}</h2>
                         <p>${content}</p>
-                        ${getAnchors(links)}
+                        ${getLinks(links)}
                     </div>
                     ${getFiles(files)}
                     <div class="close">
@@ -412,14 +388,14 @@ $(function () {
             </div>
         `;
         overlayContainer.append(o);
-        // On overlay item click close overlay window
         $(o).find('.close').on('click', function () {
-            setOverlayContainer("");
+            closeOverlay();
         });
     }
 
-    function deleteActivityItem(e, id) {
-        console.log(e, id);
+    function removeActivity(e, id) {
+        $(e).remove();
+        post({ remove_activity:id });
     }
     
     fetch('./content/index.json').then(v => v.json()).then(data => {
@@ -434,15 +410,16 @@ $(function () {
                 // title
                 const vtitle = child['title'];
                 const vimg = child['header-image'] != ''
-                    ? `<img src="${folder}${child['header-image']}" alt="Ei Kansikuvaa" />`
+                    ? `<img src="${folder}${child['header-image']}" alt="Ilmoituksen kansikuva" />`
                     : '<img alt="Ei Kansikuvaa" />';
 
                 let vfiles = child['files'];
-                let vlink = child['links'];
+                let vlinks = child['type'] != 'link' 
+                    ? child['links']
+                    : child['link'];
 
                 const vcontent = child['content'] != '' ? child['content'] : 'Tapahtumalla ei ole kuvausta.';
-
-                const dateStatus = getDateStatus(vdateStart, vdateEnd, 'abc', 'fi');
+                const vdateStatus = getDateStatus(vdateStart, vdateEnd, 'abc', 'fi');
 
                 // create the default activity item, on click open overlay
                 // create the link activity item, on click open url
@@ -453,8 +430,8 @@ $(function () {
                         case 'link': return 'Linkki-ilmoitus';
                     }
                 }
-                createActivityItem(folder, item, vtitle, vdate, vcontent, vimg, dateStatus,
-                    getType(child['type']), vfiles, vlink);
+                addActivityItem(folder, item, vtitle, vdate, vcontent, vimg,
+                    vdateStatus, getType(child['type']), vfiles, vlinks);
             });
         });
     });
@@ -496,17 +473,17 @@ $(function () {
 
     // create a new activity to the database
     function postNewActivity() {
-        const title = $(currentActivityForm).find('input#title').val();
+        const title = $(activityForm).find('input#title').val();
         if (title == '') {
             alert('Ilmoituksissa täytyy olla otsikko.');
             return;
         }
-        const startDate = $(currentActivityForm).find('input#start-date').val();
+        const startDate = $(activityForm).find('input#start-date').val();
         if (startDate == '') {
             alert('Ilmoituksissa täytyy olla alkamispäivä.');
             return;
         }
-        const endDate = $(currentActivityForm).find('input#end-date').val();
+        const endDate = $(activityForm).find('input#end-date').val();
         if (startDate == '') {
             alert('Ilmoituksissa täytyy olla loppumispäivä.');
             return;
@@ -517,7 +494,7 @@ $(function () {
         output.title = title;
         const sdate = moment(startDate).format('DD.MM.YYYY');
         output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
-        const coverImage = $(currentActivityForm).find('input#cover-image-file-input')[0].files[0];
+        const coverImage = $(activityForm).find('input#cover-image-file-input')[0].files[0];
         if (coverImage) {
             output.header_image = coverImage.name;
             attachments.push(coverImage);
@@ -527,20 +504,21 @@ $(function () {
             output.content = $(currentActivityForm).find('input#content').val();
             // additional attachment files if not linkForm
             output.files = [];
-            function getC(item) {
+            output.links = [];
+            function getFileDetails(item) {
                 return {
                     text: $(item).find('input#title').val(),
                     link: $(item).find('input#link').val()
                 };
             }
             categorySubItem.find('.attachment-container').each(function (i, l) {
-                output.files.push(getC(l));
+                output.files.push(getFileDetails(l));
             });
         } else {
             output.link = "https://www.ikatyros.com";
         }
         console.log(processed_title, attachments, output);
-        if (output != null) return;
+        if (output == null) return;
         fetch('./content/index.json').then(v => v.json()).then(v => {
             var isSameName = false;
             for (let i = 0; i < v['activities'].length; i++) {
@@ -549,15 +527,8 @@ $(function () {
                 isSameName = true;
                 break;
             }
-            if (!isSameName) {
-                // const xhr = new XMLHttpRequest();
-                // xhr.open("POST", './admin/admin_post.php', true);
-                // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                // xhr.send(JSON.stringify({
-                //     add_activity: output,
-                //     title: processed_title
-                // }));
-            } else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
+            if (!isSameName) post({ add_activity:output, title:processed_title });
+            else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
         });
     }
     $(activityForm).find('button[type="button"]#submit').on('click', function () {
