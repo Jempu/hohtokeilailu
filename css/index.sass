@@ -1,3 +1,5 @@
+@import url('./main.css');
+
 $gmapHeight: 24vw
 // Carousel
 $monitorHeight: 47vw
@@ -1132,6 +1134,9 @@ $barrelHeight: 44vw
                     line-height: 35px
                     text-align: center
                     color: #FFFFFF
+                    list-style: none
+                    .mobile
+                        display: none
                 ul
                     position: absolute
                     width: auto
@@ -1228,11 +1233,14 @@ $barrelHeight: 44vw
                 height: 5rem
                 margin: 1rem
         .reviews
-            width: 40vw
+            width: 32vw
             display: grid
-            grid-template-areas: "a3 a3 a3" "b3 c3 d3" "e3 e3 e3" "f3 f3 f3"
+            grid-template-areas: "a3 a3" "b3 c3" "e3 e3" "f3 f3"
             padding: 0 2rem
             text-align: center
+            justify-content: center
+            justify-items: center
+            align-items: center
             h1
                 &.title
                     font-size: calc( 14px + 1.4vw )
@@ -1253,20 +1261,20 @@ $barrelHeight: 44vw
                     width: 220px
                 img
                     filter: sepia(80%) hue-rotate(80deg)
-            .refresh-btn
-                grid-area: d3
-                height: 100%
-                display: grid
-                align-items: center
-                justify-items: center
-                cursor: pointer
-                img
-                    height: 2.5rem
-                    width: 2.5rem
-                &:hover
-                    transform: scale(105%) rotateZ(-2deg)
-                    & > img
-                        animation: refreshBtnAnim 2.45s ease-in-out infinite
+            // .refresh-btn
+            //     grid-area: d3
+            //     height: 100%
+            //     display: grid
+            //     align-items: center
+            //     justify-items: center
+            //     cursor: pointer
+            //     img
+            //         height: 2.5rem
+            //         width: 2.5rem
+            //     &:hover
+            //         transform: scale(105%) rotateZ(-2deg)
+            //         & > img
+            //             animation: refreshBtnAnim 2.45s ease-in-out infinite
             h2
                 grid-area: e3
                 font-size: 26px
@@ -1278,11 +1286,11 @@ $barrelHeight: 44vw
         .amount
             grid-area: c2
 
-@keyframes refreshBtnAnim
-    0%
-        transform: rotate(0)
-    100%
-        transform: rotate(360deg)
+// @keyframes refreshBtnAnim
+//     0%
+//         transform: rotate(0)
+//     100%
+//         transform: rotate(360deg)
 
 @media screen and (max-width: 880px)
     .toggle-gallery
@@ -1294,10 +1302,10 @@ $barrelHeight: 44vw
             display: inline
             .satisfied, .reviews, .amount
                 left: 46%
-                transform: translateX(-50%) rotateZ(-2deg)
+                transform: translateX(-50%) rotateZ(0)
                 padding: 0
                 &:hover
-                    transform: translateX(-50%) scale(105%) rotateZ(-2deg)
+                    transform: translateX(-50%) scale(105%) rotateZ(0)
             .satisfied, .amount
                 width: 150px
                 height: 150px
@@ -1804,14 +1812,12 @@ $barrelHeight: 44vw
                     margin-left: 0
                     margin-right: 0
                     text-align: center
-                &#schedule
-                    left: 50%
-                    transform: translateX(-53%)
     .stats
         &::before
             content: none
         .content
             background: linear-gradient(123.03deg, rgba(0, 0, 0, 0.2) 24.49%, rgba(0, 0, 0, 0.153125) 41.94%, rgba(0, 0, 0, 0) 71%), linear-gradient(91.03deg, #396AB4 0.3%, #8C7EC4 23.84%, #7E67DA 55.58%, #8073D0 80.15%, #396AB4 98.58%)
+            transform: none
             &::before, &::after
                 content: none
 
@@ -1872,6 +1878,36 @@ $barrelHeight: 44vw
             width: 100vw
             .split
                 width: 100vw
+            .item#schedule
+                width: 100%
+                height: 580px
+                .d1
+                    width: 100%
+                    left: 0
+                .d2
+                    display: none
+                #title
+                    img
+                        display: none
+                    h1
+                        width: 100%
+                        left: 0
+                        text-align: center
+                        font-size: 28px
+                .days
+                    left: 20px
+                    .normal
+                        display: none
+                    .mobile
+                        display: block
+                ul
+                    left: 74px
+                .note
+                    width: 90%
+                    left: 6.25%
+                    font-size: 22px
+                    top: 470px
+                    text-align: center
     .pricing
         .container
             .benefit

@@ -339,7 +339,7 @@ function smoothScroll(top = 0, delay = 800, hash = null) {
 const scheduleJsonPath =  './content/opening.json';
 var scheduleArray = [];
 
-function createSchedule(ul, title = null) {
+function createSchedule(dayList, ul, title = null) {
     function addOpenToTitle() {
         if (title == null) return;
         const day = new Date().getDay() - 1;
@@ -348,6 +348,7 @@ function createSchedule(ul, title = null) {
     }
     if (scheduleArray.length == 0) {
         fetch(scheduleJsonPath).then(v => v.json()).then(data => {
+            // reset mobile day list's innerhtml
             for (let i = 0; i < data['days'].length; i += 2) {
                 const n =  data['days'][i];
                 const h =  data['days'][i + 1];
@@ -358,6 +359,8 @@ function createSchedule(ul, title = null) {
                 const t2 = splN[1];
                 const hohto = h.length > 0 ? ` (Hohto ${splH[0]} - ${splH[1]})` : '';
                 li.innerHTML = n.length > 0 ? `${t1} - ${t2}${hohto}` : 'SULJETTU';
+                // add __ as padding to day list
+                $(dayList).children().eq(Math.round(i / 2)).css({ marginBottom: h.length > 0 ? '36px' : '0px' });
                 $(ul).append(li);
                 scheduleArray.push({ open: t1, close: t2 });
             }

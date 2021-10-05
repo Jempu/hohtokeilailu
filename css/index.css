@@ -1,3 +1,4 @@
+@import url("./main.css");
 root {
   --barrel-width: 100%;
   --barrel-height: 100%;
@@ -1090,7 +1091,7 @@ root {
 .barrel .body#synttarit .pan .mat .item:nth-child(1) {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
+  -ms-grid-column-span: 2;
   grid-area: a3;
 }
 
@@ -1855,6 +1856,11 @@ root {
   line-height: 35px;
   text-align: center;
   color: #FFFFFF;
+  list-style: none;
+}
+
+.about-container .content .item#schedule .days .mobile {
+  display: none;
 }
 
 .about-container .content .item#schedule ul {
@@ -2008,19 +2014,26 @@ root {
 }
 
 .stats .content .reviews {
-  width: 40vw;
+  width: 32vw;
   display: -ms-grid;
   display: grid;
-      grid-template-areas: "a3 a3 a3" "b3 c3 d3" "e3 e3 e3" "f3 f3 f3";
+      grid-template-areas: "a3 a3" "b3 c3" "e3 e3" "f3 f3";
   padding: 0 2rem;
   text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .stats .content .reviews h1.title {
   font-size: calc( 14px + 1.4vw);
   -ms-grid-row: 1;
   -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
+  -ms-grid-column-span: 2;
   grid-area: a3;
   font-family: Sansita-ExtraBold;
 }
@@ -2059,39 +2072,10 @@ root {
           filter: sepia(80%) hue-rotate(80deg);
 }
 
-.stats .content .reviews .refresh-btn {
-  -ms-grid-row: 2;
-  -ms-grid-column: 3;
-  grid-area: d3;
-  height: 100%;
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  justify-items: center;
-  cursor: pointer;
-}
-
-.stats .content .reviews .refresh-btn img {
-  height: 2.5rem;
-  width: 2.5rem;
-}
-
-.stats .content .reviews .refresh-btn:hover {
-  -webkit-transform: scale(105%) rotateZ(-2deg);
-          transform: scale(105%) rotateZ(-2deg);
-}
-
-.stats .content .reviews .refresh-btn:hover > img {
-  -webkit-animation: refreshBtnAnim 2.45s ease-in-out infinite;
-          animation: refreshBtnAnim 2.45s ease-in-out infinite;
-}
-
 .stats .content .reviews h2 {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
+  -ms-grid-column-span: 2;
   grid-area: e3;
   font-size: 26px;
   margin: 1.5rem 0 0.5rem 0;
@@ -2100,7 +2084,7 @@ root {
 .stats .content .reviews h3 {
   -ms-grid-row: 4;
   -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
+  -ms-grid-column-span: 2;
   grid-area: f3;
   font-size: 22px;
   margin: 0.5rem;
@@ -2110,28 +2094,6 @@ root {
   -ms-grid-row: 1;
   -ms-grid-column: 3;
   grid-area: c2;
-}
-
-@-webkit-keyframes refreshBtnAnim {
-  0% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@keyframes refreshBtnAnim {
-  0% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
 }
 
 @media screen and (max-width: 880px) {
@@ -2147,13 +2109,13 @@ root {
   }
   .stats .content .satisfied, .stats .content .reviews, .stats .content .amount {
     left: 46%;
-    -webkit-transform: translateX(-50%) rotateZ(-2deg);
-            transform: translateX(-50%) rotateZ(-2deg);
+    -webkit-transform: translateX(-50%) rotateZ(0);
+            transform: translateX(-50%) rotateZ(0);
     padding: 0;
   }
   .stats .content .satisfied:hover, .stats .content .reviews:hover, .stats .content .amount:hover {
-    -webkit-transform: translateX(-50%) scale(105%) rotateZ(-2deg);
-            transform: translateX(-50%) scale(105%) rotateZ(-2deg);
+    -webkit-transform: translateX(-50%) scale(105%) rotateZ(0);
+            transform: translateX(-50%) scale(105%) rotateZ(0);
   }
   .stats .content .satisfied, .stats .content .amount {
     width: 150px;
@@ -2958,16 +2920,13 @@ root {
     margin-right: 0;
     text-align: center;
   }
-  .about-container .content .item#schedule {
-    left: 50%;
-    -webkit-transform: translateX(-53%);
-            transform: translateX(-53%);
-  }
   .stats::before {
     content: none;
   }
   .stats .content {
     background: linear-gradient(123.03deg, rgba(0, 0, 0, 0.2) 24.49%, rgba(0, 0, 0, 0.153125) 41.94%, rgba(0, 0, 0, 0) 71%), linear-gradient(91.03deg, #396AB4 0.3%, #8C7EC4 23.84%, #7E67DA 55.58%, #8073D0 80.15%, #396AB4 98.58%);
+    -webkit-transform: none;
+            transform: none;
   }
   .stats .content::before, .stats .content::after {
     content: none;
@@ -3049,6 +3008,45 @@ root {
   }
   .about-container .content .split {
     width: 100vw;
+  }
+  .about-container .content .item#schedule {
+    width: 100%;
+    height: 580px;
+  }
+  .about-container .content .item#schedule .d1 {
+    width: 100%;
+    left: 0;
+  }
+  .about-container .content .item#schedule .d2 {
+    display: none;
+  }
+  .about-container .content .item#schedule #title img {
+    display: none;
+  }
+  .about-container .content .item#schedule #title h1 {
+    width: 100%;
+    left: 0;
+    text-align: center;
+    font-size: 28px;
+  }
+  .about-container .content .item#schedule .days {
+    left: 20px;
+  }
+  .about-container .content .item#schedule .days .normal {
+    display: none;
+  }
+  .about-container .content .item#schedule .days .mobile {
+    display: block;
+  }
+  .about-container .content .item#schedule ul {
+    left: 74px;
+  }
+  .about-container .content .item#schedule .note {
+    width: 90%;
+    left: 6.25%;
+    font-size: 22px;
+    top: 470px;
+    text-align: center;
   }
   .pricing .container .benefit {
     position: relative;

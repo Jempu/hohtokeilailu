@@ -485,13 +485,20 @@ $sidePieceMove: 195%
         right: 0
         top: 0
         position: absolute
+        display: grid
+        justify-items: center
+        align-items: center
+        align-content: center
         opacity: 0
         z-index: 45
-        background-color: blue
+        background: linear-gradient(142.06deg, #0652C5 10.04%, #D4418E 78.1%)
         pointer-events: none
         transition: width 0.5s ease-out, opacity 0.5s ease-out
         &[enabled="true"]
             opacity: 1
+        .link
+            margin: 0.8em 0
+            font-size: 1.52em
 
 // rotate middle 90deg
 @keyframes burgerIconAnim1

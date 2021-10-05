@@ -683,9 +683,17 @@ img {
   right: 0;
   top: 0;
   position: absolute;
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
   opacity: 0;
   z-index: 45;
-  background-color: blue;
+  background: linear-gradient(142.06deg, #0652C5 10.04%, #D4418E 78.1%);
   pointer-events: none;
   -webkit-transition: width 0.5s ease-out, opacity 0.5s ease-out;
   transition: width 0.5s ease-out, opacity 0.5s ease-out;
@@ -693,6 +701,11 @@ img {
 
 .nav .mobile-side-bar[enabled="true"] {
   opacity: 1;
+}
+
+.nav .mobile-side-bar .link {
+  margin: 0.8em 0;
+  font-size: 1.52em;
 }
 
 @-webkit-keyframes burgerIconAnim1 {

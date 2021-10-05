@@ -199,7 +199,11 @@ $(function () {
 
 
 /// Opening Hours ///
-createSchedule($(schedule).find('ul'), $(schedule).find('#title').find('h1').get(0));
+createSchedule(
+    $(schedule).find('.days .mobile'),
+    $(schedule).find('ul'),
+    $(schedule).find('#title').find('h1').get(0)
+);
 
 
 /// Arvostelut ///
@@ -213,15 +217,9 @@ function setReviews(data) {
     });
     function setReview() {
         if (reviews.length == 0) return;
-        typewriter1.deleteAll().typeString(`"${getArrayRandom(reviews)}"`).pauseFor(12000).callFunction(function () {
+        typewriter1.deleteAll().typeString(`"${getArrayRandom(reviews)}"`).pauseFor(5000).callFunction(function () {
             setReview();
         }).start();
-    }
-    if (reviewObj != null) {
-        reviews = data;
-        reviewObj.find('.refresh-btn').on('click', function () {
-            setReview();
-        });
     }
     setReview();
 }
@@ -346,7 +344,7 @@ function setActivities(data) {
     }
     data.forEach(item => {
         const folder = `${directory}${item}/`;
-        loadJson(`${folder}/activity.json`, function (child) {
+        loadJson(`${folder}activity.json`, function (child) {
             // date
             const vdate = getDisplayableDate(child['date'], true, 3);
             const vdateStart = getDisplayableDate(child['date'], false, 1, false);

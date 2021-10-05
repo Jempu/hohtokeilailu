@@ -41,21 +41,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -64,21 +64,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -87,21 +87,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -110,21 +110,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -133,21 +133,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -156,21 +156,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -179,21 +179,21 @@ header("Pragma: no-cache");
                         <div class="time">
                             <img src="./img/bowling-pins.png" alt="Normikeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                         <div class="time">
                             <img src="./img/notes.png" alt="Hohtokeilaus">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                             <img id="middle" src="./img/triple-arrow-right.png" alt="Auki -> Kiinni">
                             <input type="number" min="0" max="23" placeholder="23">
-                            :
+                            .
                             <input type="number" min="0" max="59" placeholder="00">
                         </div>
                     </li>
@@ -353,7 +353,7 @@ header("Pragma: no-cache");
                 <div class="activity-view"></div>
                 <form id="activities">
                     <div class="top">
-                        <h1>Luo uusi ilmoitus</h1>
+                        <h1>Luo uusi ilmoitus:</h1>
                         <select id="activity-select">
                             <option value="0">Tapahtumailmoitus</option>
                             <option value="1">Kilpailuilmoitus</option>
