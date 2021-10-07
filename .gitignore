@@ -5,3 +5,7 @@
 
 *.htaccess
 *.htpasswd
+
+.content/activities/
+.content/opening.json
+.content/index.json

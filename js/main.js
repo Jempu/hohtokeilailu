@@ -323,6 +323,14 @@ function getPlaceInGrid(columnCount, rowCount, index) {
 
 
 // ------------------------------------ 
+//// Create Activity_Item to the parent
+// ------------------------------------ 
+
+
+
+
+
+// ------------------------------------ 
 //// COORDINATOR
 // ------------------------------------ 
 function smoothScroll(top = 0, delay = 800, hash = null) {

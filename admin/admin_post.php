@@ -35,17 +35,16 @@ function setPricing($data)
     reloadPage();
 }
 
-function addFileToFolder($file, $path)
+function addFileToFolder($file, $path, $prefix = "")
 {
     // only allow a file with these extensions pass
-    $valid_extensions = array('jpeg', 'jpg', 'png', 'gif');
+    $valid_extensions = array('pdf', 'jpeg', 'jpg', 'png', 'gif', 'mp4', 'mov');
     if (isset($file)) {
         $tmp = $file['tmp_name'];
         $img = $file['name'];
         // get uploaded file's extension
         if (in_array(strtolower(pathinfo($img, PATHINFO_EXTENSION)), $valid_extensions)) {
-            // randomize the name in case of files with the same name
-            move_uploaded_file($tmp, $path . "/" . strtolower(rand(2, 100) . $img));
+            move_uploaded_file($tmp, $path . DIRECTORY_SEPARATOR . $prefix . $img);
         }
     }
 }
@@ -62,10 +61,6 @@ function addActivity($activityData, $folder_name)
     }
     // add the activity.json file
     file_put_contents($main_json, json_encode($json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-    // // add titlecard image and other attachments files to the folder
-    // if (isset($attachments)) {
-    //     addFileToFolder($attachments, $dir);
-    // }
     // create the activity.json file for storing all the data for the activity
     $file = fopen($dir . '/' . 'activity.json', "w");
     fwrite($file, json_encode($activityData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
@@ -119,11 +114,16 @@ if (isset($data)) {
     }
 }
 
-// file uploading
-if ($_FILES['ac_file']['error'] == 0) {
-    $dir = "../content/activities/".$_POST['ac_folder'];
+// header_image and attached file uploading
+if (isset($_FILES['file_0'])) {
+    $dir = "../content/activities/" . $_POST['activity_folder'];
     if (is_dir($dir) === false) {
         mkdir($dir);
     }
-    addFileToFolder($_FILES['ac_file'], $dir);
+    $a = 0;
+    while (isset($_FILES["file_$a"])) {
+        addFileToFolder($_FILES["file_$a"], $dir, $_POST["randomized_$a"]);
+        $a++;
+    }
 }
+?>

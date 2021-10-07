@@ -318,11 +318,10 @@ img {
 }
 
 .overlay-container .item .content .left .header-img {
-  background: url("../img/photos/bowling-shoes.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 23rem;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
   -webkit-transform: translateX(-2%);
           transform: translateX(-2%);
   border-radius: 18px;

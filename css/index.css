@@ -2981,6 +2981,9 @@ root {
   .titlecard .monitor .container .item {
     width: 800px;
   }
+  .titlecard .slider ul li button {
+    bottom: 14%;
+  }
   .pricing .snooker {
     height: 230px;
   }

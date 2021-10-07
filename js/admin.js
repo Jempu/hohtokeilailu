@@ -3,6 +3,11 @@ const html = $('html');
 function post(body, file = '') {
     const f = file == '' ? './admin/admin_post.php' : file;
     const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 200) {
+            location.reload();
+        }
+    }
     xhr.open("POST", f, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
     xhr.send(JSON.stringify(body));
@@ -337,19 +342,20 @@ $(function () {
             if (v === undefined || v.length == 0) return '';
             var output = '';
             v.forEach(e => {
-                switch (e['link'].split('.').pop()) {
+                const src = folder + e;
+                switch (e.toString().split('.').pop()) {
                     case 'pdf':
-                        output += `<iframe src="${folder}${e['link']}" frameborder="0"></iframe>`;
+                        output += `<iframe src="${src}" frameborder="0"></iframe>`;
                         break;
                     case 'png':
                     case 'jpg':
                     case 'jpeg':
                     case 'gif':
-                        output += `<img src="${folder}${e['text']}" />`
+                        output += `<img src="${src}" />`
                         break;
                     case 'mp4':
                     case 'mov':
-                        output += `<video src="${folder}${e['text']} controls"></video>`
+                        output += `<video src="${src} controls"></video>`
                         break;
                 }
             });
@@ -374,7 +380,7 @@ $(function () {
             <div class="item">
                 <div class="content">
                     <div class="left">
-                        <div class="header-img"></div>
+                        ${headerImg}
                         <h1>${title}</h1>
                         <h2>${date}</h2>
                         <p>${content}</p>
@@ -397,25 +403,59 @@ $(function () {
         $(e).remove();
         post({ remove_activity:id });
     }
+
+
+    // fetch all the items from index.json
     
     fetch('./content/index.json').then(v => v.json()).then(data => {
         data['activities'].forEach(item => {
             const folder = `${directory}${item}/`;
             fetch(`${folder}activity.json`).then(v => v.json()).then(child => {
                 // date
-                newFunction(child, folder, addActivityItem, item);
+                const vdate = getDisplayableDate(child['date'], true, 3);
+                const vdateStart = getDisplayableDate(child['date'], false, 1, false);
+                const vdateEnd = getDisplayableDate(child['date'], false, 2, false);
+                const vdateStatus = getDateStatus(vdateStart, vdateEnd, 'abc', 'fi');
+            
+                // title
+                const vtitle = child['title'];
+                const vimg = child['header_image'] != ''
+                    ? `<img src="${folder}${child['header_image']}" class="header-img" alt="Ilmoituksen kansikuva" />`
+                    : '<h1 alt="Ei Kansikuvaa"></h1>';
+            
+                const vfiles = child['files'];
+                const vlinks = child['links'] ?? child['link'] ?? '';
+            
+                const vcontent = child['content'] != ''
+                    ? child['content']
+                    : 'Tapahtumalla ei ole kuvausta.';
+            
+                // create the default activity item, on click open overlay
+                // create the link activity item, on click open url
+                function getType(v) {
+                    switch (v) {
+                        case 'event': return 'Tapahtumailmoitus';
+                        case 'competition': return 'Kilpailuilmoitus';
+                        case 'link': return 'Linkki-ilmoitus';
+                    }
+                }
+                addActivityItem(folder, item, vtitle, vdate, vcontent, vimg,
+                    vdateStatus, getType(child['type']), vfiles, vlinks);
             });
         });
     });
-    const defaultActivityForm = $(activityForm).find('#default');
+    
+
+
+    const defaultSection = $(activityForm).find('#default');
     const linkActivityForm = $(activityForm).find('#links');
     var currentActivityIndex = -1;
-    var currentActivityForm = null;
+    var currentSectionType = null;
     function setActivityForm(index) {
-        defaultActivityForm.attr('active', index < 2 ? 'true' : 'false');
+        defaultSection.attr('active', index < 2 ? 'true' : 'false');
         linkActivityForm.attr('active', index == 2 ? 'true' : 'false');
         currentActivityIndex = index;
-        currentActivityForm = index < 2 ? defaultActivityForm : linkActivityForm;
+        currentSectionType = index < 2 ? defaultSection : linkActivityForm;
     }
     $(panel).find('#activity-select').change(function () {
         setActivityForm($(this).val());
@@ -430,16 +470,24 @@ $(function () {
         }
         reader.readAsDataURL($(this)[0].files[0]);
     });
+    // if header_image file input already set
+    if ($(activityForm).find('input#cover-image-file-input')[0].files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $(activityForm).find('.cover-image img').attr('src', e.target.result);
+        }
+        reader.readAsDataURL($(activityForm).find('input#cover-image-file-input')[0].files[0]);
+    }
     
     // attachments
     // set correct input for attachment file
-    var categorySubItem = null;
+    var attachmentSection = null;
     function setAttachmentForm(e, v) {
         const categorySubItem0 = $(e).find('.category-sub-item#0');
         const categorySubItem1 = $(e).find('.category-sub-item#1');
         $(categorySubItem0).css({ display: v == 0 ? 'block' : 'none' });
         $(categorySubItem1).css({ display: v == 1 ? 'block' : 'none' });
-        categorySubItem = v == 0 ? categorySubItem0 : categorySubItem1;
+        attachmentSection = v == 0 ? categorySubItem0 : categorySubItem1;
     }
     setAttachmentForm(0);
 
@@ -460,30 +508,52 @@ $(function () {
         const endDate = $(activityForm).find('input#end-date').val();
         if (log(endDate, 'Ilmoituksissa täytyy olla loppumispäivä.')) return;
         let output = {};
-        let attachments = { header_image:null, files:[] };
+        let attachments = [];
+        let random_attachments = [];
         output.type = currentActivityIndex == 0 ? "event" : currentActivityIndex == 1 ? "competition" : "link";
         output.title = title;
         const sdate = moment(startDate).format('DD.MM.YYYY');
         output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
         const coverImage = $(activityForm).find('input#cover-image-file-input')[0].files[0];
         if (coverImage) {
-            output.header_image = coverImage.name;
-            attachments.header_image = coverImage;
+            const rand = Math.random().toString(16).substr(2, 4);
+            output.header_image = rand + "-" + coverImage.name;
+            attachments.push(coverImage);
+            random_attachments.push(rand + "-");
         }
         const processed_title = (`${title.toLowerCase()}-${sdate}`).replaceAll(' ', '-');
-        if (currentActivityForm != linkActivityForm) {
-            output.content = $(currentActivityForm).find('input#content').val();
-            // names for the additional attachment files if not linkForm
-            // files
+        if (currentSectionType == defaultSection) {
+            output.content = $(defaultSection).find('textarea#content').val();
+            // if not linkForm, add links and additional attachment files to activity.json
             output.files = [];
-            categorySubItem.find('.attachment-container').each(function (i, l) {
-                output.files.push({
-                    text: $(l).find('input#title').val(),
-                    link: $(l).find('input#link').val()
-                });
-            });
-            // links
             output.links = [];
+            defaultSection.find('.attachment-container .att-item').each(function (i, l) {
+                // check the attachment's type from select
+                switch ($(l).find('select').val()) {
+                    case '0':
+                        var wlink = $(l).find('input#link').val();
+                        // if given link doesn't have http in-front
+                        if (!wlink.includes('http://') && !wlink.includes('https://')) {
+                            wlink = 'http://' + wlink;
+                        }
+                        output.links.push({
+                            text: $(l).find('input#title').val(),
+                            link: wlink
+                        });
+                        break;
+                    case '1':
+                        const inp = $(l).find('input[type=file]')[0];
+                        const file = inp.files.length ? inp.files[0] : "";
+                        // add 4 letters long random string in-front of name
+                        const rand = Math.random().toString(16).substr(2, 4);
+                        if (file != '') {
+                            output.files.push(rand + "-" + file.name);
+                            attachments.push(file);
+                            random_attachments.push(rand + "-");
+                        }
+                        break;
+                }
+            });
         } else {
             output.link = "https://www.ikatyros.com";
         }
@@ -505,23 +575,26 @@ $(function () {
                     title:processed_title
                 });
                 // additional file upload post request
-                var attachment_form = new FormData();
-                if (attachments.header_image != null) {
-                    attachment_form.append('ac_folder', processed_title);
-                    attachment_form.append('ac_file', attachments.header_image);
-                }
-                $.ajax({
-                    url: './admin/admin_post.php',
-                    dataType: 'text',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: attachment_form,
-                    type: 'post',
-                    success: function(php) {
-                        console.log(php);
+                if (attachments.length > 0) {
+                    var attachment_form = new FormData();
+                    attachment_form.append('activity_folder', processed_title);
+                    for (let i = 0; i < attachments.length; i++) {
+                        attachment_form.append(`file_${i}`, attachments[i]);
+                        attachment_form.append(`randomized_${i}`, random_attachments[i]);
                     }
-                });
+                    $.ajax({
+                        url: './admin/admin_post.php',
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: attachment_form,
+                        type: 'POST',
+                        success: function(php) {
+                            // location.reload();
+                        }
+                    });
+                }
             }
             else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
         });
@@ -532,7 +605,7 @@ $(function () {
 
     // add new attachments
     var attachmentsArr = [];
-    const attachmentContainer = $(defaultActivityForm).find('.attachment-container');
+    const attachmentContainer = $(defaultSection).find('.attachment-container');
     function getAttachmentItemHtml() {
         return `
             <div class="top">
@@ -564,7 +637,7 @@ $(function () {
                     </div>
                 </div>
                 <input type="file" name="Lisää tiedosto" id="files">
-                <p>Tukee .pdf, .png, .jpg, .jpeg, .gif, .mp4 ja .mov -tiedostoja.</p>
+                <p>Tukee .pdf, .png, .jpg, .jpeg, .gif, .mp4 ja .mov -muotoja.</p>
             </div>
         `;
     }
@@ -622,35 +695,3 @@ $(function () {
     });
     resizePanel(false);
 });
-
-function newFunction(child, folder, addActivityItem, item) {
-    const vdate = getDisplayableDate(child['date'], true, 3);
-    const vdateStart = getDisplayableDate(child['date'], false, 1, false);
-    const vdateEnd = getDisplayableDate(child['date'], false, 2, false);
-
-    // title
-    const vtitle = child['title'];
-    const vimg = child['header_image'] != ''
-        ? `<img src="${folder}${child['header_image']}" alt="Ilmoituksen kansikuva" />`
-        : '<img alt="Ei Kansikuvaa" />';
-
-    let vfiles = child['files'];
-    let vlinks = child['type'] != 'link'
-        ? child['links']
-        : child['link'];
-
-    const vcontent = child['content'] != '' ? child['content'] : 'Tapahtumalla ei ole kuvausta.';
-    const vdateStatus = getDateStatus(vdateStart, vdateEnd, 'abc', 'fi');
-
-    // create the default activity item, on click open overlay
-    // create the link activity item, on click open url
-    function getType(v) {
-        switch (v) {
-            case 'event': return 'Tapahtumailmoitus';
-            case 'competition': return 'Kilpailuilmoitus';
-            case 'link': return 'Linkki-ilmoitus';
-        }
-    }
-    addActivityItem(folder, item, vtitle, vdate, vcontent, vimg,
-        vdateStatus, getType(child['type']), vfiles, vlinks);
-}

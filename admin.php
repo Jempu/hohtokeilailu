@@ -366,6 +366,7 @@ header("Pragma: no-cache");
                         <h2>Ilmoituksen kansikuva</h2>
                         <img src="./img/missing-image.jpg" alt="Kansikuva">
                         <input type="file" id="cover-image-file-input">
+                        <p>Tukee .png, .jpg, .jpeg ja .gif -muotoja</p>
                     </div>
                     <div class="webflow-style-input">
                         <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
@@ -381,9 +382,7 @@ header("Pragma: no-cache");
 
                     <div id="default" class="item">
                         <div>
-                            <div class="webflow-style-input">
-                                <input type="text" placeholder="Ilmoituksen tekstisisältö..." id="content">
-                            </div>
+                            <textarea id="content" cols="30" rows="10" placeholder="Ilmoituksen tekstisisältö..."></textarea>
                             <div class="attachment-container">
                                 <h2>Ilmoituksen liitteet</h2>
                             </div>
