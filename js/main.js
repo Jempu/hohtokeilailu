@@ -1,3 +1,18 @@
+const activityDirectory = './content/activities/';
+
+function post(body, file = '') {
+    const f = file == '' ? './admin/admin_post.php' : file;
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 200) {
+            location.reload();
+        }
+    }
+    xhr.open("POST", f, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    xhr.send(JSON.stringify(body));
+}
+
 // If the current page is the 'index.html' or 'index.php'
 function isIndex() {
     let loc = window.location.pathname.split('/')[2];
@@ -321,13 +336,200 @@ function getPlaceInGrid(columnCount, rowCount, index) {
     };
 }
 
+function setOverlay(itemId) {
+    if (itemId != '') {
+        overlayContainer.css({
+            display: 'grid',
+            transform: 'translateX(-50%) scale(100%)'
+        });
+        overlayContainer.children().each(function (i, l) {
+            $(l).css({ display: l.id == itemId ? 'grid' : 'none' });
+        });
+        overlayContainer.animate({ now: 108 }, {
+            duration: '400',
+            step: function (now, fx) {
+                $(this).css('transform', `translateX(-50%) scale(${now}%)`);
+            }
+        });
+    } else {
+        overlayContainer.animate({ now: 0 }, {
+            duration: '400',
+            step: function (now, fx) {
+                $(this).css('transform', `translateX(-50%) scale(${now}%)`);
+            },
+            complete: function () {
+                overlayContainer.css({ display: 'none' });
+            }
+        });
+    }
+}
+function closeOverlay() {
+    setOverlay("");
+}
 
-// ------------------------------------ 
-//// Create Activity_Item to the parent
-// ------------------------------------ 
-
-
-
+function loadActivityItemsFromJson(itemTypeRules, callback) {
+    if (itemTypeRules == null || itemTypeRules.length == 0) return;
+    function removeActivityContainerItem(e, id) {
+        $(e).remove();
+        post({ remove_activity:id });
+    }
+    fetch(`./content/index.json`).then(v => v.json()).then(data => {
+        data['activities'].forEach(item => {
+            const folder = `${activityDirectory}${item}/`;
+            fetch(`${folder}activity.json`).then(v => v.json()).then(child => {
+                // if is set to specific types
+                var container = $('body');
+                var useExpire = false;
+                var addControls = false;
+                if (itemTypeRules['all'] == null) {
+                    rules = itemTypeRules[child['type']];
+                    container = rules['parent'] ?? $('body');
+                    useExpire = rules['expire'] ?? false;
+                    addControls = rules['control'] ?? false;
+                }
+                const date = getDisplayableDate(child['date'], true, 3);
+                const dateStart = getDisplayableDate(child['date'], false, 1, false);
+                const dateEnd = getDisplayableDate(child['date'], false, 2, false);
+                const dateStatus = getDateStatus(dateStart, dateEnd, 'abc', 'fi');
+                const title = child['title'];
+                const poster = child['header_image'] != ''
+                    ? `<img src="${folder}${child['header_image']}" class="header-img" alt="Ilmoituksen kansikuva" />`
+                    : '<h1>Ei Kansikuvaa</h1>';
+                const files = child['files'];
+                const links = child['links'] ?? child['link'] ?? '';
+                const content = child['content'] != ''
+                    ? child['content']
+                    : 'Tapahtumalla ei ole kuvausta.';
+                // create the default activity item, on click open overlay
+                // create the link activity item, on click open url
+                function getType(v) {
+                    switch (v) {
+                        case 'event': return 'Tapahtumailmoitus';
+                        case 'competition': return 'Kilpailuilmoitus';
+                        case 'link': return 'Linkki-ilmoitus';
+                    }
+                }
+                const type = getType(child['type']);
+                // create activity container item
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'activity-item';
+                itemDiv.id = item;
+                itemDiv.setAttribute('onclick', child['type'] == 'link' ? `window.open('${links}');` : `setOverlay('${item}');`);
+                itemDiv.innerHTML =
+                // if admin, display all in the activity view with controls
+                addControls ? `
+                    <div class="content">
+                        ${poster}
+                        <div class="bo" id="a"></div>
+                        <h2>${title}</h2>
+                        <h3>${date}</h3>
+                        <div class="bo" id="b"></div>
+                    </div>
+                    <div class="control">
+                        <h1>${type}</h1>
+                        <h1>Tapahtuma ${dateStatus}</h1>
+                        <h2 id="delete">Poista Ilmoitus<h2>
+                    </div>
+                `
+                // all activity items displayed look the same
+                : `
+                    <div class="content">
+                        ${poster}
+                        <div class="bo" id="a"></div>
+                        <h2>${title}</h2>
+                        <h3>${date}</h3>
+                        <div class="bo" id="b"></div>
+                    </div>
+                `;
+                // itemDiv.onclick = function() {
+                //     switch (child['type']) {
+                //         case 'link':
+                //             window.open(links);
+                //             break;
+                //         default:
+                //             setOverlay(item);
+                //             break;
+                //     }
+                // }
+                $(itemDiv).find('.control h2#delete').on('click', function () {
+                    removeActivityContainerItem(itemDiv, item);
+                });
+                (useExpire
+                    ? $(container).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? container
+                    : container).append(itemDiv);
+                // overlay item
+                const overDiv = document.createElement('div');
+                overDiv.className = 'item';
+                overDiv.id = item;
+                function getFiles(v) {
+                    if (v === undefined || v.length == 0) return '';
+                    var output = '';
+                    v.forEach(e => {
+                        const src = folder + e;
+                        switch (e.toString().split('.').pop()) {
+                            case 'pdf':
+                                output += `<iframe src="${src}" frameborder="0"></iframe>\n`;
+                                break;
+                            case 'png':
+                            case 'jpg':
+                            case 'jpeg':
+                            case 'gif':
+                                output += `<img src="${src}" />\n`
+                                break;
+                            case 'mp4':
+                            case 'mov':
+                                output += `<video src="${src} controls"></video>\n`
+                                break;
+                        }
+                    });
+                    return output != '' ? `
+                        <div class="right">
+                            <div class="media">
+                                ${output}
+                            </div>
+                        </div>
+                    ` : '';
+                }
+                if (type == 'Linkki-ilmoitus') return;
+                function getLinks(links) {
+                    if (links === undefined) return '';
+                    var output = '';
+                    links.forEach(e => {
+                        output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
+                    });
+                    return output;
+                }
+                overDiv.innerHTML = `
+                    <div class="item">
+                        <div class="content">
+                            <div class="left">
+                                ${poster}
+                                <h1>${title}</h1>
+                                <h2>${date}</h2>
+                                <p>${content}</p>
+                                ${getLinks(links)}
+                            </div>
+                            ${getFiles(files)}
+                            <div class="close">
+                                <img src="./img/close.png" alt="Sulje näkymä">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $(overlayContainer).append(overDiv);
+                $(overDiv).find('.close').on('click', function () {
+                    closeOverlay();
+                });
+            });
+        });
+    }).then(v => {
+        if (callback !== undefined) {
+            setTimeout(() => {
+                callback();
+            }, 1100);
+        }
+    });
+}
 
 
 // ------------------------------------ 
@@ -394,4 +596,5 @@ $(window).on('load', function () {
         $(this).css({ display: 'none' });
         setPageScrolling(true);
     });
+    closeOverlay();
 });

@@ -786,7 +786,6 @@ $barrelHeight: 44vw
                     transform: translateX(-50%)
             .container
                 width: 100%
-                height: auto
                 position: relative
                 overflow: hidden
                 &#a
@@ -794,85 +793,16 @@ $barrelHeight: 44vw
                 &#b
                     background: rgba(14, 10, 27, 0.75)
                 .content
-                    width: auto
-                    height: auto
+                    width: 100%
                     padding: 1.3vw
                     position: relative
-                    display: grid
-                    justify-items: center
+                    justify-content: center
                     align-content: center
                     gap: 5%
-                    grid-auto-flow: column
+                    display: flex
+                    flex-direction: row
+                    flex-wrap: wrap
                     margin: auto
-                    .item
-                        cursor: pointer
-                        width: 16vw
-                        height: 22vw
-                        position: relative
-                        background: #FFFFFF
-                        border: 9px solid #406194
-                        box-sizing: border-box
-                        border-radius: 70px 70px 90px 90px
-                        text-align: center
-                        z-index: 0
-                        transition: transform 0.3s ease-out
-                        pointer-events: fill
-                        &:hover
-                            transform: scale(110%)
-                        &::before
-                            content: ''
-                            width: 98%
-                            height: 98.5%
-                            position: absolute
-                            top: 0
-                            left: 0
-                            margin: 1%
-                            background: linear-gradient(132deg, #1CB5E0 0%, #000851 100%)
-                            border-radius: 60px 60px 80px 80px
-                            z-index: 0
-                        img, h2, h3, .bo
-                            margin-top: 0.7vw
-                            position: relative
-                            z-index: 1
-                            pointer-events: none
-                        img
-                            max-width: 90%
-                            height: 7vw
-                            border-radius: 12px
-                        h2
-                            margin: 0
-                            font-size: 1.7vw
-                        h3
-                            font-size: 1.2vw
-                            margin-bottom: 1.55vw
-                        .bo
-                            width: 100%
-                            height: 5px
-                            position: relative
-                            height: 1vw
-                            &::before, &::after
-                                content: ''
-                                position: absolute
-                                left: 50%
-                                height: 3px
-                                transform: translateX(-50%)
-                                background-color: #ccc
-                                border-radius: 10px
-                                opacity: 0.5
-                            &#a
-                                &::before
-                                    top: 0
-                                    width: 80%
-                                &::after
-                                    top: 25%
-                                    width: 90%
-                            &#b
-                                &::before
-                                    top: 0
-                                    width: 90%
-                                &::after
-                                    top: 25%
-                                    width: 80%
         // &[ika-responsive="pc"] .item-container &#proshop
         &#proshop
             background-color: #0D1137
@@ -1448,33 +1378,6 @@ $barrelHeight: 44vw
         text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5)
     .container
         display: flex
-        .item
-            cursor: pointer
-            margin: 1rem
-            width: 20rem
-            height: auto
-            text-align: center
-            position: relative
-            display: inline-block
-            background-color: #ACABAB
-            border-radius: 12px
-            overflow: hidden
-            transition: transform 0.3s ease-in-out
-            &:hover
-                transform: scale(104%)
-            &:nth-child(2)
-                grid-area: b
-            &:nth-child(3)
-                grid-area: c
-            &:nth-child(4)
-                grid-area: d
-            h1, h2, img
-                pointer-events: none
-            img
-                width: 100%
-                max-height: 70%
-            h1, h2
-                margin: 1rem 0 1rem 0
     iframe
         margin-left: 2rem
         box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5)
@@ -1690,6 +1593,15 @@ $barrelHeight: 44vw
             background-size: 100% 100%
             transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+            &:hover
+                transform: translateX(-50%) rotate(0) scale(110%)
+                & ~ .item
+                    filter: brightness(0.95) contrast(120%)
+                    .price
+                        .normal
+                            opacity: 0.15
+                        .reduced
+                            opacity: 1
             h1
                 font-size: 50px
     .contact
@@ -1917,8 +1829,6 @@ $barrelHeight: 44vw
                 right: 0
                 margin: 0 auto
                 transform: none
-                &:hover
-                    
             .cards
                 grid-template-areas: "c2" "a2" "b2" "d2" "d2" "e2"
                 justify-items: center

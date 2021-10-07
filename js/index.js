@@ -1,5 +1,7 @@
-const html = $("html");
+const html = $('html');
+const body = $('body');
 const overlayContainer = $('.overlay-container');
+
 const titlecard = $('.titlecard');
 const aboutContainer = $('.about-container');
 const schedule = $(aboutContainer).find('#schedule');
@@ -225,172 +227,130 @@ function setReviews(data) {
 }
 
 /// Activities ///
-const compContainer = $('.submarine').children();
 
-// titlecard events
+// activities in titlecard's window
 const titlecardEventLog = $(titlecard).find('.events').get(0);
-// footer events
+
+// activities in default activity container
 const mainCategoryEvents = $('.main-category.events .container').get(0);
-// comp list events
+
+// activities under competition's activities' container
+const compContainer = $('.submarine').children();
 var competitionItems = [0, 0, 0];
 
-function setActivities(data) {
-    function setOverlayContainer(item) {
-        const v = item != "";
-        setPageScrolling(v);
-        if (v) {
-            overlayContainer.css({ display: 'block', transform: 'translateX(-50%) scale(100%)' });
-            overlayContainer.children().each(function(i, l) {
-                $(l).css({ display: l.id == item ? 'block' : 'none' });
-            });
-            overlayContainer.animate({ now: 108 }, {
-                duration: '400',
-                step: function (now, fx) {
-                    $(this).css('transform', `translateX(-50%) scale(${now}%)`);
-                }
-            });
-        } else {
-            overlayContainer.animate({ now: 0 }, {
-                duration: '400',
-                step: function (now, fx) {
-                    $(this).css('transform', `translateX(-50%) scale(${now}%)`);
-                },
-                complete: function () {
-                    overlayContainer.css({ display: 'none' });
-                    html.css({ overflowX: 'clip', overflowY: 'scroll' });
-                }
-            });
-        }
+// function setActivities(data) {
+//     function createTitlecardEventItem(item, title, date) {
+//         if (titlecardEventLog == null) return;
+//         if (titlecardEventLog.children.length < 3) {
+//             let titleEventItem = document.createElement('div');
+//             titleEventItem.className = 'item';
+//             titleEventItem.innerHTML = `
+//                 <h3>${title}</h3>
+//                 <h4>${date}</h4>
+//             `;
+//             titlecardEventLog.appendChild(titleEventItem);
+//         }
+//     }
+//     function createFooterEventItem(item, img, title, date) {
+//         if (mainCategoryEvents == null) return;
+//         let footerEventItem = document.createElement('div');
+//         footerEventItem.className = 'item';
+//         footerEventItem.innerHTML = `
+//             ${img}
+//             <h1>${title}</h1>
+//             <h2>${date}</h2>
+//         `;
+//         $(footerEventItem).on('click', function () {
+//             setOverlayContainer(item);
+//         });
+//         mainCategoryEvents.appendChild(footerEventItem);
+//     }
+//     function createCompetitionContainerItem(
+//         item, title, date, content, headerImg, dateStatus) {
+//         // container item
+//         const cel = document.createElement('div');
+//         cel.className = 'item';
+//         cel.id = item;
+//         date1 = `<h3>${date}</h3>`;
+//         cel.innerHTML = `
+//             ${headerImg}
+//             <div class="bo" id="a"></div>
+//             <h2>${title}</h2>
+//             ${date1}
+//             <div class="bo" id="b"></div>
+//         `;
+//         competitionItems[dateStatus]++;
+//         $('.submarine').find(`.content#${['a', 'b', 'c'][dateStatus]}`).append(cel);
+//         // On container item click open overlay window
+//         $(cel).on('click', function () {
+//             setOverlayContainer(item);
+//         });
+//         // overlay item
+//         const oel = document.createElement('div');
+//         oel.className = 'item';
+//         oel.id = item;
+//         oel.innerHTML = `
+//             <div class="item">
+//                 <div class="content">
+//                     <div class="left">
+//                         <div class="header-img"></div>
+//                         <h1>${title}</h1>
+//                         <h2>${date}</h2>
+//                         <p>${content}</p>
+//                         <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
+//                         <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
+//                     </div>
+//                     <div class="right">
+//                         <div class="media">
+//                             <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
+//                             <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
+//                         </div>
+//                     </div>
+//                     <div class="close">
+//                         <img src="./img/close.png" alt="Sulje näkymä">
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//     }
+
+//     //         const dateStatus = getDateStatus(vdateStart, vdateEnd);
+//     //         switch (child['type']) {
+//     //             case 'event':
+//     //             case 'link':
+//     //                 // display an event if it's only happening currently or in future
+//     //                 switch (dateStatus) {
+//     //                     case 0:
+//     //                     case 1:
+//     //                         createTitlecardEventItem(item, vtitle, vdate);
+//     //                         createFooterEventItem(item, vimg, vtitle, vdate);
+//     //                         break;
+//     //                 }
+//     //                 break;
+//     //             case 'competition':
+//     //                 createTitlecardEventItem(item, vtitle, vdate);
+//     //                 createFooterEventItem(item, vimg, vtitle, vdate);
+//     //                 createCompetitionContainerItem(item, vtitle, vdate, vcontent, vimg, dateStatus);
+//     //                 break;
+//     //         }
+//     //     });
+//     // });
+
+loadActivityItemsFromJson({
+    "event": {
+        parent: mainCategoryEvents
+    },
+    "link": {
+        parent: mainCategoryEvents
+    },
+    "competition": {
+        parent: $('.submarine'),
+        expire: true
     }
-    setOverlayContainer("");
-    const directory = './content/activities/';
-    function createTitlecardEventItem(item, title, date) {
-        if (titlecardEventLog == null) return;
-        if (titlecardEventLog.children.length < 3) {
-            let titleEventItem = document.createElement('div');
-            titleEventItem.className = 'item';
-            titleEventItem.innerHTML = `
-                <h3>${title}</h3>
-                <h4>${date}</h4>
-            `;
-            titlecardEventLog.appendChild(titleEventItem);
-        }
-    }
-    function createFooterEventItem(item, img, title, date) {
-        if (mainCategoryEvents == null) return;
-        let footerEventItem = document.createElement('div');
-        footerEventItem.className = 'item';
-        footerEventItem.innerHTML = `
-            ${img}
-            <h1>${title}</h1>
-            <h2>${date}</h2>
-        `;
-        $(footerEventItem).on('click', function () {
-            setOverlayContainer(item);
-        });
-        mainCategoryEvents.appendChild(footerEventItem);
-    }
-    function createCompetitionContainerItem(item, title, date, content, headerImg, dateStatus) {
-        // container item
-        const cel = document.createElement('div');
-        cel.className = 'item';
-        cel.id = item;
-        date1 = `<h3>${date}</h3>`;
-        cel.innerHTML = `
-            ${headerImg}
-            <div class="bo" id="a"></div>
-            <h2>${title}</h2>
-            ${date1}
-            <div class="bo" id="b"></div>
-        `;
-        competitionItems[dateStatus]++;
-        $('.submarine').find(`.content#${['a', 'b', 'c'][dateStatus]}`).append(cel);
-        // On container item click open overlay window
-        $(cel).on('click', function () {
-            setOverlayContainer(item);
-        });
-        // overlay item
-        const oel = document.createElement('div');
-        oel.className = 'item';
-        oel.id = item;
-        oel.innerHTML = `
-            <div class="item">
-                <div class="content">
-                    <div class="left">
-                        <div class="header-img"></div>
-                        <h1>${title}</h1>
-                        <h2>${date}</h2>
-                        <p>${content}</p>
-                        <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
-                        <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
-                    </div>
-                    <div class="right">
-                        <div class="media">
-                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
-                            <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
-                        </div>
-                    </div>
-                    <div class="close">
-                        <img src="./img/close.png" alt="Sulje näkymä">
-                    </div>
-                </div>
-            </div>
-        `;
-        overlayContainer.append(oel);
-        // On overlay item click close overlay window
-        $(oel).find('.close').on('click', function () {
-            setOverlayContainer("");
-        });
-    }
-    data.forEach(item => {
-        const folder = `${directory}${item}/`;
-        loadJson(`${folder}activity.json`, function (child) {
-            // date
-            const vdate = getDisplayableDate(child['date'], true, 3);
-            const vdateStart = getDisplayableDate(child['date'], false, 1, false);
-            const vdateEnd = getDisplayableDate(child['date'], false, 2, false);
-
-            // title
-            const vtitle = child['title'];
-            const vimg = child['header-image'] != ''
-                ? `<img src="${folder}${child['header-image']}" alt="Tapahtumakuva">`
-                : '';
-
-            let vfiles = child['files'];
-            let vlink = child['links'];
-
-            const vcontent = child['content'] != '' ? child['content'] : 'Tapahtumalla ei ole kuvausta.';
-
-            const dateStatus = getDateStatus(vdateStart, vdateEnd);
-            switch (child['type']) {
-                case 'event':
-                case 'link':
-                    // display an event if it's only happening currently or in future
-                    switch (dateStatus) {
-                        case 0:
-                        case 1:
-                            createTitlecardEventItem(item, vtitle, vdate);
-                            createFooterEventItem(item, vimg, vtitle, vdate);
-                            break;
-                    }
-                    break;
-                case 'competition':
-                    createTitlecardEventItem(item, vtitle, vdate);
-                    createFooterEventItem(item, vimg, vtitle, vdate);
-                    createCompetitionContainerItem(item, vtitle, vdate, vcontent, vimg, dateStatus);
-                    break;
-            }
-        });
-    });
-    setTimeout(() => {
-        $('.submarine').children().each(function (i, l) {
-            $(l).css({ display: $(l).find('.content').children()['length'] != 0 ? 'block' : 'none' });
-        });
-    }, 500);
-}
-
-// Load rolling image background for about section
-// createRollingImage('.about-container', 'img/about-roll', ['1.jpg', '3.jpg', '5.jpg', '7.jpg', '9.jpg', '11.jpg', '13.jpg', '15.jpg', '17.jpg', '19.jpg']);
+}, function () {
+    // Once all of the other data has been loaded, finally load the barrel.
+    barrel.start($('.barrel'));
+});
 
 // Create the responsive map
 $(function() {
@@ -409,10 +369,8 @@ $(function() {
     setCategory(false);
 });
 
-
 /// Load 'index.json' ///
 fetch(indexJsonPath).then(v => v.json()).then(data => {
-    setActivities(data['activities']);
     
     // add path to gallery photos
     if (galleryPath != '') {
@@ -496,6 +454,4 @@ $(window).on('load', function () {
     setTimeout(() => {
         setAnchors();
     }, 200);
-    // Once all of the other data has been loaded, finally load the barrel.
-    barrel.start($('.barrel'));
 });

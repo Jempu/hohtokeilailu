@@ -414,35 +414,7 @@ header("Pragma: no-cache");
         </div>
     </div>
 
-    <!-- all viewable activities are here -->
-    <div class="overlay-container" style="display:none;">
-    <!--
-        <div class="item">
-            <div class="content">
-                <div class="left">
-                    <div class="header-img"></div>
-                    <h1>
-                        Aamukeilaus nyt käynnissä. Tule mukaan!
-                    </h1>
-                    <p>
-                        Alkukilpailu 5.s EU. Rajaton uusinta. Tasoitukset 210-155 70%, maksimitasoitus 39p/s. Lämmittely 5 min. Kilpailumaksu 25€. Finaali lauantaina 4.9.2021 klo 12.00 alkaen. Finaaliin 20 parasta seuraavasti: 12 parasta 5.s EU tuloksella sekä 12 parhaan ulkopuolelta: paras B-luokan mies ja nainen, paras C-luokan mies ja nainen, paras D-luokan mies ja nainen sekä paras veteraanimies ja -nainen. Finaalin ensimäisessä osassa pelataan 5s. Am, jonka jälkeen ensimmäisen osion 6 parasta pelaa Round Robin kierroksen ilman sijoitussarjaa.
-                    </p>
-                    <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
-                    <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
-                </div>
-                <div class="right">
-                    <div class="media">
-                        <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
-                        <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
-                    </div>
-                </div>
-                <div class="close">
-                    <img src="./img/close.png" alt="Sulje näkymä">
-                </div>
-            </div>
-        </div>
-    -->
-    </div>
+    <div class="overlay-container" style="display:none;"></div>
 
 </body>
 
