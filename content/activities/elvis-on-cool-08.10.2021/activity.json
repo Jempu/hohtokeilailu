@@ -1,0 +1,20 @@
+{
+    "type": "event",
+    "title": "elvis on cool",
+    "date": "08.10.2021-09.10.2021",
+    "header_image": "e747-elvistelija.png",
+    "content": "One day all for one",
+    "files": [
+        "ec50-add almighty smile to jere.jpg"
+    ],
+    "links": [
+        {
+            "text": "ikaka",
+            "link": "http://www.ikatyros.com"
+        },
+        {
+            "text": "video",
+            "link": "https://www.youtube.com/watch?v=_vBVGjFdwk4"
+        }
+    ]
+}

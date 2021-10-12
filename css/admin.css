@@ -10,7 +10,6 @@
   font-family: Nunito;
   overflow: clip;
   z-index: 48;
-  background: -webkit-gradient(linear, left bottom, left top, from(#041f60), to(#041f60));
   background: linear-gradient(0deg, #041f60, #041f60);
   background-size: cover;
 }
@@ -20,71 +19,52 @@
 }
 
 .admin-panel[expanded="true"] .sidepanel .control {
-  -webkit-transform: rotateZ(180deg);
-          transform: rotateZ(180deg);
+  transform: rotateZ(180deg);
 }
 
 .admin-panel[expanded="true"] .sidepanel .control:hover {
-  -webkit-transform: scale(104%) rotateZ(180deg);
-          transform: scale(104%) rotateZ(180deg);
+  transform: scale(104%) rotateZ(180deg);
 }
 
 .admin-panel[expanded="true"] .content {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .admin-panel .sidepanel {
   width: 100%;
   height: 4.25rem;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   position: fixed;
   bottom: 0;
   left: 0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
   background-size: cover;
-  -webkit-transition: border-radius 0.4s ease-out;
   transition: border-radius 0.4s ease-out;
   z-index: 49;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  justify-content: start;
 }
 
 .admin-panel .sidepanel .home {
   width: 60%;
   height: 100%;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-panel .sidepanel .home img {
   height: 80%;
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
   cursor: pointer;
   pointer-events: all;
 }
 
 .admin-panel .sidepanel .home img:hover {
-  -webkit-transform: scale(104%);
-          transform: scale(104%);
+  transform: scale(104%);
 }
 
 .admin-panel .sidepanel .help {
-  display: -ms-grid;
   display: grid;
 }
 
@@ -100,16 +80,10 @@
   overflow-x: auto;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.2);
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .admin-panel .content h1, .admin-panel .content h2 {
@@ -139,8 +113,6 @@
 }
 
 .admin-panel .content .activities .top {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -158,19 +130,10 @@
 .admin-panel .content .activities .activity-view .item {
   width: 100%;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-panel .content .activities .activity-view .item .content {
@@ -184,19 +147,13 @@
   background-color: #154fad;
   border-radius: 12px;
   overflow: hidden;
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-  transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  -webkit-box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5);
-          box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5);
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5);
+  box-sizing: content-box;
 }
 
 .admin-panel .content .activities .activity-view .item .content:hover {
-  -webkit-transform: scale(104%);
-          transform: scale(104%);
+  transform: scale(104%);
 }
 
 .admin-panel .content .activities .activity-view .item .content h1, .admin-panel .content .activities .activity-view .item .content h2, .admin-panel .content .activities .activity-view .item .content img {
@@ -245,16 +202,9 @@
   width: 340px;
   position: relative;
   grid-area: a;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
   padding-top: 0;
 }
@@ -262,15 +212,9 @@
 .admin-panel .content form#schedule .title {
   width: 100%;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   padding-top: 0.6rem;
 }
 
@@ -300,15 +244,9 @@
   width: 100%;
   height: 42px;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   color: #fff;
 }
 
@@ -337,20 +275,11 @@
 }
 
 .admin-panel .content form#pricing {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   grid-area: b;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 2.5rem;
   margin-top: 1.2rem;
 }
@@ -366,8 +295,6 @@
   width: 90%;
   height: auto;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: 0.5rem 0;
 }
@@ -396,16 +323,9 @@
 
 .admin-panel .content form#activities {
   grid-area: c;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .admin-panel .content form#activities select {
@@ -421,11 +341,8 @@
 }
 
 .admin-panel .content form#activities .item#default .attachment-container .att-item .top {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 .admin-panel .content form#activities .item#default .attachment-container .att-item .top .close {
@@ -435,15 +352,11 @@
   right: 0.5rem;
   top: 0.5rem;
   cursor: pointer;
-  -webkit-transition: -webkit-transform 0.4s ease;
-  transition: -webkit-transform 0.4s ease;
   transition: transform 0.4s ease;
-  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }
 
 .admin-panel .content form#activities .item#default .attachment-container .att-item .top .close:hover {
-  -webkit-transform: scale(104%);
-          transform: scale(104%);
+  transform: scale(104%);
 }
 
 .admin-panel .content form#gallery {
@@ -451,13 +364,8 @@
   max-height: 95%;
   padding-top: 0;
   padding-bottom: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
   background-size: cover;
 }
@@ -492,15 +400,11 @@
   right: 0.5rem;
   top: 0.5rem;
   cursor: pointer;
-  -webkit-transition: -webkit-transform 0.4s ease;
-  transition: -webkit-transform 0.4s ease;
   transition: transform 0.4s ease;
-  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }
 
 .admin-panel .content form#gallery .content .item .close:hover {
-  -webkit-transform: scale(104%);
-          transform: scale(104%);
+  transform: scale(104%);
 }
 
 .admin-panel .content form#gallery .content .item img, .admin-panel .content form#gallery .content .item video {
@@ -531,8 +435,6 @@
 
 .admin-panel form .a-title {
   width: 100%;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
 }
 
@@ -579,15 +481,9 @@
 }
 
 .admin-panel button[type="button"] {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-panel button img {
@@ -601,13 +497,8 @@
 
 .admin-panel .webflow-style-input {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -627,17 +518,13 @@
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background-position: 0% 0%;
-  background: -webkit-gradient(linear, left top, right top, from(#B294FF), color-stop(#57E6E6), color-stop(#FEFFB8), color-stop(#57E6E6), color-stop(#B294FF), to(#57E6E6));
   background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
   background-size: 500% auto;
-  -webkit-animation: gradient 3s linear infinite;
-          animation: gradient 3s linear infinite;
+  animation: gradient 3s linear infinite;
 }
 
 .admin-panel .webflow-style-input input {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   color: #BFD2FF;
   font-size: 1.8rem;
   line-height: 2.4rem;
@@ -653,7 +540,6 @@
   font-size: 2.4rem;
   line-height: 2.4rem;
   vertical-align: middle;
-  -webkit-transition: color .25s;
   transition: color .25s;
 }
 
@@ -674,12 +560,10 @@
 .admin-panel select, .admin-panel input[type="date"], .admin-panel button[type="button"], .admin-panel input[type="file"] {
   padding: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 8px #999;
-          box-shadow: 2px 2px 8px #999;
+  box-shadow: 2px 2px 8px #999;
   background: #211630;
   color: #fff;
   outline: 2px rgba(255, 255, 255, 0.4) solid;
-  -webkit-transition: outline 0.3s ease-out;
   transition: outline 0.3s ease-out;
   border: none;
   display: inline-block;
@@ -701,7 +585,6 @@
   content: '<>';
   font: 11px "Consolas", monospace;
   color: #666;
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   right: 8px;
   top: 2px;
@@ -721,15 +604,6 @@
   position: absolute;
   pointer-events: none;
   display: block;
-}
-
-@-webkit-keyframes gradient {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100% 0;
-  }
 }
 
 @keyframes gradient {

@@ -1,51 +1,39 @@
 @font-face
     font-family: Montserrat
     src: url('./fonts/montserrat/Montserrat-Regular.ttf')
-
 @font-face
     font-family: Nunito
     src: url('./fonts/nunito/Nunito-Regular.ttf')
-
 @font-face
     font-family: NunitoSans
     src: url('./fonts/nunito-sans/NunitoSans-Regular.ttf')
-
 @font-face
     font-family: NunitoSans-Light
     src: url('./fonts/nunito-sans/NunitoSans-Light.ttf')
-
-    @font-face
+@font-face
     font-family: Sansita
     src: url('./fonts/sansita/Sansita-Regular.ttf')
-
 @font-face
     font-family: Sansita-ExtraBold
     src: url('./fonts/sansita/Sansita-ExtraBold.ttf')
-
 @font-face
     font-family: Sansita-ExtraBold-Italic
     src: url('./fonts/sansita/Sansita-ExtraBoldItalic.ttf')
-
 @font-face
     font-family: RedHatDisplay
     src: url('./fonts/red-hat-display/RedHatDisplay-Regular.ttf')
-
 @font-face
     font-family: Roboto
     src: url('./fonts/roboto/Roboto-Regular.ttf')
-
 @font-face
     font-family: Russo
     src: url('./fonts/russo-one/RussoOne-Regular.ttf')
-
 *
     padding: 0
     margin: 0
-
 html
     scroll-behavior: smooth
     overflow-x: clip
-
 body
     width: 99.3vw
     height: auto
@@ -60,30 +48,35 @@ body
     font-size: calc(0.75em + 1vmin)
     scrollbar-color: #668cb7 #303260 
 
+// Navbar
+$nav-height-full: 7.5rem
+$nav-height-minimized: 5rem
+// Mobile Burger Menu
+$burgerMenuZ: 10
+$burgerColor: #fff
+$sidePieceMove: 195%
+
 h1, h2, h3, h4, h5, h6
     cursor: default
-
 h1, h2, h3, h4, h5, h6, p, li
     color: #fff
-
 h1
-    font-size: calc(12px + 0.8vw)
-    
+    font-size: calc(18px + 0.8vw)
 h2
-    font-size: calc(8px + 0.8vw)
-
+    font-size: calc(16px + 0.8vw)
+h3
+    font-size: calc(14px + 0.8vw)
+h4, h5, h6, p
+    font-size: calc(12px + 0.8vw)
 ul
     list-style: none
-
 a
     color: #fff
     text-decoration: none
     &:hover
         text-decoration: underline
-
 img
     pointer-events: none
-
 .tt-bb
     position: relative
     &::before, &::after
@@ -103,7 +96,6 @@ img
     &.rr
         &::before, &::after
             border-radius: 5px
-
 .hover-image
     width: 100%
     height: 100%
@@ -114,7 +106,6 @@ img
         transform: scale(103%)
     img
         border-radius: 10px
-
 .lb
     position: relative
     width: 95%
@@ -125,7 +116,6 @@ img
     background-color: #ccc
     border-radius: 10px
     opacity: 0.3
-
 .header
     width: 100%
     height: auto
@@ -137,13 +127,15 @@ img
         padding: 0.4vw
         font-size: 1.8vw
         white-space: nowrap
-
 .varaa-btn
+    width: 75%
+    height: 80px
+    margin: 2rem auto
     cursor: pointer
     img
+        width: 85%
+        height: 100%
         pointer-events: none
-
-    
 .coordinator
     width: 2rem
     height: auto
@@ -178,8 +170,6 @@ img
             transform: scale(110%)
         img
             width: 100%
-
-    
 .overlay-container
     width: 100vw
     min-height: 100vh
@@ -247,6 +237,7 @@ img
                     text-decoration: underline
                     text-decoration-style: dotted
                     text-decoration-color: #fff
+                    white-space: nowrap
                     &:hover
                         text-decoration-style: solid
             .right
@@ -284,17 +275,6 @@ img
                     filter: hue-rotate(-30deg) brightness(1.3)
                 img
                     height: 100%
-
-
-// Navbar
-$nav-height-full: 7.5rem
-$nav-height-minimized: 5rem
-
-// Mobile Burger Menu
-$burgerMenuZ: 10
-$burgerColor: #fff
-$sidePieceMove: 195%
-
 .nav
     position: fixed
     top: 0
@@ -489,7 +469,6 @@ $sidePieceMove: 195%
         .link
             margin: 0.8em 0
             font-size: 1.52em
-
 // rotate middle 90deg
 @keyframes burgerIconAnim1
     from
@@ -525,9 +504,7 @@ $sidePieceMove: 195%
         transform: translateY(0)
     to
         transform: translateY(-$sidePieceMove)
-
 // REVERSE
-
 // move side pieces to middle
 @keyframes burgerIconAnim6L
     from
@@ -557,8 +534,6 @@ $sidePieceMove: 195%
         transform: rotate(90deg)
     to
         transform: rotate(0)
-
-
 // footer
 .footer
     width: 100%
@@ -742,10 +717,12 @@ $sidePieceMove: 195%
 .activity-item
     cursor: pointer
     pointer-events: all
-    width: 300px
+    min-width: 300px
+    width: calc( 200px + 6.5vw )
     position: relative
     display: inline-block
-    margin: 1rem
+    margin: 1vmin
+    padding: 1.8vmin
     overflow: hidden
     border: 9px solid #406194
     text-align: center
@@ -779,13 +756,13 @@ $sidePieceMove: 195%
         pointer-events: none
     img
         max-width: 90%
-        height: 7vw
+        max-height: 10rem
         border-radius: 12px
     h2
-        margin: 0
-        font-size: 1.7vw
+        margin: 0.8rem
+        font-size: calc(18px + 1vmin)
     h3
-        font-size: 1.2vw
+        font-size: calc(14px + 1vmin)
         margin-bottom: 1.55vw
     .bo
         width: 100%
@@ -858,7 +835,17 @@ $sidePieceMove: 195%
             width: 4rem
             height: 4rem
 
+.display-tablet, .display-mobile
+    display: none
+
 @media screen and (max-width: 600px)
+    .display
+        &.pc
+            display: none
+        &.tablet
+            display: none
+        &.mobile
+            display: block
     html
         scrollbar-width: none
         &::-webkit-scrollbar

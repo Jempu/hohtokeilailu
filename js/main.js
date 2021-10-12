@@ -288,27 +288,18 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
 }
 
 
-// Times need to be formatted as "9:26"
-function getIfOpen(openTime, closeTime, currentTime = null) {
-    var ct = currentTime, ctH = 0, ctM = 0;
-    const ot = openTime.split(':'), wt = closeTime.split(':');
+// Times need to be formatted as "9.26"
+function getIfOpen(openTime, closeTime, currentTime = null, timeSeparator = '.') {
+    let ct = currentTime, ctH = 0, ctM = 0;
+    const ot = openTime.split(timeSeparator), wt = closeTime.split(timeSeparator);
     const otH = ot[0], otM = ot[1], wtH = wt[0], wtM = wt[1];
-    // if null, use local time
     if (ct == null) {
         const d = new Date();
         ctH = d.getHours();
         ctM = d.getMinutes();
     }
-    if (ctH - otH >= 0) {
-        if (ctM - wtM > 0) {
-            if (wtH - ctH >= 0) {
-                if (wtM - ctM > 0) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
+    return (ctH - otH >= 0 && ctM - otM >= 0 && wtH - ctH > 0) 
+        && (wtH - ctH == 0 ? wtH - ctH == 0 && wtM - ctM >= 0 : true);
 }
 
 
@@ -367,14 +358,17 @@ function closeOverlay() {
     setOverlay("");
 }
 
-function loadActivityItemsFromJson(itemTypeRules, callback) {
+async function loadActivityItemsFromJson(itemTypeRules, callback) {
     if (itemTypeRules == null || itemTypeRules.length == 0) return;
     function removeActivityContainerItem(e, id) {
         $(e).remove();
         post({ remove_activity:id });
     }
     fetch(`./content/index.json`).then(v => v.json()).then(data => {
-        data['activities'].forEach(item => {
+        const dataActivities = data['activities'];
+        var loadedDataCount = 1;
+        const dataCount = dataActivities.length;
+        dataActivities.forEach(item => {
             const folder = `${activityDirectory}${item}/`;
             fetch(`${folder}activity.json`).then(v => v.json()).then(child => {
                 // if is set to specific types
@@ -394,7 +388,7 @@ function loadActivityItemsFromJson(itemTypeRules, callback) {
                 const title = child['title'];
                 const poster = child['header_image'] != ''
                     ? `<img src="${folder}${child['header_image']}" class="header-img" alt="Ilmoituksen kansikuva" />`
-                    : '<h1>Ei Kansikuvaa</h1>';
+                    : '';
                 const files = child['files'];
                 const links = child['links'] ?? child['link'] ?? '';
                 const content = child['content'] != ''
@@ -520,14 +514,14 @@ function loadActivityItemsFromJson(itemTypeRules, callback) {
                 $(overDiv).find('.close').on('click', function () {
                     closeOverlay();
                 });
+                $(itemDiv).ready(function () {
+                    loadedDataCount++;
+                    if (loadedDataCount >= dataCount && callback != null && callback !== undefined) {
+                        callback();
+                    }
+                })
             });
         });
-    }).then(v => {
-        if (callback !== undefined) {
-            setTimeout(() => {
-                callback();
-            }, 1100);
-        }
     });
 }
 
@@ -574,7 +568,6 @@ function createSchedule(dayList, ul, title = null) {
                 $(ul).append(li);
                 scheduleArray.push({ open: t1, close: t2 });
             }
-        }).then(() => {
             addOpenToTitle();
         });
     } else {

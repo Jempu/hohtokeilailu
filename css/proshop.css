@@ -13,8 +13,6 @@ body {
   width: 100%;
   height: 80%;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -59,8 +57,6 @@ body {
   width: 100%;
   height: 20%;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -76,12 +72,9 @@ body {
   position: absolute;
   width: 40%;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .titlecard .controls .wheel .item {
@@ -146,8 +139,6 @@ body {
 .catalogue .type .title {
   width: 100%;
   height: 20%;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
 }
 
@@ -205,18 +196,12 @@ body {
   cursor: pointer;
   width: 230px;
   height: 70px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: auto;
   border-radius: 12px;
   text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-family: Russo;
   font-style: normal;
   font-weight: normal;
@@ -232,8 +217,7 @@ body {
 .btn.b {
   color: #636877;
   border: 3px solid #636877;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .item-overlay {
@@ -242,10 +226,8 @@ body {
   position: absolute;
   top: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   z-index: 11;
-  background: -webkit-gradient(linear, left top, right top, from(#FC466B), to(#3F5EFB));
   background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
   background-size: contain;
   background-repeat: no-repeat;
@@ -261,8 +243,6 @@ body {
 .item-overlay .main {
   width: 100%;
   height: auto;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
 }
 
@@ -270,8 +250,6 @@ body {
   width: 50%;
   height: 60rem;
   position: relative;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
 }
 
@@ -290,16 +268,14 @@ body {
   left: 45px;
   top: 162px;
   background: #BFBEC6;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   margin: 2rem;
 }
 
 .item-overlay .main .overview .colors h1 {
   position: absolute;
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+  transform: rotate(-90deg);
   right: -40%;
   bottom: -40%;
   font-family: Russo;

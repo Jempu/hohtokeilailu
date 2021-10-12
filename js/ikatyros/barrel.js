@@ -67,12 +67,9 @@ const barrel = {
             // video playback
             const hv = $(e).find(".head-video");
             if ($(hv).length != 0) {
-                const player = $f(hv[0]);
+                const player = new Vimeo.Player(hv[0]);
                 this.container.playing[index] = !this.container.playing[index];
-                player.addEvent('ready', function() {
-                    // Code goes here
-                });
-                player.api(!this.container.playing[index] ? "play" : "pause");
+                if (!this.container.playing[index]) player.play(); else player.pause();
             }
         }, 220);
         if (v) {

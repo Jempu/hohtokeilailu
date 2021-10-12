@@ -14,7 +14,7 @@ const galleryImageLimit = 20;
 $(function () {
     const monitor = $(".monitor");
     const monitorContainer = $(monitor).find(".container");
-    const carousel = $("#cloud9-carousel");
+    var carousel = $("#cloud9-carousel");
     var carouselChildren = $(carousel).children();
     var carouselChildCount = 0;
     const slider = $(".slider");
@@ -33,30 +33,40 @@ $(function () {
     });
 
     sliderSlides.each(function (i, l) {
-        $(l).find(".button").on('click', function () {
+        $(l).find('.button').on('click', function () {
             selectBarrelCategory(i);
         });
     });
 
     var slideCount = sliderSlides.length;
-    var slideWidth = $(".slider ul li").width();
-    var slideHeight = $(".slider ul li").height();
+    var slideWidth = $('.slider ul li').width();
+    var slideHeight = $('.slider ul li').height();
     var slideUlWidth = slideCount * slideWidth;
     var currentSlide = -1;
     var isTransitioning = false;
-    const slideVideos = monitorContainer.find('iframe');
+    var slideVimeoPlayers = [];
+    monitorContainer.find('.vimeo-player').each(function (i, l) {
+        slideVimeoPlayers.push(new Vimeo.Player($(l)[0]));
+    });
 
-    function setCarousel(index) {
+    function setCarousel(index, doClone = false) {
+        if (doClone) {
+            $(carousel).data('carousel').deactivate();
+            var clone = $(carousel).clone();
+            $(carousel).remove();
+            carousel = clone;
+            $(monitorContainer).find('.categories').append(clone);
+        }
         carouselChildren = $(carousel).children().get().reverse();
         carouselChildCount = $(carouselChildren).length;
+
+        const ww = (2560 - $(window).width()) / 2560 * 50 + 50;
+        console.log(ww);
+
         $(carousel).Cloud9Carousel({
+            // yRadius: ww,
             bringToFront: false,
             frontItemClass: "front",
-            mirror: {
-                gap: 12,     /* 12 pixel gap between item and reflection */
-                height: 0.2, /* 20% of item height */
-                opacity: 0.4 /* 40% opacity at the top */
-            },
             onLoaded: function() {
                 $(carousel).data("carousel").goTo(carouselChildCount - index);
             }
@@ -79,10 +89,10 @@ $(function () {
             $(l).attr('slide', `${l.getAttribute('x') == index}`);
         });
         // auto-play the video in slide
-        slideVideos.each(function (i, l) {
-            const player = $f(l);
-            player.api(i == index ? 'play' : 'pause');
-        });
+        for (let i = 0; i < slideVimeoPlayers.length; i++) {
+            const p = slideVimeoPlayers[i];
+            if (i == index) p.play(); else p.pause();
+        }
     }
 
     function rotateCarousel(right) {
@@ -154,7 +164,7 @@ $(function () {
             slideHeight = $(sliderSlides).height();
             slideUlWidth = slideCount * slideWidth;
             $(sliderUl).css({ "width": slideUlWidth, "margin-left": - slideWidth });
-            setCarousel(currentSlide + 1);
+            setCarousel(currentSlide + 1, true);
         }, 50);
     });
 
@@ -164,7 +174,7 @@ $(function () {
         if (scrollTop < $(monitorContainer).height()) {
             $(monitor).find(".title").eq(0).css({ transform: `translate(-50%, ${scrollTop / -20}%)` });
             $(monitorContainer).children().each(function (i, l) {
-                $(l).css({ transform: `translateY(${scrollTop / -110}%)` });
+                $(l).css({ transform: `translateX(${ikaResponsive.aInternal ? -10 : 0}%, ${scrollTop / -110}%)` });
             });
         }
     }
@@ -190,10 +200,10 @@ $(function () {
 
             setTimeout(() => {
                 // auto-play the video in slide
-                slideVideos.each(function (i, l) {
-                    const player = $f(l);
-                    player.api(i == currentSlide ? 'play' : 'pause');
-                });
+                for (let i = 0; i < slideVimeoPlayers.length; i++) {
+                    const p = slideVimeoPlayers[i];
+                    if (i == currentSlide) p.play(); else p.pause();
+                }
             }, 1200);
         }, 200);
     }, 100);
@@ -210,18 +220,14 @@ createSchedule(
 
 /// Arvostelut ///
 function setReviews(data) {
-    let reviews = [];
-    const reviewObj = $('.stats .content .reviews');
-    const typewriter1 = new Typewriter($(reviewObj).find('h2').get(0), {
+    const typewriter1 = new Typewriter($('.stats .content .reviews h2').get(0), {
         cursor: '',
-        loop: false,
-        delay: 2
+        delay: 0
     });
     function setReview() {
-        if (reviews.length == 0) return;
-        typewriter1.deleteAll().typeString(`"${getArrayRandom(reviews)}"`).pauseFor(5000).callFunction(function () {
-            setReview();
-        }).start();
+        if (data.length == 0) return;
+        typewriter1.deleteAll().typeString(`"${getArrayRandom(data)}"`).start().pauseFor(5000)
+            .callFunction(function (callback, thisArg) { setReview(); });
     }
     setReview();
 }
@@ -238,104 +244,6 @@ const mainCategoryEvents = $('.main-category.events .container').get(0);
 const compContainer = $('.submarine').children();
 var competitionItems = [0, 0, 0];
 
-// function setActivities(data) {
-//     function createTitlecardEventItem(item, title, date) {
-//         if (titlecardEventLog == null) return;
-//         if (titlecardEventLog.children.length < 3) {
-//             let titleEventItem = document.createElement('div');
-//             titleEventItem.className = 'item';
-//             titleEventItem.innerHTML = `
-//                 <h3>${title}</h3>
-//                 <h4>${date}</h4>
-//             `;
-//             titlecardEventLog.appendChild(titleEventItem);
-//         }
-//     }
-//     function createFooterEventItem(item, img, title, date) {
-//         if (mainCategoryEvents == null) return;
-//         let footerEventItem = document.createElement('div');
-//         footerEventItem.className = 'item';
-//         footerEventItem.innerHTML = `
-//             ${img}
-//             <h1>${title}</h1>
-//             <h2>${date}</h2>
-//         `;
-//         $(footerEventItem).on('click', function () {
-//             setOverlayContainer(item);
-//         });
-//         mainCategoryEvents.appendChild(footerEventItem);
-//     }
-//     function createCompetitionContainerItem(
-//         item, title, date, content, headerImg, dateStatus) {
-//         // container item
-//         const cel = document.createElement('div');
-//         cel.className = 'item';
-//         cel.id = item;
-//         date1 = `<h3>${date}</h3>`;
-//         cel.innerHTML = `
-//             ${headerImg}
-//             <div class="bo" id="a"></div>
-//             <h2>${title}</h2>
-//             ${date1}
-//             <div class="bo" id="b"></div>
-//         `;
-//         competitionItems[dateStatus]++;
-//         $('.submarine').find(`.content#${['a', 'b', 'c'][dateStatus]}`).append(cel);
-//         // On container item click open overlay window
-//         $(cel).on('click', function () {
-//             setOverlayContainer(item);
-//         });
-//         // overlay item
-//         const oel = document.createElement('div');
-//         oel.className = 'item';
-//         oel.id = item;
-//         oel.innerHTML = `
-//             <div class="item">
-//                 <div class="content">
-//                     <div class="left">
-//                         <div class="header-img"></div>
-//                         <h1>${title}</h1>
-//                         <h2>${date}</h2>
-//                         <p>${content}</p>
-//                         <a href="http://tulokset.keilailu.fi/printpdfindex.php?reportid=10&id=77942&id2=22" target="#">Tulokset</a>
-//                         <a href="https://www.varaavuoro.com/mikkeli/competitions" target="#">Vuoron varaus</a>
-//                     </div>
-//                     <div class="right">
-//                         <div class="media">
-//                             <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/kesakaadot.pdf" frameborder="0"></iframe>
-//                             <iframe src="https://www.hohtokeilailu.fi/wp-content/uploads/2021/06/vph-kuljetus-kesa-kaadot.pdf" frameborder="0"></iframe>
-//                         </div>
-//                     </div>
-//                     <div class="close">
-//                         <img src="./img/close.png" alt="Sulje näkymä">
-//                     </div>
-//                 </div>
-//             </div>
-//         `;
-//     }
-
-//     //         const dateStatus = getDateStatus(vdateStart, vdateEnd);
-//     //         switch (child['type']) {
-//     //             case 'event':
-//     //             case 'link':
-//     //                 // display an event if it's only happening currently or in future
-//     //                 switch (dateStatus) {
-//     //                     case 0:
-//     //                     case 1:
-//     //                         createTitlecardEventItem(item, vtitle, vdate);
-//     //                         createFooterEventItem(item, vimg, vtitle, vdate);
-//     //                         break;
-//     //                 }
-//     //                 break;
-//     //             case 'competition':
-//     //                 createTitlecardEventItem(item, vtitle, vdate);
-//     //                 createFooterEventItem(item, vimg, vtitle, vdate);
-//     //                 createCompetitionContainerItem(item, vtitle, vdate, vcontent, vimg, dateStatus);
-//     //                 break;
-//     //         }
-//     //     });
-//     // });
-
 loadActivityItemsFromJson({
     "event": {
         parent: mainCategoryEvents
@@ -348,7 +256,6 @@ loadActivityItemsFromJson({
         expire: true
     }
 }, function () {
-    // Once all of the other data has been loaded, finally load the barrel.
     barrel.start($('.barrel'));
 });
 

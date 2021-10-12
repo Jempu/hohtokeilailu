@@ -16,6 +16,14 @@ $barrelHeight: 44vw
 *
     box-sizing: border-box
 
+.header
+    width: 100%
+    background-color: #592255
+    text-align: center
+    h1
+        cursor: default
+        padding-top: 0.5rem
+        padding-bottom: 1rem
 
 /// Carousel ///
 .titlecard
@@ -203,11 +211,13 @@ $barrelHeight: 44vw
                 width: 100vw
                 height: 100%
                 position: relative
+                display: flex
+                flex-direction: column
                 float: left
-                display: inline-block
                 margin: 0
                 padding: 0
                 text-align: center
+                justify-content: center
                 background-position: center
                 background-repeat: no-repeat
                 background-size: cover cover
@@ -231,10 +241,11 @@ $barrelHeight: 44vw
                 iframe
                     pointer-events: none
         .button
-            position: absolute
+            position: relative
             width: 245px
             height: 60px
             left: 50%
+            margin: auto 0
             transform: translate(-50%)
             bottom: 20%
             background: #CF4040
@@ -676,44 +687,33 @@ $barrelHeight: 44vw
                         width: 100%
                         height: 100%
             .pan
-                width: 100%
-                height: 25vw
                 position: relative
-                .header
-                    width: 100%
-                    background-color: #592255
-                    text-align: center
-                    h1
-                        cursor: default
-                        padding-top: 0.5rem
-                        padding-bottom: 1rem
+                width: 100%
                 .mat
-                    width: 100%
-                    height: 20vw
                     position: relative
+                    width: 100%
                     background-image: url('../img/abstract.png')
                     background-position: center
                     background-size: cover
                     background-repeat: no-repeat
-                    display: grid
-                    grid-template-areas: "a3 b3"
+                    display: flex
+                    flex-wrap: wrap
                     align-items: center
                     justify-items: center
+                    justify-content: center
+                    align-content: center
                     .item
+                        position: relative
                         width: 32vw
                         height: 80%
-                        position: relative
                         top: 0
-                        margin: 0 0.5vw
+                        margin: 2vw
+                        padding: 0.3vw
                         background-color: #43547E
                         border: 6px dashed rgba(255, 255, 255, 0.6)
                         box-sizing: border-box
                         border-radius: 60p
                         text-align: center
-                        &:nth-child(1)
-                            grid-area: a3
-                        &:nth-child(2)
-                            grid-area: b3
                         h1
                             font-family: NunitoSans
                             font-size: 64px
@@ -734,8 +734,8 @@ $barrelHeight: 44vw
             justify-items: center
             text-align: center
             .prop
-                width: auto
                 position: relative
+                width: auto
                 margin: 1vw
                 text-align: center
                 display: grid
@@ -779,11 +779,11 @@ $barrelHeight: 44vw
             .title
                 position: relative
                 h2
-                    white-space: nowrap
                     position: absolute
                     left: 50%
                     top: 39%
                     transform: translateX(-50%)
+                    white-space: nowrap
             .container
                 width: 100%
                 position: relative
@@ -793,9 +793,9 @@ $barrelHeight: 44vw
                 &#b
                     background: rgba(14, 10, 27, 0.75)
                 .content
+                    position: relative
                     width: 100%
                     padding: 1.3vw
-                    position: relative
                     justify-content: center
                     align-content: center
                     gap: 5%
@@ -807,9 +807,9 @@ $barrelHeight: 44vw
         &#proshop
             background-color: #0D1137
             .items
+                position: relative
                 width: 1000px
                 height: 150px
-                position: relative
                 left: 50%
                 transform: translateX(-50%)
                 display: grid
@@ -1016,7 +1016,8 @@ $barrelHeight: 44vw
                 margin-right: auto
             &#schedule
                 position: relative
-                width: 700px
+                width: 94vw
+                max-width: 700px
                 height: 540px
                 background: linear-gradient(268.88deg, rgba(34, 59, 118, 0.8) -3.77%, rgba(43, 62, 111, 0.512) 14.48%, rgba(12, 18, 35, 0.296) 102.78%), rgba(45, 62, 106, 0.7)
                 border: 4px solid #FFFFFF
@@ -1278,6 +1279,10 @@ $barrelHeight: 44vw
         .item
             width: 100%
             height: 100%
+            &#default
+                display: block
+            &#mobile-portrait
+                display: none
             &#gmap
                 width: 100%
                 height: $gmapHeight
@@ -1343,6 +1348,16 @@ $barrelHeight: 44vw
             padding: 0
             h1
                 margin: 0.2rem
+        .middle
+            height: 56vw
+            #video.item div
+                height: 100%
+                width: 204%
+                left: -50%
+            #default
+                display: none
+            #mobile-portrait
+                display: block
         .bottom
             height: 140px
             .link
@@ -1501,64 +1516,52 @@ $barrelHeight: 44vw
                 border: 4px solid #fff
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
                 background: linear-gradient(150deg, #4b6cb7 0%, #182848 100%)
-                transition: width 0.1s ease-out, height 0.1s ease-out, filter 0.4s ease-in-out
+                transition: width 0.1s ease-out, height 0.1s ease-out, filter 0.4s ease-in-out, transform 0.18s ease-in-out
                 &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
                     img
+                        width: 50%
                         margin: 2.6rem 0 1.1rem 0
-                // move into place
-                &:nth-child(2)
-                    transform: translate(20%, 8%)
-                &:nth-child(3)
-                    transform: translate(10%, 6%)
-                &:nth-child(5)
-                    transform: translate(-10%, 6%)
-                &:nth-child(6)
-                    transform: translate(-20%, 8%)
                 // sizes
                 &:nth-child(2), &:nth-child(6)
-                    width: 300px
-                    height: 360px
+                    width: calc(240px + 6vmin)
+                    height: calc(380px + 6vmin)
                     z-index: 1
-                    &:hover
-                        width: 340px
-                        height: 400px
-                    img
-                        width: 78px
-                        height: 78px
                 &:nth-child(3), &:nth-child(5)
-                    width: 320px
-                    height: 380px
+                    width: calc(280px + 6vmin)
+                    height: calc(420px + 6vmin)
                     z-index: 2
-                    &:hover
-                        width: 360px
-                        height: 420px
-                    img
-                        width: 86px
-                        height: 86px
                 &:nth-child(4)
-                    width: 320px
-                    height: 470px
+                    width: calc(300px + 6vmin)
+                    height: calc(480px + 6vmin)
                     z-index: 3
-                    &:hover
-                        width: 360px
-                        height: 510px
-                    img
-                        width: 140px
-                        height: 145px
                 &:nth-child(2)
+                    transform: translate(20%, 0)
                     grid-area: a2
+                    &:hover
+                        transform:  translate(10%, 0) scale(111%)
                 &:nth-child(3)
+                    transform: translate(10%, 2%)
                     grid-area: b2
+                    &:hover
+                        transform: translate(0%, 2%) scale(111%)
                 &:nth-child(4)
                     grid-area: c2
                     background: linear-gradient(0deg, rgba(37, 39, 39, 0.8), rgba(37, 39, 39, 0.8)), url('../img/neon.png')
                     background-size: contain contain
                     background-position: center
                     background-repeat: no-repeat
+                    &:hover
+                        transform: scale(111%)
                 &:nth-child(5)
+                    transform: translate(-10%, 2%)
                     grid-area: d2
+                    &:hover
+                        transform: translate(0%, 2%) scale(111%)
                 &:nth-child(6)
+                    transform: translate(-20%, 0)
                     grid-area: e2
+                    &:hover
+                        transform: translate(-10%, 0) scale(111%)
                 img
                     margin: 1.6rem 0 1.1rem 0
                 h2
@@ -1577,7 +1580,7 @@ $barrelHeight: 44vw
                         opacity: 0
                         color: #28e05c
                         position: absolute
-                        right: 30%
+                        right: 32.5%
                         top: 0
                         transition: opacity 0.3s ease-in-out
         .benefit
@@ -1605,8 +1608,8 @@ $barrelHeight: 44vw
             h1
                 font-size: 50px
     .contact
-        width: 26rem
         position: relative
+        width: calc(220px + 18vw)
         margin: 3.2rem auto
         background-color: #537895
         background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%)
@@ -1621,9 +1624,6 @@ $barrelHeight: 44vw
         h1
             text-align: center
             font-size: 24px
-        img
-            width: 2rem
-            height: 2rem
         div
             margin-top: 1rem
             h2
@@ -1633,14 +1633,10 @@ $barrelHeight: 44vw
                 transform: translateX(3%)
                 &:hover
                     transform: translateX(3%) scale(106%)
-        .varaa-btn
-            width: 100%
-            height: 80px
-            img
-                width: 85%
-                height: 100%
         .item
             img
+                width: 2rem
+                height: 2rem
                 margin: 0 auto 0 14%
                 float: left
     .methods
@@ -1724,6 +1720,9 @@ $barrelHeight: 44vw
                     margin-left: 0
                     margin-right: 0
                     text-align: center
+        .item
+            h2
+                margin: 1.6rem 0
     .stats
         &::before
             content: none
@@ -1737,7 +1736,7 @@ $barrelHeight: 44vw
     .pricing
         .container
             filter: contrast(90%) hue-rotate(80deg)
-            transform: translateX(-50%) rotateZ(0) scale(108%)
+            transform: rotateZ(0)
             .benefit:hover
                 & ~ .item
                     filter: brightness(0.95) contrast(120%)
@@ -1762,29 +1761,34 @@ $barrelHeight: 44vw
 @media screen and (max-width: 801px)
     .titlecard
         .monitor
-            .categories
-                display: none
             .container
-                transform: translateX(-50%)
                 .item
                     width: 800px
         .slider ul li button
             bottom: 14%
+    .main-category.events
+        .container
+            flex-direction: column
     .pricing
         .snooker
             height: 230px
             .vid
                 transform: translateX(5%) scale(2.5)
         .container
-            left: 50%
             padding: 0
 
 @media screen and (max-width: 600px)
+    .titlecard
+        .monitor
+            .categories
+                display: none
     .barrel
         .item-container
             .item
                 .head div
                     transform: scale(190%) translateY(3%)
+                &#synttarit div.mat .item
+                    width: 100%
     .about-container
         background: #5A1D50
         width: 100vw
@@ -1816,6 +1820,8 @@ $barrelHeight: 44vw
                         display: block
                 ul
                     left: 74px
+                    .sch li
+                        width: 430px
                 .note
                     width: 90%
                     left: 6.25%
@@ -1824,23 +1830,28 @@ $barrelHeight: 44vw
                     text-align: center
     .pricing
         .container
+            background: linear-gradient(142.06deg, #0652C5 10.04%, #D4418E 78.1%)
             .benefit
                 position: relative
                 right: 0
                 margin: 0 auto
                 transform: none
+                &:hover
+                    transform: none
             .cards
                 grid-template-areas: "c2" "a2" "b2" "d2" "d2" "e2"
                 justify-items: center
                 .item
                     &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6)
+                        width: 70%
+                        height: calc( 270px + 6vmin )
+                        margin: 0.2rem 0
                         transform: none
-                    &:nth-child(4):hover
-                        width: 320px
-                        height: 470px
-                    &:nth-child(2), &:nth-child(3), &:nth-child(5), &:nth-child(6)
-                        width: 320px
-                        height: 420px
+                        img
+                            width: 24%
                         &:hover
-                            width: 320px
-                            height: 420px
+                            transform: none
+            .methods
+                background: #8A5151
+        .contact
+            width: 95%

@@ -8,14 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:image" content="./img/logos/mikkelin-keilahalli-round.png" />
     <meta property="og:title" content="Mikkelin Keilahalli" />
-    <meta name="description" content="Tule kokeilemaan keilausta meillä! Tarjoamme mahdollisuuden keilata perheen pienimmällekin. Keilahallimme löytyy Ammattikorkeakoulun vierestä." />
-    <meta name="keywords" content="keilaus, perhetapahtuma, mikkeli, tapahtuma, tekeminen, bowling, lasten synttärit, kilpakeilaus, competitive bowling, competition" />
+    <meta name="description"
+        content="Tule kokeilemaan keilausta meillä! Tarjoamme mahdollisuuden keilata perheen pienimmällekin. Keilahallimme löytyy Ammattikorkeakoulun vierestä." />
+    <meta name="keywords"
+        content="keilaus, perhetapahtuma, mikkeli, tapahtuma, tekeminen, bowling, lasten synttärit, kilpakeilaus, competitive bowling, competition" />
     <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-round.png" type="image/x-icon" />
     <title>Etusivu - Mikkelin Keilahalli</title>
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./js/freewall-master/gallery.css" />
     <link rel="stylesheet" href="./js/ikatyros/loading.css" />
-    
+
     <script type="text/javascript" src="./js/jquery-3.6.0.min/jquery.js"></script>
     <script type="text/javascript" src="./js/freewall-master/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="./js/cloud9carousel-master/jquery.cloud9carousel.js"></script>
@@ -59,10 +61,10 @@
                     <!-- Mikkelin Keilahalli hohtokeila: -->
                     <div style="padding: 57.35% 0 0 0; position: relative">
                         <iframe
-                            src="https://player.vimeo.com/video/603430815?badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=0&amp;app_id=58479&amp;h=43b4556ace"
-                            frameborder="0"
-                            allow="autoplay; fullscreen; picture-in-picture"
-                            allowfullscreen
+                            class="vimeo-player"
+                            id="vp21"
+                            src="https://player.vimeo.com/video/603430815?badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=vp21&amp;app_id=58479&amp;h=43b4556ace"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"
                             title="Mikkelin Keilahalli hohtokeila.mp4">
                         </iframe>
@@ -72,10 +74,10 @@
                     <!-- Mikkelin Keilahalli lasten synttarit: -->
                     <div style="padding: 57.35% 0 0 0; position: relative">
                         <iframe
-                            src="https://player.vimeo.com/video/603431703?badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=0&amp;app_id=58479&amp;h=0ce791b002"
-                            frameborder="0"
-                            allow="autoplay; fullscreen; picture-in-picture"
-                            allowfullscreen
+                            class="vimeo-player"
+                            id="vp22"
+                            src="https://player.vimeo.com/video/603431703?badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=vp22&amp;app_id=58479&amp;h=0ce791b002"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"
                             title="Mikkelin Keilahalli lasten synttarit.mp4">
                         </iframe>
@@ -215,8 +217,10 @@
                 <div class="head">
                     <!-- Mikkelin Keilahalli hohtokeila: -->
                     <div style="padding: 56.25% 0 0 0; position: relative">
-                        <iframe class="head-video" id="v1"
-                            src="https://player.vimeo.com/video/603430815?api=1&badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=v1&amp;app_id=58479&amp;h=43b4556ace"
+                        <iframe
+                            class="vimeo-player head-video"
+                            id="vp10"
+                            src="https://player.vimeo.com/video/603430815?api=1&badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=vp10&amp;app_id=58479&amp;h=43b4556ace"
                             frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="
                   position: absolute;
                   top: 0;
@@ -251,29 +255,29 @@
                         <img src="./img/photos/about.jpg" alt="Hyvä olo" />
                         <p>Hohtokeilaus on hauskaa hyvän musiikin soidessa ja valoefektien loistaessa.</p>
                     </div>
-					
-					<div class="contact-barrel tt-bb">
-						<h2>Voit varata vuoron täältä:</h2>
-						<div class="sta">
-							<img src="./img/phone.png" alt="Puhelinnumero" />
-							<h2>015 164005</h2>
-						</div>
-						<div class="sta">
-							<img src="./img/email.png" alt="Sähköpostiosoite" />
-							<h2>info@mikkelinkeilahalli.fi</h2>
-						</div>
-					</div>
+
+                    <div class="contact-barrel tt-bb">
+                        <h2>Voit varata vuoron täältä:</h2>
+                        <div class="sta">
+                            <img src="./img/phone.png" alt="Puhelinnumero" />
+                            <h2>015 164005</h2>
+                        </div>
+                        <div class="sta">
+                            <img src="./img/email.png" alt="Sähköpostiosoite" />
+                            <h2>info@mikkelinkeilahalli.fi</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="item" id="synttarit">
                 <div class="head">
                     <!-- Mikkelin Keilahalli lasten synttarit: -->
                     <div style="padding: 56.25% 0 0 0; position: relative">
-                        <iframe class="head-video" id="v2"
-                            src="https://player.vimeo.com/video/603431703?api=1&badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=v2&amp;app_id=58479&amp;h=0ce791b002"
-                            frameborder="0"
-                            allow="autoplay; fullscreen; picture-in-picture"
-                            allowfullscreen
+                        <iframe
+                            class="vimeo-player head-video"
+                            id="vp11"
+                            src="https://player.vimeo.com/video/603431703?api=1&badge=0&amp;autoplay=0&muted=1&loop=1&title=0&byline=0&portrait=0&sidedock=0&amp;player_id=vp11&amp;app_id=58479&amp;h=0ce791b002"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             title="Mikkelin Keilahalli lasten synttarit.mp4"
                             style="position:absolute;top:0;left:0;width:100%;height:100%;">
                         </iframe>
@@ -309,10 +313,10 @@
                                 <!-- Mikkelin Keilahalli lasten synttarit 2: -->
                                 <div style="padding: 56.5% 0 0 0; position: relative">
                                     <iframe
-                                        src="https://player.vimeo.com/video/603432044?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=ddd4f82627"
-                                        frameborder="0"
-                                        allow="autoplay; fullscreen; picture-in-picture"
-                                        allowfullscreen
+                                        class="vimeo-player"
+                                        id="vp12"
+                                        src="https://player.vimeo.com/video/603432044?badge=0&amp;autopause=0&amp;player_id=vp12&amp;app_id=58479&amp;h=ddd4f82627"
+                                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                                         title="Mikkelin Keilahalli lasten synttarit 2.mp4"
                                         style="position: absolute;top: 0;left: 0;width: 100%;height:100%;">
                                     </iframe>
@@ -397,17 +401,17 @@
                             me myymme ruoat ja juomat nälkäisille ja janoisille.
                         </p>
                     </div>
-					<div class="contact-barrel tt-bb">
-						<h2>Voit varata vuoron täältä:</h2>
-						<div class="sta">
-							<img src="./img/phone.png" alt="Puhelinnumero" />
-							<h2>015 164005</h2>
-						</div>
-						<div class="sta">
-							<img src="./img/email.png" alt="Sähköpostiosoite" />
-							<h2>info@mikkelinkeilahalli.fi</h2>
-						</div>
-					</div>
+                    <div class="contact-barrel tt-bb">
+                        <h2>Voit varata vuoron täältä:</h2>
+                        <div class="sta">
+                            <img src="./img/phone.png" alt="Puhelinnumero" />
+                            <h2>015 164005</h2>
+                        </div>
+                        <div class="sta">
+                            <img src="./img/email.png" alt="Sähköpostiosoite" />
+                            <h2>info@mikkelinkeilahalli.fi</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="item" id="sauna">
@@ -614,7 +618,7 @@
                             <li>su:</li>
                         </div>
                     </div>
-                    <ul></ul>
+                    <ul class="sch"></ul>
                     <div class="note">
                         Keilahalli avoinna tilauksesta myös muina aikoina. Lisätiedot
                         soittamalla.
@@ -655,21 +659,21 @@
 
     <!-- Tapahtumat -->
     <div class="main-category events tt-bb">
-        <div class="title tt-bb">
+        <div class="header tt-bb">
             <h1>Hallillamme tapahtuu</h1>
         </div>
         <div class="container"></div>
         <!-- Facebook Page Plugin for viewing timeline (Small Header) -->
         <!-- Full-width -->
-        <iframe class="full-width"
+        <!-- <iframe class="full-width"
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmikkelinkeilahallioy&tabs=timeline&width=420&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="420" height="500" style="border: none; overflow: hidden; border-radius: 0 0 10px 10px" scrolling="no"
-            frameborder="0" allowfullscreen="true" allow="web-share"></iframe>
+            frameborder="0" allowfullscreen="true" allow="web-share"></iframe> -->
         <!-- Mobile-width -->
-        <iframe class="mobile-width"
+        <!-- <iframe class="mobile-width"
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmikkelinkeilahallioy&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="340" height="500" style="border: none; overflow: hidden; border-radius: 0 0 10px 10px" scrolling="no"
-            frameborder="0" allowfullscreen="true" allow="web-share"></iframe>
+            frameborder="0" allowfullscreen="true" allow="web-share"></iframe> -->
     </div>
 
     <!-- Galleria -->
@@ -761,7 +765,7 @@
                 <div class="item">
                     <img src="./img/day.png" alt="Päiväsaikainen keilaus" />
                     <h1>Päivä</h1>
-                    <h2>Ti – Pe 12.00 – 17.00</h2>
+                    <h2>Ti - Pe 12.00 - 17.00</h2>
                     <div class="price">
                         <h3 class="normal">18€</h3>
                         <h3 class="reduced">16€</h3>
@@ -771,7 +775,7 @@
                 <div class="item">
                     <img src="./img/night.png" alt="Iltaisaikainen keilaus" />
                     <h1>Ilta</h1>
-                    <h2>Ti – Pe 17.00 – 20.00</h2>
+                    <h2>Ti - Pe 17.00 - 20.00</h2>
                     <div class="price">
                         <h3 class="normal">24€</h3>
                         <h3 class="reduced">22€</h3>
@@ -781,7 +785,7 @@
                 <div class="item">
                     <img src="./img/excellent-service.png" alt="" />
                     <h1>Hohtokeilaus</h1>
-                    <h2>Ti – La 16.00 – 22.00</h2>
+                    <h2>Ti - La 16.00 - 22.00</h2>
                     <div class="price">
                         <h3 class="normal">30€</h3>
                         <h3 class="reduced">28€</h3>
@@ -791,7 +795,7 @@
                 <div class="item">
                     <img src="./img/calendar.png" alt="" />
                     <h1>Viikonloppu</h1>
-                    <h2>La 12.00 – 16.00</h2>
+                    <h2>La 12.00 - 16.00</h2>
                     <div class="price">
                         <h3 class="normal">26€</h3>
                         <h3 class="reduced">24€</h3>
@@ -844,16 +848,20 @@
                 <img src="./img/googlemaps.png" alt="Google-maps -näkymä" />
             </div>
             <div class="item" id="video">
-                <div style="padding: 24.13% 0 0 0; position: relative">
+                <div id="default" style="padding: 24.13% 0 0 0; position: relative">
                     <iframe
                         src="https://player.vimeo.com/video/598699332?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=ceecc693d3"
-                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-              " title="drone-map-vid3.mp4"></iframe>
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                        style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"
+                        title="Mikkelin Keilahalli ilmassa"></iframe>
+                </div>
+                <div id="mobile-portrait"
+                    style="padding:54.78% 0 0 0;position:relative;transform:translateX(-50%);left:50%;width: 100%;">
+                    <iframe
+                        src="https://player.vimeo.com/video/629995678?h=beac83c14a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                        title="Mikkelin Keilahalli ilmassa"></iframe>
                 </div>
             </div>
         </div>
@@ -889,11 +897,10 @@
         </button>
     </div>
     <script type="text/javascript" src="./js/smooth-scroll.js"></script>
-	
+
     <div class="overlay-container" style="display:none;"></div>
 
     <!-- Vimeo Video Player -->
-    <script type="text/javascript" src="./js/froogaloop.js"></script>
     <script type="text/javascript" src="https://player.vimeo.com/api/player.js"></script>
 </body>
 
