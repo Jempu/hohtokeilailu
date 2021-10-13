@@ -36,16 +36,30 @@ root {
   overflow: hidden;
 }
 
-.titlecard .monitor .title {
-  font-size: 4.5vw;
-  font-family: Sansita-ExtraBold;
+.titlecard .monitor .titlecard-title {
   position: absolute;
+  width: 75%;
   left: 50%;
   top: 23%;
   transform: translateX(-50%);
   text-align: center;
   text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5);
   z-index: 5;
+}
+
+.titlecard .monitor .titlecard-title h1 {
+  position: relative;
+  width: 100%;
+  font-size: calc(18px + 2.6vw);
+  font-family: Sansita-Black;
+}
+
+.titlecard .monitor .titlecard-title h2 {
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+  font-size: calc(15px + 2.6vw);
+  font-family: Sansita-BlackItalic;
 }
 
 .titlecard .monitor .container {
@@ -1926,7 +1940,7 @@ root {
 }
 
 .main-category.events iframe {
-  margin-left: 2rem;
+  margin: auto 0 auto 2rem;
   box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5);
 }
 
@@ -2055,13 +2069,17 @@ root {
 
 .pricing .container .title {
   padding: 3rem 0;
+  background: linear-gradient(180deg, rgba(4, 4, 4, 0.1) 0%, rgba(4, 4, 4, 0.15) 55.21%, rgba(4, 4, 4, 0.1) 75.52%, rgba(4, 4, 4, 0.02) 100%);
+}
+
+.pricing .container .title h1 {
+  margin: auto;
+  font-size: calc( 22px + 2vw);
   font-family: Sansita-ExtraBold;
-  font-size: 36px;
   font-weight: 800;
   text-decoration: underline;
   -webkit-text-decoration-color: #fff;
           text-decoration-color: #fff;
-  background: linear-gradient(180deg, rgba(4, 4, 4, 0.1) 0%, rgba(4, 4, 4, 0.15) 55.21%, rgba(4, 4, 4, 0.1) 75.52%, rgba(4, 4, 4, 0.02) 100%);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -2087,7 +2105,7 @@ root {
 }
 
 .pricing .container .cards .item:nth-child(2) img, .pricing .container .cards .item:nth-child(3) img, .pricing .container .cards .item:nth-child(4) img, .pricing .container .cards .item:nth-child(5) img, .pricing .container .cards .item:nth-child(6) img {
-  width: 50%;
+  width: 32%;
   margin: 2.6rem 0 1.1rem 0;
 }
 

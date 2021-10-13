@@ -50,13 +50,16 @@ $(function () {
     });
 
     function setCarousel(index, doClone = false) {
-        if (doClone) {
-            $(carousel).data('carousel').deactivate();
-            var clone = $(carousel).clone();
-            $(carousel).remove();
-            carousel = clone;
-            $(monitorContainer).find('.categories').append(clone);
-        }
+        
+        // make resizing dynamic
+        // if (doClone) {
+        //     $(carousel).data('carousel').deactivate();
+        //     var clone = $(carousel).clone();
+        //     $(carousel).remove();
+        //     carousel = clone;
+        //     $(monitorContainer).find('.categories').append(clone);
+        // }
+
         carouselChildren = $(carousel).children().get().reverse();
         carouselChildCount = $(carouselChildren).length;
 
@@ -172,7 +175,7 @@ $(function () {
     function setMonitorScollParallax() {
         var scrollTop = $(window).scrollTop();
         if (scrollTop < $(monitorContainer).height()) {
-            $(monitor).find(".title").eq(0).css({ transform: `translate(-50%, ${scrollTop / -20}%)` });
+            $(monitor).find(".titlecard-title").css({ transform: `translate(-50%, ${scrollTop / -20}%)` });
             $(monitorContainer).children().each(function (i, l) {
                 $(l).css({ transform: `translateX(${ikaResponsive.aInternal ? -10 : 0}%, ${scrollTop / -110}%)` });
             });
@@ -216,6 +219,90 @@ createSchedule(
     $(schedule).find('ul'),
     $(schedule).find('#title').find('h1').get(0)
 );
+
+function setPricingCardTimes() {
+    fetch ('./content/opening.json').then(v => v.json()).then(week => {
+        let normiWeekStartIndex = -1,
+            normiWeekEndIndex = -1,
+            hohtoKeilausWeekStartIndex = -1,
+            hohtoKeilausWeekEndDay = -1;
+        function getDayName(day) {
+            switch (day) {
+                case 0:
+                case 1:
+                    return 'Ma';
+                case 2:
+                case 3:
+                    return 'Ti';
+                case 4:
+                case 5:
+                    return 'Ke';
+                case 6:
+                case 7:
+                    return 'To';
+                case 8:
+                case 9:
+                    return 'Pe';
+                case 10:
+                case 11:
+                    return 'La';
+                case 12:
+                case 13:
+                    return 'Su';
+            }
+        }
+        var found_normiWeekStart = false, found_normiWeekEnd = false,
+            found_hohtoStartDay = false, found_hohtoWeekEnd = false;
+        for (let i = 0; i < week.length; i += 2) {
+            const normi = week[i];
+            const hohto = week[i + 1];
+    
+            // if less than 17.00 => day time
+            // if over 17.00 => night time
+    
+            // if ma - pe => arki 
+            // if la / su => weekend
+    
+            if (!found_normiWeekStart) { 
+                if (normi != '') {
+                    normiWeekStartIndex = i;
+                    found_normiWeekStart = true;
+                } else {
+                    normiWeekStartIndex += 2;
+                }
+            } else {
+                if (normi != '') {
+                    found_normiWeekEnd = true;
+                }
+            }
+        }
+        const normiOut = found_normiWeekStart && found_normiWeekEnd ?
+            `${getDayName(normiWeekStartIndex) - getDayName(normiWeekEndIndex)}` :
+            found_normiWeekStart ? getDayName(normiWeekStartIndex) : 'Suljettu';
+    
+        getDayName(normiWeekStartIndex);
+        getDayName(normiWeekEndIndex);
+    });
+    // normikeilaus
+    // 12.00 - 20.00
+    
+    // päivä kestää avaamisesta asti => klo. 17.00
+    // sitten alkaa ilta
+    // 17.00 => sulkemiseen asti
+    
+    // hohtokeilaus
+    // 16.00 - 20.00
+    
+    // kestää alkamisesta asti => sulkemiseen asti
+    
+    // tarkista jokainen päivä, saat aloitus päivän
+    
+    // tarkista viikon viimeisin hohtokeilauksen päivä, saat lopetuspäivän
+    
+    // output:
+    // Ti - La 16.00 - 22.00
+}
+// setPricingCardTimes();
 
 
 /// Arvostelut ///
@@ -278,8 +365,10 @@ $(function() {
 
 /// Load 'index.json' ///
 fetch(indexJsonPath).then(v => v.json()).then(data => {
-    
-    // add path to gallery photos
+    // titles
+    $(titlecard).find('.titlecard-title .title').html(data['titlecard_title']);
+    $(titlecard).find('.titlecard-title .subtitle').html(data['titlecard_subtitle']);
+    // gallery
     if (galleryPath != '') {
         var arr = [];
         data['gallery'].forEach(e => {
@@ -289,8 +378,31 @@ fetch(indexJsonPath).then(v => v.json()).then(data => {
     } else {
         setGallery(data['gallery'], galleryImageLimit);
     }
-    
-    // setPricing(v['pricing']);
+    // pricing
+    const pr = data['pricing'];
+    function fr(name) { return `${pr[name]}€`; }
+    function gr(name1, name2) { return `${pr[name1][name2]}€`; }
+    function bdPrice(name) {
+        const r = name.replace('_', '-');
+        $(`.${r} h3`).html(gr(name, 'normal'));
+        $(`.${r} h4`).html(gr(name, 'hohto'));
+    }
+    bdPrice('birthday_small');
+    bdPrice('birthday_big');
+    $(`.pricing .snooker .title h3`).html(fr('snooker'));
+    const discount = pr['discount'];
+    $('.pricing .cards .benefit#discount h1').html(`-${discount}€`);
+    function cardPrice(name) {
+        const a = pr[name];
+        $(`.pricing .cards .item#${name} h3.normal`).html(`${a}€`);
+        $(`.pricing .cards .item#${name} h3.reduced`).html(a - discount <= 0 ? '0€!' : `${a - discount}€`);
+    }
+    cardPrice('day');
+    cardPrice('night');
+    cardPrice('hohto');
+    cardPrice('weekend');
+    cardPrice('equipment');
+    // reviews
     setReviews(data['reviews']);
 });
 

@@ -54,7 +54,10 @@
 
     <div class="titlecard">
         <div class="monitor">
-            <h1 class="title">Keilahalli avoinna koko kesän</h1>
+            <div class="titlecard-title">
+                <h1 class="title">Keilahalli avoinna koko kesän</h1>
+                <h2 class="subtitle">Lorem ipsum dolor sit amet.</h2>
+            </div>
 
             <div class="container">
                 <div class="item">
@@ -353,13 +356,13 @@
                             <h1>Synttäripaketit</h1>
                         </div>
                         <div class="mat">
-                            <div class="item">
+                            <div class="item" id="birthday-small">
                                 <h1>Pieni synttäripaketti</h1>
                                 <h2>4-8 henkilöä</h2>
                                 <h3>135€</h3>
                                 <h4>Hohto 145€</h4>
                             </div>
-                            <div class="item">
+                            <div class="item" id="birthday-big">
                                 <h1>Iso synttäripaketti</h1>
                                 <h2>9-12 henkilöä</h2>
                                 <h3>175€</h3>
@@ -665,15 +668,15 @@
         <div class="container"></div>
         <!-- Facebook Page Plugin for viewing timeline (Small Header) -->
         <!-- Full-width -->
-        <!-- <iframe class="full-width"
+        <iframe class="full-width"
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmikkelinkeilahallioy&tabs=timeline&width=420&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="420" height="500" style="border: none; overflow: hidden; border-radius: 0 0 10px 10px" scrolling="no"
-            frameborder="0" allowfullscreen="true" allow="web-share"></iframe> -->
+            frameborder="0" allowfullscreen="true" allow="web-share"></iframe>
         <!-- Mobile-width -->
-        <!-- <iframe class="mobile-width"
+        <iframe class="mobile-width"
             src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmikkelinkeilahallioy&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
             width="340" height="500" style="border: none; overflow: hidden; border-radius: 0 0 10px 10px" scrolling="no"
-            frameborder="0" allowfullscreen="true" allow="web-share"></iframe> -->
+            frameborder="0" allowfullscreen="true" allow="web-share"></iframe>
     </div>
 
     <!-- Galleria -->
@@ -714,9 +717,6 @@
                     </div>
                     <h4>Perustuu 225 arvosteluun</h4>
                 </div>
-                <!-- <div class="refresh-btn">
-                    <img src="./img/refresh.png" alt="Valitse seuraava keilahallin arvostelu" />
-                </div> -->
                 <h2>
                     Hyvät radat. Kelpaa vaikka ammattilaisille. Hallin omat välineet
                     kunnossa. Sopii myös alkuillasta ennen baaria, ja kokoustamista
@@ -746,7 +746,7 @@
               " title="Mikkelin Keilahalli Biljardia.mp4"></iframe>
                 </div>
             </div>
-            <div class="title">
+            <div class="title" id="snooker">
                 <h1>Hinnastomme</h1>
                 <h2>Biljardi</h2>
                 <h3>7€</h3>
@@ -758,51 +758,51 @@
                 <h1>Ratahinnasto</h1>
             </div>
             <div class="cards">
-                <div class="benefit">
+                <div class="benefit" id="discount">
                     <h2>Opiskelija- ja eläkeläisalennus (voimassa arkisin)</h2>
                     <h1>–2€</h1>
                 </div>
-                <div class="item">
+                <div class="item" id="day">
                     <img src="./img/day.png" alt="Päiväsaikainen keilaus" />
                     <h1>Päivä</h1>
-                    <h2>Ti - Pe 12.00 - 17.00</h2>
+                    <h2>Ma - Pe 12.00 - 17.00</h2>
                     <div class="price">
                         <h3 class="normal">18€</h3>
                         <h3 class="reduced">16€</h3>
                     </div>
                     <h4>Rata / tunti</h4>
                 </div>
-                <div class="item">
+                <div class="item" id="night">
                     <img src="./img/night.png" alt="Iltaisaikainen keilaus" />
                     <h1>Ilta</h1>
-                    <h2>Ti - Pe 17.00 - 20.00</h2>
+                    <h2>Ma - Pe 17.00 - 20.00</h2>
                     <div class="price">
                         <h3 class="normal">24€</h3>
                         <h3 class="reduced">22€</h3>
                     </div>
                     <h4>Rata / tunti</h4>
                 </div>
-                <div class="item">
+                <div class="item" id="hohto">
                     <img src="./img/excellent-service.png" alt="" />
                     <h1>Hohtokeilaus</h1>
-                    <h2>Ti - La 16.00 - 22.00</h2>
+                    <h2>Pe - La 16.00 - 22.00</h2>
                     <div class="price">
                         <h3 class="normal">30€</h3>
                         <h3 class="reduced">28€</h3>
                     </div>
                     <h4>Rata / tunti</h4>
                 </div>
-                <div class="item">
+                <div class="item" id="weekend">
                     <img src="./img/calendar.png" alt="" />
                     <h1>Viikonloppu</h1>
-                    <h2>La 12.00 - 16.00</h2>
+                    <h2>La 12.00 - 22.00</h2>
                     <div class="price">
                         <h3 class="normal">26€</h3>
                         <h3 class="reduced">24€</h3>
                     </div>
                     <h4>Rata / tunti</h4>
                 </div>
-                <div class="item">
+                <div class="item" id="equipment">
                     <img src="./img/proshop/shoes/shoes.png" alt="" />
                     <h1>Välinevuokraus</h1>
                     <h2>Keilakengät</h2>
