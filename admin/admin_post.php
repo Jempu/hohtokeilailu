@@ -75,6 +75,7 @@ function removeActivity($folder_name)
     $json = json_decode(file_get_contents($main_json), true);
     if (($key = array_search($folder_name, $json['activities'])) !== false) {
         unset($json['activities'][$key]);
+        $json['activities'] = array_reverse($json['activities']);
     }
     file_put_contents($main_json, json_encode($json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     // remove everything from the folder

@@ -334,7 +334,7 @@ function setOverlay(itemId) {
             transform: 'translateX(-50%) scale(100%)'
         });
         overlayContainer.children().each(function (i, l) {
-            $(l).css({ display: l.id == itemId ? 'grid' : 'none' });
+            $(l).css({ display: l.id == itemId ? 'flex' : 'none' });
         });
         overlayContainer.animate({ now: 108 }, {
             duration: '400',
@@ -359,6 +359,7 @@ function closeOverlay() {
 }
 
 async function loadActivityItemsFromJson(itemTypeRules, callback) {
+    var callbackCalled = false;
     if (itemTypeRules == null || itemTypeRules.length == 0) return;
     function removeActivityContainerItem(e, id) {
         $(e).remove();
@@ -375,8 +376,13 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 var container = $('body');
                 var useExpire = false;
                 var addControls = false;
-                if (itemTypeRules['all'] == null) {
-                    rules = itemTypeRules[child['type']];
+                if (itemTypeRules['all'] != null) {
+                    var rules = itemTypeRules['all'];
+                    container = rules['parent'] ?? $('body');
+                    useExpire = rules['expire'] ?? false;
+                    addControls = rules['control'] ?? false;
+                } else {
+                    var rules = itemTypeRules[child['type']];
                     container = rules['parent'] ?? $('body');
                     useExpire = rules['expire'] ?? false;
                     addControls = rules['control'] ?? false;
@@ -478,9 +484,7 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                     });
                     return output != '' ? `
                         <div class="right">
-                            <div class="media">
-                                ${output}
-                            </div>
+                            ${output}
                         </div>
                     ` : '';
                 }
@@ -494,19 +498,17 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                     return output;
                 }
                 overDiv.innerHTML = `
-                    <div class="item">
-                        <div class="content">
-                            <div class="left">
-                                ${poster}
-                                <h1>${title}</h1>
-                                <h2>${date}</h2>
-                                <p>${content}</p>
-                                ${getLinks(links)}
-                            </div>
-                            ${getFiles(files)}
-                            <div class="close">
-                                <img src="./img/close.png" alt="Sulje näkymä">
-                            </div>
+                    <div class="content">
+                        <div class="left">
+                            ${poster}
+                            <h1>${title}</h1>
+                            <h2>${date}</h2>
+                            <p>${content}</p>
+                            ${getLinks(links)}
+                        </div>
+                        ${getFiles(files)}
+                        <div class="close">
+                            <img src="./img/close.png" alt="Sulje näkymä">
                         </div>
                     </div>
                 `;
@@ -516,7 +518,8 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 });
                 $(itemDiv).ready(function () {
                     loadedDataCount++;
-                    if (loadedDataCount >= dataCount && callback != null && callback !== undefined) {
+                    if (loadedDataCount >= dataCount && callback != null && callback !== undefined && !callbackCalled) {
+                        callbackCalled = true;
                         callback();
                     }
                 })

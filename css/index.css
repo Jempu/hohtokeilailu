@@ -111,7 +111,6 @@ root {
 .titlecard .monitor .container .item img, .titlecard .monitor .container .item iframe {
   width: 100%;
   height: 100%;
-  z-index: -1;
 }
 
 .titlecard .monitor .events {
@@ -1186,11 +1185,20 @@ root {
 }
 
 .barrel .three-layout {
+  position: relative;
   width: 90%;
   background: #62255B;
   border: 5px solid rgba(254, 254, 254, 0.5);
   border-radius: 60px;
   text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.barrel .three-layout p {
+  margin: 0 auto;
 }
 
 .barrel .three-layout img {
@@ -1596,6 +1604,7 @@ root {
   transform: rotateZ(2deg);
   position: relative;
   display: flex;
+  justify-content: center;
   z-index: 4;
 }
 

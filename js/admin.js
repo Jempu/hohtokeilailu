@@ -252,11 +252,9 @@ $(function () {
         }});
     });
 
-    const activityContainer = $(panel).find('.content .activities .activity-view')
-
     loadActivityItemsFromJson({
         "all": {
-            parent: activityContainer,
+            parent: $(panel).find('.content .activities .activity-view'),
             control: true
         }
     });

@@ -94,7 +94,6 @@ $barrelHeight: 44vw
                 img, iframe
                     width: 100%
                     height: 100%
-                    z-index: -1
         .events
             position: absolute
             right: 8%
@@ -851,11 +850,18 @@ $barrelHeight: 44vw
                     height: 65%
                     margin: 0.5rem
     .three-layout
+        position: relative
         width: 90%
         background: #62255B
         border: 5px solid rgba(254, 254, 254, 0.5)
         border-radius: 60px
         text-align: center
+        left: 50%
+        transform: translateX(-50%)
+        margin: 2rem 0
+        padding: 1rem
+        p
+            margin: 0 auto
         img
             width: 28%
             height: 20%
@@ -1139,6 +1145,7 @@ $barrelHeight: 44vw
         transform: rotateZ(2deg)
         position: relative
         display: flex
+        justify-content: center
         z-index: 4
         &::before
             top: -10%
