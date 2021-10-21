@@ -362,11 +362,11 @@ img {
 }
 
 .overlay-container .item .content .close {
-  width: 6rem;
-  height: 4rem;
+  width: 8rem;
+  height: 6rem;
   position: absolute;
   right: calc( 8rem + 1.5vw);
-  top: calc( 4rem + 1vw);
+  top: calc( 3rem + 1vw);
   cursor: pointer;
   -webkit-filter: hue-rotate(-1deg) brightness(1.1);
           filter: hue-rotate(-1deg) brightness(1.1);
@@ -374,6 +374,11 @@ img {
   transition: transform 0.3s ease-out, filter 0.3s ease-out;
   transition: transform 0.3s ease-out, filter 0.3s ease-out, -webkit-filter 0.3s ease-out;
   z-index: inherit;
+  background: darkgray;
+  border-radius: 22px;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
 }
 
 .overlay-container .item .content .close:hover {
@@ -1009,25 +1014,44 @@ img {
   }
 }
 
+.submarine {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+}
+
+.submarine .no-activities {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
 .activity-item {
-  cursor: pointer;
-  pointer-events: all;
-  min-width: 300px;
-  width: calc( 200px + 6.5vw);
   position: relative;
   display: inline-block;
+  width: calc( 200px + 18vw);
+  min-width: 300px;
   margin: 1vmin;
-  padding: 1.8vmin;
+  padding: 0.3vmin;
   overflow: hidden;
   border: 9px solid #406194;
+  border-radius: 24px;
   text-align: center;
   background-color: #ACABAB;
-  transition: transform 0.3s ease-in-out;
-  border-radius: 24px;
+  transition: transform 0.23s ease-in-out, box-shadow 0.28s ease-out;
+  pointer-events: all;
+  cursor: default;
+}
+
+.activity-item .content {
+  padding: 0.3vw;
 }
 
 .activity-item:hover {
-  transform: scale(106%);
+  transform: scale(102%);
+  box-shadow: 4px 14px 4px rgba(255, 255, 255, 0.52);
 }
 
 .activity-item::before {
@@ -1047,20 +1071,23 @@ img {
   pointer-events: none;
 }
 
-.activity-item img {
-  width: 100%;
-  max-height: 70%;
-}
-
 .activity-item h1, .activity-item h2 {
   margin: 1rem 0 1rem 0;
 }
 
-.activity-item img, .activity-item h2, .activity-item h3, .activity-item .bo {
-  margin-top: 0.7vw;
+.activity-item a, .activity-item img, .activity-item h2, .activity-item h3, .activity-item iframe, .activity-item .bo {
   position: relative;
-  z-index: 1;
-  pointer-events: none;
+  z-index: inherit;
+}
+
+.activity-item img, .activity-item iframe {
+  width: 100%;
+  max-height: 70%;
+  z-index: 2;
+}
+
+.activity-item iframe {
+  height: calc( 650px + 1vmin);
 }
 
 .activity-item img {
@@ -1077,6 +1104,11 @@ img {
 .activity-item h3 {
   font-size: calc(14px + 1vmin);
   margin-bottom: 1.55vw;
+}
+
+.activity-item a {
+  color: #BFCBF9;
+  margin: 0.6rem 0;
 }
 
 .activity-item .bo {

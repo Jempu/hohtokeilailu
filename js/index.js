@@ -343,7 +343,9 @@ loadActivityItemsFromJson({
         expire: true
     }
 }, function () {
-    barrel.start($('.barrel'));
+    setTimeout(() => {
+        barrel.start($('.barrel'));
+    }, 1000);
 });
 
 // Create the responsive map

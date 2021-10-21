@@ -1,10 +1,12 @@
 @import url('./main.css');
 
-$input-background: rgba(57, 63, 84, 0.8)
+$input-background: #211630
 $input-text-inactive: #7881A1
 $input-text-active: #BFD2FF
+$text-fontsize: calc( 16px + 0.7vmin )
+$text-color: #e5d3d9
 
-.admin-panel
+body
     position: fixed
     width: 100%
     height: 100%
@@ -15,31 +17,26 @@ $input-text-active: #BFD2FF
     font-family: Nunito
     overflow: clip
     z-index: 48
-    background: linear-gradient(0deg, rgba(4, 31, 96, 1), rgba(4, 31, 96, 1))
+    color: $text-color
+    text-decoration-color: $text-color
+    h1, h2, h3, h4, h5, h6, p, a, input, select, option
+        color: $text-color
+
+    // background: linear-gradient(0deg, rgba(4, 31, 96, 1), rgba(4, 31, 96, 1))
     background-size: cover
-    &[expanded="true"]
-        .sidepanel
-            border-radius: 25px 0 0 25px
-            .control
-                transform: rotateZ(180deg)
-                &:hover
-                    transform: scale(104%) rotateZ(180deg)
-        .content
-            transform: translateX(100%)
-    .sidepanel
+    panel
+        position: fixed
+        display: flex
         width: 100%
         height: 4.25rem
-        display: inline-flex
-        position: fixed
         bottom: 0
         left: 0
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
         background-size: cover
         transition: border-radius 0.4s ease-out
         z-index: 49
-        justify-content: start
+        justify-content: space-evenly
         .home
-            width: 60%
             height: 100%
             position: relative
             display: flex
@@ -56,37 +53,35 @@ $input-text-active: #BFD2FF
             display: grid
             a
                 margin: auto 0
-    .content
+    container
         height: 94.5%
         position: relative
-        grid-area: b
         gap: calc(16px + 1vw)
         overflow-x: auto
         overflow-y: auto
         background: rgba(0, 0, 0, 0.2)
         display: flex
+        justify-content: space-evenly
         align-items: center
-        justify-content: space-around
         flex-wrap: wrap
-        h1, h2
-            padding: 0 1.5vw
         h1
             font-family: Sansita-ExtraBold
-        h2
-            font-size: calc(8px + 0.8vw)
-        .rrow
-            display: inline-block
-        #second
-            width: calc( 20em + 1vmin )
-        .activities
+        section
+            display: flex
+            flex-direction: column
+            justify-content: start
+            align-items: center
+            overflow: clip
+            #titlecard-title
+                position: relative
+                width: 100%
+        #activities
             position: relative
-            width: 500px
-            height: 100%
             .top
                 display: flex
-            .activity-view
-                width: 100%
+            activities
                 position: relative
+                width: 100%
                 max-height: 30%
                 overflow-x: clip
                 overflow-y: scroll
@@ -132,172 +127,180 @@ $input-text-active: #BFD2FF
                             cursor: pointer
                             text-decoration: underline
                             text-decoration-style: dashed
-                            text-decoration-color: #fff
                             &:hover
                                 text-decoration: underline
-        form
+            creator
+                position: relative
+                width: 100%
+        section, form
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
+            background-size: cover
             position: relative
             max-height: calc( 100% - 4.5rem )
-            min-height: 50%
             border-radius: 2rem
-            &#schedule
-                width: 340px
+            img
+                width: 4rem
+                height: 4rem
+        #schedule
+            width: 340px
+            display: flex
+            flex-direction: column
+            align-items: center
+            margin: 0
+            padding-top: 0
+            input
+                background-color: $input-background
+            .title
                 position: relative
-                grid-area: a
                 display: flex
-                flex-direction: column
+                width: 92%
+                justify-content: space-around
                 align-items: center
-                margin: 0
-                padding-top: 0
-                .title
-                    width: 100%
+                padding-top: 0.6rem
+                img, h1
+                    margin: auto
+                    padding: 0
+            ul
+                width: 95%
+                position: relative
+                display: block
+                li
                     position: relative
+                    width: 100%
                     display: flex
+                    flex-direction: column
                     justify-content: center
                     align-items: center
-                    padding-top: 0.6rem
-                    img, h1
-                        margin: 0 1rem
-                ul
-                    width: 75%
-                    position: relative
-                    display: block
-                    li
-                        width: 100%
-                        position: relative
-                        display: block
-                        background-color: #5e5e7a
-                        border: 1px solid #ccc
-                        color: #555
-                        border-radius: 16px
-                        padding: 0 0.8rem 1rem 0.8rem
-                        margin: 0.8rem 0
-                        .time
-                            width: 100%
-                            height: 42px
-                            position: relative
-                            display: flex
-                            justify-content: center
-                            align-items: center
-                            color: #fff
-                            input
-                                width: 25%
-                                height: 70%
-                                border: none
-                                text-align: center
-                                border-radius: 12px
-                                font-size: 18px
-                            img
-                                width: 48px
-                                height: 40px
-                                &#middle
-                                    width: 20px
-                                    height: 20px
-            &#titlecard-title
-                grid-area: t
-                width: 480px
-            &#pricing
-                display: flex
-                grid-area: b
-                flex-direction: column
-                justify-content: center
-                align-items: center
-                padding-bottom: 2.5rem
-                margin-top: 1.2rem
-                ul
-                    width: 100%
-                    height: auto
-                    position: relative
-                    padding: 0 1rem 0 1rem
-                    li
-                        width: 90%
-                        height: auto
+                    background-color: #5e5e7a
+                    border: 1px solid #ccc
+                    color: #555
+                    border-radius: 16px
+                    padding-bottom: 1rem
+                    margin: 0.5vw 0
+                    .time
+                        width: 95%
+                        height: 42px
                         position: relative
                         display: flex
-                        margin: 0.5rem 0
-                        img, .price, div
-                            margin: auto
-                        input[type="number"]
-                            height: 24px
-                            width: 42px
-                            border-radius: 16px
+                        justify-content: center
+                        align-items: center
+                        color: $text-color
+                        input
+                            width: 25%
+                            height: 70%
+                            border: none
                             text-align: center
-                            font-size: 16px
-                        .price
-                            background: gray
-                            border-radius: 18px
-                            padding-right: 1rem
-                        h2
-                            font-family: NunitoSans-Light
-            &#activities
-                grid-area: c
-                display: flex
-                flex-direction: column
-                align-items: center
-                select
-                    margin: 1rem 0
-                .item
-                    display: none
-                    &[active="true"]
-                        display: block
-                    &#default
-                        .attachment-container
-                            .att-item
-                                .top
-                                    display: flex
-                                    justify-content: space-around
-                                    .close
-                                        width: 4rem
-                                        height: 5rem
-                                        position: relative
-                                        right: 0.5rem
-                                        top: 0.5rem
-                                        cursor: pointer
-                                        transition: transform 0.4s ease
-                                        &:hover
-                                            transform: scale(104%)
-            &#gallery
-                width: calc(20em + 1vmin)
-                max-height: 95%
-                padding-top: 0
-                padding-bottom: 1rem
-                display: flex
-                flex-direction: column
-                background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
-                background-size: cover
-                h1
-                    padding: 1rem 0
-                .content, .file-new-input
+                            border-radius: 12px
+                        img
+                            width: 48px
+                            height: 40px
+                            &#middle
+                                width: 20px
+                                height: 20px
+        #pricing
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            padding-bottom: 2.5rem
+            margin-top: 1.2rem
+            h4
+                margin: auto 0.8rem
+            ul
+                width: 100%
+                position: relative
+                padding: 0 1rem 0 1rem
+                li
+                    display: flex
+                    width: 90%
                     position: relative
-                    display: inline-block
-                .content
-                    height: 80%
-                    .item
-                        width: 80%
+                    margin: 0.5rem 0
+                    justify-content: space-between
+                    input[type="number"]
+                        height: 24px
+                        width: 42px
+                        border-radius: 16px
+                        text-align: center
+                    &#birthday_small, &#birthday_big
+                        .item
+                            flex-direction: row
+                    .price
+                        background: $input-background
+                        border-radius: 18px
+                        padding-right: 1rem
+                        display: flex
+                        vertical-align: middle
+                        justify-content: center
+                        align-items: center
+                    h2
+                        font-family: NunitoSans-Light
+        #activities
+            display: flex
+            flex-direction: column
+            align-items: center
+            select
+                margin: 1rem 0
+            .item
+                display: none
+                &[active="true"]
+                    display: block
+                &#default
+                    .attachment-container
+                        .att-item
+                            .top
+                                display: flex
+                                justify-content: space-around
+                                .close
+                                    width: 4rem
+                                    height: 5rem
+                                    position: relative
+                                    right: 0.5rem
+                                    top: 0.5rem
+                                    cursor: pointer
+                                    transition: transform 0.4s ease
+                                    &:hover
+                                        transform: scale(104%)
+        #gallery
+            width: calc(20em + 1vmin)
+            max-height: 95%
+            padding-top: 0
+            padding-bottom: 1rem
+            display: flex
+            flex-direction: column
+            h1
+                padding: 1rem 0
+            .content, .file-new-input
+                position: relative
+                display: inline-block
+            .content
+                height: 80vh
+                overflow-y: auto
+                .item
+                    width: 80%
+                    height: auto
+                    position: relative
+                    display: block
+                    margin: 0.6rem auto
+                    border-radius: 12px
+                    overflow: clip
+                    .close
+                        width: 4rem
+                        height: 5rem
+                        position: absolute
+                        right: 0.5rem
+                        top: 0.5rem
+                        cursor: pointer
+                        transition: transform 0.4s ease
+                        &:hover
+                            transform: scale(104%)
+                    img, video
+                        width: 100%
                         height: auto
-                        position: relative
-                        display: block
-                        margin: 0.6rem auto
-                        border-radius: 12px
-                        overflow: clip
-                        .close
-                            width: 4rem
-                            height: 5rem
-                            position: absolute
-                            right: 0.5rem
-                            top: 0.5rem
-                            cursor: pointer
-                            transition: transform 0.4s ease
-                            &:hover
-                                transform: scale(104%)
-                        img, video
-                            width: 100%
-                            height: auto
-                p
-                    margin: 2rem 0
-                .file-new-input
-                    height: 20%
-                    display: inline-block
+            p
+                margin: 2rem 0
+            .file-new-input
+                height: 20%
+                display: inline-block
     form
         width: 100%
         position: relative
@@ -313,21 +316,17 @@ $input-text-active: #BFD2FF
                 width: 74%
             p
                 margin: 2%
-    // add a background and cursor to inputs
-    input[type="submit"], button[type="button"]
-        width: auto
-        cursor: pointer
-        background-color: gray
     // hide arrow buttons
     input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
         -webkit-appearance: none
         margin: 0
     input[type=number]
         -moz-appearance: textfield
-        background: gray
     input, button
+        cursor: pointer
+        width: auto
         position: relative
-        color: #fff
+        color: $text-color
         border-style: none
         background: transparent
         outline: none
@@ -358,7 +357,7 @@ $input-text-active: #BFD2FF
         max-width: 400px
         margin: 0 auto
         border-radius: 2px
-        padding: 0.5rem 1.7rem
+        padding: 0.5rem 0.5rem 0.5rem 0
         background: $input-background
         &:after
             content: ""
@@ -377,32 +376,37 @@ $input-text-active: #BFD2FF
         & input
             flex-grow: 1
             color: $input-text-active
-            font-size: 1.8rem
             line-height: 2.4rem
             vertical-align: middle
         &::-webkit-input-placeholder
             color: $input-text-inactive
         & button
             color: $input-text-inactive
-            font-size: 2.4rem
             line-height: 2.4rem
             vertical-align: middle
             transition: color .25s
         &:hover
             color: $input-text-active
+        p
+            margin: auto 0
     // custom css select
     select, input[type="date"], button[type="button"]
-        width: 140px
+        width: auto
         height: 35px
+        padding: 0.2
     input[type="file"]
         width: 80%
         height: 25px
-    select, input[type="date"], button[type="button"], input[type="file"]
+    input, button, h1, h2, h3, h4, h5, h6, p, a,
+    select, input[type="date"], input[type="submit"],
+    button[type="button"], input[type="file"], textarea
+        font-size: $text-fontsize
+    select, input[type="date"], input[type="submit"], button[type="button"], input[type="file"], textarea
         padding: 4px 
         border-radius: 4px 
         box-shadow: 2px 2px 8px #999 
-        background: #211630
-        color: #fff
+        background-color: $input-background
+        color: $text-color
         outline: 2px rgba(255, 255, 255, 0.4) solid
         transition: outline 0.3s ease-out
         border: none 
@@ -410,7 +414,7 @@ $input-text-active: #BFD2FF
         -webkit-appearance: none 
         -moz-appearance: none 
         appearance: none 
-        cursor: pointer 
+        cursor: pointer
         &:hover
             outline: 2px rgba(255, 255, 255, 0.8) solid
     label 
@@ -438,6 +442,16 @@ $input-text-active: #BFD2FF
             position: absolute 
             pointer-events: none 
             display: block 
+    select, option
+        text-align: center
+    textarea
+        position: relative
+        width: 100%
+        height: calc( 50px + 1vmin )
+        min-height: calc( 50px + 1vmin )
+        max-height: calc( 250px + 1vmin )
+        resize: vertical
+        font-family: Nunito
 
 @keyframes gradient
     0%
@@ -447,8 +461,10 @@ $input-text-active: #BFD2FF
 
 
 @media screen and (max-width: 600px)
-    .admin-panel
+    body
         form#schedule
             ul li
                 margin: 0 0
                 padding: 0 0.3rem 0 0.3rem
+        section
+            margin-bottom: 2.8rem

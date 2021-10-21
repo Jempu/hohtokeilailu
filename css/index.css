@@ -1378,6 +1378,17 @@ root {
   opacity: 0.4;
 }
 
+.about-container a#online {
+  position: relative;
+  width: 100%;
+  margin: 2vw auto;
+  display: inline-block;
+  text-align: center;
+  font-size: calc(18px + 1.3vw);
+  z-index: 3;
+  color: #BFCBF9;
+}
+
 .about-container .item {
   height: auto;
   position: relative;

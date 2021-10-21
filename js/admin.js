@@ -1,6 +1,5 @@
 const html = $('html');
 const body = $('body');
-const overlayContainer = $('.overlay-container');
 
 function addInputLogic(inputs, arr) {
     var currKey;
@@ -67,7 +66,7 @@ function pdfEmbed(pdf, target) {
 
 // called by .php
 function galleryAddOldPreviews(data) {
-    const parent = $('.admin-panel').find('#gallery .content');
+    const parent = $(body).find('#gallery .content');
     data.forEach(e => {
         if (e.substr(e.length - 1, 1) != '.') {
             var type = '';
@@ -125,15 +124,14 @@ function removePreview(item, src) {
 }
 
 $(function () {
-    const panel = $('.admin-panel');
-    const anchors = $(panel).find('.anchors');
-    const content = $(panel).find('.content');
+    const panel = body;
+    const content = $(panel).find('container');
 
     // all of the different forms
     const scheduleForm = $(content).find('#schedule');
     const titleForm = $(content).find('#titlecard-title');
     const pricingForm = $(content).find('#pricing');
-    const activityForm = $(content).find('#activities');
+    const actCreator = $(content).find('#activities');
     const galleryForm = $(content).find('#gallery');
 
     //limit inputs to their character limits
@@ -259,8 +257,8 @@ $(function () {
         }
     });
 
-    const defaultSection = $(activityForm).find('#default');
-    const linkActivityForm = $(activityForm).find('#links');
+    const defaultSection = $(actCreator).find('#default');
+    const linkActivityForm = $(actCreator).find('#links');
     var currentActivityIndex = -1;
     var currentSectionType = null;
     function setActivityForm(index) {
@@ -269,26 +267,27 @@ $(function () {
         currentActivityIndex = index;
         currentSectionType = index < 2 ? defaultSection : linkActivityForm;
     }
-    $(panel).find('#activity-select').change(function () {
+    $(actCreator).find('#act-select').change(function () {
         setActivityForm($(this).val());
     });
     setActivityForm(0);
     
     // set input's header_image preview
-    $(activityForm).find('input#cover-image-file-input').change(function () {
+    const coverImgInput = $(actCreator).find('input#cover-image-file-input');
+    $(coverImgInput).change(function () {
         const reader = new FileReader();
         reader.onload = function (e) {
-            $(activityForm).find('.cover-image img').attr('src', e.target.result);
+            $(actCreator).find('.cover-image img').attr('src', e.target.result);
         }
         reader.readAsDataURL($(this)[0].files[0]);
     });
     // if header_image file input already set
-    if ($(activityForm).find('input#cover-image-file-input')[0].files[0]) {
+    if ($(coverImgInput)[0].files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            $(activityForm).find('.cover-image img').attr('src', e.target.result);
+            $(actCreator).find('.cover-image img').attr('src', e.target.result);
         }
-        reader.readAsDataURL($(activityForm).find('input#cover-image-file-input')[0].files[0]);
+        reader.readAsDataURL($(coverImgInput)[0].files[0]);
     }
     
     // attachments
@@ -305,7 +304,7 @@ $(function () {
 
     // create a new activity to the database
     function addNewActivity() {
-        const title = $(activityForm).find('input#title').val();
+        const title = $(actCreator).find('input#title').val();
         function log(str, msg) {
             if (str == '') {
                 console.log(msg);
@@ -315,9 +314,9 @@ $(function () {
             return false;
         }
         if (log(title, 'Ilmoituksissa täytyy olla otsikko.')) return;
-        const startDate = $(activityForm).find('input#start-date').val();
+        const startDate = $(actCreator).find('input#start-date').val();
         if (log(startDate, 'Ilmoituksissa täytyy olla alkamispäivä.')) return;
-        const endDate = $(activityForm).find('input#end-date').val();
+        const endDate = $(actCreator).find('input#end-date').val();
         if (log(endDate, 'Ilmoituksissa täytyy olla loppumispäivä.')) return;
         let output = {};
         let attachments = [];
@@ -326,7 +325,7 @@ $(function () {
         output.title = title;
         const sdate = moment(startDate).format('DD.MM.YYYY');
         output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
-        const coverImage = $(activityForm).find('input#cover-image-file-input')[0].files[0];
+        const coverImage = $(actCreator).find('input#cover-image-file-input')[0].files[0];
         if (coverImage) {
             const rand = Math.random().toString(16).substr(2, 4);
             output.header_image = rand + "-" + coverImage.name;
@@ -411,7 +410,7 @@ $(function () {
             else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
         });
     }
-    $(activityForm).find('button[type="button"]#submit').on('click', function () {
+    $(actCreator).find('button[type="button"]#submit').on('click', function () {
         addNewActivity();
     });
 
@@ -478,7 +477,7 @@ $(function () {
         setAttachmentForm($(o), 0);
         $(attachmentContainer).append(o);
     }
-    $(activityForm).find('button#add-attachment').on('click', function () {
+    $(actCreator).find('button#add-attachment').on('click', function () {
         addAttachmentForm();
     });
     
@@ -496,14 +495,9 @@ $(function () {
         });
     });
 
-    // panel expansion
-    var expanded = true;
-    function resizePanel(val) {
-        expanded = val;
-        $(panel).get(0).setAttribute('expanded', val ? 'true' : 'false');
+    // when a change has been made, pressing the global
+    // save button saves all of the form's changes
+    function saveAllChanges() {
+        alert('Kaikki muutokset tallennettu!');
     }
-    $(anchors).find('.control').on('click', function () {
-        resizePanel(!expanded);
-    });
-    resizePanel(false);
 });

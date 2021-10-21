@@ -24,6 +24,26 @@ function gp(isRoot = false) {
     return isIndex() || isRoot ? './' : '../';
 }
 
+function getHtmlForFile(path) {
+    var o = '';
+    switch (path.split('/').pop().split('.').pop()) {
+        case 'pdf':
+            o += `<iframe src="${path}" type="application/pdf" width="100%" frameborder="0"></iframe>`;
+            break;
+        case 'png':
+        case 'jpg':
+        case 'jpeg':
+        case 'gif':
+            o += `<img src="${path}" />`
+            break;
+        case 'mp4':
+        case 'mov':
+            o += `<video src="${path} controls"></video>`
+            break;
+    }
+    return o;
+}
+
 function setPageScrolling(v) {
     $('html').css({ overflowX: 'clip', overflowY: v ? 'auto' : 'clip' });
 }
@@ -262,21 +282,17 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
     // current
     if (isAfterDate(s1[0], s1[1], s1[2]) && isBeforeDate(s2[0], s2[1], s2[2])) {
         if (format == 'number') return 0;
-        else {
-            switch (lang) {
-                case 'en': return 'current';
-                case 'fi': return 'meneillään';
-            }
+        switch (lang) {
+            case 'en': return 'current';
+            case 'fi': return 'meneillään';
         }
     }
     // future
     else if (isAfterDate(s2[0], s2[1], s2[2]) && isBeforeDate(s1[0], s1[1], s1[2])) {
         if (format == 'number') return 2;
-        else {
-            switch (lang) {
-                case 'en': return 'future';
-                case 'fi': return 'tulossa';
-            }
+        switch (lang) {
+            case 'en': return 'future';
+            case 'fi': return 'tulossa';
         }
     }
     // past
@@ -327,38 +343,42 @@ function getPlaceInGrid(columnCount, rowCount, index) {
     };
 }
 
-function setOverlay(itemId) {
-    if (itemId != '') {
-        overlayContainer.css({
-            display: 'grid',
-            transform: 'translateX(-50%) scale(100%)'
-        });
-        overlayContainer.children().each(function (i, l) {
-            $(l).css({ display: l.id == itemId ? 'flex' : 'none' });
-        });
-        overlayContainer.animate({ now: 108 }, {
-            duration: '400',
-            step: function (now, fx) {
-                $(this).css('transform', `translateX(-50%) scale(${now}%)`);
-            }
-        });
-    } else {
-        overlayContainer.animate({ now: 0 }, {
-            duration: '400',
-            step: function (now, fx) {
-                $(this).css('transform', `translateX(-50%) scale(${now}%)`);
-            },
-            complete: function () {
-                overlayContainer.css({ display: 'none' });
-            }
-        });
-    }
-}
-function closeOverlay() {
-    setOverlay("");
-}
+// function setOverlay(itemId) {
+//     if (itemId != '') {
+//         overlayContainer.css({
+//             display: 'grid',
+//             transform: 'translateX(-50%) scale(100%)'
+//         });
+//         overlayContainer.children().each(function (i, l) {
+//             $(l).css({ display: l.id == itemId ? 'flex' : 'none' });
+//         });
+//         overlayContainer.animate({ now: 108 }, {
+//             duration: '400',
+//             step: function (now, fx) {
+//                 $(this).css('transform', `translateX(-50%) scale(${now}%)`);
+//             }
+//         });
+//         setPageScrolling(false);
+//     } else {
+//         overlayContainer.animate({ now: 0 }, {
+//             duration: '400',
+//             step: function (now, fx) {
+//                 $(this).css('transform', `translateX(-50%) scale(${now}%)`);
+//             },
+//             complete: function () {
+//                 overlayContainer.css({ display: 'none' });
+//             }
+//         });
+//         setPageScrolling(true);
+//     }
+// }
+// function closeOverlay() {
+//     setOverlay("");
+// }
 
 async function loadActivityItemsFromJson(itemTypeRules, callback) {
+    callback()
+    return;
     var callbackCalled = false;
     if (itemTypeRules == null || itemTypeRules.length == 0) return;
     function removeActivityContainerItem(e, id) {
@@ -373,18 +393,19 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
             const folder = `${activityDirectory}${item}/`;
             fetch(`${folder}activity.json`).then(v => v.json()).then(child => {
                 // if is set to specific types
-                var container = $('body');
-                var useExpire = false;
+                var parent = $('body');
+                var useExpirationOnItems = false;
                 var addControls = false;
+                var useExpiredItems = false;
                 if (itemTypeRules['all'] != null) {
                     var rules = itemTypeRules['all'];
-                    container = rules['parent'] ?? $('body');
-                    useExpire = rules['expire'] ?? false;
+                    parent = rules['parent'] ?? $('body');
+                    useExpirationOnItems = rules['expire'] ?? false;
                     addControls = rules['control'] ?? false;
                 } else {
                     var rules = itemTypeRules[child['type']];
-                    container = rules['parent'] ?? $('body');
-                    useExpire = rules['expire'] ?? false;
+                    parent = rules['parent'] ?? $('body');
+                    useExpirationOnItems = rules['expire'] ?? false;
                     addControls = rules['control'] ?? false;
                 }
                 const date = getDisplayableDate(child['date'], true, 3);
@@ -392,9 +413,11 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 const dateEnd = getDisplayableDate(child['date'], false, 2, false);
                 const dateStatus = getDateStatus(dateStart, dateEnd, 'abc', 'fi');
                 const title = child['title'];
+
                 const poster = child['header_image'] != ''
-                    ? `<img src="${folder}${child['header_image']}" class="header-img" alt="Ilmoituksen kansikuva" />`
+                    ? `${folder}${child['header_image']}`
                     : '';
+                
                 const files = child['files'];
                 const links = child['links'] ?? child['link'] ?? '';
                 const content = child['content'] != ''
@@ -414,108 +437,102 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'activity-item';
                 itemDiv.id = item;
-                itemDiv.setAttribute('onclick', child['type'] == 'link' ? `window.open('${links}');` : `setOverlay('${item}');`);
-                itemDiv.innerHTML =
-                // if admin, display all in the activity view with controls
-                addControls ? `
+                // itemDiv.setAttribute('onclick', child['type'] == 'link' ? `window.open('${links}');` : `setOverlay('${item}');`);
+                function getHtmlAndLinkForFile(poster) {
+                    return `
+                        ${getHtmlForFile(poster)}
+                        <br>
+                        <a href="${poster}" target="#">Avaa tiedosto eri ikkunaan</a>
+                    `;
+                }
+                function getAllLinks(links) {
+                    var output = '';
+                    links.forEach(link => {
+                        output += `
+                            <a href="${link['link']}" target="#">${link['text']}</a>
+                            <br>
+                        `;
+                    });
+                    return output;
+                }
+                itemDiv.innerHTML = `
                     <div class="content">
-                        ${poster}
+                        ${getHtmlAndLinkForFile(poster)}
                         <div class="bo" id="a"></div>
                         <h2>${title}</h2>
                         <h3>${date}</h3>
+                        ${getAllLinks(child['links'])}
                         <div class="bo" id="b"></div>
-                    </div>
+                    </div>`
+                    + (addControls ? `
                     <div class="control">
                         <h1>${type}</h1>
                         <h1>Tapahtuma ${dateStatus}</h1>
                         <h2 id="delete">Poista Ilmoitus<h2>
-                    </div>
-                `
-                // all activity items displayed look the same
-                : `
-                    <div class="content">
-                        ${poster}
-                        <div class="bo" id="a"></div>
-                        <h2>${title}</h2>
-                        <h3>${date}</h3>
-                        <div class="bo" id="b"></div>
-                    </div>
-                `;
-                // itemDiv.onclick = function() {
-                //     switch (child['type']) {
-                //         case 'link':
-                //             window.open(links);
-                //             break;
-                //         default:
-                //             setOverlay(item);
-                //             break;
-                //     }
-                // }
-                $(itemDiv).find('.control h2#delete').on('click', function () {
-                    removeActivityContainerItem(itemDiv, item);
-                });
-                (useExpire
-                    ? $(container).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? container
-                    : container).append(itemDiv);
+                    </div>` : '');
+                if (addControls) {
+                    $(itemDiv).find('.control h2#delete').on('click', function () {
+                        removeActivityContainerItem(itemDiv, item);
+                    });
+                }
+
+                parent.find('.no-activities').css({ display: 'none' });
+
+                if (useExpiredItems) {
+                    if (getDateStatus(dateStart, dateEnd) == 0) {
+                        (useExpirationOnItems
+                            ? $(parent).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? parent
+                            : parent).append(itemDiv);
+                    }
+                } else {
+                    (useExpirationOnItems
+                        ? $(parent).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? parent
+                        : parent).append(itemDiv);
+                }
                 // overlay item
-                const overDiv = document.createElement('div');
-                overDiv.className = 'item';
-                overDiv.id = item;
-                function getFiles(v) {
-                    if (v === undefined || v.length == 0) return '';
-                    var output = '';
-                    v.forEach(e => {
-                        const src = folder + e;
-                        switch (e.toString().split('.').pop()) {
-                            case 'pdf':
-                                output += `<iframe src="${src}" frameborder="0"></iframe>\n`;
-                                break;
-                            case 'png':
-                            case 'jpg':
-                            case 'jpeg':
-                            case 'gif':
-                                output += `<img src="${src}" />\n`
-                                break;
-                            case 'mp4':
-                            case 'mov':
-                                output += `<video src="${src} controls"></video>\n`
-                                break;
-                        }
-                    });
-                    return output != '' ? `
-                        <div class="right">
-                            ${output}
-                        </div>
-                    ` : '';
-                }
-                if (type == 'Linkki-ilmoitus') return;
-                function getLinks(links) {
-                    if (links === undefined) return '';
-                    var output = '';
-                    links.forEach(e => {
-                        output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
-                    });
-                    return output;
-                }
-                overDiv.innerHTML = `
-                    <div class="content">
-                        <div class="left">
-                            ${poster}
-                            <h1>${title}</h1>
-                            <h2>${date}</h2>
-                            <p>${content}</p>
-                            ${getLinks(links)}
-                        </div>
-                        ${getFiles(files)}
-                        <div class="close">
-                            <img src="./img/close.png" alt="Sulje näkymä">
-                        </div>
-                    </div>
-                `;
-                $(overlayContainer).append(overDiv);
-                $(overDiv).find('.close').on('click', function () {
-                    closeOverlay();
-                });
+                // const overDiv = document.createElement('div');
+                // overDiv.className = 'item';
+                // overDiv.id = item;
+                // function getFiles(files) {
+                //     if (files === undefined || files.length == 0) return '';
+                //     var output = '';
+                //     files.forEach(file => {
+                //         output += getHtmlForFile(folder + file) + '\n';
+                //     });
+                //     return output != '' ? `
+                //         <div class="right">
+                //             ${output}
+                //         </div>
+                //     ` : '';
+                // }
+                // if (type == 'Linkki-ilmoitus') return;
+                // function getLinks(links) {
+                //     if (links === undefined) return '';
+                //     var output = '';
+                //     links.forEach(e => {
+                //         output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
+                //     });
+                //     return output;
+                // }
+                // overDiv.innerHTML = `
+                //     <div class="content">
+                //         <div class="left">
+                //             ${poster}
+                //             <h1>${title}</h1>
+                //             <h2>${date}</h2>
+                //             <p>${content}</p>
+                //             ${getLinks(links)}
+                //         </div>
+                //         ${getFiles(files)}
+                //         <div class="close">
+                //             <img src="./img/close.png" alt="Sulje näkymä">
+                //         </div>
+                //     </div>
+                // `;
+                // $(overlayContainer).append(overDiv);
+                // $(overDiv).find('.close').on('click', function () {
+                //     closeOverlay();
+                // });
                 $(itemDiv).ready(function () {
                     loadedDataCount++;
                     if (loadedDataCount >= dataCount && callback != null && callback !== undefined && !callbackCalled) {
@@ -530,7 +547,7 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
 
 
 // ------------------------------------ 
-//// COORDINATOR
+// COORDINATOR
 // ------------------------------------ 
 function smoothScroll(top = 0, delay = 800, hash = null) {
     $('html, body').animate({
@@ -578,6 +595,14 @@ function createSchedule(dayList, ul, title = null) {
     }
 }
 
+function playLoadingScreenAnim() {
+    $('.page-loader').animate({
+        opacity: 0
+    }, 750, function () {
+        $(this).css({ display: 'none' });
+        setPageScrolling(true);
+    });
+}
 
 $(window).on('load', function () {
     $(document).find('.varaa-btn').each(function (i, l) {
@@ -585,12 +610,5 @@ $(window).on('load', function () {
             window.open('https://www.varaavuoro.com/mikkeli', target='#');
         });
     });
-    // plays an animation on loading screen until the page has been fully loaded
-    $('.page-loader').animate({
-        opacity: 0
-    }, 750, function () {
-        $(this).css({ display: 'none' });
-        setPageScrolling(true);
-    });
-    closeOverlay();
+    playLoadingScreenAnim();
 });

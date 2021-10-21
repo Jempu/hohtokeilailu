@@ -1,5 +1,5 @@
 @import url("./main.css");
-.admin-panel {
+body {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -10,42 +10,31 @@
   font-family: Nunito;
   overflow: clip;
   z-index: 48;
-  background: linear-gradient(0deg, #041f60, #041f60);
+  color: #e5d3d9;
+  -webkit-text-decoration-color: #e5d3d9;
+          text-decoration-color: #e5d3d9;
   background-size: cover;
 }
 
-.admin-panel[expanded="true"] .sidepanel {
-  border-radius: 25px 0 0 25px;
+body h1, body h2, body h3, body h4, body h5, body h6, body p, body a, body input, body select, body option {
+  color: #e5d3d9;
 }
 
-.admin-panel[expanded="true"] .sidepanel .control {
-  transform: rotateZ(180deg);
-}
-
-.admin-panel[expanded="true"] .sidepanel .control:hover {
-  transform: scale(104%) rotateZ(180deg);
-}
-
-.admin-panel[expanded="true"] .content {
-  transform: translateX(100%);
-}
-
-.admin-panel .sidepanel {
+body panel {
+  position: fixed;
+  display: flex;
   width: 100%;
   height: 4.25rem;
-  display: inline-flex;
-  position: fixed;
   bottom: 0;
   left: 0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
   background-size: cover;
   transition: border-radius 0.4s ease-out;
   z-index: 49;
-  justify-content: start;
+  justify-content: space-evenly;
 }
 
-.admin-panel .sidepanel .home {
-  width: 60%;
+body panel .home {
   height: 100%;
   position: relative;
   display: flex;
@@ -53,72 +42,66 @@
   align-items: center;
 }
 
-.admin-panel .sidepanel .home img {
+body panel .home img {
   height: 80%;
   transition: transform 0.3s ease-out;
   cursor: pointer;
   pointer-events: all;
 }
 
-.admin-panel .sidepanel .home img:hover {
+body panel .home img:hover {
   transform: scale(104%);
 }
 
-.admin-panel .sidepanel .help {
+body panel .help {
   display: grid;
 }
 
-.admin-panel .sidepanel .help a {
+body panel .help a {
   margin: auto 0;
 }
 
-.admin-panel .content {
+body container {
   height: 94.5%;
   position: relative;
-  grid-area: b;
   gap: calc(16px + 1vw);
   overflow-x: auto;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.2);
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: space-around;
   flex-wrap: wrap;
 }
 
-.admin-panel .content h1, .admin-panel .content h2 {
-  padding: 0 1.5vw;
-}
-
-.admin-panel .content h1 {
+body container h1 {
   font-family: Sansita-ExtraBold;
 }
 
-.admin-panel .content h2 {
-  font-size: calc(8px + 0.8vw);
+body container section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  overflow: clip;
 }
 
-.admin-panel .content .rrow {
-  display: inline-block;
-}
-
-.admin-panel .content #second {
-  width: calc( 20em + 1vmin);
-}
-
-.admin-panel .content .activities {
+body container section #titlecard-title {
   position: relative;
-  width: 500px;
-  height: 100%;
+  width: 100%;
 }
 
-.admin-panel .content .activities .top {
+body container #activities {
+  position: relative;
+}
+
+body container #activities .top {
   display: flex;
 }
 
-.admin-panel .content .activities .activity-view {
-  width: 100%;
+body container #activities activities {
   position: relative;
+  width: 100%;
   max-height: 30%;
   overflow-x: clip;
   overflow-y: scroll;
@@ -127,7 +110,7 @@
   border-radius: 32px;
 }
 
-.admin-panel .content .activities .activity-view .item {
+body container #activities activities .item {
   width: 100%;
   position: relative;
   display: flex;
@@ -136,7 +119,7 @@
   align-items: center;
 }
 
-.admin-panel .content .activities .activity-view .item .content {
+body container #activities activities .item .content {
   cursor: pointer;
   margin: 1rem;
   width: 46%;
@@ -152,56 +135,63 @@
   box-sizing: content-box;
 }
 
-.admin-panel .content .activities .activity-view .item .content:hover {
+body container #activities activities .item .content:hover {
   transform: scale(104%);
 }
 
-.admin-panel .content .activities .activity-view .item .content h1, .admin-panel .content .activities .activity-view .item .content h2, .admin-panel .content .activities .activity-view .item .content img {
+body container #activities activities .item .content h1, body container #activities activities .item .content h2, body container #activities activities .item .content img {
   pointer-events: none;
 }
 
-.admin-panel .content .activities .activity-view .item .content img, .admin-panel .content .activities .activity-view .item .content video {
+body container #activities activities .item .content img, body container #activities activities .item .content video {
   width: 100%;
   height: 12rem;
 }
 
-.admin-panel .content .activities .activity-view .item .content h1, .admin-panel .content .activities .activity-view .item .content h2, .admin-panel .content .activities .activity-view .item .content h3, .admin-panel .content .activities .activity-view .item .content h4, .admin-panel .content .activities .activity-view .item .content p {
+body container #activities activities .item .content h1, body container #activities activities .item .content h2, body container #activities activities .item .content h3, body container #activities activities .item .content h4, body container #activities activities .item .content p {
   margin: 1rem 0;
 }
 
-.admin-panel .content .activities .activity-view .item .control {
+body container #activities activities .item .control {
   width: auto;
 }
 
-.admin-panel .content .activities .activity-view .item .control h1 {
+body container #activities activities .item .control h1 {
   margin: 3rem 1rem 1rem 1rem;
 }
 
-.admin-panel .content .activities .activity-view .item .control h2 {
+body container #activities activities .item .control h2 {
   margin: 1rem;
   cursor: pointer;
   text-decoration: underline;
   -webkit-text-decoration-style: dashed;
           text-decoration-style: dashed;
-  -webkit-text-decoration-color: #fff;
-          text-decoration-color: #fff;
 }
 
-.admin-panel .content .activities .activity-view .item .control h2:hover {
+body container #activities activities .item .control h2:hover {
   text-decoration: underline;
 }
 
-.admin-panel .content form {
+body container #activities creator {
+  position: relative;
+  width: 100%;
+}
+
+body container section, body container form {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
+  background-size: cover;
   position: relative;
   max-height: calc( 100% - 4.5rem);
-  min-height: 50%;
   border-radius: 2rem;
 }
 
-.admin-panel .content form#schedule {
+body container section img, body container form img {
+  width: 4rem;
+  height: 4rem;
+}
+
+body container #schedule {
   width: 340px;
-  position: relative;
-  grid-area: a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -209,74 +199,75 @@
   padding-top: 0;
 }
 
-.admin-panel .content form#schedule .title {
-  width: 100%;
+body container #schedule input {
+  background-color: #211630;
+}
+
+body container #schedule .title {
   position: relative;
   display: flex;
-  justify-content: center;
+  width: 92%;
+  justify-content: space-around;
   align-items: center;
   padding-top: 0.6rem;
 }
 
-.admin-panel .content form#schedule .title img, .admin-panel .content form#schedule .title h1 {
-  margin: 0 1rem;
+body container #schedule .title img, body container #schedule .title h1 {
+  margin: auto;
+  padding: 0;
 }
 
-.admin-panel .content form#schedule ul {
-  width: 75%;
+body container #schedule ul {
+  width: 95%;
   position: relative;
   display: block;
 }
 
-.admin-panel .content form#schedule ul li {
+body container #schedule ul li {
+  position: relative;
   width: 100%;
-  position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #5e5e7a;
   border: 1px solid #ccc;
   color: #555;
   border-radius: 16px;
-  padding: 0 0.8rem 1rem 0.8rem;
-  margin: 0.8rem 0;
+  padding-bottom: 1rem;
+  margin: 0.5vw 0;
 }
 
-.admin-panel .content form#schedule ul li .time {
-  width: 100%;
+body container #schedule ul li .time {
+  width: 95%;
   height: 42px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #e5d3d9;
 }
 
-.admin-panel .content form#schedule ul li .time input {
+body container #schedule ul li .time input {
   width: 25%;
   height: 70%;
   border: none;
   text-align: center;
   border-radius: 12px;
-  font-size: 18px;
 }
 
-.admin-panel .content form#schedule ul li .time img {
+body container #schedule ul li .time img {
   width: 48px;
   height: 40px;
 }
 
-.admin-panel .content form#schedule ul li .time img#middle {
+body container #schedule ul li .time img#middle {
   width: 20px;
   height: 20px;
 }
 
-.admin-panel .content form#titlecard-title {
-  grid-area: t;
-  width: 480px;
-}
-
-.admin-panel .content form#pricing {
+body container #pricing {
   display: flex;
-  grid-area: b;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -284,68 +275,73 @@
   margin-top: 1.2rem;
 }
 
-.admin-panel .content form#pricing ul {
+body container #pricing h4 {
+  margin: auto 0.8rem;
+}
+
+body container #pricing ul {
   width: 100%;
-  height: auto;
   position: relative;
   padding: 0 1rem 0 1rem;
 }
 
-.admin-panel .content form#pricing ul li {
-  width: 90%;
-  height: auto;
-  position: relative;
+body container #pricing ul li {
   display: flex;
+  width: 90%;
+  position: relative;
   margin: 0.5rem 0;
+  justify-content: space-between;
 }
 
-.admin-panel .content form#pricing ul li img, .admin-panel .content form#pricing ul li .price, .admin-panel .content form#pricing ul li div {
-  margin: auto;
-}
-
-.admin-panel .content form#pricing ul li input[type="number"] {
+body container #pricing ul li input[type="number"] {
   height: 24px;
   width: 42px;
   border-radius: 16px;
   text-align: center;
-  font-size: 16px;
 }
 
-.admin-panel .content form#pricing ul li .price {
-  background: gray;
+body container #pricing ul li#birthday_small .item, body container #pricing ul li#birthday_big .item {
+  flex-direction: row;
+}
+
+body container #pricing ul li .price {
+  background: #211630;
   border-radius: 18px;
   padding-right: 1rem;
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
 }
 
-.admin-panel .content form#pricing ul li h2 {
+body container #pricing ul li h2 {
   font-family: NunitoSans-Light;
 }
 
-.admin-panel .content form#activities {
-  grid-area: c;
+body container #activities {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.admin-panel .content form#activities select {
+body container #activities select {
   margin: 1rem 0;
 }
 
-.admin-panel .content form#activities .item {
+body container #activities .item {
   display: none;
 }
 
-.admin-panel .content form#activities .item[active="true"] {
+body container #activities .item[active="true"] {
   display: block;
 }
 
-.admin-panel .content form#activities .item#default .attachment-container .att-item .top {
+body container #activities .item#default .attachment-container .att-item .top {
   display: flex;
   justify-content: space-around;
 }
 
-.admin-panel .content form#activities .item#default .attachment-container .att-item .top .close {
+body container #activities .item#default .attachment-container .att-item .top .close {
   width: 4rem;
   height: 5rem;
   position: relative;
@@ -355,35 +351,34 @@
   transition: transform 0.4s ease;
 }
 
-.admin-panel .content form#activities .item#default .attachment-container .att-item .top .close:hover {
+body container #activities .item#default .attachment-container .att-item .top .close:hover {
   transform: scale(104%);
 }
 
-.admin-panel .content form#gallery {
+body container #gallery {
   width: calc(20em + 1vmin);
   max-height: 95%;
   padding-top: 0;
   padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
-  background-size: cover;
 }
 
-.admin-panel .content form#gallery h1 {
+body container #gallery h1 {
   padding: 1rem 0;
 }
 
-.admin-panel .content form#gallery .content, .admin-panel .content form#gallery .file-new-input {
+body container #gallery .content, body container #gallery .file-new-input {
   position: relative;
   display: inline-block;
 }
 
-.admin-panel .content form#gallery .content {
-  height: 80%;
+body container #gallery .content {
+  height: 80vh;
+  overflow-y: auto;
 }
 
-.admin-panel .content form#gallery .content .item {
+body container #gallery .content .item {
   width: 80%;
   height: auto;
   position: relative;
@@ -393,7 +388,7 @@
   overflow: clip;
 }
 
-.admin-panel .content form#gallery .content .item .close {
+body container #gallery .content .item .close {
   width: 4rem;
   height: 5rem;
   position: absolute;
@@ -403,75 +398,70 @@
   transition: transform 0.4s ease;
 }
 
-.admin-panel .content form#gallery .content .item .close:hover {
+body container #gallery .content .item .close:hover {
   transform: scale(104%);
 }
 
-.admin-panel .content form#gallery .content .item img, .admin-panel .content form#gallery .content .item video {
+body container #gallery .content .item img, body container #gallery .content .item video {
   width: 100%;
   height: auto;
 }
 
-.admin-panel .content form#gallery p {
+body container #gallery p {
   margin: 2rem 0;
 }
 
-.admin-panel .content form#gallery .file-new-input {
+body container #gallery .file-new-input {
   height: 20%;
   display: inline-block;
 }
 
-.admin-panel form {
+body form {
   width: 100%;
   position: relative;
   padding-top: 2rem;
   background-color: rgba(20, 20, 20, 0.2);
 }
 
-.admin-panel form img {
+body form img {
   width: 3rem;
   height: 3rem;
 }
 
-.admin-panel form .a-title {
+body form .a-title {
   width: 100%;
   display: inline-flex;
 }
 
-.admin-panel form .a-title input {
+body form .a-title input {
   width: 74%;
 }
 
-.admin-panel form .a-title p {
+body form .a-title p {
   margin: 2%;
 }
 
-.admin-panel input[type="submit"], .admin-panel button[type="button"] {
-  width: auto;
-  cursor: pointer;
-  background-color: gray;
-}
-
-.admin-panel input::-webkit-outer-spin-button, .admin-panel input::-webkit-inner-spin-button {
+body input::-webkit-outer-spin-button, body input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.admin-panel input[type=number] {
+body input[type=number] {
   -moz-appearance: textfield;
-  background: gray;
 }
 
-.admin-panel input, .admin-panel button {
+body input, body button {
+  cursor: pointer;
+  width: auto;
   position: relative;
-  color: #fff;
+  color: #e5d3d9;
   border-style: none;
   background: transparent;
   outline: none;
   margin: 0.5rem;
 }
 
-.admin-panel button {
+body button {
   padding: 0;
   background: none;
   border: none;
@@ -480,22 +470,22 @@
   padding: 0.4rem;
 }
 
-.admin-panel button[type="button"] {
+body button[type="button"] {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.admin-panel button img {
+body button img {
   width: 28px;
   height: 28px;
 }
 
-.admin-panel select {
+body select {
   height: 20px;
 }
 
-.admin-panel .webflow-style-input {
+body .webflow-style-input {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -503,11 +493,11 @@
   max-width: 400px;
   margin: 0 auto;
   border-radius: 2px;
-  padding: 0.5rem 1.7rem;
-  background: rgba(57, 63, 84, 0.8);
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  background: #211630;
 }
 
-.admin-panel .webflow-style-input:after {
+body .webflow-style-input:after {
   content: "";
   position: absolute;
   left: 0px;
@@ -523,46 +513,55 @@
   animation: gradient 3s linear infinite;
 }
 
-.admin-panel .webflow-style-input input {
+body .webflow-style-input input {
   flex-grow: 1;
   color: #BFD2FF;
-  font-size: 1.8rem;
   line-height: 2.4rem;
   vertical-align: middle;
 }
 
-.admin-panel .webflow-style-input::-webkit-input-placeholder {
+body .webflow-style-input::-webkit-input-placeholder {
   color: #7881A1;
 }
 
-.admin-panel .webflow-style-input button {
+body .webflow-style-input button {
   color: #7881A1;
-  font-size: 2.4rem;
   line-height: 2.4rem;
   vertical-align: middle;
   transition: color .25s;
 }
 
-.admin-panel .webflow-style-input:hover {
+body .webflow-style-input:hover {
   color: #BFD2FF;
 }
 
-.admin-panel select, .admin-panel input[type="date"], .admin-panel button[type="button"] {
-  width: 140px;
-  height: 35px;
+body .webflow-style-input p {
+  margin: auto 0;
 }
 
-.admin-panel input[type="file"] {
+body select, body input[type="date"], body button[type="button"] {
+  width: auto;
+  height: 35px;
+  padding: 0.2;
+}
+
+body input[type="file"] {
   width: 80%;
   height: 25px;
 }
 
-.admin-panel select, .admin-panel input[type="date"], .admin-panel button[type="button"], .admin-panel input[type="file"] {
+body input, body button, body h1, body h2, body h3, body h4, body h5, body h6, body p, body a,
+body select, body input[type="date"], body input[type="submit"],
+body button[type="button"], body input[type="file"], body textarea {
+  font-size: calc( 16px + 0.7vmin);
+}
+
+body select, body input[type="date"], body input[type="submit"], body button[type="button"], body input[type="file"], body textarea {
   padding: 4px;
   border-radius: 4px;
   box-shadow: 2px 2px 8px #999;
-  background: #211630;
-  color: #fff;
+  background-color: #211630;
+  color: #e5d3d9;
   outline: 2px rgba(255, 255, 255, 0.4) solid;
   transition: outline 0.3s ease-out;
   border: none;
@@ -573,15 +572,15 @@
   cursor: pointer;
 }
 
-.admin-panel select:hover, .admin-panel input[type="date"]:hover, .admin-panel button[type="button"]:hover, .admin-panel input[type="file"]:hover {
+body select:hover, body input[type="date"]:hover, body input[type="submit"]:hover, body button[type="button"]:hover, body input[type="file"]:hover, body textarea:hover {
   outline: 2px rgba(255, 255, 255, 0.8) solid;
 }
 
-.admin-panel label {
+body label {
   position: relative;
 }
 
-.admin-panel label:after {
+body label:after {
   content: '<>';
   font: 11px "Consolas", monospace;
   color: #666;
@@ -594,7 +593,7 @@
   pointer-events: none;
 }
 
-.admin-panel label:before {
+body label:before {
   content: '';
   right: 6px;
   top: 0px;
@@ -604,6 +603,20 @@
   position: absolute;
   pointer-events: none;
   display: block;
+}
+
+body select, body option {
+  text-align: center;
+}
+
+body textarea {
+  position: relative;
+  width: 100%;
+  height: calc( 50px + 1vmin);
+  min-height: calc( 50px + 1vmin);
+  max-height: calc( 250px + 1vmin);
+  resize: vertical;
+  font-family: Nunito;
 }
 
 @keyframes gradient {
@@ -616,9 +629,12 @@
 }
 
 @media screen and (max-width: 600px) {
-  .admin-panel form#schedule ul li {
+  body form#schedule ul li {
     margin: 0 0;
     padding: 0 0.3rem 0 0.3rem;
+  }
+  body section {
+    margin-bottom: 2.8rem;
   }
 }
 /*# sourceMappingURL=admin.css.map */
