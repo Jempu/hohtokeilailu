@@ -360,13 +360,20 @@ function getPlaceInGrid(columnCount, rowCount, index) {
 
 async function loadActivityItemsFromJson(itemTypeRules, callback) {
     var callbackCalled = false;
-    if (itemTypeRules == null || itemTypeRules.length == 0) return;
+    if (itemTypeRules == null || itemTypeRules.length == 0) {
+        if (callback != null && callback !== undefined) callback();
+        return;
+    }
     function removeActivityContainerItem(e, id) {
         $(e).remove();
         post({ remove_activity:id });
     }
     fetch(`./content/index.json`).then(v => v.json()).then(data => {
         const dataActivities = data['activities'];
+        if (dataActivities.length == 0) {
+            if (callback != null && callback !== undefined) callback();
+            return;
+        }
         var loadedDataCount = 1;
         const dataCount = dataActivities.length;
         dataActivities.forEach(item => {
