@@ -13,7 +13,8 @@ body {
   color: #e5d3d9;
   -webkit-text-decoration-color: #e5d3d9;
           text-decoration-color: #e5d3d9;
-  background-size: cover;
+  background-size: contain;
+  background-position: center;
 }
 
 body h1, body h2, body h3, body h4, body h5, body h6, body p, body a, body input, body select, body option {
@@ -30,7 +31,7 @@ body panel {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%);
   background-size: cover;
   transition: border-radius 0.4s ease-out;
-  z-index: 49;
+  z-index: 9999;
   justify-content: space-evenly;
 }
 
@@ -84,6 +85,7 @@ body container section {
   justify-content: start;
   align-items: center;
   overflow: clip;
+  box-shadow: 3px 4px 8px #7a8ec9;
 }
 
 body container section #titlecard-title {
@@ -93,6 +95,7 @@ body container section #titlecard-title {
 
 body container #activities {
   position: relative;
+  width: 675px;
 }
 
 body container #activities .top {
@@ -102,7 +105,7 @@ body container #activities .top {
 body container #activities activities {
   position: relative;
   width: 100%;
-  max-height: 30%;
+  max-height: 550px;
   overflow-x: clip;
   overflow-y: scroll;
   background-color: rgba(20, 20, 20, 0.2);
@@ -110,8 +113,8 @@ body container #activities activities {
   border-radius: 32px;
 }
 
-body container #activities activities .item {
-  width: 100%;
+body container #activities activities .activity-item {
+  width: 95%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -119,62 +122,77 @@ body container #activities activities .item {
   align-items: center;
 }
 
-body container #activities activities .item .content {
-  cursor: pointer;
-  margin: 1rem;
-  width: 46%;
-  height: auto;
-  text-align: center;
+body container #activities activities .activity-item .content {
   position: relative;
   display: inline-block;
-  background-color: #154fad;
+  width: calc( 100% - 20px);
+  height: auto;
+  margin: 1rem;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease-in-out;
-  box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5);
-  box-sizing: content-box;
+  text-align: center;
 }
 
-body container #activities activities .item .content:hover {
-  transform: scale(104%);
-}
-
-body container #activities activities .item .content h1, body container #activities activities .item .content h2, body container #activities activities .item .content img {
+body container #activities activities .activity-item .content h1, body container #activities activities .activity-item .content h2, body container #activities activities .activity-item .content img {
   pointer-events: none;
 }
 
-body container #activities activities .item .content img, body container #activities activities .item .content video {
+body container #activities activities .activity-item .content img, body container #activities activities .activity-item .content video, body container #activities activities .activity-item .content iframe {
+  width: initial;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  max-width: 100%;
+  max-height: 500px;
+}
+
+body container #activities activities .activity-item .content iframe {
   width: 100%;
-  height: 12rem;
 }
 
-body container #activities activities .item .content h1, body container #activities activities .item .content h2, body container #activities activities .item .content h3, body container #activities activities .item .content h4, body container #activities activities .item .content p {
-  margin: 1rem 0;
+body container #activities activities .activity-item .content h1, body container #activities activities .activity-item .content h2, body container #activities activities .activity-item .content h3, body container #activities activities .activity-item .content h4, body container #activities activities .activity-item .content p {
+  z-index: inherit;
 }
 
-body container #activities activities .item .control {
-  width: auto;
+body container #activities activities .activity-item .control h1 {
+  margin: 0;
 }
 
-body container #activities activities .item .control h1 {
-  margin: 3rem 1rem 1rem 1rem;
-}
-
-body container #activities activities .item .control h2 {
-  margin: 1rem;
+body container #activities activities .activity-item .control h2 {
+  margin-top: 0.5rem;
   cursor: pointer;
   text-decoration: underline;
   -webkit-text-decoration-style: dashed;
           text-decoration-style: dashed;
 }
 
-body container #activities activities .item .control h2:hover {
+body container #activities activities .activity-item .control h2:hover {
   text-decoration: underline;
 }
 
 body container #activities creator {
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body container #activities creator .cover-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body container #activities creator .cover-image img, body container #activities creator .cover-image video, body container #activities creator .cover-image iframe {
+  width: initial;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  max-width: 100%;
+  max-height: 500px;
 }
 
 body container section, body container form {
@@ -191,7 +209,7 @@ body container section img, body container form img {
 }
 
 body container #schedule {
-  width: 340px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -485,6 +503,12 @@ body select {
   height: 20px;
 }
 
+body #save-activity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 body .webflow-style-input {
   position: relative;
   display: flex;
@@ -547,7 +571,6 @@ body select, body input[type="date"], body button[type="button"] {
 
 body input[type="file"] {
   width: 80%;
-  height: 25px;
 }
 
 body input, body button, body h1, body h2, body h3, body h4, body h5, body h6, body p, body a,
@@ -629,12 +652,17 @@ body textarea {
 }
 
 @media screen and (max-width: 600px) {
+  body container {
+    gap: 0;
+  }
+  body container section {
+    margin-bottom: 0;
+    border-radius: 0;
+    width: 100%;
+  }
   body form#schedule ul li {
     margin: 0 0;
     padding: 0 0.3rem 0 0.3rem;
-  }
-  body section {
-    margin-bottom: 2.8rem;
   }
 }
 /*# sourceMappingURL=admin.css.map */

@@ -38,7 +38,7 @@ function getHtmlForFile(path) {
             break;
         case 'mp4':
         case 'mov':
-            o += `<video src="${path} controls"></video>`
+            o += `<video src="${path}" controls></video>`
             break;
     }
     return o;
@@ -268,16 +268,28 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
     const s2 = targetDateEnd.split('.');
     const d = new Date();
     function isAfterDate(day, mon, yea) {
-        const a = d.getDate() - day > 0;
+
+
+        
+
+        const a = d.getDate() - day < 0;
         const b = d.getMonth() + 1 - mon > 0;
         const c = d.getFullYear() - yea > 0;
-        return !(!c && (!b || !a));
+        return !c && (b || !a);
     }
     function isBeforeDate(day, mon, yea) {
-        const a = d.getDate() - day <= 0;
-        const b = d.getMonth() + 1 - mon <= 0;
-        const c = d.getFullYear() - yea <= 0;
-        return !(c && (!b || !a));
+        if (yea - d.getFullYear() > 0) {
+            if (mon - d.getMonth() + 1 > 0) {
+                if (mon - d.getMonth() + 1 - 2 == 0) {
+                    if (day - d.getDate() > 0) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     // current
     if (isAfterDate(s1[0], s1[1], s1[2]) && isBeforeDate(s2[0], s2[1], s2[2])) {
@@ -288,15 +300,15 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
         }
     }
     // future
-    else if (isAfterDate(s2[0], s2[1], s2[2]) && isBeforeDate(s1[0], s1[1], s1[2])) {
-        if (format == 'number') return 2;
+    if (isBeforeDate(s2[0], s2[1], s2[2])) {
+        if (format == 'number') return 1;
         switch (lang) {
             case 'en': return 'future';
             case 'fi': return 'tulossa';
         }
     }
     // past
-    if (format == 'number') return 1;
+    if (format == 'number') return 2;
     switch (lang) {
         case 'en': return 'past';
         case 'fi': return 'mennyt';
@@ -377,8 +389,6 @@ function getPlaceInGrid(columnCount, rowCount, index) {
 // }
 
 async function loadActivityItemsFromJson(itemTypeRules, callback) {
-    callback()
-    return;
     var callbackCalled = false;
     if (itemTypeRules == null || itemTypeRules.length == 0) return;
     function removeActivityContainerItem(e, id) {
@@ -394,18 +404,17 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
             fetch(`${folder}activity.json`).then(v => v.json()).then(child => {
                 // if is set to specific types
                 var parent = $('body');
-                var useExpirationOnItems = false;
-                var addControls = false;
                 var useExpiredItems = false;
+                var addControls = false;
                 if (itemTypeRules['all'] != null) {
                     var rules = itemTypeRules['all'];
                     parent = rules['parent'] ?? $('body');
-                    useExpirationOnItems = rules['expire'] ?? false;
+                    useExpiredItems = rules['useExpiredItems'] ?? false;
                     addControls = rules['control'] ?? false;
                 } else {
                     var rules = itemTypeRules[child['type']];
                     parent = rules['parent'] ?? $('body');
-                    useExpirationOnItems = rules['expire'] ?? false;
+                    useExpiredItems = rules['useExpiredItems'] ?? false;
                     addControls = rules['control'] ?? false;
                 }
                 const date = getDisplayableDate(child['date'], true, 3);
@@ -462,6 +471,7 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                         <h2>${title}</h2>
                         <h3>${date}</h3>
                         ${getAllLinks(child['links'])}
+                        ${child['content'] != '' ? `<p>${child['content']}</p>` : ''}
                         <div class="bo" id="b"></div>
                     </div>`
                     + (addControls ? `
@@ -476,18 +486,18 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                     });
                 }
 
-                parent.find('.no-activities').css({ display: 'none' });
-
-                if (useExpiredItems) {
+                if (!useExpiredItems) {
                     if (getDateStatus(dateStart, dateEnd) == 0) {
-                        (useExpirationOnItems
+                        (useExpiredItems
                             ? $(parent).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? parent
                             : parent).append(itemDiv);
+                        $(parent).find('noactivities').css({ display: 'none' });
                     }
                 } else {
-                    (useExpirationOnItems
+                    (useExpiredItems
                         ? $(parent).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? parent
                         : parent).append(itemDiv);
+                    $(parent).find('noactivities').css({ display: 'none' });
                 }
                 // overlay item
                 // const overDiv = document.createElement('div');

@@ -210,6 +210,14 @@ root {
   transition-property: width height;
 }
 
+.titlecard .monitor .categories #cloud9-carousel .cloud9-item h1 {
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .titlecard .monitor .categories #cloud9-carousel .cloud9-item.front {
   opacity: 1;
   cursor: pointer;
@@ -326,7 +334,7 @@ root {
 
 .titlecard .slider ul li p {
   font-size: 36px;
-  margin: 1rem 12% 3rem 12%;
+  margin: 1rem 12% auto 12%;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -340,7 +348,7 @@ root {
   height: 60px;
   left: 50%;
   margin: auto 0;
-  transform: translate(-50%);
+  transform: translate(-50%, 50%);
   bottom: 20%;
   background: #CF4040;
   border-radius: 40px;
@@ -548,6 +556,10 @@ root {
 
 .barrel[ika-responsive="pc"] [y="1"] .head {
   top: 0;
+}
+
+.barrel[ika-responsive="pc"] [y="1"][open="false"] .head .cap {
+  bottom: 10%;
 }
 
 .barrel[ika-responsive="pc"] [y="2"] .head {
@@ -792,6 +804,7 @@ root {
   height: auto;
   position: relative;
   padding-top: 0.1vw;
+  background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%);
 }
 
 .barrel .body h1 {
@@ -864,7 +877,7 @@ root {
 }
 
 .barrel .body#hohtokeilaus {
-  background-image: url("../img/neon.png");
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../img/neon.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1016,12 +1029,7 @@ root {
   font-weight: 300;
 }
 
-.barrel .body#baari {
-  background-color: black;
-}
-
 .barrel .body#sauna {
-  background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%);
   justify-items: center;
   text-align: center;
 }
@@ -1938,8 +1946,8 @@ root {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
   justify-content: center;
+  align-items: center;
   background: linear-gradient(96.74deg, rgba(0, 0, 0, 0) -13.79%, rgba(186, 76, 155, 0.153) 14.43%, rgba(111, 189, 142, 0.261) 39.65%, rgba(106, 137, 159, 0.258) 75.67%, rgba(0, 0, 0, 0) 101.49%), linear-gradient(180deg, #2A4586 0%, rgba(42, 69, 134, 0.567708) 43.23%, rgba(42, 69, 134, 0) 100%);
   background-size: contain;
   padding-bottom: 2rem;
@@ -1960,7 +1968,6 @@ root {
 }
 
 .main-category.events iframe {
-  margin: auto 0 auto 2rem;
   box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5);
 }
 

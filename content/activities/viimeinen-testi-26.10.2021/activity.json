@@ -1,0 +1,18 @@
+{
+    "type": "competition",
+    "title": "Viimeinen testi",
+    "date": "26.10.2020-31.10.2022",
+    "header_image": "49a8-yleistiedotenetti2020.pdf",
+    "content": "",
+    "files": [],
+    "links": [
+        {
+            "text": "Ilmoittaudu",
+            "link": "https://www.ikatyros.com"
+        },
+        {
+            "text": "Tulokset",
+            "link": "https://www.ikatyros.com"
+        }
+    ]
+}

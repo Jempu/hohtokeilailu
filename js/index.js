@@ -63,8 +63,7 @@ $(function () {
         carouselChildren = $(carousel).children().get().reverse();
         carouselChildCount = $(carouselChildren).length;
 
-        const ww = (2560 - $(window).width()) / 2560 * 50 + 50;
-        console.log(ww);
+        $(carousel).css({ transform: `translateY(-${(2500 - $(window).width()) / 13}px)` });
 
         $(carousel).Cloud9Carousel({
             // yRadius: ww,
@@ -335,12 +334,8 @@ loadActivityItemsFromJson({
     "event": {
         parent: mainCategoryEvents
     },
-    "link": {
-        parent: mainCategoryEvents
-    },
     "competition": {
-        parent: $('.submarine'),
-        expire: true
+        parent: $('.submarine')
     }
 }, function () {
     setTimeout(() => {

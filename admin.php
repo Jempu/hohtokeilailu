@@ -15,7 +15,7 @@ header("Pragma: no-cache");
     <meta http-equiv="Cache-control" content="No-Cache">
     <meta http-equiv="Pragma" content="No-Cache">
     <link rel="shortcut icon" href="./img/logos/mikkelin-keilahalli-admin-round.png" type="image/x-icon">
-    <title>Mikkelin Keilahalli - Admin</title>
+    <title>Admin - Mikkelin Keilahalli</title>
     <link rel="stylesheet" href="./css/admin.css">
     <script type="text/javascript" src="./js/jquery-3.6.0.min/jquery.js"></script>
 </head>
@@ -28,6 +28,10 @@ header("Pragma: no-cache");
         <button type="button" id="save-changes">
             <img src="./img/save.png" alt="Tallenna">
             Tallenna muutokset
+        </button>
+        <button type="button" id="save-activity">
+            <img src="./img/save.png" alt="Tallenna">
+            <p>Luo uusi ilmoitus</p>
         </button>
         <div class="help">
             <a href="./content/uploads/sivusto-manuaali.pdf#page=9" target="#">Tarvitsetko apua? Lue Admin-sivuston manuaali.</a>
@@ -338,26 +342,28 @@ header("Pragma: no-cache");
                 Tapahtumailmoitukset
             </div>
             <activities>
-                <div class="no-activities">Keilahallilla ei ole tällä hetkellä ilmoituksia.</div>
+                <noactivities>Keilahallilla ei ole tällä hetkellä ilmoituksia.</noactivities>
             </activities>
             <creator>
                 <h1 class="header">Luo uusi ilmoitus:</h1>
                 <div class="cover-image">
                     <h2>Ilmoituksen kansikuva</h2>
-                    <img src="./img/missing-image.jpg" alt="Kansikuva">
-                    <input type="file" id="cover-image-file-input">
+                    <img>
+                    <video src="" controls></video>
+                    <input src="" type="file" id="cover-image-file-input">
+                    <iframe src="" type="application/pdf" width="100%" frameborder="0"></iframe>
                     <p>Tukee .pdf, .png, .jpg, .jpeg ja .gif -muotoja</p>
                 </div>
                 <div class="webflow-style-input">
                     <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
                     <p>50</p>
                 </div>
-                <select id="act-select">
+                <select id="activity-location-select">
                     <option value="1">Laita ilmoitus kilpailuosioon</option>
                     <option value="0">Laita ilmoitus tapahtumaosioon</option>
                 </select>
                 <div>
-                    <h2>Ilmoituksen ajankohta</h2>
+                    <h2>Ilmoituksen alkamis - loppumispäivä</h2>
                     <input type="date" id="start-date">
                     →
                     <input type="date" id="end-date">
@@ -377,10 +383,6 @@ header("Pragma: no-cache");
                         <input class="" type="email" placeholder="Linkin osoite..."></input>
                     </div>
                 </div>
-                <button type="button" id="save-activity">
-                    <img src="./img/save.png" alt="Tallenna">
-                    Luo uusi ilmoitus
-                </button>
             </creator>
         </section>
         <section id="gallery">

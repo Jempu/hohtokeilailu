@@ -38,7 +38,6 @@ $(function () {
     });
 
     function setBarrel(index) {
-        if (barrel.selectedCategory != -1 && barrel.selectedCategory != index) return;
         barrel.setCategory(index);
     }
 

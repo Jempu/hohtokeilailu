@@ -165,6 +165,12 @@ $barrelHeight: 44vw
                         height: 80%
                         transition: all 0.5s ease-in-out
                         transition-property: width height
+                    h1
+                        position: absolute
+                        text-align: center
+                        white-space: nowrap
+                        left: 50%
+                        transform: translateX(-50%)
                     &.front
                         opacity: 1
                         cursor: pointer
@@ -245,7 +251,7 @@ $barrelHeight: 44vw
                     background: linear-gradient(92.51deg, #7D4092 12.02%, #C54A58 67.75%, #661F56 87.36%)
                 p
                     font-size: 36px
-                    margin: 1rem 12% 3rem 12%
+                    margin: 1rem 12% auto 12%
                     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3)
                 iframe
                     pointer-events: none
@@ -255,7 +261,7 @@ $barrelHeight: 44vw
             height: 60px
             left: 50%
             margin: auto 0
-            transform: translate(-50%)
+            transform: translate(-50%, 50%)
             bottom: 20%
             background: #CF4040
             border-radius: 40px
@@ -404,6 +410,8 @@ $barrelHeight: 44vw
         [y="1"]
             .head
                 top: 0
+            &[open="false"] .head .cap
+                bottom: 10%
         [y="2"]
             .head
                 bottom: 0
@@ -573,6 +581,7 @@ $barrelHeight: 44vw
         height: auto
         position: relative
         padding-top: 0.1vw
+        background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%)
         h1
             font-family: Sansita-ExtraBold
             font-size: 48px
@@ -621,7 +630,7 @@ $barrelHeight: 44vw
                         transform: scale(112%)
         // all of the categories
         &#hohtokeilaus
-            background-image: url('../img/neon.png')
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../img/neon.png')
             background-position: center
             background-size: cover
             background-repeat: no-repeat
@@ -736,10 +745,8 @@ $barrelHeight: 44vw
                         h4
                             font-size: 36px
                             font-weight: 300
-        &#baari
-            background-color: black
+        // &#baari
         &#sauna
-            background: linear-gradient(90deg, #394185 0%, #272B4B 16.67%, #1F202D 51.04%, #22285E 90.37%, #394185 100%)
             justify-items: center
             text-align: center
             .prop
@@ -1404,8 +1411,8 @@ $barrelHeight: 44vw
     position: relative
     display: flex
     flex-wrap: wrap
-    align-content: center
     justify-content: center
+    align-items: center
     background: linear-gradient(96.74deg, rgba(0, 0, 0, 0) -13.79%, rgba(186, 76, 155, 0.153) 14.43%, rgba(111, 189, 142, 0.261) 39.65%, rgba(106, 137, 159, 0.258) 75.67%, rgba(0, 0, 0, 0) 101.49%), linear-gradient(180deg, #2A4586 0%, rgba(42, 69, 134, 0.567708) 43.23%, rgba(42, 69, 134, 0) 100%)
     background-size: contain
     padding-bottom: 2rem
@@ -1420,7 +1427,6 @@ $barrelHeight: 44vw
     .container
         display: flex
     iframe
-        margin: auto 0 auto 2rem
         box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5)
     .mobile-width
         display: none

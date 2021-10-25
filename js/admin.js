@@ -125,14 +125,14 @@ function removePreview(item, src) {
 
 $(function () {
     const panel = body;
-    const content = $(panel).find('container');
+    const container = $(panel).find('container');
 
     // all of the different forms
-    const scheduleForm = $(content).find('#schedule');
-    const titleForm = $(content).find('#titlecard-title');
-    const pricingForm = $(content).find('#pricing');
-    const actCreator = $(content).find('#activities');
-    const galleryForm = $(content).find('#gallery');
+    const scheduleF = $(container).find('#schedule');
+    const titleF = $(container).find('#titlecard-title');
+    const pricingF = $(container).find('#pricing');
+    const activityF = $(container).find('#activities');
+    const galleryF = $(container).find('#gallery');
 
     //limit inputs to their character limits
     $('.webflow-style-input').each(function (i, l) {
@@ -148,8 +148,7 @@ $(function () {
     });
 
     // schedule
-    const timeInputs = $(scheduleForm).find('input[type=number]');
-    // load the opening.json that has all of the openings
+    const timeInputs = $(scheduleF).find('input[type=number]');
     var openingArr = [];
     fetch('./content/opening.json').then(v => v.json()).then(data => {
         data['days'].forEach(e => {
@@ -161,28 +160,25 @@ $(function () {
         });
 
         addInputLogic(timeInputs, openingArr);
-
-        // create a submittable .json-format xhr-request. more about the format in 'README.md'.
-        $(scheduleForm).find('button[type=button]').on('click', function () {
-            var arr = [];
-            for (let i = 0; i < timeInputs.length; i++) {
-                const a = timeInputs[i];
-                const b = timeInputs[i + 1];
-                if (Number.parseInt(a.value) != 0) {
-                    arr.push(a.value);
-                    if (i % 2 == 0) {
-                        arr.push(Number.parseInt(b.value) != 0 ? b.value : '00');
-                        i++;
-                    }
-                } else arr.push('');
-            }
-            var weekdays = [];
-            for (let i = 0; i < arr.length; i += 4)
-                weekdays.push(arr[i].length != 0 ? `${arr[i]}.${arr[i + 1]},${arr[i + 2]}.${arr[i + 3]}` : '');
-            post({ days:weekdays });
-        });
     });
-
+    function saveSchedule() {
+        var arr = [];
+        for (let i = 0; i < timeInputs.length; i++) {
+            const a = timeInputs[i];
+            const b = timeInputs[i + 1];
+            if (Number.parseInt(a.value) != 0) {
+                arr.push(a.value);
+                if (i % 2 == 0) {
+                    arr.push(Number.parseInt(b.value) != 0 ? b.value : '00');
+                    i++;
+                }
+            } else arr.push('');
+        }
+        var weekdays = [];
+        for (let i = 0; i < arr.length; i += 4)
+            weekdays.push(arr[i].length != 0 ? `${arr[i]}.${arr[i + 1]},${arr[i + 2]}.${arr[i + 3]}` : '');
+        post({ days:weekdays });
+    }
 
     // pricing
     // - Hohtokeilaus hae kellonajat "opening.json" (16.00-22.00)
@@ -193,13 +189,17 @@ $(function () {
     fetch('./content/index.json').then(v => v.json()).then(data => {
 
         // add title text to the input
-        $(titleForm).find('input#title-main').val(data['titlecard_title']);
-        $(titleForm).find('input#title-sub').val(data['titlecard_subtitle']);
+        $(titleF).find('input#title-main').val(data['titlecard_title']);
+        $(titleF).find('input#title-sub').val(data['titlecard_subtitle']);
+        // calculate size
+        $(titleF).find('.webflow-style-input').each(function (i, l) {
+            $(l).find('p').html($(l).find('p').html() - $(l).find('input').val().length);
+        });
 
         // add already existing pricing data to the form.
         const p = data['pricing'];
         function f(id) {
-            $(pricingForm).find(`#${id} input`).attr('value', p[id]);
+            $(pricingF).find(`#${id} input`).attr('value', p[id]);
         }
         f('hohto');
         f('day');
@@ -209,27 +209,26 @@ $(function () {
         f('snooker');
         f('discount');
 
-        const bs = $(pricingForm).find('#birthday_small input');
+        const bs = $(pricingF).find('#birthday_small input');
         $(bs[0]).attr('value', p['birthday_small']['normal']);
         $(bs[1]).attr('value', p['birthday_small']['hohto']);
 
-        const ss = $(pricingForm).find('#birthday_big input');
+        const ss = $(pricingF).find('#birthday_big input');
         $(ss[0]).attr('value', p['birthday_big']['normal']);
         $(ss[1]).attr('value', p['birthday_big']['hohto']);
     });
 
-    // save new titlecard's titles
-    $(titleForm).find('button[type="button"]').on('click', function () {
+    function saveTitles() {
         post({ titles:{
-            title:$(titleForm).find('input#title-main').val(),
-            subtitle:$(titleForm).find('input#title-sub').val()
+            title:$(titleF).find('input#title-main').val(),
+            subtitle:$(titleF).find('input#title-sub').val()
         }});
-    });
+    }
 
-    $(pricingForm).find('button[type="button"]').on('click', function () {
+    function savePricing() {
         function f(id, index = 0) {
             return Number.parseInt(
-                $(pricingForm).find(`#${id} input`).eq(index).val());
+                $(pricingF).find(`#${id} input`).eq(index).val());
         }
         post({ pricing:{
             birthday_small: {
@@ -248,46 +247,71 @@ $(function () {
             snooker: f('snooker'),
             discount: f('discount')
         }});
-    });
+    }
 
+    // activities
     loadActivityItemsFromJson({
         "all": {
-            parent: $(panel).find('.content .activities .activity-view'),
-            control: true
+            parent: $(activityF).find('activities'),
+            control: true,
+            useExpiredItems: true
         }
     });
 
-    const defaultSection = $(actCreator).find('#default');
-    const linkActivityForm = $(actCreator).find('#links');
-    var currentActivityIndex = -1;
-    var currentSectionType = null;
-    function setActivityForm(index) {
-        defaultSection.attr('active', index < 2 ? 'true' : 'false');
-        linkActivityForm.attr('active', index == 2 ? 'true' : 'false');
-        currentActivityIndex = index;
-        currentSectionType = index < 2 ? defaultSection : linkActivityForm;
-    }
-    $(actCreator).find('#act-select').change(function () {
-        setActivityForm($(this).val());
+    var newActivityTargetContainerIndex = 0;
+    $(activityF).find('#activity-location-select').change(function () {
+        newActivityTargetContainerIndex = $(this).val();
     });
-    setActivityForm(0);
     
-    // set input's header_image preview
-    const coverImgInput = $(actCreator).find('input#cover-image-file-input');
-    $(coverImgInput).change(function () {
+    // header_image
+    const headerPdf = $(activityF).find('.cover-image iframe');
+    const headerImg = $(activityF).find('.cover-image img');
+    const headerVid = $(activityF).find('.cover-image video');
+    const headerInput = $(activityF).find('input#cover-image-file-input');
+    function checkHeaderFile(file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            $(actCreator).find('.cover-image img').attr('src', e.target.result);
+            switch (file.name.split('/').pop().split('.').pop()) {
+                case 'pdf':
+                    $(headerPdf).css({ display: 'block' });
+                    $(headerImg).css({ display: 'none' });
+                    $(headerVid).css({ display: 'none' });
+                    $(headerPdf).attr('src', e.target.result);
+                    break;
+                case 'png':
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                    $(headerPdf).css({ display: 'none' });
+                    $(headerImg).css({ display: 'block' });
+                    $(headerVid).css({ display: 'none' });
+                    $(headerImg).attr('src', e.target.result);
+                    $(headerImg).attr('src', e.target.result);
+                    break;
+                case 'mp4':
+                case 'mov':
+                    $(headerPdf).css({ display: 'none' });
+                    $(headerImg).css({ display: 'none' });
+                    $(headerVid).css({ display: 'block' });
+                    $(headerVid).attr('src', e.target.result);
+                    break;
+                default:
+                    $(headerPdf).css({ display: 'none' });
+                    $(headerImg).css({ display: 'none' });
+                    $(headerVid).css({ display: 'none' });
+                    break;
+            }
         }
-        reader.readAsDataURL($(this)[0].files[0]);
+        reader.readAsDataURL(file);
+    }
+    $(headerInput).change(function () {
+        checkHeaderFile($(this)[0].files[0]);
     });
-    // if header_image file input already set
-    if ($(coverImgInput)[0].files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            $(actCreator).find('.cover-image img').attr('src', e.target.result);
-        }
-        reader.readAsDataURL($(coverImgInput)[0].files[0]);
+    if ($(headerInput)[0].files[0]) checkHeaderFile($(headerInput)[0].files[0]);
+    else {
+        $(headerPdf).css({ display: 'none' });
+        $(headerImg).css({ display: 'none' });
+        $(headerVid).css({ display: 'none' });
     }
     
     // attachments
@@ -304,7 +328,7 @@ $(function () {
 
     // create a new activity to the database
     function addNewActivity() {
-        const title = $(actCreator).find('input#title').val();
+        const title = $(activityF).find('input#title').val();
         function log(str, msg) {
             if (str == '') {
                 console.log(msg);
@@ -314,18 +338,18 @@ $(function () {
             return false;
         }
         if (log(title, 'Ilmoituksissa täytyy olla otsikko.')) return;
-        const startDate = $(actCreator).find('input#start-date').val();
+        const startDate = $(activityF).find('input#start-date').val();
         if (log(startDate, 'Ilmoituksissa täytyy olla alkamispäivä.')) return;
-        const endDate = $(actCreator).find('input#end-date').val();
+        const endDate = $(activityF).find('input#end-date').val();
         if (log(endDate, 'Ilmoituksissa täytyy olla loppumispäivä.')) return;
         let output = {};
         let attachments = [];
         let random_attachments = [];
-        output.type = currentActivityIndex == 0 ? "event" : currentActivityIndex == 1 ? "competition" : "link";
+        output.type = $(activityF).find('select#activity-location-select').val() == 0 ? 'event' : 'competition';
         output.title = title;
         const sdate = moment(startDate).format('DD.MM.YYYY');
         output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
-        const coverImage = $(actCreator).find('input#cover-image-file-input')[0].files[0];
+        const coverImage = $(activityF).find('input#cover-image-file-input')[0].files[0];
         if (coverImage) {
             const rand = Math.random().toString(16).substr(2, 4);
             output.header_image = rand + "-" + coverImage.name;
@@ -333,44 +357,42 @@ $(function () {
             random_attachments.push(rand + "-");
         }
         const processed_title = (`${title.toLowerCase()}-${sdate}`).replaceAll(' ', '-');
-        if (currentSectionType == defaultSection) {
-            output.content = $(defaultSection).find('textarea#content').val();
-            // if not linkForm, add links and additional attachment files to activity.json
-            output.files = [];
-            output.links = [];
-            defaultSection.find('.attachment-container .att-item').each(function (i, l) {
-                // check the attachment's type from select
-                switch ($(l).find('select').val()) {
-                    case '0':
-                        var wlink = $(l).find('input#link').val();
-                        // if given link doesn't have http in-front
-                        if (!wlink.includes('http://') && !wlink.includes('https://')) {
-                            wlink = 'http://' + wlink;
-                        }
-                        output.links.push({
-                            text: $(l).find('input#title').val(),
-                            link: wlink
-                        });
-                        break;
-                    case '1':
-                        const inp = $(l).find('input[type=file]')[0];
-                        const file = inp.files.length ? inp.files[0] : "";
-                        // add 4 letters long random string in-front of name
-                        const rand = Math.random().toString(16).substr(2, 4);
-                        if (file != '') {
-                            output.files.push(rand + "-" + file.name);
-                            attachments.push(file);
-                            random_attachments.push(rand + "-");
-                        }
-                        break;
-                }
-            });
-        } else {
-            output.link = "https://www.ikatyros.com";
+        // set content
+        output.content = $(activityF).find('textarea#content').val();
+        // if not linkForm, add links and additional attachment files to activity.json
+        output.files = [];
+        output.links = [];
+        $(activityF).find('.attachment-container .att-item').each(function (i, l) {
+            // check the attachment's type from select
+            switch ($(l).find('select').val()) {
+                case '0':
+                    var wlink = $(l).find('input#link').val();
+                    // if given link doesn't have http in-front
+                    if (!wlink.includes('http://') && !wlink.includes('https://')) {
+                        wlink = 'http://' + wlink;
+                    }
+                    output.links.push({
+                        text: $(l).find('input#title').val(),
+                        link: wlink
+                    });
+                    break;
+                case '1':
+                    const inp = $(l).find('input[type=file]')[0];
+                    const file = inp.files.length ? inp.files[0] : "";
+                    // add 4 letters long random string in-front of name
+                    const rand = Math.random().toString(16).substr(2, 4);
+                    if (file != '') {
+                        output.files.push(rand + "-" + file.name);
+                        attachments.push(file);
+                        random_attachments.push(rand + "-");
+                    }
+                    break;
+            }
+        });
+        if (output == null) {
+            alert('Virhe luodessa ilmoitusta (output == null). Tätä virhettä ei pitäisi tapahtua, joten ilmoita asiasta.');
+            return;
         }
-        console.log(processed_title, attachments, output);
-        // if (attachments.length > 0) output.attachments = attachments;
-        if (output == null) return;
         fetch('./content/index.json').then(v => v.json()).then(v => {
             var isSameName = false;
             for (let i = 0; i < v['activities'].length; i++) {
@@ -380,7 +402,6 @@ $(function () {
                 break;
             }
             if (!isSameName) {
-                // activity.json post request
                 post({
                     add_activity:output,
                     title:processed_title
@@ -402,21 +423,22 @@ $(function () {
                         data: attachment_form,
                         type: 'POST',
                         success: function(php) {
-                            // location.reload();
+                            location.reload();
                         }
                     });
                 }
+                alert('Loit uuden ilmoituksen onnistuneesti!');
             }
             else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
         });
     }
-    $(actCreator).find('button[type="button"]#submit').on('click', function () {
+    $(panel).find('button#save-activity').on('click', function () {
         addNewActivity();
     });
 
     // add new attachments
     var attachmentsArr = [];
-    const attachmentContainer = $(defaultSection).find('.attachment-container');
+    const attachmentContainer = $(activityF).find('.attachment-container');
     function getAttachmentItemHtml() {
         return `
             <div class="top">
@@ -477,13 +499,13 @@ $(function () {
         setAttachmentForm($(o), 0);
         $(attachmentContainer).append(o);
     }
-    $(actCreator).find('button#add-attachment').on('click', function () {
+    $(activityF).find('button#add-attachment').on('click', function () {
         addAttachmentForm();
     });
     
     // gallery
-    const galleryContent = $(galleryForm).find('.content');
-    const galleryInput = $(galleryForm).find('#file-input');
+    const galleryContent = $(galleryF).find('.content');
+    const galleryInput = $(galleryF).find('#file-input');
     $(galleryInput).change(function () {
         const files = $(galleryInput).prop('files');
         $(files).each(function (i, l) {
@@ -497,7 +519,10 @@ $(function () {
 
     // when a change has been made, pressing the global
     // save button saves all of the form's changes
-    function saveAllChanges() {
+    $(panel).find('button#save-changes').click(function () {
+        saveSchedule();
+        saveTitles();
+        savePricing();
         alert('Kaikki muutokset tallennettu!');
-    }
+    });
 });

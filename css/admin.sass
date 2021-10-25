@@ -1,4 +1,4 @@
-@import url('./main.css');
+@import url('./main.css')
 
 $input-background: #211630
 $input-text-inactive: #7881A1
@@ -19,11 +19,10 @@ body
     z-index: 48
     color: $text-color
     text-decoration-color: $text-color
+    background-size: contain
+    background-position: center
     h1, h2, h3, h4, h5, h6, p, a, input, select, option
         color: $text-color
-
-    // background: linear-gradient(0deg, rgba(4, 31, 96, 1), rgba(4, 31, 96, 1))
-    background-size: cover
     panel
         position: fixed
         display: flex
@@ -34,7 +33,7 @@ body
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
         background-size: cover
         transition: border-radius 0.4s ease-out
-        z-index: 49
+        z-index: 9999
         justify-content: space-evenly
         .home
             height: 100%
@@ -72,58 +71,57 @@ body
             justify-content: start
             align-items: center
             overflow: clip
+            box-shadow: 3px 4px 8px #7a8ec9
             #titlecard-title
                 position: relative
                 width: 100%
         #activities
             position: relative
+            width: 675px
             .top
                 display: flex
             activities
                 position: relative
                 width: 100%
-                max-height: 30%
+                max-height: 550px
                 overflow-x: clip
                 overflow-y: scroll
                 background-color: rgba(20, 20, 20, 0.2)
                 margin-bottom: 1rem
                 border-radius: 32px
-                .item
-                    width: 100%
+                // .activity-items are partially on main.sass
+                .activity-item
+                    width: 95%
                     position: relative
                     display: flex
                     flex-direction: column
                     justify-content: center
                     align-items: center
                     .content
-                        cursor: pointer
-                        margin: 1rem
-                        width: 46%
-                        height: auto
-                        text-align: center
                         position: relative
                         display: inline-block
-                        background-color: #154fad
+                        width: calc( 100% - 20px )
+                        height: auto
+                        margin: 1rem
                         border-radius: 12px
                         overflow: hidden
-                        transition: transform 0.3s ease-in-out
-                        box-shadow: -1px -1px 19px rgba(121, 153, 160, 0.5)
-                        box-sizing: content-box
-                        &:hover
-                            transform: scale(104%)
+                        text-align: center
                         h1, h2, img
                             pointer-events: none
-                        img, video
+                        img, video, iframe
+                            width: initial
+                            height: max-content
+                            max-width: 100%
+                            max-height: 500px
+                        iframe
                             width: 100%
-                            height: 12rem
                         h1, h2, h3, h4, p
-                            margin: 1rem 0
+                            z-index: inherit
                     .control
-                        width: auto
                         h1
-                            margin: 3rem 1rem 1rem 1rem
+                            margin: 0
                         h2
-                            margin: 1rem
+                            margin-top: 0.5rem
                             cursor: pointer
                             text-decoration: underline
                             text-decoration-style: dashed
@@ -132,6 +130,20 @@ body
             creator
                 position: relative
                 width: 100%
+                display: flex
+                flex-direction: column
+                align-items: center
+                overflow-x: hidden
+                overflow-y: auto
+                .cover-image
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    img, video, iframe
+                        width: initial
+                        height: max-content
+                        max-width: 100%
+                        max-height: 500px
         section, form
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(250deg, #FC466B 0%, #3F5EFB 100%)
             background-size: cover
@@ -142,7 +154,7 @@ body
                 width: 4rem
                 height: 4rem
         #schedule
-            width: 340px
+            width: 360px
             display: flex
             flex-direction: column
             align-items: center
@@ -348,6 +360,11 @@ body
     select
         height: 20px
 
+    #save-activity
+        display: flex
+        justify-content: center
+        align-items: center
+
     // https://codepen.io/PRtheRose/pen/BNgEJo
     .webflow-style-input
         position: relative
@@ -396,7 +413,6 @@ body
         padding: 0.2
     input[type="file"]
         width: 80%
-        height: 25px
     input, button, h1, h2, h3, h4, h5, h6, p, a,
     select, input[type="date"], input[type="submit"],
     button[type="button"], input[type="file"], textarea
@@ -462,9 +478,13 @@ body
 
 @media screen and (max-width: 600px)
     body
+        container
+            gap: 0
+            section
+                margin-bottom: 0
+                border-radius: 0
+                width: 100%
         form#schedule
             ul li
                 margin: 0 0
                 padding: 0 0.3rem 0 0.3rem
-        section
-            margin-bottom: 2.8rem
