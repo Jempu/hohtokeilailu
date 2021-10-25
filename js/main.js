@@ -268,17 +268,21 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
     const s2 = targetDateEnd.split('.');
     const d = new Date();
     function isAfterDate(day, mon, yea) {
-
-
-        
-
-        const a = d.getDate() - day < 0;
-        const b = d.getMonth() + 1 - mon > 0;
-        const c = d.getFullYear() - yea > 0;
-        return !c && (b || !a);
+        if (d.getFullYear() - yea <= 0) {
+            if (d.getMonth() + 1 - mon >= 0) {
+                if (d.getMonth() + 1 - mon == 0) {
+                    if (d.getDate() - day < 0) {
+                        return false;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
     function isBeforeDate(day, mon, yea) {
-        if (yea - d.getFullYear() > 0) {
+        if (d.getFullYear() - yea <= 0) {
             if (mon - d.getMonth() + 1 > 0) {
                 if (mon - d.getMonth() + 1 - 2 == 0) {
                     if (day - d.getDate() > 0) {
@@ -314,7 +318,6 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
         case 'fi': return 'mennyt';
     }
 }
-
 
 // Times need to be formatted as "9.26"
 function getIfOpen(openTime, closeTime, currentTime = null, timeSeparator = '.') {
@@ -354,39 +357,6 @@ function getPlaceInGrid(columnCount, rowCount, index) {
         transform: !isRight && x1 > 0 ? 'translateX(-50%)' : 'translateX(0%)'
     };
 }
-
-// function setOverlay(itemId) {
-//     if (itemId != '') {
-//         overlayContainer.css({
-//             display: 'grid',
-//             transform: 'translateX(-50%) scale(100%)'
-//         });
-//         overlayContainer.children().each(function (i, l) {
-//             $(l).css({ display: l.id == itemId ? 'flex' : 'none' });
-//         });
-//         overlayContainer.animate({ now: 108 }, {
-//             duration: '400',
-//             step: function (now, fx) {
-//                 $(this).css('transform', `translateX(-50%) scale(${now}%)`);
-//             }
-//         });
-//         setPageScrolling(false);
-//     } else {
-//         overlayContainer.animate({ now: 0 }, {
-//             duration: '400',
-//             step: function (now, fx) {
-//                 $(this).css('transform', `translateX(-50%) scale(${now}%)`);
-//             },
-//             complete: function () {
-//                 overlayContainer.css({ display: 'none' });
-//             }
-//         });
-//         setPageScrolling(true);
-//     }
-// }
-// function closeOverlay() {
-//     setOverlay("");
-// }
 
 async function loadActivityItemsFromJson(itemTypeRules, callback) {
     var callbackCalled = false;
@@ -429,9 +399,6 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 
                 const files = child['files'];
                 const links = child['links'] ?? child['link'] ?? '';
-                const content = child['content'] != ''
-                    ? child['content']
-                    : 'Tapahtumalla ei ole kuvausta.';
                 // create the default activity item, on click open overlay
                 // create the link activity item, on click open url
                 function getType(v) {
@@ -446,7 +413,6 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'activity-item';
                 itemDiv.id = item;
-                // itemDiv.setAttribute('onclick', child['type'] == 'link' ? `window.open('${links}');` : `setOverlay('${item}');`);
                 function getHtmlAndLinkForFile(poster) {
                     return `
                         ${getHtmlForFile(poster)}
@@ -487,7 +453,7 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 }
 
                 if (!useExpiredItems) {
-                    if (getDateStatus(dateStart, dateEnd) == 0) {
+                    if (getDateStatus(dateStart, dateEnd) != 2) {
                         (useExpiredItems
                             ? $(parent).find(`#${getDateStatus(dateStart, dateEnd, 'abc', 'en')} .content`).get(0) ?? parent
                             : parent).append(itemDiv);
@@ -499,50 +465,6 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                         : parent).append(itemDiv);
                     $(parent).find('noactivities').css({ display: 'none' });
                 }
-                // overlay item
-                // const overDiv = document.createElement('div');
-                // overDiv.className = 'item';
-                // overDiv.id = item;
-                // function getFiles(files) {
-                //     if (files === undefined || files.length == 0) return '';
-                //     var output = '';
-                //     files.forEach(file => {
-                //         output += getHtmlForFile(folder + file) + '\n';
-                //     });
-                //     return output != '' ? `
-                //         <div class="right">
-                //             ${output}
-                //         </div>
-                //     ` : '';
-                // }
-                // if (type == 'Linkki-ilmoitus') return;
-                // function getLinks(links) {
-                //     if (links === undefined) return '';
-                //     var output = '';
-                //     links.forEach(e => {
-                //         output += `<a href="${e['link']}" target="#">${e['text']}</a>`;
-                //     });
-                //     return output;
-                // }
-                // overDiv.innerHTML = `
-                //     <div class="content">
-                //         <div class="left">
-                //             ${poster}
-                //             <h1>${title}</h1>
-                //             <h2>${date}</h2>
-                //             <p>${content}</p>
-                //             ${getLinks(links)}
-                //         </div>
-                //         ${getFiles(files)}
-                //         <div class="close">
-                //             <img src="./img/close.png" alt="Sulje näkymä">
-                //         </div>
-                //     </div>
-                // `;
-                // $(overlayContainer).append(overDiv);
-                // $(overDiv).find('.close').on('click', function () {
-                //     closeOverlay();
-                // });
                 $(itemDiv).ready(function () {
                     loadedDataCount++;
                     if (loadedDataCount >= dataCount && callback != null && callback !== undefined && !callbackCalled) {
