@@ -1,6 +1,4 @@
-const html = $('html');
 const body = $('body');
-
 function addInputLogic(inputs, arr) {
     var currKey;
     document.addEventListener('keydown', function (e) {
@@ -24,30 +22,16 @@ function addInputLogic(inputs, arr) {
         });
     });
 }
-
-
-// limit inputs to a certain range of characters
-// and limit the amount of characters
-function check(e, value) {
-    //Check Charater
-    // var unicode = e.charCode ? e.charCode : e.keyCode;
-    // if (value.indexOf(".") != -1) if (unicode == 46) return false;
-    // if (unicode != 8) if ((unicode < 48 || unicode > 57) && unicode != 46) return false;
-    return true;
-}
 function checkLength(l, e) {
     var fieldLength = e.value.length;
     if (fieldLength <= l) {
         return true;
-    }
-    else {
+    } else {
         var str = e.value;
         str = str.substring(0, str.length - 1);
         e.value = str;
     }
 }
-
-
 function pdfEmbed(pdf, target) {
     PDFObject.embed(pdf, target, {
         pdfOpenParams: {
@@ -63,7 +47,6 @@ function pdfEmbed(pdf, target) {
         forceIframe: true
     });
 }
-
 // called by .php
 function galleryAddOldPreviews(data) {
     const parent = $(body).find('#gallery .content');
@@ -86,7 +69,6 @@ function galleryAddOldPreviews(data) {
         }
     })
 }
-
 function addPreviewToGallery(type, src, parent, deletable = false) {
     // create the parent
     const di = document.createElement('div');
@@ -115,26 +97,22 @@ function addPreviewToGallery(type, src, parent, deletable = false) {
         $(di).append(el);
     }
 }
-
 // called by the item itself, no listeners
 function removePreview(item, src) {
     const t = item.parentNode;
     t.parentNode.removeChild(t);
     post({ gallery_remove_media: src.split('/').pop() }, './admin/gallery_post.php');
 }
-
 $(function () {
     const panel = body;
     const container = $(panel).find('container');
-
     // all of the different forms
     const scheduleF = $(container).find('#schedule');
     const titleF = $(container).find('#titlecard-title');
     const pricingF = $(container).find('#pricing');
     const activityF = $(container).find('#activities');
     const galleryF = $(container).find('#gallery');
-
-    //limit inputs to their character limits
+    // limit inputs to their character limits
     $('.webflow-style-input').each(function (i, l) {
         const p = $(l).find('p');
         const v = $(p).html() ?? null;
@@ -146,7 +124,6 @@ $(function () {
             });
         }
     });
-
     // schedule
     const timeInputs = $(scheduleF).find('input[type=number]');
     var openingArr = [];
@@ -158,7 +135,6 @@ $(function () {
                 });
             } else openingArr.push('00', '00', '00', '00');
         });
-
         addInputLogic(timeInputs, openingArr);
     });
     function saveSchedule() {
@@ -177,17 +153,14 @@ $(function () {
         var weekdays = [];
         for (let i = 0; i < arr.length; i += 4)
             weekdays.push(arr[i].length != 0 ? `${arr[i]}.${arr[i + 1]},${arr[i + 2]}.${arr[i + 3]}` : '');
-        post({ days:weekdays });
+        post({ days: weekdays });
     }
-
     // pricing
     // - Hohtokeilaus hae kellonajat "opening.json" (16.00-22.00)
     // - Päiväkeilaus koko päivän 17 asti.
     // - Iltakeilaus alkaa 17 ja kestää niin pitkään kun halli on auki
     // - viikonloppu koko päivän (La & Su)
-
     fetch('./content/index.json').then(v => v.json()).then(data => {
-
         // add title text to the input
         $(titleF).find('input#title-main').val(data['titlecard_title']);
         $(titleF).find('input#title-sub').val(data['titlecard_subtitle']);
@@ -195,7 +168,6 @@ $(function () {
         $(titleF).find('.webflow-style-input').each(function (i, l) {
             $(l).find('p').html($(l).find('p').html() - $(l).find('input').val().length);
         });
-
         // add already existing pricing data to the form.
         const p = data['pricing'];
         function f(id) {
@@ -208,48 +180,46 @@ $(function () {
         f('equipment');
         f('snooker');
         f('discount');
-
         const bs = $(pricingF).find('#birthday_small input');
         $(bs[0]).attr('value', p['birthday_small']['normal']);
         $(bs[1]).attr('value', p['birthday_small']['hohto']);
-
         const ss = $(pricingF).find('#birthday_big input');
         $(ss[0]).attr('value', p['birthday_big']['normal']);
         $(ss[1]).attr('value', p['birthday_big']['hohto']);
     });
-
     function saveTitles() {
-        post({ titles:{
-            title:$(titleF).find('input#title-main').val(),
-            subtitle:$(titleF).find('input#title-sub').val()
-        }});
+        post({
+            titles: {
+                title: $(titleF).find('input#title-main').val(),
+                subtitle: $(titleF).find('input#title-sub').val()
+            }
+        });
     }
-
     function savePricing() {
         function f(id, index = 0) {
             return Number.parseInt(
                 $(pricingF).find(`#${id} input`).eq(index).val());
         }
-        post({ pricing:{
-            birthday_small: {
-                normal: f('birthday_small'),
-                hohto: f('birthday_small', 1)
-            },
-            birthday_big: {
-                normal: f('birthday_big'),
-                hohto: f('birthday_big', 1)
-            },
-            hohto: f('hohto'),
-            day: f('day'),
-            night: f('night'),
-            weekend: f('weekend'),
-            equipment: f('equipment'),
-            snooker: f('snooker'),
-            discount: f('discount')
-        }});
+        post({
+            pricing: {
+                birthday_small: {
+                    normal: f('birthday_small'),
+                    hohto: f('birthday_small', 1)
+                },
+                birthday_big: {
+                    normal: f('birthday_big'),
+                    hohto: f('birthday_big', 1)
+                },
+                hohto: f('hohto'),
+                day: f('day'),
+                night: f('night'),
+                weekend: f('weekend'),
+                equipment: f('equipment'),
+                snooker: f('snooker'),
+                discount: f('discount')
+            }
+        });
     }
-
-    // activities
     loadActivityItemsFromJson({
         "all": {
             parent: $(activityF).find('activities'),
@@ -257,77 +227,67 @@ $(function () {
             useExpiredItems: true
         }
     });
-
-    var newActivityTargetContainerIndex = 0;
-    $(activityF).find('#activity-location-select').change(function () {
-        newActivityTargetContainerIndex = $(this).val();
-    });
-    
     // header_image
-    const headerPdf = $(activityF).find('.cover-image iframe');
-    const headerImg = $(activityF).find('.cover-image img');
-    const headerVid = $(activityF).find('.cover-image video');
     const headerInput = $(activityF).find('input#cover-image-file-input');
-    function checkHeaderFile(file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            switch (file.name.split('/').pop().split('.').pop()) {
-                case 'pdf':
-                    $(headerPdf).css({ display: 'block' });
-                    $(headerImg).css({ display: 'none' });
-                    $(headerVid).css({ display: 'none' });
-                    $(headerPdf).attr('src', e.target.result);
-                    break;
-                case 'png':
-                case 'jpg':
-                case 'jpeg':
-                case 'gif':
-                    $(headerPdf).css({ display: 'none' });
-                    $(headerImg).css({ display: 'block' });
-                    $(headerVid).css({ display: 'none' });
-                    $(headerImg).attr('src', e.target.result);
-                    $(headerImg).attr('src', e.target.result);
-                    break;
-                case 'mp4':
-                case 'mov':
-                    $(headerPdf).css({ display: 'none' });
-                    $(headerImg).css({ display: 'none' });
-                    $(headerVid).css({ display: 'block' });
-                    $(headerVid).attr('src', e.target.result);
-                    break;
-                default:
-                    $(headerPdf).css({ display: 'none' });
-                    $(headerImg).css({ display: 'none' });
-                    $(headerVid).css({ display: 'none' });
-                    break;
+    function checkHeaderFile(cover, file = null) {
+        const pdf = $(cover).find('iframe'),
+            img = $(cover).find('img'),
+            vid = $(cover).find('video'),
+            reader = new FileReader();
+        if (file != null) {
+            reader.onload = function (e) {
+                switch (file.name.split('/').pop().split('.').pop().toLowerCase()) {
+                    case 'pdf':
+                        $(pdf).css({ display: 'block' });
+                        $(img).css({ display: 'none' });
+                        $(vid).css({ display: 'none' });
+                        $(pdf).attr('src', e.target.result);
+                        break;
+                    case 'png':
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'gif':
+                        $(pdf).css({ display: 'none' });
+                        $(img).css({ display: 'block' });
+                        $(vid).css({ display: 'none' });
+                        $(img).attr('src', e.target.result);
+                        $(img).attr('src', e.target.result);
+                        break;
+                    case 'mp4':
+                    case 'mov':
+                        $(pdf).css({ display: 'none' });
+                        $(img).css({ display: 'none' });
+                        $(vid).css({ display: 'block' });
+                        $(vid).attr('src', e.target.result);
+                        break;
+                    default:
+                        $(pdf).css({ display: 'none' });
+                        $(img).css({ display: 'none' });
+                        $(vid).css({ display: 'none' });
+                        break;
+                }
             }
+            reader.readAsDataURL(file);
+        } else {
+            $(pdf).css({ display: 'none' });
+            $(img).css({ display: 'none' });
+            $(vid).css({ display: 'none' });
         }
-        reader.readAsDataURL(file);
     }
     $(headerInput).change(function () {
-        checkHeaderFile($(this)[0].files[0]);
+        checkHeaderFile($(activityF).find('.cover-image'), $(this)[0].files[0]);
     });
-    if ($(headerInput)[0].files[0]) checkHeaderFile($(headerInput)[0].files[0]);
-    else {
-        $(headerPdf).css({ display: 'none' });
-        $(headerImg).css({ display: 'none' });
-        $(headerVid).css({ display: 'none' });
-    }
-    
+    checkHeaderFile($(activityF).find('.cover-image'), $(headerInput)[0].files[0] ?? null);
     // attachments
-    // set correct input for attachment file
-    var attachmentSection = null;
     function setAttachmentForm(e, v) {
         const categorySubItem0 = $(e).find('.category-sub-item#0');
         const categorySubItem1 = $(e).find('.category-sub-item#1');
         $(categorySubItem0).css({ display: v == 0 ? 'block' : 'none' });
         $(categorySubItem1).css({ display: v == 1 ? 'block' : 'none' });
-        attachmentSection = v == 0 ? categorySubItem0 : categorySubItem1;
     }
     setAttachmentForm(0);
-
     // create a new activity to the database
-    function addNewActivity() {
+    function addNewActivity(targetLocation = '') {
         const title = $(activityF).find('input#title').val();
         function log(str, msg) {
             if (str == '') {
@@ -337,7 +297,6 @@ $(function () {
             }
             return false;
         }
-        if (log(title, 'Ilmoituksissa täytyy olla otsikko.')) return;
         const startDate = $(activityF).find('input#start-date').val();
         if (log(startDate, 'Ilmoituksissa täytyy olla alkamispäivä.')) return;
         const endDate = $(activityF).find('input#end-date').val();
@@ -345,8 +304,16 @@ $(function () {
         let output = {};
         let attachments = [];
         let random_attachments = [];
-        output.type = $(activityF).find('select#activity-location-select').val() == 0 ? 'event' : 'competition';
-        output.title = title;
+        function getLoc(a) {
+            switch (a) {
+                case 'kilpailuosio':
+                    return 'competition';
+                case 'event':
+                default:
+                    return 'event';
+            }
+        }
+        output.type = getLoc(targetLocation);
         const sdate = moment(startDate).format('DD.MM.YYYY');
         output.date = `${sdate}-${moment(endDate).format('DD.MM.YYYY')}`;
         const coverImage = $(activityF).find('input#cover-image-file-input')[0].files[0];
@@ -356,7 +323,7 @@ $(function () {
             attachments.push(coverImage);
             random_attachments.push(rand + "-");
         }
-        const processed_title = (`${title.toLowerCase()}-${sdate}`).replaceAll(' ', '-');
+        const random_folder_name = Math.random().toString(16).substr(2, 8);
         // set content
         output.content = $(activityF).find('textarea#content').val();
         // if not linkForm, add links and additional attachment files to activity.json
@@ -397,19 +364,19 @@ $(function () {
             var isSameName = false;
             for (let i = 0; i < v['activities'].length; i++) {
                 const e = v['activities'][i];
-                if (e != processed_title) continue;
+                if (e != random_folder_name) continue;
                 isSameName = true;
                 break;
             }
             if (!isSameName) {
                 post({
-                    add_activity:output,
-                    title:processed_title
+                    add_activity: output,
+                    title: random_folder_name
                 });
                 // additional file upload post request
                 if (attachments.length > 0) {
                     var attachment_form = new FormData();
-                    attachment_form.append('activity_folder', processed_title);
+                    attachment_form.append('activity_folder', random_folder_name);
                     for (let i = 0; i < attachments.length; i++) {
                         attachment_form.append(`file_${i}`, attachments[i]);
                         attachment_form.append(`randomized_${i}`, random_attachments[i]);
@@ -422,7 +389,7 @@ $(function () {
                         processData: false,
                         data: attachment_form,
                         type: 'POST',
-                        success: function(php) {
+                        success: function (php) {
                             location.reload();
                         }
                     });
@@ -432,15 +399,16 @@ $(function () {
             else alert('Saman niminen ilmoitus on jo olemassa. Vaihda ilmoituksen nimi.');
         });
     }
-    $(panel).find('button#save-activity').on('click', function () {
-        addNewActivity();
+    $(panel).find('button.add-activity').each(function (i, l) {
+        $(l).on('click', function () {
+            addNewActivity(l.id);
+        });
     });
-
     // add new attachments
     var attachmentsArr = [];
     const attachmentContainer = $(activityF).find('.attachment-container');
     function getAttachmentItemHtml() {
-        return `
+        const a = `
             <div class="top">
                 <h1 id="index">${attachmentsArr.length}.</h1>
                 <select id="attachment-type">
@@ -453,26 +421,22 @@ $(function () {
             </div>
             <div class="category-sub-item" id="0">
                 <div class="webflow-style-input">
-                    <input type="text" placeholder="Liitteen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(30,this)">
-                    <p>30</p>
+                    <input type="text" placeholder="Linkin nimi..." id="title">
                 </div>
                 <div class="webflow-style-input">
-                    <input type="text" placeholder="Liitteen linkki..." id="link">
+                    <input type="text" placeholder="Linkin osoite..." id="link">
                 </div>
             </div>
             <div class="category-sub-item" id="1">
-                <div class="pdf-container">
-                    <div class="item">
-                        <iframe src="./content/uploads/sivusto-manuaali.pdf" type="application/pdf" frameborder="0"></iframe>
-                        <div class="close">
-                            <img src="./img/close.png" alt="Poista ilmoitus">
-                        </div>
-                    </div>
+                <div class="cover">
+                    <img src="">
+                    <video src="" controls></video>
+                    <iframe src="" type="application/pdf" width="100%" frameborder="0"></iframe>
                 </div>
                 <input type="file" name="Lisää tiedosto" id="files">
-                <p>Tukee .pdf, .png, .jpg, .jpeg, .gif, .mp4 ja .mov -muotoja.</p>
             </div>
         `;
+        return a;
     }
     function removeAttachmentForm(e) {
         attachmentsArr.splice(attachmentsArr.indexOf(e), 1);
@@ -490,6 +454,10 @@ $(function () {
         attachmentsArr.push(o);
         o.className = 'att-item';
         o.innerHTML = getAttachmentItemHtml();
+        $(o).find('.category-sub-item#1 input').change(function () {
+            checkHeaderFile($(o).find('.category-sub-item#1 .cover'), $(this)[0].files[0]);
+        });
+        checkHeaderFile($(o).find('.category-sub-item#1 .cover'), null);
         $(o).find('.top select#attachment-type').change(function () {
             setAttachmentForm($(o), $(this).val());
         });
@@ -502,7 +470,6 @@ $(function () {
     $(activityF).find('button#add-attachment').on('click', function () {
         addAttachmentForm();
     });
-    
     // gallery
     const galleryContent = $(galleryF).find('.content');
     const galleryInput = $(galleryF).find('#file-input');
@@ -516,7 +483,6 @@ $(function () {
             reader.readAsDataURL(l);
         });
     });
-
     // when a change has been made, pressing the global
     // save button saves all of the form's changes
     $(panel).find('button#save-changes').click(function () {
@@ -525,4 +491,5 @@ $(function () {
         savePricing();
         alert('Kaikki muutokset tallennettu!');
     });
+    setPageScrolling(true);
 });

@@ -21,7 +21,7 @@ $(function() {
         $(coor).get(0).setAttribute('enabled', val ? 'true' : 'false');
     }
     $(window).on('scroll', function () {
-        setVisibility(window.scrollY > window.innerHeight * 2.18);
+        setVisibility(window.scrollY > window.innerHeight * 2.18 && window.scrollY < $('html').height() - 1000);
     });
     setVisibility(false);
 });

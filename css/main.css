@@ -92,19 +92,15 @@ h1, h2, h3, h4, h5, h6, p, li {
 }
 
 h1 {
-  font-size: calc(18px + 0.8vw);
+  font-size: calc( 28px + 0.8vmin);
 }
 
 h2 {
-  font-size: calc(16px + 0.8vw);
+  font-size: calc( 24px + 0.8vmin);
 }
 
-h3 {
-  font-size: calc(14px + 0.8vw);
-}
-
-h4, h5, h6, p {
-  font-size: calc(12px + 0.8vw);
+h3, h4, h5, h6, p {
+  font-size: calc( 20px + 0.8vmin);
 }
 
 ul {
@@ -196,7 +192,6 @@ body input[type="file"] {
 
 .header h1 {
   padding: 0.4vw;
-  font-size: 1.8vw;
   white-space: nowrap;
 }
 
@@ -242,7 +237,6 @@ body input[type="file"] {
   background-color: #5A1D50;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
   border: none;
   cursor: pointer;
   border-radius: 12px;
@@ -324,19 +318,16 @@ body input[type="file"] {
 
 .overlay-container .item .content .left h1 {
   font-family: Sansita-ExtraBold;
-  font-size: calc( 16px + 1.4vw);
   margin: 2rem 0;
 }
 
 .overlay-container .item .content .left p {
-  font-size: calc( 8px + 1.1vw);
   margin: 2rem 0;
 }
 
 .overlay-container .item .content .left a {
   width: auto;
   display: inline;
-  font-size: calc( 8px + 1.1vw);
   margin: 2rem 0 0 1rem;
   text-decoration: underline;
   -webkit-text-decoration-style: dotted;
@@ -431,7 +422,6 @@ body input[type="file"] {
   color: #fff;
   pointer-events: visible;
   margin: auto 0;
-  font-size: calc( 18px + 0.6vw);
   text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5);
   transition: transform 0.4s ease-in-out;
 }
@@ -753,14 +743,14 @@ body input[type="file"] {
 }
 
 .footer {
-  width: 100%;
   position: relative;
+  width: 100%;
   background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(173.68deg, #172E67 -2.03%, #6B306C 9.85%, #AB568E 48.71%, #892E65 99.16%);
 }
 
 .footer .container {
-  width: 100%;
   position: relative;
+  width: 100%;
   padding: 2rem 2vw 1vw 2vw;
   display: grid;
   grid-template-areas: "a b" "c b";
@@ -823,31 +813,30 @@ body input[type="file"] {
   grid-area: c;
   position: relative;
   margin: 1.5rem auto;
-  display: grid;
-  grid-template-areas: "a b c d";
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  flex-wrap: wrap;
 }
 
 .footer .container .middle .item {
-  width: auto;
-  height: 100%;
-  display: inline-block;
   position: relative;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
   top: 0;
   left: 0;
-  margin: 2rem;
+  margin: 2rem 1rem;
+  text-align: center;
 }
 
 .footer .container .middle .item#logo {
-  grid-area: a;
+  width: 5rem;
 }
 
 .footer .container .middle .item#logo img {
   width: 5rem;
   height: 5rem;
-}
-
-.footer .container .middle .item#contacts {
-  grid-area: b;
 }
 
 .footer .container .middle .item#contacts img {
@@ -867,6 +856,7 @@ body input[type="file"] {
   display: inline-flex;
   margin: 0.5rem 0;
   cursor: pointer;
+  text-align: left;
 }
 
 .footer .container .middle .item#contacts ul li div {
@@ -881,8 +871,6 @@ body input[type="file"] {
 }
 
 .footer .container .middle .item#reserve {
-  grid-area: c;
-  text-align: center;
   cursor: pointer;
   transition: transform 0.4s ease-out;
 }
@@ -893,11 +881,6 @@ body input[type="file"] {
 
 .footer .container .middle .item#reserve:hover {
   transform: scale(104%);
-}
-
-.footer .container .middle .item#notice {
-  grid-area: d;
-  text-align: center;
 }
 
 .footer .container .middle .item#notice ul {
@@ -1001,7 +984,6 @@ body input[type="file"] {
   margin: auto;
   margin-left: 2rem;
   font-size: calc(16px + 0.5vw);
-  white-space: nowrap;
   text-decoration: none;
 }
 
@@ -1269,7 +1251,7 @@ noactivities, .no-activities {
     background-repeat: no-repeat;
     background-size: cover;
   }
-  .nav #home, .nav .link.hover {
+  .nav .link.hover {
     display: none;
   }
   .nav .content::before {
@@ -1285,9 +1267,14 @@ noactivities, .no-activities {
     display: block;
   }
   .nav .link#home {
-    margin-top: 1.3rem;
     width: 200px;
     height: 65px;
+    margin: 0.4rem 0 0 0;
+  }
+  .nav[minimized="true"] .link#home {
+    width: 200px;
+    height: 65px;
+    margin: 0.4rem 0 0 0;
   }
   .footer .container .middle {
     grid-template-areas: "a" "b" "d" "c";
@@ -1308,7 +1295,7 @@ noactivities, .no-activities {
   }
   .footer .watermark .item a {
     margin-left: 1rem;
-    white-space: normal;
+    white-space: default;
     text-align: center;
   }
   .overlay-container .item .content .right iframe, .overlay-container .item .content .right img, .overlay-container .item .content .right video {

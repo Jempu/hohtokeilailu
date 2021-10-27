@@ -28,9 +28,13 @@ header("Pragma: no-cache");
             <img src="./img/save.png" alt="Tallenna">
             Tallenna muutokset
         </button>
-        <button type="button" id="save-activity">
+        <button type="button" class="save-activity" id="tapahtumaosio">
             <img src="./img/save.png" alt="Tallenna">
-            <p>Luo uusi ilmoitus</p>
+            <p>Luo uusi tapahtumailmoitus</p>
+        </button>
+        <button type="button" class="add-activity" id="kilpailuosio">
+            <img src="./img/save.png" alt="Tallenna">
+            <p>Luo uusi kilpailuilmoitus</p>
         </button>
         <div class="help">
             <a href="./content/uploads/sivusto-manuaali.pdf#page=9" target="#">Tarvitsetko apua? Lue Admin-sivuston manuaali.</a>
@@ -347,27 +351,18 @@ header("Pragma: no-cache");
                 <h1 class="header">Luo uusi ilmoitus:</h1>
                 <div class="cover-image">
                     <h2>Ilmoituksen kansikuva</h2>
-                    <img>
+                    <img src="">
                     <video src="" controls></video>
-                    <input src="" type="file" id="cover-image-file-input">
                     <iframe src="" type="application/pdf" width="100%" frameborder="0"></iframe>
-                    <p>Tukee .pdf, .png, .jpg, .jpeg ja .gif -muotoja</p>
+                    <input type="file" id="cover-image-file-input">
                 </div>
-                <div class="webflow-style-input">
-                    <input type="text" placeholder="Ilmoituksen otsikko..." id="title" onKeyPress="return check(event,value)" onInput="checkLength(50,this)">
-                    <p>50</p>
-                </div>
-                <select id="activity-location-select">
-                    <option value="1">Laita ilmoitus kilpailuosioon</option>
-                    <option value="0">Laita ilmoitus tapahtumaosioon</option>
-                </select>
                 <div>
                     <h2>Ilmoituksen alkamis - loppumispäivä</h2>
                     <input type="date" id="start-date">
                     →
                     <input type="date" id="end-date">
                 </div>
-                <div>
+                <div class="eghu">
                     <insert>
                         <textarea id="content" cols="30" rows="10" placeholder="Ilmoituksen tekstisisältö (ei pakollinen)..."></textarea>
                         <div class="attachment-container">
@@ -376,10 +371,11 @@ header("Pragma: no-cache");
                     </insert>
                     <links></links>
                     <button type="button" id="add-attachment">Lisää toinen linkki</button>
+                    <p>Linkit ja liitteet tukevat .pdf, .png, .jpg, .jpeg ja .gif -muotoja</p>
                 </div>
                 <div id="links" class="item">
                     <div class="webflow-style-input">
-                        <input class="" type="email" placeholder="Linkin osoite..."></input>
+                        <input class="" type="email" placeholder="Lisää osoite..."></input>
                     </div>
                 </div>
             </creator>
@@ -387,10 +383,10 @@ header("Pragma: no-cache");
         <section id="gallery">
             <h1 class="header">Galleria</h1>
             <div class="content"></div>
-            <p>Galleria tukee .jpg, .png, .gif, .mp4 ja .mov -tiedostoja</p>
             <form id="gallery-new-input" action="./admin/gallery_post.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="gallery-images[]" multiple id="file-input">
                 <input type="submit" value="Lisää uudet kuvat">
+                <p>Galleria tukee .jpg, .png, .gif, .mp4 ja .mov -tiedostoja</p>
             </form>
         </section>
     </container>

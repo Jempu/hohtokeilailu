@@ -1,5 +1,4 @@
 const activityDirectory = './content/activities/';
-
 function post(body, file = '') {
     const f = file == '' ? './admin/admin_post.php' : file;
     const xhr = new XMLHttpRequest();
@@ -12,55 +11,47 @@ function post(body, file = '') {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
     xhr.send(JSON.stringify(body));
 }
-
 // If the current page is the 'index.html' or 'index.php'
 function isIndex() {
     let loc = window.location.pathname.split('/')[2];
     return loc == '' || loc == 'index.html' || loc == 'index.php';
 }
-
 // Get the global path (gp) either from '.../project/index.html' or '.../project/folder/index.html'
 function gp(isRoot = false) {
     return isIndex() || isRoot ? './' : '../';
 }
-
-function getHtmlForFile(path) {
+function getHtmlForFile(fileWPath) {
     var o = '';
-    switch (path.split('/').pop().split('.').pop()) {
+    switch (fileWPath.split('/').pop().split('.').pop()) {
         case 'pdf':
-            o += `<iframe src="${path}" type="application/pdf" width="100%" frameborder="0"></iframe>`;
+            o += `<iframe src="${fileWPath}" type="application/pdf" width="100%" frameborder="0"></iframe>`;
             break;
         case 'png':
         case 'jpg':
         case 'jpeg':
         case 'gif':
-            o += `<img src="${path}" />`
+            o += `<img src="${fileWPath}" />`
             break;
         case 'mp4':
         case 'mov':
-            o += `<video src="${path}" controls></video>`
+            o += `<video src="${fileWPath}" controls></video>`
             break;
     }
     return o;
 }
-
 function setPageScrolling(v) {
     $('html').css({ overflowX: 'clip', overflowY: v ? 'auto' : 'clip' });
 }
 setPageScrolling(false);
-
 // Mathematical functions
-
 // Clamp number between two values with the following line:
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-
 function getRandomIndex(input) {
     function rand(v) { return Math.round((v - 1) * Math.random()); }
     if (typeof input === 'array') return rand(array.length);
     if (typeof input === 'number') return rand(input);
     return -1;
 }
-
 function getArrayRandom(array, lastIndex = null) {
     let i = Math.round((array.length - 1) * Math.random());
     if (lastIndex != null) {
@@ -70,13 +61,9 @@ function getArrayRandom(array, lastIndex = null) {
     }
     return array[i];
 }
-
-// ------------------------------------------------------------------------------------ //
 // Every element that has been tagged as 'ika-responsive' gets a 'pc' or 'mobile' value
 // and that can be used to make things responsive with scripts and css.
-// ------------------------------------------------------------------------------------ //
 // You can attach a listener to IkaResponsive to detect if 'isMobileSize' has changed.
-// ------------------------------------------------------------------------------------ //
 const ikaResponsive = {
     resizables: undefined,
     aInternal: undefined,
@@ -113,14 +100,9 @@ const ikaResponsive = {
 $(function() {
     ikaResponsive.start();
 });
-
-// ------------------------------------------------------------------------------------ //
 // Loads html of a file and displays it on the page
-// ------------------------------------------------------------------------------------ //
-const head = document.getElementsByTagName("head")[0]
-// the parents that the instance gets put on
+const head = document.getElementsByTagName('head')[0];
 var ikaInstances = null;
-
 function instantiate(parent, html, scripts, styles) {
     if (ikaInstances == null) return;
     fetch(html).then(v => v.text()).then(v => {
@@ -149,13 +131,11 @@ function instantiate(parent, html, scripts, styles) {
         }
     });
 }
-
 function loadJson(file, callback) {
     fetch(file).then(v => v.json()).then(data => {
         callback(data);
     });
 }
-
 function loadScript(src, callback) {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -163,7 +143,6 @@ function loadScript(src, callback) {
     script.src = src;
     head.appendChild(script);
 }
-
 $(window).ready(function () {
     ikaInstances = document.querySelectorAll('[ika-instance]');
     ikaInstances.forEach(el => {
@@ -173,10 +152,7 @@ $(window).ready(function () {
         instantiate(el, d['html'], scripts, styles);
     });
 });
-
-// ------------------------------------------------------------------------------------ //
 // Contains miscallenious functionality.
-// ------------------------------------------------------------------------------------ //
 // Valid date: 06.12.2021
 function getWeekDayFromDate(date, lang = 'fi') {
     var days = null;
@@ -192,7 +168,6 @@ function getWeekDayFromDate(date, lang = 'fi') {
     const datePattern = /(\d{2})\.(\d{2})\.(\d{4})/;
     return days[new Date(date.replace(datePattern, '$3-$2-$1')).getDay()];
 }
-
 /*
     Output: "Monday, 2. – 12.2.2020"
     Full date: 2.5.2021 – 20.5.2021
@@ -255,7 +230,6 @@ function getDisplayableDate(date, withDay = true, dayParts = 1, clipped = true, 
     const weekday = withDay ? `${getWeekDayFromDate(trim.checkDate, lang)}, ` : '';
     return weekday + trim.date;
 }
-
 /*
     Gets the date from the current time;
     if it's in current time, the future or the past.
@@ -285,7 +259,7 @@ function getDateStatus(targetDateStart, targetDateEnd, format = 'number', lang =
         if (d.getFullYear() - yea <= 0) {
             if (mon - d.getMonth() + 1 > 0) {
                 if (mon - d.getMonth() + 1 - 2 == 0) {
-                    if (day - d.getDate() > 0) {
+                    if (day - d.getDate() >= 0) {
                         return true;
                     }
                 } else {
@@ -357,7 +331,6 @@ function getPlaceInGrid(columnCount, rowCount, index) {
         transform: !isRight && x1 > 0 ? 'translateX(-50%)' : 'translateX(0%)'
     };
 }
-
 async function loadActivityItemsFromJson(itemTypeRules, callback) {
     var callbackCalled = false;
     if (itemTypeRules == null || itemTypeRules.length == 0) {
@@ -398,14 +371,6 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 const dateStart = getDisplayableDate(child['date'], false, 1, false);
                 const dateEnd = getDisplayableDate(child['date'], false, 2, false);
                 const dateStatus = getDateStatus(dateStart, dateEnd, 'abc', 'fi');
-                const title = child['title'];
-
-                const poster = child['header_image'] != ''
-                    ? `${folder}${child['header_image']}`
-                    : '';
-                
-                const files = child['files'];
-                const links = child['links'] ?? child['link'] ?? '';
                 // create the default activity item, on click open overlay
                 // create the link activity item, on click open url
                 function getType(v) {
@@ -420,31 +385,31 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'activity-item';
                 itemDiv.id = item;
-                function getHtmlAndLinkForFile(poster) {
-                    return `
-                        ${getHtmlForFile(poster)}
-                        <br>
-                        <a href="${poster}" target="#">Avaa tiedosto eri ikkunaan</a>
-                    `;
+                function getHtmlAndLinkForFile(file) {
+                    return `${getHtmlForFile(file)}<br><a href="${file}" target="#">Avaa tiedosto eri ikkunaan</a>`;
                 }
-                function getAllLinks(links) {
-                    var output = '';
-                    links.forEach(link => {
-                        output += `
-                            <a href="${link['link']}" target="#">${link['text']}</a>
-                            <br>
-                        `;
+                function getFiles(files) {
+                    var o = '';
+                    files.forEach(file => {
+                        o += `${getHtmlAndLinkForFile(folder+'/'+file)}<br>`;
                     });
-                    return output;
+                    return o;
+                }
+                function getLinks(links) {
+                    var o = '';
+                    links.forEach(link => {
+                        o += `<a href="${link['link']}" target="#">${link['text']}</a><br>`;
+                    });
+                    return o;
                 }
                 itemDiv.innerHTML = `
                     <div class="content">
-                        ${getHtmlAndLinkForFile(poster)}
+                        ${getHtmlAndLinkForFile(child['header_image'] != '' ? `${folder}${child['header_image']}` : '')}
                         <div class="bo" id="a"></div>
-                        <h2>${title}</h2>
                         <h3>${date}</h3>
-                        ${getAllLinks(child['links'])}
+                        ${getFiles(child['files'])}
                         ${child['content'] != '' ? `<p>${child['content']}</p>` : ''}
+                        ${getLinks(child['links'])}
                         <div class="bo" id="b"></div>
                     </div>`
                     + (addControls ? `
@@ -458,7 +423,6 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
                         removeActivityContainerItem(itemDiv, item);
                     });
                 }
-
                 if (!useExpiredItems) {
                     if (getDateStatus(dateStart, dateEnd) != 2) {
                         (useExpiredItems
@@ -483,11 +447,6 @@ async function loadActivityItemsFromJson(itemTypeRules, callback) {
         });
     });
 }
-
-
-// ------------------------------------ 
-// COORDINATOR
-// ------------------------------------ 
 function smoothScroll(top = 0, delay = 800, hash = null) {
     $('html, body').animate({
         scrollTop: top
@@ -497,11 +456,8 @@ function smoothScroll(top = 0, delay = 800, hash = null) {
         }
     });
 }
-
-
 const scheduleJsonPath =  './content/opening.json';
 var scheduleArray = [];
-
 function createSchedule(dayList, ul, title = null) {
     function addOpenToTitle() {
         if (title == null) return;
@@ -533,7 +489,6 @@ function createSchedule(dayList, ul, title = null) {
         addOpenToTitle();
     }
 }
-
 function playLoadingScreenAnim() {
     $('.page-loader').animate({
         opacity: 0
@@ -542,7 +497,6 @@ function playLoadingScreenAnim() {
         setPageScrolling(true);
     });
 }
-
 $(window).on('load', function () {
     $(document).find('.varaa-btn').each(function (i, l) {
         $(l).on('click', function () {

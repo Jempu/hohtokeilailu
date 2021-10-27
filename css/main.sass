@@ -62,21 +62,20 @@ $burgerMenuZ: 10
 $burgerColor: #fff
 $sidePieceMove: 195%
 
-$font-size-normal: calc( 20px + 0.8vmin )
+$font-size-default: calc( 20px + 0.8vmin )
 $font-size-big: calc( 24px + 0.8vmin )
+$font-size-huge: calc( 28px + 0.8vmin )
 
 h1, h2, h3, h4, h5, h6
     cursor: default
 h1, h2, h3, h4, h5, h6, p, li
     color: #fff
 h1
-    font-size: calc(18px + 0.8vw)
+    font-size: $font-size-huge
 h2
-    font-size: calc(16px + 0.8vw)
-h3
-    font-size: calc(14px + 0.8vw)
-h4, h5, h6, p
-    font-size: calc(12px + 0.8vw)
+    font-size: $font-size-big
+h3, h4, h5, h6, p
+    font-size: $font-size-default
 ul
     list-style: none
 a
@@ -140,7 +139,6 @@ body
     font-family: Sansita-ExtraBold
     h1
         padding: 0.4vw
-        font-size: 1.8vw
         white-space: nowrap
 .varaa-btn
     width: 75%
@@ -176,7 +174,6 @@ body
         background-color: #5A1D50
         text-align: center
         text-decoration: none
-        font-size: 16px
         border: none
         cursor: pointer
         border-radius: 12px
@@ -238,15 +235,12 @@ body
                     border-radius: 18px
                 h1
                     font-family: Sansita-ExtraBold
-                    font-size: calc( 16px + 1.4vw )
                     margin: 2rem 0
                 p
-                    font-size: calc( 8px + 1.1vw )
                     margin: 2rem 0
                 a
                     width: auto
                     display: inline
-                    font-size: calc( 8px + 1.1vw )
                     margin: 2rem 0 0 1rem
                     text-decoration: underline
                     text-decoration-style: dotted
@@ -306,7 +300,7 @@ body
             margin: 0.7rem 0 0 10rem
     img
         height: 100%
-    // normal links that open a new window or scroll to
+    // default links that open a new window or scroll to
     .link
         cursor: pointer
         position: relative
@@ -314,7 +308,6 @@ body
         color: #fff
         pointer-events: visible
         margin: auto 0
-        font-size: calc( 18px + 0.6vw )
         text-shadow: 0px 4px 6px rgba(50, 50, 50, 0.5)
         transition: transform 0.4s ease-in-out
         &:hover
@@ -544,14 +537,14 @@ body
         transform: rotate(90deg)
     to
         transform: rotate(0)
-// footer
+
 .footer
-    width: 100%
     position: relative
+    width: 100%
     background: linear-gradient(0deg, rgba(18, 31, 51, 0.3), rgba(18, 31, 51, 0.3)), linear-gradient(173.68deg, #172E67 -2.03%, #6B306C 9.85%, #AB568E 48.71%, #892E65 99.16%)
     .container
-        width: 100%
         position: relative
+        width: 100%
         padding: 2rem 2vw 1vw 2vw
         display: grid
         grid-template-areas: "a b" "c b"
@@ -596,23 +589,23 @@ body
             grid-area: c
             position: relative
             margin: 1.5rem auto
-            display: grid
-            grid-template-areas: "a b c d"
+            display: flex
+            justify-content: space-around
+            align-items: start
+            flex-wrap: wrap
             .item
-                width: auto
-                height: 100%
-                display: inline-block
                 position: relative
+                width: min-content
                 top: 0
                 left: 0
-                margin: 2rem
+                margin: 2rem 1rem
+                text-align: center
                 &#logo
-                    grid-area: a
+                    width: 5rem
                     img
                         width: 5rem
                         height: 5rem
                 &#contacts
-                    grid-area: b
                     img
                         width: 4rem
                         height: 4rem
@@ -626,6 +619,7 @@ body
                             display: inline-flex
                             margin: 0.5rem 0
                             cursor: pointer
+                            text-align: left
                             div
                                 width: 100%
                             h1
@@ -634,8 +628,6 @@ body
                                 white-space: nowrap
                                 font-size: calc(16px + 0.4vw)
                 &#reserve
-                    grid-area: c
-                    text-align: center
                     cursor: pointer
                     transition: transform 0.4s ease-out
                     img
@@ -643,8 +635,6 @@ body
                     &:hover
                         transform: scale(104%)
                 &#notice
-                    grid-area: d
-                    text-align: center
                     ul
                         height: 100%
                         li
@@ -712,7 +702,6 @@ body
                 margin: auto
                 margin-left: 2rem
                 font-size: calc(16px + 0.5vw)
-                white-space: nowrap
                 text-decoration: none
                 &:hover
                     text-decoration: underline
@@ -913,7 +902,7 @@ noactivities, .no-activities
         background: url('../img/stars-align-mobile.png')
         background-repeat: no-repeat
         background-size: cover
-        #home, .link.hover
+        .link.hover
             display: none
         .content
             &::before
@@ -926,9 +915,13 @@ noactivities, .no-activities
             &.mobile
                 display: block
             &#home
-                margin-top: 1.3rem
                 width: 200px
                 height: 65px
+                margin: 0.4rem 0 0 0
+        &[minimized="true"] .link#home
+            width: 200px
+            height: 65px
+            margin: 0.4rem 0 0 0
     .footer
         .container
             .middle
@@ -945,7 +938,7 @@ noactivities, .no-activities
             margin: 0 2rem
             a
                 margin-left: 1rem
-                white-space: normal
+                white-space: default
                 text-align: center
     .overlay-container .item .content .right
         iframe, img, video
